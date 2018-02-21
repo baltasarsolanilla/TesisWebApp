@@ -1,4 +1,5 @@
 angular.module('balancedScorecard', [
     'strategyList',
-    'strategyTabset'
+    'strategyTabset',
+    'strategyTree'
 ]);

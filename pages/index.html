@@ -26,6 +26,9 @@
     <!-- strategyList -> ui-select style -->
     <link rel="stylesheet" href="../angular/strategy-list/ui-select/ui-select.style.css">
 
+    <!-- strategyTree -> abn-tree style -->
+    <link rel="stylesheet" href="../angular/strategy-tree/abn-tree/abn-tree.css">
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -89,6 +92,14 @@
             <div class="row">
                 <div class="col-lg-12">
                     <strategy-tabset></strategy-tabset>
+                    <div ng-controller="strategyTreeController" style="margin:20px">
+                        <td style="vertical-align:top">
+                            <div style="width:250px; margin-left:100px; background:whitesmoke; border:1px solid lightgray; border-radius:5px;">
+                              <span ng-if="doing_async">...loading...</span>
+                              <abn-tree tree-data="my_data" expand-level="2"></abn-tree>
+                            </div>
+                          </td>
+                    </div>
                 </div>
             </div>
         <!-- /#page-wrapper -->
@@ -113,18 +124,23 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular-animate.js"></script>
 
      <!-- app main module --> 
-     <script src="../app.module.js"></script>
+     <script src="../app.js"></script>
 
-     <!-- strategyList -->
+     <!-- strategy-list -->
      <script src="../angular/strategy-list/strategy-list.module.js"></script>
      <script src="../angular/strategy-list/strategy-list.component.js"></script>
      <script src="../angular/strategy-list/ui-select/ui-select.module.js"></script>
 
-     <!-- strategyTabset -->
+     <!-- strategy-tabset -->
      <script src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.5.0.js"></script>
      <script src="../angular/strategy-tabset/strategy-tabset.module.js"></script>
      <script src="../angular/strategy-tabset/strategy-tabset.component.js"></script>
-     
+
+     <!-- strategy-tree -->
+     <script src="../angular/strategy-tree/strategy-tree.module.js"></script>
+     <script src="../angular/strategy-tree/strategy-tree.controller.js"></script>
+     <script src="../angular/strategy-tree/abn-tree/abn-tree.directive.js"></script>
+
 </body>
 
 </html>
