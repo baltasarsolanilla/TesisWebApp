@@ -3,33 +3,46 @@ angular.module('strategyTree').
 controller('strategyTreeController', function($scope){
     $scope.my_data = [
         {
-          label: 'North America',
+          label: 'Finanzas',
           children: [
             {
-              label: 'Canada',
-              children: ['Toronto', 'Vancouver']
+              label: 'Objetivo - A',
+              children: ['KPI - T', 'KPI - V']
             }, {
-              label: 'USA',
-              children: ['New York', 'Los Angeles']
-            }, {
-              label: 'Mexico',
-              children: ['Mexico City', 'Guadalajara']
-            }
+              label: 'Objetivo - U',
+              children: ['KPI - NY', 'KPI - LA']
+            }, 
           ]
-        }, {
-          label: 'South America',
+        }, 
+        {
+          label: 'Clientes',
           children: [
             {
-              label: 'Venezuela',
-              children: ['Caracas', 'Maracaibo']
+              label: 'Objetivo - V',
+              children: ['KPI - C', 'KPI - M']
             }, {
-              label: 'Brazil',
-              children: ['Sao Paulo', 'Rio de Janeiro']
-            }, {
-              label: 'Argentina',
-              children: ['Buenos Aires', 'Cordoba']
+              label: 'Objetivo - B',
+              children: ['KPI - SP', 'KPI - RJ']
             }
           ]
-        }
+        },
+        {
+            label: 'Procesos Internos',
+            children: [
+              {
+                label: 'Objetivo - V',
+                children: ['KPI - C', 'KPI - M']
+              }
+            ]
+          },
+          {
+            label: 'Aprendizaje y Crecimiento',
+            children: [
+              {
+                label: 'Objetivo - V',
+                children: ['KPI - C', 'KPI - K']
+              }
+            ]
+          }
       ];
 });

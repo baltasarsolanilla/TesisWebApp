@@ -1,0 +1,45 @@
+/*** PANEL PRIMARY ***/
+/* NOTA CSS
+  .class_1.class_2 match cada elemento que TENGA LAS DOS CLASES
+  .class_1 class_2 match cada elemento 'class_2' que sea descendiente de 'class_1'.
+*/
+
+.with-nav-tabs.panel {
+	border: none;
+	box-shadow: none;
+}
+
+.panel.with-nav-tabs .panel-heading{
+  padding: 5px 5px 0px 5px;
+}
+.panel.with-nav-tabs .nav-tabs{
+border: none;
+}
+.panel.with-nav-tabs .nav-justified{
+	margin-bottom: -1px;
+}
+
+.with-nav-tabs.panel-primary .nav-tabs > li > a,
+.with-nav-tabs.panel-primary .nav-tabs > li > a:hover,
+.with-nav-tabs.panel-primary .nav-tabs > li > a:focus {
+    color: #fff;
+}
+.with-nav-tabs.panel-primary .nav-tabs > .open > a,
+.with-nav-tabs.panel-primary .nav-tabs > .open > a:hover,
+.with-nav-tabs.panel-primary .nav-tabs > .open > a:focus,
+.with-nav-tabs.panel-primary .nav-tabs > li > a:hover,
+.with-nav-tabs.panel-primary .nav-tabs > li > a:focus {
+	color: #fff;
+	background-color: #3071a9;
+	border-color: transparent;
+}
+.with-nav-tabs.panel-primary .nav-tabs > li.active > a,
+.with-nav-tabs.panel-primary .nav-tabs > li.active > a:hover,
+.with-nav-tabs.panel-primary .nav-tabs > li.active > a:focus {
+	color: #428bca;
+	background-color: #fff;
+	border-color: #428bca;
+	border-bottom-color: transparent;
+}
+
+

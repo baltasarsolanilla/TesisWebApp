@@ -1,0 +1,14 @@
+.velocimetro-chart-container {
+}
+
+#velocimetro-canvas { 
+  width: 100%;
+}
+
+#velocimetro-textfield{
+  width: 80%; height: 50%;
+  margin: 0 auto;
+  position: relative;
+  text-align: center; font-size: 2em; font-weight: bold;
+  color: black; font-family: 'Amaranth', sans-serif;
+}

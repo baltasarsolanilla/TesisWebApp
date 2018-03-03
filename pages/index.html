@@ -21,13 +21,25 @@
     <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
 
     <!-- strategyList -> ui-select style -->
     <link rel="stylesheet" href="../angular/strategy-list/ui-select/ui-select.style.css">
 
     <!-- strategyTree -> abn-tree style -->
     <link rel="stylesheet" href="../angular/strategy-tree/abn-tree/abn-tree.css">
+    <link rel="stylesheet" href="../angular/strategy-tree/strategy-tree.css">
+
+    <!-- strategyTabset -->
+    <link rel="stylesheet" href="../angular/strategy-tabset/strategy-tabset.css">
+    
+    <!-- historicoChart - ChartJS -->
+    <!-- <link rel="stylesheet" href="../vendor/chartjs/chartjs.css"> -->
+    <link rel="stylesheet" href="../charts/historico-chart/historico-chart.css">
+
+    <!-- velocimetroChart -->
+    <link rel="stylesheet" href="../charts/velocimetro-chart/velocimetro-chart.css" >
+
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -59,23 +71,26 @@
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <li class="sidebar-search">
-                            <strategy-list></strategy-list>
+                            <strategy-list>
+                                <!-- <canvas id="historico"></canvas>  ELIMINAR SI NO SIRVE-->
+                            </strategy-list>
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Estrategia </a>
+                            <!-- <a href="index.html"><i class="fa fa-cogs fa-fw"></i> Estrategia </a> -->
+                            <a href="index.html"><i class="fa fa-location-arrow fa-fw"></i> Estrategia </a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Mapa Estratégico </a>
+                            <a href="#"><i class="fa fa-map fa-fw"></i> Mapa Estratégico </a>
                         </li>
                         <li>
-                            <a href="tables.html"><i class="fa fa-table fa-fw"></i> Objetivos</a>
+                            <a href="tables.html"><i class="fa fa-crosshairs fa-fw"></i> Objetivos</a>
                         </li>
                         <li>
-                            <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Indicadores </a>
+                            <a href="forms.html"><i class="fa fa-tachometer-alt fa-fw"></i> Indicadores </a>
                         </li>
                         <li>
-                            <a href="forms.html"><i class="fa fa-wrench fa-fw"></i> Ayuda </a>
+                            <a href="forms.html"><i class="fa fa-info fa-fw"></i> Ayuda </a>
                         </li>
                         
                     </ul>
@@ -86,20 +101,20 @@
         </nav>
 
         <!-- Nav-tree -->
-        <div></div>
-
-        <div id="page-wrapper">
-            <div class="row">
-                <div class="col-lg-12">
+            <div ng-controller="strategyTreeController">
+                    <td>
+                        <div class="strategy-tree-box">
+                            <span ng-if="doing_async">...loading...</span>
+                            <abn-tree tree-data="my_data" expand-level="3"></abn-tree>
+                        </div>
+                    </td>
+            </div>
+        
+        <!-- style="background-color: #337ab7;" -->
+        <div id="page-wrapper" >
+            <div class="row" style="margin-right: 0px !important; margin-left: 0px !important;">
+                <div class="col-lg-12" style="padding-right: 0 !important; padding-left: 0 !important;">
                     <strategy-tabset></strategy-tabset>
-                    <div ng-controller="strategyTreeController" style="margin:20px">
-                        <td style="vertical-align:top">
-                            <div style="width:250px; margin-left:100px; background:whitesmoke; border:1px solid lightgray; border-radius:5px;">
-                              <span ng-if="doing_async">...loading...</span>
-                              <abn-tree tree-data="my_data" expand-level="2"></abn-tree>
-                            </div>
-                          </td>
-                    </div>
                 </div>
             </div>
         <!-- /#page-wrapper -->
@@ -112,6 +127,9 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- fontAwesome 5.0 -->
+    <script src="../vendor/fontawesome5/fontawesome-all.js"></script>
 
   
     <!-- ****               **** -->
@@ -141,6 +159,9 @@
      <script src="../angular/strategy-tree/strategy-tree.controller.js"></script>
      <script src="../angular/strategy-tree/abn-tree/abn-tree.directive.js"></script>
 
+     <!-- ****               **** -->
+     <!-- ****    CHARTS     **** -->
+     <!-- ****               **** -->
 </body>
 
 </html>
