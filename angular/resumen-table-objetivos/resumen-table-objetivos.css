@@ -1,0 +1,26 @@
+.table tr td {
+    border: none !important; 
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.2em;
+    
+}
+
+.primer-columna {
+    text-align: left !important;
+    width: 30%;
+}
+
+
+/* No andan estos colores, es solo referencia */
+.fa-arrow-up {
+    color: green;
+}
+
+.fa-arrow-right {
+    color: rgb(245, 234, 89);
+}
+
+.fa-arrow-down {
+    color: rgba(243, 4, 4, 0.918);
+}

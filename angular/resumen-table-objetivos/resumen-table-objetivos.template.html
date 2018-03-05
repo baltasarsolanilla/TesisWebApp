@@ -1,0 +1,13 @@
+<div class="">
+    <p>{{$ctrl.hello}}</p>
+    <table ng-table="$ctrl.tableParams" show-filter="false" class="table table-bordered table-striped">
+        <tr ng-repeat="row in $data track by row.id">
+          <td title="'KPI'" sortable="'nombre'" class="primer-columna">
+            <a href="#"> {{row.nombre}}</a></td>
+          <td title="'VALOR'" sortable="'valor'" ng-style="$ctrl.setColor(row.valor)">{{row.valor | number:2}}</td>
+          <td title="'TENDENCIA'" sortable="'tendencia'">
+              <i ng-class="$ctrl.setArrow(row.valor)" ng-style="$ctrl.setColor(row.valor)"></i></td>            
+          <td title="'PESO'" sortable="'peso'">{{row.peso}}%</td>
+        </tr>
+    </table>
+</div>
