@@ -1,0 +1,7 @@
+<div class="">
+    <table ng-table-dynamic="tableParams with cols" show-filter="false" class="table table-bordered table-striped table-detalle">
+        <tr ng-repeat="row in $data track by row.id">
+          <td ng-repeat="col in $columns track by $index" ng-style="setColor(row, $index)">{{::row[col.field]}}</td>
+        </tr>
+    </table>
+</div>

@@ -1,14 +1,15 @@
-.table tr td {
-    border: none !important; 
+.table.table-resumen tr td {
+    border: none; 
     text-align: center;
     font-weight: bold;
     font-size: 1.2em;
     
 }
 
-.primer-columna {
-    text-align: left !important;
+#primer-columna {
+    text-align: left;
     width: 30%;
+    /* border: 1px solid #ddd; */
 }
 
 

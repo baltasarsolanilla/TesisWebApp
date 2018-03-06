@@ -1,8 +1,8 @@
 <div class="">
     <p>{{$ctrl.hello}}</p>
-    <table ng-table="$ctrl.tableParams" show-filter="false" class="table table-bordered table-striped">
+    <table ng-table="$ctrl.tableParams" show-filter="false" class="table table-bordered table-striped table-resumen">
         <tr ng-repeat="row in $data track by row.id">
-          <td title="'KPI'" sortable="'nombre'" class="primer-columna">
+          <td title="'KPI'" sortable="'nombre'" id="primer-columna">
             <a href="#"> {{row.nombre}}</a></td>
           <td title="'VALOR'" sortable="'valor'" ng-style="$ctrl.setColor(row.valor)">{{row.valor | number:2}}</td>
           <td title="'TENDENCIA'" sortable="'tendencia'">
