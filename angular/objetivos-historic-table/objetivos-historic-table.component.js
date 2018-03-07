@@ -43,14 +43,93 @@ angular.
                 valor_kpi_3: '4',
                 valor_kpi_4: '2',
                 total: '8'
+            },
+            {
+                id: 5,
+                fecha: 'Abril 2017',
+                valor_kpi_1: '2',
+                valor_kpi_2: '5',
+                valor_kpi_3: '8',
+                valor_kpi_4: '3',
+                total: '4'
+            },
+            {
+                id: 6,
+                fecha: 'Mayo 2017',
+                valor_kpi_1: '8',
+                valor_kpi_2: '4',
+                valor_kpi_3: '2',
+                valor_kpi_4: '7',
+                total: '9'
+            },
+            {
+                id: 7,
+                fecha: 'Abril 2017',
+                valor_kpi_1: '2',
+                valor_kpi_2: '5',
+                valor_kpi_3: '8',
+                valor_kpi_4: '3',
+                total: '4'
+            },
+            {
+                id: 8,
+                fecha: 'Mayo 2017',
+                valor_kpi_1: '8',
+                valor_kpi_2: '4',
+                valor_kpi_3: '2',
+                valor_kpi_4: '7',
+                total: '9'
+            },
+            {
+                id: 9,
+                fecha: 'Abril 2017',
+                valor_kpi_1: '2',
+                valor_kpi_2: '5',
+                valor_kpi_3: '8',
+                valor_kpi_4: '3',
+                total: '4'
+            },
+            {
+                id: 10,
+                fecha: 'Abril 2017',
+                valor_kpi_1: '2',
+                valor_kpi_2: '5',
+                valor_kpi_3: '8',
+                valor_kpi_4: '3',
+                total: '4'
+            },
+            {
+                id: 11,
+                fecha: 'Abril 2017',
+                valor_kpi_1: '2',
+                valor_kpi_2: '5',
+                valor_kpi_3: '8',
+                valor_kpi_4: '3',
+                total: '4'
+            },
+            {
+                id: 12,
+                fecha: 'Mayo 2017',
+                valor_kpi_1: '8',
+                valor_kpi_2: '4',
+                valor_kpi_3: '2',
+                valor_kpi_4: '7',
+                total: '9'
+            },{
+                id: 13,
+                fecha: 'Mayo 2017',
+                valor_kpi_1: '8',
+                valor_kpi_2: '4',
+                valor_kpi_3: '2',
+                valor_kpi_4: '7',
+                total: '9'
             }];
         
             $scope.cols = [
                 {
                 title: 'FECHA',
                 field: 'fecha',
-                sortable: 'id' //ASI LO ORDENO POR FECHA CORRECTAMENTE -> OBVIO TIENE Q ESTAR BIEN CARGADO ASCENDENTE/DESCENDENTE
-                
+                sortable: 'id', //ASI LO ORDENO POR FECHA CORRECTAMENTE -> OBVIO TIENE Q ESTAR BIEN CARGADO ASCENDENTE/DESCENDENTE
                 },
                 {
                 title: 'KPI-1',
@@ -83,7 +162,7 @@ angular.
                 var style = '';
                 switch(columna) {
                 case 0:
-                    return '';
+                    return {'text-align':'left'};
                     break;
                 case 1:
                     return this.getColor(row.valor_kpi_1);
@@ -107,16 +186,21 @@ angular.
         
             $scope.getColor = function(valor) {
                 if (valor < 3.33)
-                return {color:'rgba(243, 4, 4, 0.918)'}
+                    return {color:'rgba(243, 4, 4, 0.918)'}
                 else if (valor < 6.66)
-                return {color:'#FFDD00'}
+                    return {color:'#FFDD00'}
                 else
-                return {color:'green'}
+                    return {color:'green'}
+            }
+
+            $scope.filter = {
+                fecha: undefined
             }
             
             $scope.tableParams = new NgTableParams({
                 page: 1, // show first page
-                count: 10 // count per page
+                count: 12, // count per page
+                filter: $scope.filter
                 }, 
                 {
                 filterDelay: 0,

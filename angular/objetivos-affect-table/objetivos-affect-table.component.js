@@ -1,40 +1,36 @@
 'use strict';
 
 angular.
-    module('objetivosActualTable').
-    component('objetivosActualTable', {
-        templateUrl: '../angular/objetivos-actual-table/objetivos-actual-table.template.html',
-        controller: function ResumenTableObjetivosController($scope, NgTableParams){
+    module('objetivosAffectTable').
+    component('objetivosAffectTable', {
+        templateUrl: '../angular/objetivos-affect-table/objetivos-affect-table.template.html',
+        controller: function objetivosAffectTableController($scope, NgTableParams){
 
             var kpi_data = [{
               id: 1,
-              nombre: 'Ganarle a Juanca',
-              valor: '6.77',
+              nombre: 'Jugar al tennis',
+              valor: '10.0',
               tendencia: 'ALTA',
-              peso: '50'
             },
             {
               id: 2,
-              nombre: 'Perder el tiempo',
+              nombre: 'Aprender AngularJS',
               valor: '4.20',
-              tendencia: 'BAJA',
-              peso: '12.5'
+              tendencia: 'MEDIA',
             },
             {
               id: 3,
-              nombre: 'Umota corriendo',
+              nombre: 'Funcional',
               valor: '5.4',
-              tendencia: 'ALTA',
-              peso: '25'
+              tendencia: 'MEDIA',
             },
             {
               id: 4,
-              nombre: 'Luna de colada',
+              nombre: 'Leer Harry Potter II',
               valor: '2.4',
-              tendencia: 'MEDIA',
-              peso: '12.5'
+              tendencia: 'BAJA',
             }];
-            
+
             $scope.setColorValor = function(valor){
               if (valor > 6.66)
                 return {color:'green'}

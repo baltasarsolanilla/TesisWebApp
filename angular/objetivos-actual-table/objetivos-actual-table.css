@@ -1,9 +1,8 @@
-.table.table-resumen tr td {
+.table.table-actual tr td {
     border: none; 
     text-align: center;
     font-weight: bold;
     font-size: 1.2em;
-    
 }
 
 #primer-columna {
@@ -11,7 +10,6 @@
     width: 30%;
     /* border: 1px solid #ddd; */
 }
-
 
 /* No andan estos colores, es solo referencia */
 .fa-arrow-up {

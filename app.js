@@ -3,5 +3,6 @@ angular.module('balancedScorecard', [
     'strategyTabset',
     'strategyTree',
     'objetivosActualTable',
-    'objetivosHistoricTable'
+    'objetivosHistoricTable',
+    'objetivosAffectTable'
 ]);
