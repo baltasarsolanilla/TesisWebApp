@@ -7,9 +7,9 @@
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                            <div class="velocimetro-chart-container">
-                                <canvas id="velocimetro-canvas"></canvas>
-                                <div id="velocimetro-textfield"></div>
+                            <div class="gauge-chart-container">
+                                <canvas id="gauge-canvas"></canvas>
+                                <div id="gauge-textfield"></div>
                             </div>
                         </div>
                 </div>
@@ -21,7 +21,7 @@
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                            <div class="historico-chart-container">
+                            <div class="historic-chart-container">
                                 <canvas id="historico-chart"></canvas>
                             </div>
                         </div>
@@ -33,16 +33,16 @@
     <div class="row">
         <div class="col-lg-12">
             <h4>Indicadores relacionados</h4>
-            <resumen-table-objetivos></resumen-table-objetivos>
+            <objetivos-actual-table></objetivos-actual-table>
         </div>
     </div>
 </div>
 
 <!-- historico-chart >> ChartJS  -->
 <script src="../vendor/chartjs/Chart.bundle.js"></script>
-<script src="../charts/historico-chart/historico-utils.js"></script>
-<script src="../charts/historico-chart/historico-chart.js"></script>
+<script src="../charts/historic-chart/historic-utils.js"></script>
+<script src="../charts/historic-chart/historic-chart.js"></script>
 
-<!-- velocimetro-chart -->
-<script src="../charts/velocimetro-chart/gauge.js"></script>
-<script src="../charts/velocimetro-chart/velocimetro-chart.js"></script>
+<!-- gauge-chart -->
+<script src="../charts/gauge-chart/gauge.js"></script>
+<script src="../charts/gauge-chart/gauge-chart.js"></script>

@@ -1,9 +1,9 @@
 'use strict';
 
 angular.
-    module('resumenTableObjetivos').
-    component('resumenTableObjetivos', {
-        templateUrl: '../angular/resumen-table-objetivos/resumen-table-objetivos.template.html',
+    module('objetivosActualTable').
+    component('objetivosActualTable', {
+        templateUrl: '../angular/objetivos-actual-table/objetivos-actual-table.template.html',
         controller: function ResumenTableObjetivosController($scope, NgTableParams){
 
             var kpi_data = [{

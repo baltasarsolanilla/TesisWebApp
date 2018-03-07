@@ -1,11 +1,11 @@
-.velocimetro-chart-container {
+.gauge-chart-container {
 }
 
-#velocimetro-canvas { 
+#gauge-canvas { 
   width: 100%;
 }
 
-#velocimetro-textfield{
+#gauge-textfield{
   width: 80%; height: 50%;
   margin: 0 auto;
   position: relative;

@@ -1,11 +1,11 @@
 var initGrafico = function(minValue, maxValue, value, opts){
-    var velocimetro = new Gauge(document.getElementById("velocimetro-canvas"));
-    velocimetro.setOptions(opts);
-    velocimetro.setTextField(document.getElementById("velocimetro-textfield"));
-    velocimetro.minValue = minValue;
-    velocimetro.maxValue = maxValue;
-    velocimetro.animationSpeed = 10;
-    velocimetro.set(value);
+    var gauge = new Gauge(document.getElementById("gauge-canvas"));
+    gauge.setOptions(opts);
+    gauge.setTextField(document.getElementById("gauge-textfield"));
+    gauge.minValue = minValue;
+    gauge.maxValue = maxValue;
+    gauge.animationSpeed = 10;
+    gauge.set(value);
 }
 
 var setColorTextField = function(minValue, maxValue, staticZones, value, opts){
@@ -20,7 +20,7 @@ var setColorTextField = function(minValue, maxValue, staticZones, value, opts){
           if ((opts.staticZones[o].min < value) &&(value < opts.staticZones[o].max))
             aux = opts.staticZones[o].strokeStyle;
         }
-  $('#velocimetro-textfield').css({"color": aux});
+  $('#gauge-textfield').css({"color": aux});
 }
 
   var minValue = 0;

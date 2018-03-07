@@ -1,10 +1,10 @@
 'use strict';
 
 angular.
-    module('detalleTableObjetivos').
-    component('detalleTableObjetivos', {
-        templateUrl: '../angular/detalle-table-objetivos/detalle-table-objetivos.template.html',
-        controller: function DetalleTableObjetivosController($scope, NgTableParams){
+    module('objetivosHistoricTable').
+    component('objetivosHistoricTable', {
+        templateUrl: '../angular/objetivos-historic-table/objetivos-historic-table.template.html',
+        controller: function objetivosHistoricTableController($scope, NgTableParams){
             // tip: to debug, open chrome dev tools and uncomment the following line 
             //debugger;
 
@@ -109,7 +109,7 @@ angular.
                 if (valor < 3.33)
                 return {color:'rgba(243, 4, 4, 0.918)'}
                 else if (valor < 6.66)
-                return {color:'rgb(245, 234, 89)'}
+                return {color:'#FFDD00'}
                 else
                 return {color:'green'}
             }
