@@ -30,7 +30,7 @@
             attrs.iconCollapse = 'icon-minus glyphicon glyphicon-minus';
           }
           if (attrs.iconLeaf == null) {
-            attrs.iconLeaf = 'icon-file  glyphicon glyphicon-file';git 
+            attrs.iconLeaf = 'icon-file  glyphicon glyphicon-file'; 
           }
           if (attrs.expandLevel == null) {
             attrs.expandLevel = '3';
