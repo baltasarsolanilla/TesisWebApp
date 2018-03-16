@@ -22,7 +22,7 @@ body {
 @media (min-width: 768px) {
   #page-wrapper {
     position: inherit;
-    margin: 0 0 0 430px;
+    margin: 0 0 0 400px;
     padding: 0;
     /* border-left: 1px solid #e7e7e7; */
     border-bottom: 1px solid #e7e7e7;
@@ -83,7 +83,7 @@ body {
   padding-right: 0;
 }
 .sidebar .sidebar-search{
-  padding: 15px;
+  padding: 5px;
 }
 .sidebar ul li {
   border-bottom: 1px solid #e7e7e7;
@@ -114,7 +114,7 @@ body {
   .sidebar {
     z-index: 1;
     position: absolute;
-    width: 180px;
+    width: 160px;
     margin-top: 51px;
   }
   .navbar-top-links .dropdown-messages,
