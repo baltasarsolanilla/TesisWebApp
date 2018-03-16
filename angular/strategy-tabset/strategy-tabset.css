@@ -12,6 +12,8 @@
 
 .panel.with-nav-tabs .panel-heading{
   padding: 5px 5px 0px 5px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
 }
 .panel.with-nav-tabs .nav-tabs{
 border: none;
@@ -42,5 +44,13 @@ border: none;
 	border-color: #428bca;
 	border-bottom-color: transparent;
 }
+
+.objetivo-title {
+	margin:0px;
+	padding: 10px;
+	background-color: #337ab7;
+	color: white;
+}
+
 
 
