@@ -39,7 +39,7 @@ angular.
               if (valor > 6.66)
                 return {color:'green'}
               else if (valor > 3.33)
-                return {color:'rgb(245, 234, 89)'}
+                return {color:'#FFDD00'}
               else
                 return {color:'rgba(243, 4, 4, 0.918)'}
             }
@@ -49,7 +49,7 @@ angular.
               if (valor === 'ALTA')
                 return {color:'green'}
               else if (valor === 'MEDIA')
-                return {color:'rgb(245, 234, 89)'}
+                return {color:'#FFDD00'}
               else
                 return {color:'rgba(243, 4, 4, 0.918)'}
             }
