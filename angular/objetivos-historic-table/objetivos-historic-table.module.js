@@ -1,3 +1,4 @@
 angular.module('objetivosHistoricTable', [
-    'ngTable'
+    'ngTable',
+    'builderTableService'
 ]);

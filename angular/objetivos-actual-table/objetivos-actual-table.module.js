@@ -1,3 +1,4 @@
 angular.module('objetivosActualTable', [
-    'ngTable'
+    'ngTable',
+    'builderTableService'
 ]);

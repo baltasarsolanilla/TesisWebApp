@@ -1,3 +1,4 @@
 angular.module('objetivosAffectTable', [
-    'ngTable'
+    'ngTable',
+    'builderTableService'
 ]);

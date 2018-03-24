@@ -4,126 +4,90 @@ angular.
     module('objetivosHistoricTable').
     component('objetivosHistoricTable', {
         templateUrl: '../angular/objetivos-historic-table/objetivos-historic-table.template.html',
-        controller: function objetivosHistoricTableController($scope, NgTableParams){
+        controller: function objetivosHistoricTableController($scope, NgTableParams, BuilderTable){
             // tip: to debug, open chrome dev tools and uncomment the following line 
             //debugger;
 
             var data = [{
                 id: 1,
-                fecha: 'Marzo 2017',
-                valor_kpi_1: '7',
-                valor_kpi_2: '3',
-                valor_kpi_3: '4',
-                valor_kpi_4: '8',
-                total: '2'
+                fecha: 'Enero 2016'
+                //valor_kpi_1: 
+                //valor_kpi_2: 
+                //valor_kpi_3: 
+                //valor_kpi_4:
+                //total:
             },
             {
                 id: 2,
-                fecha: 'Abril 2017',
-                valor_kpi_1: '2',
-                valor_kpi_2: '5',
-                valor_kpi_3: '8',
-                valor_kpi_4: '3',
-                total: '4'
+                fecha: 'Febrero 2016'
             },
             {
                 id: 3,
-                fecha: 'Mayo 2017',
-                valor_kpi_1: '8',
-                valor_kpi_2: '4',
-                valor_kpi_3: '2',
-                valor_kpi_4: '7',
-                total: '9'
+                fecha: 'Marzo 2016'
             },
             {
                 id: 4,
-                fecha: 'Junio 2017',
-                valor_kpi_1: '3',
-                valor_kpi_2: '7',
-                valor_kpi_3: '4',
-                valor_kpi_4: '2',
-                total: '8'
+                fecha: 'Abril 2016'
             },
             {
                 id: 5,
-                fecha: 'Abril 2017',
-                valor_kpi_1: '2',
-                valor_kpi_2: '5',
-                valor_kpi_3: '8',
-                valor_kpi_4: '3',
-                total: '4'
+                fecha: 'Mayo 2016'
             },
             {
                 id: 6,
-                fecha: 'Mayo 2017',
-                valor_kpi_1: '8',
-                valor_kpi_2: '4',
-                valor_kpi_3: '2',
-                valor_kpi_4: '7',
-                total: '9'
+                fecha: 'Junio 2016'
             },
             {
                 id: 7,
-                fecha: 'Abril 2017',
-                valor_kpi_1: '2',
-                valor_kpi_2: '5',
-                valor_kpi_3: '8',
-                valor_kpi_4: '3',
-                total: '4'
+                fecha: 'Julio 2016'
             },
             {
                 id: 8,
-                fecha: 'Mayo 2017',
-                valor_kpi_1: '8',
-                valor_kpi_2: '4',
-                valor_kpi_3: '2',
-                valor_kpi_4: '7',
-                total: '9'
+                fecha: 'Agosto 2016'
             },
             {
                 id: 9,
-                fecha: 'Abril 2017',
-                valor_kpi_1: '2',
-                valor_kpi_2: '5',
-                valor_kpi_3: '8',
-                valor_kpi_4: '3',
-                total: '4'
+                fecha: 'Septiembre 2016'
             },
             {
                 id: 10,
-                fecha: 'Abril 2017',
-                valor_kpi_1: '2',
-                valor_kpi_2: '5',
-                valor_kpi_3: '8',
-                valor_kpi_4: '3',
-                total: '4'
+                fecha: 'Octubre 2016'
             },
             {
                 id: 11,
-                fecha: 'Abril 2017',
-                valor_kpi_1: '2',
-                valor_kpi_2: '5',
-                valor_kpi_3: '8',
-                valor_kpi_4: '3',
-                total: '4'
+                fecha: 'Novimebre 2016'
             },
             {
                 id: 12,
-                fecha: 'Mayo 2017',
-                valor_kpi_1: '8',
-                valor_kpi_2: '4',
-                valor_kpi_3: '2',
-                valor_kpi_4: '7',
-                total: '9'
-            },{
+                fecha: 'Diciembre 2016'
+            },
+            {
                 id: 13,
-                fecha: 'Mayo 2017',
-                valor_kpi_1: '8',
-                valor_kpi_2: '4',
-                valor_kpi_3: '2',
-                valor_kpi_4: '7',
-                total: '9'
+                fecha: 'Enero 2017'
+            },{
+                id: 14,
+                fecha: 'Febrero 2017'
+            },
+            {
+                id: 15,
+                fecha: 'Marzo 2017'
+            },
+            {
+                id: 16,
+                fecha: 'Abril 2017'
             }];
+
+            function fillData(data){
+                data.forEach(element => {
+                    element.valor_kpi_1 = BuilderTable.getRandomValor();
+                    element.valor_kpi_2 = BuilderTable.getRandomValor();
+                    element.valor_kpi_3 = BuilderTable.getRandomValor();
+                    element.valor_kpi_4 = BuilderTable.getRandomValor();
+                    element.total = BuilderTable.getRandomValor();
+                });
+            }
+
+            fillData(data);
         
             $scope.cols = [
                 {
@@ -165,32 +129,23 @@ angular.
                     return {'text-align':'left'};
                     break;
                 case 1:
-                    return this.getColor(row.valor_kpi_1);
+                    return BuilderTable.setColorValor(row.valor_kpi_1);
                     break;
                 case 2: 
-                    return this.getColor(row.valor_kpi_2);
+                    return BuilderTable.setColorValor(row.valor_kpi_2);
                     break;
                 case 3:
-                    return this.getColor(row.valor_kpi_3);
+                    return BuilderTable.setColorValor(row.valor_kpi_3);
                     break;
                 case 4:
-                    return this.getColor(row.valor_kpi_4);
+                    return BuilderTable.setColorValor(row.valor_kpi_4);
                     break;
                 case 5:
-                    return this.getColor(row.total);
+                    return BuilderTable.setColorValor(row.total);
                     break;
                 default:
                     return {color: 'black'};  
                 }
-            }
-        
-            $scope.getColor = function(valor) {
-                if (valor < 3.33)
-                    return {color:'rgba(243, 4, 4, 0.918)'}
-                else if (valor < 6.66)
-                    return {color:'#FFDD00'}
-                else
-                    return {color:'green'}
             }
 
             $scope.filter = {
