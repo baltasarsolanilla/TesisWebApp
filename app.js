@@ -4,5 +4,6 @@ angular.module('balancedScorecard', [
     'strategyTree',
     'objetivosActualTable',
     'objetivosHistoricTable',
-    'objetivosAffectTable'
+    'objetivosAffectTable',
+    'menuRouting'
 ]);

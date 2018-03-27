@@ -30,6 +30,23 @@ body {
   }
 }
 
+#page-wrapper2 {
+  padding: 0 15px;
+  /* min-height: 600px; */
+  /* background-color: #337ab7; */
+  background-color: white;
+  height: calc(100vh - 52px);
+  overflow-y: scroll;
+}
+@media (min-width: 768px) {
+  #page-wrapper2 {
+    position: inherit;
+    margin-left: 160px;
+    border-left: 1px solid #e7e7e7;
+    border-bottom: 1px solid #e7e7e7;
+  }
+}
+
 #page-wrapper > row > col-lg-12{
   margin: 0 !important;
 }
