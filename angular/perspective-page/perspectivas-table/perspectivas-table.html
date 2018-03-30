@@ -1,0 +1,36 @@
+<div class="">
+    <h1>Perspectivas</h1>
+    <div class="row" style="margin-bottom:10px;">
+        <div class="col-lg-2">
+            <div class="btn-group">
+                <button class="btn btn-success btn-lg" ng-click="addPerspectiva()">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </button>
+                <button class="btn btn-primary btn-lg" ng-click="updatePerspectiva()">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </button>
+                <button class="btn btn-danger btn-lg" ng-click="removePerspectiva()">
+                    <span class="glyphicon glyphicon-trash"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Perspectivas de la estrategia</h3>
+            <table ng-table="tableParams" class="table table-bordered table-hover table-condensed table-striped table-objetivos-de-perspectiva" show-filter="false">
+                <colgroup>
+                    <col width="80%" />
+                </colgroup>
+                <tr ng-repeat="perspectiva in $data track by perspectiva.id" ng-click="logRow(perspectiva); setSelectedPerspectiva(perspectiva.id)" ng-class="{selected: perspectiva.id === idSelectedPerspectiva}">
+                    <td title="'Perspectivas'" sortable="'name'">
+                        {{perspectiva.name}}
+                    </td>
+                </tr>
+            </table>
+        </div>
+            <div class="col-md-6">
+               <objetivos-table id-perspectiva="idSelectedPerspectiva"></objetivos-table>
+            </div>
+        </div>
+</div>

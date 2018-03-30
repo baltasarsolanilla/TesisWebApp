@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="balancedScorecard">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Batch editable table</title>
+  
+  
+  <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css'>
+  <link rel='stylesheet prefetch' href='https://unpkg.com/ng-table/bundles/ng-table.min.css'>
+  <link rel="stylesheet" href="objetivos-table/objetivos-table.css">
+  <link rel="stylesheet" href="objetivos-search-box/ui-select/ui-select.style.css">
+  <link rel="stylesheet" href="perspectivas-table/perspectivas-table.css">
+
+  
+</head>
+
+<body>
+  <br>
+  <perspectivas-table></perspectivas-table>
+  
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js'></script>
+  <script src='http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.7/angular.min.js'></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular-sanitize.min.js"></script>
+  <script src='https://unpkg.com/ng-table/bundles/ng-table.min.js'></script>
+  
+  <!-- <script  src="js/index.js"></script> -->
+
+  <script src="app.js"></script>
+
+  <script src="perspectivas-table/perspectivas-table.module.js"></script>
+  <script src="perspectivas-table/perspectivas-table.component.js"></script>
+
+  <script src="objetivos-table/objetivos-table.module.js"></script>
+  <script src="objetivos-table/objetivos-table.component.js"></script>
+
+  <script src="objetivos-search-box/ui-select/ui-select.module.js"></script>
+  <script src="objetivos-search-box/objetivos-search-box.module.js"></script>
+  <script src="objetivos-search-box/objetivos-search-box.component.js"></script>
+  
+</body>
+
+</html>

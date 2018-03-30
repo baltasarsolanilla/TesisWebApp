@@ -1,9 +1,12 @@
 'use strict';
 
 angular.
-    module('strategyList').
-    component('strategyList', {
-        templateUrl: '../angular/strategy-list/strategy-list.template.html',
+    module('objetivosSearchBox').
+    component('objetivosSearchBox', {
+        templateUrl: '../angular/perspective-page/objetivos-search-box/objetivos-search-box.html',
+        bindings: {
+          onUpdate: '&'
+        },
         controller: function strategyListController($scope){
           var vm = this;
           vm.people = [
@@ -18,5 +21,11 @@ angular.
             { name: 'Michael',   email: 'michael@email.com',   age: 15, country: 'Colombia' },
             { name: 'Nicolás',   email: 'nicolas@email.com',    age: 43, country: 'Colombia' }
           ];
+
+         vm.updateObjetivo = function(objetivo){
+            console.log("strategy-list -- updateObjetivo");
+            console.log(objetivo);
+            vm.onUpdate({objetivo: objetivo });
+          }
         }
     });

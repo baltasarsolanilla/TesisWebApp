@@ -8,7 +8,7 @@
     '$timeout', function($timeout) {
       return {
         restrict: 'E',
-        templateUrl: '../angular/strategy-tree/strategy-tree.template.html',
+        templateUrl: '../angular/strategy-page/strategy-tree/strategy-tree.html',
         replace: true,
         scope: {
           treeData: '=',
