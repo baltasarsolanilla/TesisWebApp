@@ -1,9 +1,8 @@
  <div class="ng-cloak">
     <ui-select ng-model="$ctrl.person.selected" theme="bootstrap" ng-change="$ctrl.onSelectValue($ctrl.person.selected)">
-        <!-- <ui-select-match placeholder="Seleccionar objetivo...">{{$select.selected.name}}</ui-select-match> -->
         <ui-select-match placeholder={{$ctrl.message}}>{{$select.selected.name}}</ui-select-match>
         <ui-select-choices repeat="item in $ctrl.people | filter: $select.search">
-        <div ng-bind-html="item.name | highlight: $select.search"></div>
+            <div ng-bind-html="item.name | highlight: $select.search"></div>
         </ui-select-choices>
     </ui-select>
 </div>
