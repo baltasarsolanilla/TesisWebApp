@@ -3,7 +3,7 @@
 angular.
     module('searchBox').
     component('searchBox', {
-        templateUrl: '../angular/objetivos-page/search-box/search-box.html',
+        templateUrl: '../angular/shared-components/search-box/search-box.html',
         bindings: {
           onSelect: '&',
           url: '<',

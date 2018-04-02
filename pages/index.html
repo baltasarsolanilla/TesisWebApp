@@ -24,8 +24,10 @@
     <!-- <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
 
     <!-- ************************** MAIN-MENU ************************** -->
-    <!-- strategy-search-box -> ui-select style -->
-    <link rel="stylesheet" href="../angular/main-menu/strategy-search-box/ui-select/ui-select.style.css">
+
+    <!-- ************************** SHARED-COMPONENTS ************************** -->
+    <link rel="stylesheet" href="../angular/shared-components/search-box/ui-select/ui-select.style.css">
+
 
     <!-- ************************** STRATEGY-PAGE ************************** -->
 
@@ -55,14 +57,18 @@
     <!-- objetivos-affect-table -->
     <link rel="stylesheet" href="../angular/strategy-page/objetivos-affect-table/objetivos-affect-table.css">
 
-    <!-- ************************** PERSPECTIVas-PAGE ************************** -->
-    <link rel="stylesheet" href="../angular/perspectivas-page/perspectivas-table/perspectivas-table.css">
+
+    <!-- ************************** PERSPECTIVAS-PAGE ************************** -->
+    <link rel="stylesheet" href="../angular/perspectivas-page/perspectivas-page.css">
 
 
     <!-- ************************** OBJETIVOS-PAGE ************************** -->
 
-    <link rel="stylesheet" href="../angular/objetivos-page/search-box/ui-select/ui-select.style.css">
     <link rel="stylesheet" href="../angular/objetivos-page/objetivos-page.css">
+
+
+
+
 
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -93,7 +99,7 @@
            
             <ul class="nav navbar-top-links navbar-right">
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="">
                         <i class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-messages">
@@ -144,7 +150,7 @@
                 </li>
                 <!-- /.dropdown -->
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="">
                         <i class="fa fa-tasks fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-tasks">
@@ -223,7 +229,7 @@
                 </li>
                 <!-- /.dropdown -->
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="">
                         <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-alerts">
@@ -239,7 +245,7 @@
                         <li>
                             <a href="#">
                                 <div>
-                                    <i class="fa fa-twitter fa-fw"></i> 3 New Followers
+                                    <i class="fas fa-user-plus fa-fw"></i> 3 New Followers
                                     <span class="pull-right text-muted small">12 minutes ago</span>
                                 </div>
                             </a>
@@ -283,16 +289,16 @@
                 </li>
                 <!-- /.dropdown -->
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="">
                         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
                         <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
                         </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        <li><a href="#"><i class="fas fa-cog fa-fw"></i> Settings</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="login.html"><i class="fas fa-sign-out-alt fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -305,12 +311,12 @@
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <li class="sidebar-search">
-                            <strategy-search-box></strategy-search-box>
+                            <search-box message="'Search...'"></search-box>
                             <!-- /input-group -->
                         </li>
                         <li>
                             <!-- <a href="index.html"><i class="fa fa-cogs fa-fw"></i> Estrategia </a> -->
-                            <a href="#!/"><i class="fa fa-location-arrow fa-fw"></i> Estrategia </a>
+                            <a href="#!/estrategia"><i class="fa fa-location-arrow fa-fw"></i> Estrategia </a>
                         </li>
                         <li>
                             <a href="#!/mapa-estrategico"><i class="fa fa-map fa-fw"></i>Mapa Estratégico</a>
@@ -365,15 +371,20 @@
 
     <!-- ************************** MAIN-MENU ****************************** -->
 
-    <!-- strategy-search-box -->
-    <script src="../angular/main-menu/strategy-search-box/strategy-search-box.module.js"></script>
-    <script src="../angular/main-menu/strategy-search-box/strategy-search-box.component.js"></script>
-    <script src="../angular/main-menu/strategy-search-box/ui-select/ui-select.module.js"></script>
 
     <!-- menu routing -->
     <script src="../angular/main-menu/menu-routing/menu-routing.module.js"></script>
 
+    <!-- ************************** SHARED-COMPONENTS ****************************** -->
+    
+    <script src="../angular/shared-components/search-box/ui-select/ui-select.module.js"></script>
+    <script src="../angular/shared-components/search-box/search-box.module.js"></script>
+    <script src="../angular/shared-components/search-box/search-box.component.js"></script>
+
     <!-- ************************** STRATEGY-PAGE ************************** -->
+    <!-- strategy-page -->
+    <script src="../angular/strategy-page/strategy-page.module.js"></script>
+    <script src="../angular/strategy-page/strategy-page.component.js"></script>
 
     <!-- strategy-tabset -->
     <script src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.5.0.js"></script>
@@ -408,9 +419,10 @@
 
     <!-- ************************** PERSPECTIVAS-PAGE ************************** -->
 
-    <!-- objetivos-search-box -->
-    <script src="../angular/perspectivas-page/objetivos-search-box/objetivos-search-box.module.js"></script>
-    <script src="../angular/perspectivas-page/objetivos-search-box/objetivos-search-box.component.js"></script>
+    <!-- perspectivas-page -->
+    <script src="../angular/perspectivas-page/perspectivas-page.module.js"></script>
+    <script src="../angular/perspectivas-page/perspectivas-page.component.js"></script>
+
 
     <!-- objetivos-table -->
     <script src="../angular/perspectivas-page/objetivos-table/objetivos-table.module.js"></script>
@@ -430,10 +442,6 @@
 
     <script src="../angular/objetivos-page/kpis-table/kpis-table.module.js"></script>
     <script src="../angular/objetivos-page/kpis-table/kpis-table.component.js"></script>
-
-    <script src="../angular/objetivos-page/search-box/ui-select/ui-select.module.js"></script>
-    <script src="../angular/objetivos-page/search-box/search-box.module.js"></script>
-    <script src="../angular/objetivos-page/search-box/search-box.component.js"></script>
 
 </body>
 

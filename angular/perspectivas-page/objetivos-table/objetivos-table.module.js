@@ -1,4 +1,4 @@
 angular.module('objetivosTable', [
     'ngTable',
-    'objetivosSearchBox'
+    'searchBox'
 ]);

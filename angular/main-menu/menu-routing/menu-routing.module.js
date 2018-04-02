@@ -7,6 +7,9 @@ config( function($routeProvider){
     .when('/', {
         templateUrl: "../pages/menu-templates/estrategia.html"
     })
+    .when('/estrategia', {
+        templateUrl: "../pages/menu-templates/estrategia.html"
+    })
     .when('/mapa-estrategico', {
         templateUrl: "../pages/menu-templates/mapa-estrategico.html"
     })
@@ -17,12 +20,10 @@ config( function($routeProvider){
         templateUrl: "../pages/menu-templates/objetivos.html"
     })
     .when('/indicadores', {
-        templateUrl: "../pages/menu-templates/objetivos.html"
+        templateUrl: "../pages/menu-templates/indicadores.html"
     })
     .when('/ayuda', {
-        templateUrl: "../pages/menu-templates/objetivos.html"
+        templateUrl: "../pages/menu-templates/ayuda.html"
     })
-    // .otherwise({
-        // template : "../page/menu-templates/estrategia.html"
-    // });
+    // .otherwise({redirectTo: $routeProvider});
 })
