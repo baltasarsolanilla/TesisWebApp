@@ -1,0 +1,33 @@
+<div>
+    <h1>Objetivos</h1>
+    <div class="row" style="margin-bottom:10px;">
+        <div class="col-lg-2">
+            <div class="btn-group">
+                <button class="btn btn-success btn-lg" ng-click="createObjetivo()">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </button>
+                <button class="btn btn-primary btn-lg" ng-click="updateObjetivo()" ng-disabled="!objetivoSelected">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </button>
+                <button class="btn btn-danger btn-lg" ng-click="deleteObjetivo()" ng-disabled="!objetivoSelected">
+                    <span class="glyphicon glyphicon-trash"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3">
+            <search-box on-select="onSelect(value)" url="objetivoSelected.name" message="'Seleccionar objetivo...'"></search-box>
+            <!-- <h4>{{objetivoSelected.id}}</h4> -->
+        </div>
+    </div>
+    <br></br>
+    <div class="row">
+        <div class="col-lg-6">
+            <kpis-table id="objetivoSelected.id"></kpis-table>
+        </div>
+        <div class="col-lg-6">
+            <objetivos-afectados-table id="objetivoSelected.id"></objetivos-afectados-table>
+        </div>
+    </div>
+</div>

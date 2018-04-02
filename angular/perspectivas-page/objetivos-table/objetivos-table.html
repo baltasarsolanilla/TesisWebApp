@@ -17,7 +17,7 @@
         </div>
     </div>
     <div class="col-lg-6">
-        <objetivos-search-box ng-show="isEditing" on-update="onUpdate(objetivo)"></objetivos-search-box>
+        <search-box ng-show="isEditing" on-select="onUpdate(value)"></search-box>
     </div>
     <table ng-table="tableParams" class="table table-bordered table-hover table-condensed table-striped table-objetivos-de-perspectiva"  show-filter="false" >
         <colgroup>

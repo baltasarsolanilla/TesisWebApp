@@ -1,16 +1,18 @@
 'use strict';
 
 angular.
-    module('objetivosTable').
-        component('objetivosTable', {
-            templateUrl: '../angular/perspective-page/objetivos-table/objetivos-table.html',
+    module('kpisTable').
+        component('kpisTable', {
+            templateUrl: '../angular/objetivos-page/kpis-table/kpis-table.html',
             bindings: {
-              idPerspectiva: '<'
+              id: '<'
             },
             controller: function ObjetivosTableController($scope, NgTableParams){
                 var simpleList = [{"id":1,"name":"Nissim","age":41,"money":454},{"id":2,"name":"Mariko","age":10,"money":-100},{"id":3,"name":"Mark","age":39,"money":291},{"id":4,"name":"Allen","age":85,"money":871},{"id":5,"name":"Dustin","age":10,"money":378},{"id":6,"name":"Macon","age":9,"money":128}];
                 var simpleList2 = [{"id":3,"name":"Mark","age":39,"money":291},{"id":4,"name":"Allen","age":85,"money":871},{"id":5,"name":"Dustin","age":10,"money":378},{"id":6,"name":"Macon","age":9,"money":128}];
                 var originalData = angular.copy(simpleList);
+                $scope.messageComboBox1 = "Seleccionar objetivo...";
+                $scope.messageComboBox2 = "Peso";
 
                 $scope.tableParams = new NgTableParams({
                   page: 1, // show first page
@@ -28,19 +30,20 @@ angular.
                 $scope.hasChanges = hasChanges;
                 $scope.saveChanges = saveChanges;
 
-                $scope.onUpdate = onUpdate;
+                $scope.onSelect = onSelect;
                 $scope.changeDataset = changeDataset
                 
                 //Esta funcion carga el objetivo seleccionado para despues hacer el ADD.
-                function onUpdate(newObjetivo){
-                  console.log("perspectiva-objetivos-table -- onUpdate");
-                  $scope.newObjetivo = newObjetivo;
+                function onSelect(value){
+                  console.log("kpis-table -- onSelect");
+                  $scope.valueSelected = value;
+                  $scope.changeDataset($scope.valueSelected.id);
                 }
 
                 //Esta funcion es la que va a cargar le nuevo dataset una vez seleccionado una perspectiva.
-                function changeDataset(idPerspectiva){
-                  console.log("objetivos-table -- changeDataset")
-                  if ((idPerspectiva % 2) === 0)
+                function changeDataset(id){
+                  console.log("kpis-table -- changeDataset")
+                  if ((id % 2) === 0)
                     $scope.tableParams.settings({
                       dataset: angular.copy(originalData)
                     });
@@ -52,19 +55,19 @@ angular.
                 }
 
                 this.$onChanges = function(changes){
-                  console.log("objetivos-table -- onChanges");
-                  if (changes.idPerspectiva)
-                    $scope.changeDataset(changes.idPerspectiva.currentValue);
+                  console.log("kpis-table -- onChanges");
+                  if (changes.id)
+                    $scope.changeDataset(changes.id.currentValue);
                 }
 
                 var id = '100';
                 function add() {
-                  console.log("perspectiva-objetivos-table -- add");
+                  console.log("kpis-table -- add");
                   $scope.isEditing = true;
                   $scope.isRowAdded = true;
                   $scope.tableParams.settings().dataset.unshift({
                     id: id++, 
-                    name: $scope.newObjetivo.name
+                    name: $scope.valueSelected.name
                   });
                   // we need to ensure the user sees the new row we've just added.
                   // it seems a poor but reliable choice to remove sorting and move them to the first page

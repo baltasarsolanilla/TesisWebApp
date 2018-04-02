@@ -3,7 +3,7 @@
 angular.
     module('objetivosSearchBox').
     component('objetivosSearchBox', {
-        templateUrl: '../angular/perspective-page/objetivos-search-box/objetivos-search-box.html',
+        templateUrl: '../angular/perspectivas-page/objetivos-search-box/objetivos-search-box.html',
         bindings: {
           onUpdate: '&'
         },

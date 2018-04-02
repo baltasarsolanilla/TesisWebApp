@@ -3,7 +3,7 @@
 angular.
     module('perspectivasTable').
         component('perspectivasTable', {
-            templateUrl: '../angular/perspective-page/perspectivas-table/perspectivas-table.html',
+            templateUrl: '../angular/perspectivas-page/perspectivas-table/perspectivas-table.html',
             controller: function PerspectivaObjetivosTableController($scope, NgTableParams){
                 var simpleList = [{"id":1,"name":"Nissim","age":41,"money":454},{"id":2,"name":"Mariko","age":10,"money":-100},{"id":3,"name":"Mark","age":39,"money":291},{"id":4,"name":"Allen","age":85,"money":871},{"id":5,"name":"Dustin","age":10,"money":378},{"id":6,"name":"Macon","age":9,"money":128}];
                 var originalData = angular.copy(simpleList);

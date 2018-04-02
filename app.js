@@ -7,4 +7,5 @@ angular.module('balancedScorecard', [
     'objetivosAffectTable',
     'menuRouting',
     'perspectivasTable',
+    'objetivosPage'
 ]);
