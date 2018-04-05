@@ -5,19 +5,19 @@
     </button>
     <div class="">
         <div class="btn-group pull-left" style="margin-bottom:6px;">
-            <button class="btn btn-warning" ng-if="isEditing" ng-click="cancelChanges()">
-                <span class="glyphicon glyphicon-remove"></span>
+            <button class="btn btn-success" ng-if="isEditing" ng-disabled="!newObjetivo" ng-click="add()">
+                <span class="glyphicon glyphicon-plus"></span>
             </button>
             <button class="btn btn-primary" ng-if="isEditing" ng-disabled="!hasChanges()" ng-click="saveChanges()">
                 <span class="glyphicon glyphicon-ok"></span>
             </button>
-            <button class="btn btn-success" ng-if="isEditing" ng-disabled="!newObjetivo" ng-click="add()">
-                <span class="glyphicon glyphicon-plus"></span>
+            <button class="btn btn-warning" ng-if="isEditing" ng-click="cancelChanges()">
+                <span class="glyphicon glyphicon-remove"></span>
             </button>
         </div>
     </div>
     <div class="col-lg-6">
-        <search-box ng-show="isEditing" on-select="onUpdate(value)"></search-box>
+        <search-box ng-show="isEditing" on-select="onUpdate(value)" message="'Seleccionar objetivo...'"></search-box>
     </div>
     <table ng-table="tableParams" class="table table-bordered table-hover table-condensed table-striped table-objetivos-de-perspectiva"  show-filter="false" >
         <colgroup>
@@ -31,6 +31,6 @@
             </td>
         </tr>
     </table>
-    <!-- <h4>perspectiva id: {{$ctrl.idPerspectiva}}</h4> -->
+    <!-- <h4>perspectiva id en objetivos-table: {{$ctrl.idPerspectiva}}</h4> -->
  
 </div>

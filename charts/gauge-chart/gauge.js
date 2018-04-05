@@ -72,7 +72,7 @@
     var digits, num, value;
     num = 1 <= arguments.length ? slice.call(arguments, 0) : [];
     value = num[0];
-    digits = 0 || num[1];
+    digits = 2 || num[1];
     return addCommas(value.toFixed(digits));
   };
 

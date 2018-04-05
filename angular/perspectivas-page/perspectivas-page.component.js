@@ -6,10 +6,26 @@ angular.
             templateUrl: '../angular/perspectivas-page/perspectivas-page.html',
             controller: function PerspectivasPageController($scope){
                 
-                $scope.onSelect = onSelect;
+                $scope.onSelectEstrategia = onSelectEstrategia;
                 
-                function onSelect(value){
-                    $scope.selectedPerspectiva = value;
+                function onSelectEstrategia(value){
+                    $scope.selectedEstrategia = value;
+                }
+
+                $scope.addEstrategia = addEstrategia;
+                $scope.updateEstrategia = updateEstrategia;
+                $scope.removeEstrategia = removeEstrategia;
+
+                function addEstrategia(){
+                    alert("Agregar plan estrategico");
+                }
+
+                function updateEstrategia(){
+                    alert("Modificar plan estrategico");
+                }
+
+                function removeEstrategia(){
+                    alert("Eliminar plan estrategico");
                 }
             }
         });

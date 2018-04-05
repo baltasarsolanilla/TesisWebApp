@@ -8,8 +8,17 @@ angular.
               id: '<'
             },
             controller: function ObjetivosTableController($scope, NgTableParams){
-                var simpleList = [{"id":1,"name":"Nissim","age":41,"money":454},{"id":2,"name":"Mariko","age":10,"money":-100},{"id":3,"name":"Mark","age":39,"money":291},{"id":4,"name":"Allen","age":85,"money":871},{"id":5,"name":"Dustin","age":10,"money":378},{"id":6,"name":"Macon","age":9,"money":128}];
-                var simpleList2 = [{"id":3,"name":"Mark","age":39,"money":291},{"id":4,"name":"Allen","age":85,"money":871},{"id":5,"name":"Dustin","age":10,"money":378},{"id":6,"name":"Macon","age":9,"money":128}];
+              var simpleList = [{"id":1,"name":"Nissim","peso":12.5},
+                                {"id":2,"name":"Marico","peso":12.5},
+                                {"id":3,"name":"Mark","peso":25},
+                                {"id":4,"name":"Allen","peso":25}];
+
+                var simpleList2 =[{"id":1,"name":"Macon","peso":5},
+                                  {"id":2,"name":"Griselda","peso":15},
+                                  {"id":3,"name":"Marcelo","peso":30},
+                                  {"id":4,"name":"John","peso":50},
+                                  {"id":5,"name":"Kel","peso":12.5}];
+                                  
                 var originalData = angular.copy(simpleList);
 
                 // this.$onInit = function() {
@@ -39,13 +48,13 @@ angular.
                 function onSelect(value){
                   console.log("kpis-table -- onSelect");
                   $scope.valueSelected = value;
-                  $scope.changeDataset($scope.valueSelected.id);
                 }
 
                 //Esta funcion es la que va a cargar le nuevo dataset una vez seleccionado una perspectiva.
+                $scope.change = true;
                 function changeDataset(id){
                   console.log("kpis-table -- changeDataset")
-                  if ((id % 2) === 0)
+                  if ($scope.change)
                     $scope.tableParams.settings({
                       dataset: angular.copy(originalData)
                     });
@@ -53,6 +62,7 @@ angular.
                     $scope.tableParams.settings({
                       dataset: angular.copy(simpleList2)
                     });
+                  $scope.change = ! $scope.change;
                   $scope.tableParams.reload();
                 }
 

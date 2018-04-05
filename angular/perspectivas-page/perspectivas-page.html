@@ -1,12 +1,38 @@
 <div class="">
-    <h1>Perspectivas</h1>
+    <h1>Plan Estratégico</h1>
+    <div class="row" style="margin-bottom:10px;">
+        <div class="col-lg-6">
+            <div class="btn-group">
+                <button class="btn btn-success btn-lg" ng-click="addEstrategia()">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </button>
+                <button class="btn btn-primary btn-lg" ng-click="updateEstrategia()" ng-disabled="!selectedEstrategia">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </button>
+                <button class="btn btn-danger btn-lg" ng-click="removeEstrategia()" ng-disabled="!selectedEstrategia">
+                    <span class="glyphicon glyphicon-trash"></span>
+                </button>
+            </div>
+        </div>
+    </div>
     <div class="row">
-        <div class="col-md-6">
-            <perspectivas-table on-select="onSelect(value)"></perspectivas-table>
-            <h4>Perspectiva id: {{selectedPerspectiva.id}}</h4>
+        <div class="col-lg-4">
+            <search-box on-select="onSelectEstrategia(value)" message="'Seleccionar plan estratégico...'"></search-box>
         </div>
-        <div class="col-md-6" style="margin-top:45px;">
-            <objetivos-table id-perspectiva="selectedPerspectiva.id"></objetivos-table>
+        <!-- <h4>Estrategia id: {{selectedEstrategia.id}}</h4> -->
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-lg-6">
+            <h4>Misión</h4>
+            <p>Cupidatat incididunt officia ad et non. Consectetur mollit proident mollit veniam fugiat sint veniam duis est aliquip. Ut proident esse qui do fugiat. Aute aliqua Lorem commodo nostrud ex cupidatat. Elit sunt ea sit enim sit exercitation commodo eiusmod. Eiusmod esse ad nisi occaecat incididunt eu eiusmod sunt ut velit do commodo laboris exercitation. Eu fugiat enim proident sit veniam labore.</p>
         </div>
+        <div class="col-lg-6">
+            <h4>Vision</h4>
+            <p>Qui dolor nostrud sint ea occaecat. Non quis consequat laboris eiusmod nostrud duis aliquip excepteur incididunt consequat aute quis enim deserunt. Anim occaecat magna aliqua ipsum deserunt aliqua. Cillum id laboris laboris do.</p>
+        </div>
+    </div>
+    <div class="">
+        <perspectivas-table id-estrategia="selectedEstrategia.id"></perspectivas-table>
     </div>
 </div>

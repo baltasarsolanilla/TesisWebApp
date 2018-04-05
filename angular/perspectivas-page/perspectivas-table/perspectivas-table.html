@@ -1,28 +1,40 @@
-<div class="">
-    <div class="row" style="margin-bottom:10px;">
-        <div class="col-lg-6">
-            <div class="btn-group">
-                <button class="btn btn-success btn-lg" ng-click="addPerspectiva()">
+<div class="row">
+    <div class="col-lg-6">
+        <h3 style="display:inline-block;">Perspectivas del plan estratégico</h3>
+        <button class="btn btn-primary btn-sm" ng-show="!isEditing" ng-click="isEditing = true" style="margin-left:12px;">
+                <span class="glyphicon glyphicon-pencil"></span>
+        </button>
+        <div class="">
+            <div class="btn-group pull-left" style="margin-bottom:6px;">
+                <button class="btn btn-success" ng-if="isEditing" ng-disabled="!newObjetivo" ng-click="add()">
                     <span class="glyphicon glyphicon-plus"></span>
                 </button>
-                <button class="btn btn-primary btn-lg" ng-click="updatePerspectiva()">
-                    <span class="glyphicon glyphicon-pencil"></span>
+                <button class="btn btn-primary" ng-if="isEditing" ng-disabled="!hasChanges()" ng-click="saveChanges()">
+                    <span class="glyphicon glyphicon-ok"></span>
                 </button>
-                <button class="btn btn-danger btn-lg" ng-click="removePerspectiva()">
-                    <span class="glyphicon glyphicon-trash"></span>
+                <button class="btn btn-warning" ng-if="isEditing" ng-click="cancelChanges()">
+                    <span class="glyphicon glyphicon-remove"></span>
                 </button>
             </div>
+            <div class="col-lg-6">
+                <search-box ng-show="isEditing" on-select="onUpdate(value)" message="'Seleccionar perspectiva...'"></search-box>
+            </div>
         </div>
+        <table ng-table="tableParams" class="table table-bordered table-hover table-condensed table-striped table-objetivos-de-perspectiva" show-filter="false">
+            <colgroup>
+                <col width="80%" />
+            </colgroup>
+            <tr ng-repeat="row in $data track by row.id" ng-click="onSelectItem(row)" ng-class="{selected: row.id === selectedPerspectiva.id}">
+                <td title="'PERSPECTIVAS'" sortable="'name'">
+                    <span class="">{{row.name}}
+                        <button class="btn btn-danger btn-sm pull-right"  ng-click="del(objetivo)" ng-hide="!isEditing"><span class="glyphicon glyphicon-trash"></span></button>
+                    </span>
+                </td>
+            </tr>
+        </table>
+        <!-- <h4>estrategia id en perspectivas-table: {{$ctrl.idEstrategia}}</h4> -->
     </div>
-    <h3>Perspectivas de la estrategia</h3>
-    <table ng-table="tableParams" class="table table-bordered table-hover table-condensed table-striped table-objetivos-de-perspectiva" show-filter="false">
-        <colgroup>
-            <col width="80%" />
-        </colgroup>
-        <tr ng-repeat="row in $data track by row.id" ng-click="onSelectItem(row)" ng-class="{selected: row.id === selectedPerspectiva}">
-            <td title="'PERSPECTIVAS'" sortable="'name'">
-                {{row.name}}
-            </td>
-        </tr>
-    </table>
+    <div class="col-lg-6">
+        <objetivos-table id-perspectiva="selectedPerspectiva.id"></objetivos-table>
+    </div>
 </div>

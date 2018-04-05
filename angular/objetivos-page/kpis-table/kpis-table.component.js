@@ -8,9 +8,18 @@ angular.
               id: '<'
             },
             controller: function ObjetivosTableController($scope, NgTableParams){
-                var simpleList = [{"id":1,"name":"Nissim","age":41,"money":454},{"id":2,"name":"Mariko","age":10,"money":-100},{"id":3,"name":"Mark","age":39,"money":291},{"id":4,"name":"Allen","age":85,"money":871},{"id":5,"name":"Dustin","age":10,"money":378},{"id":6,"name":"Macon","age":9,"money":128}];
-                var simpleList2 = [{"id":3,"name":"Mark","age":39,"money":291},{"id":4,"name":"Allen","age":85,"money":871},{"id":5,"name":"Dustin","age":10,"money":378},{"id":6,"name":"Macon","age":9,"money":128}];
+                var simpleList = [{"id":1,"name":"KPI -- A","peso":12.5},
+                                  {"id":2,"name":"KPI -- B","peso":12.5},
+                                  {"id":3,"name":"KPI -- C","peso":25}];
+                
+                var simpleList2 =[{"id":1,"name":"KPI -- Z","peso":5},
+                                  {"id":2,"name":"KPI -- Q","peso":15},
+                                  {"id":3,"name":"KPI -- R","peso":30},
+                                  {"id":4,"name":"KPI -- S","peso":50},
+                                  {"id":5,"name":"KPI -- T","peso":12.5}];
+
                 var originalData = angular.copy(simpleList);
+
                 $scope.messageComboBox1 = "Seleccionar objetivo...";
                 $scope.messageComboBox2 = "Peso";
 
@@ -31,26 +40,32 @@ angular.
                 $scope.saveChanges = saveChanges;
 
                 $scope.onSelect = onSelect;
+                $scope.onSelectPeso = onSelectPeso;
                 $scope.changeDataset = changeDataset
                 
                 //Esta funcion carga el objetivo seleccionado para despues hacer el ADD.
                 function onSelect(value){
                   console.log("kpis-table -- onSelect");
                   $scope.valueSelected = value;
-                  $scope.changeDataset($scope.valueSelected.id);
+                }
+                function onSelectPeso(value){
+                  console.log("kpis-table -- onSelect");
+                  $scope.pesoSelected = value;
                 }
 
                 //Esta funcion es la que va a cargar le nuevo dataset una vez seleccionado una perspectiva.
+                $scope.change = true;
                 function changeDataset(id){
                   console.log("kpis-table -- changeDataset")
-                  if ((id % 2) === 0)
+                  if ($scope.change)
                     $scope.tableParams.settings({
-                      dataset: angular.copy(originalData)
+                      dataset: angular.copy(simpleList)
                     });
                   else
                     $scope.tableParams.settings({
                       dataset: angular.copy(simpleList2)
                     });
+                  $scope.change = !$scope.change;
                   $scope.tableParams.reload();
                 }
 
@@ -67,7 +82,8 @@ angular.
                   $scope.isRowAdded = true;
                   $scope.tableParams.settings().dataset.unshift({
                     id: id++, 
-                    name: $scope.valueSelected.name
+                    name: $scope.valueSelected.name,
+                    peso: $scope.pesoSelected.name
                   });
                   // we need to ensure the user sees the new row we've just added.
                   // it seems a poor but reliable choice to remove sorting and move them to the first page
