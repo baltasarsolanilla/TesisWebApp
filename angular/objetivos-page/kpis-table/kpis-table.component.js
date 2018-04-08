@@ -7,7 +7,7 @@ angular.
             bindings: {
               id: '<'
             },
-            controller: function ObjetivosTableController($scope, NgTableParams){
+            controller: function KPIsTableController($scope, $window, NgTableParams){
                 var simpleList = [{"id":1,"name":"KPI -- A","peso":12.5},
                                   {"id":2,"name":"KPI -- B","peso":12.5},
                                   {"id":3,"name":"KPI -- C","peso":25}];
@@ -20,8 +20,23 @@ angular.
 
                 var originalData = angular.copy(simpleList);
 
-                $scope.messageComboBox1 = "Seleccionar objetivo...";
-                $scope.messageComboBox2 = "Peso";
+                // Funciones del controller
+                $scope.add = add;
+                $scope.del = del;
+                $scope.hasChanges = hasChanges;
+                $scope.cancelChanges = cancelChanges;
+                $scope.saveChanges = saveChanges;
+                
+
+                $scope.onSelectKpi = onSelectKpi;
+                $scope.onSelectPeso = onSelectPeso;
+                $scope.changeDataset = changeDataset;
+
+                // Variables del controller
+                var controllerName = "KPIS-TABLE-CONTROLLER -> ";
+                $scope.selectedKPI = null;
+                $scope.selectedPeso = null;
+                $scope.deleteCount = 0;
 
                 $scope.tableParams = new NgTableParams({
                   page: 1, // show first page
@@ -30,33 +45,23 @@ angular.
                   counts: [],
                   dataset: angular.copy(simpleList)
                 });
-            
-                $scope.deleteCount = 0;
-            
-                $scope.add = add;
-                $scope.cancelChanges = cancelChanges;
-                $scope.del = del;
-                $scope.hasChanges = hasChanges;
-                $scope.saveChanges = saveChanges;
-
-                $scope.onSelect = onSelect;
-                $scope.onSelectPeso = onSelectPeso;
-                $scope.changeDataset = changeDataset
                 
-                //Esta funcion carga el objetivo seleccionado para despues hacer el ADD.
-                function onSelect(value){
-                  console.log("kpis-table -- onSelect");
-                  $scope.valueSelected = value;
+                //Carga el KPI seleccionado en el search-box.
+                function onSelectKpi(value){
+                $window.console.log(controllerName + "onSelect(vale)");
+                  $scope.selectedKPI = value;
                 }
+
+                //Carga el PESO seleccionado en el search-box.
                 function onSelectPeso(value){
-                  console.log("kpis-table -- onSelect");
-                  $scope.pesoSelected = value;
+                  $window.console.log(controllerName + "onSelectPeso(value)");
+                  $scope.selectedPeso = value;
                 }
 
                 //Esta funcion es la que va a cargar le nuevo dataset una vez seleccionado una perspectiva.
                 $scope.change = true;
-                function changeDataset(id){
-                  console.log("kpis-table -- changeDataset")
+                function changeDataset(idObjetivo){
+                  $window.console.log(controllerName + "changeDataset(idObjetivo)")
                   if ($scope.change)
                     $scope.tableParams.settings({
                       dataset: angular.copy(simpleList)
@@ -70,20 +75,20 @@ angular.
                 }
 
                 this.$onChanges = function(changes){
-                  console.log("kpis-table -- onChanges");
+                  $window.console.log(controllerName + "onChanges(changes)");
                   if (changes.id)
                     $scope.changeDataset(changes.id.currentValue);
                 }
 
                 var id = '100';
                 function add() {
-                  console.log("kpis-table -- add");
+                  $window.console.log(controllerName + "add()");
                   $scope.isEditing = true;
                   $scope.isRowAdded = true;
                   $scope.tableParams.settings().dataset.unshift({
                     id: id++, 
-                    name: $scope.valueSelected.name,
-                    peso: $scope.pesoSelected.name
+                    name: $scope.selectedKPI.name,
+                    peso: $scope.selectedPeso.name
                   });
                   // we need to ensure the user sees the new row we've just added.
                   // it seems a poor but reliable choice to remove sorting and move them to the first page
@@ -94,6 +99,7 @@ angular.
                 }
             
                 function del(row) {
+                  $window.console.log(controllerName + "del(row)");
                   _.remove($scope.tableParams.settings().dataset, function(item) {
                     return row === item;
                   });
@@ -107,16 +113,19 @@ angular.
                 }
             
                 function hasChanges() {
+                  $window.console.log(controllerName + "hasChanges()");
                   return $scope.deleteCount > 0 || $scope.isRowAdded;
                 }
             
                 function resetTableStatus() {
+                  $window.console.log(controllerName + "resetTableStatus()");
                   $scope.isEditing = false;
                   $scope.isRowAdded = false;
                   $scope.deleteCount = 0;
                 }
             
                 function cancelChanges() {
+                  $window.console.log(controllerName + "cancelChanges()");
                   resetTableStatus();
                   var currentPage = $scope.tableParams.page();
                   $scope.tableParams.settings({
@@ -125,6 +134,7 @@ angular.
                 }
             
                 function saveChanges() {
+                  $window.console.log(controllerName + "saveChanges()");
                   resetTableStatus();
                   var currentPage = $scope.tableParams.page();
                   originalData = angular.copy($scope.tableParams.settings().dataset);

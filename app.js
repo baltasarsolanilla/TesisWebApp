@@ -1,7 +1,7 @@
 angular.module('balancedScorecard', [
     'menuRouting',
     'strategyPage',
-    'perspectivasPage',
+    'estrategiasPage',
     'objetivosPage',
     'searchBox'
 ]);

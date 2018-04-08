@@ -24,6 +24,6 @@ config( function($routeProvider){
     })
     .when('/ayuda', {
         templateUrl: "../pages/menu-templates/ayuda.html"
-    })
+    });
     // .otherwise({redirectTo: $routeProvider});
-})
+});

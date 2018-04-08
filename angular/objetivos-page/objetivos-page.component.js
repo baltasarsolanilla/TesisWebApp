@@ -4,29 +4,37 @@ angular.
     module('objetivosPage').
         component('objetivosPage', {
             templateUrl: '../angular/objetivos-page/objetivos-page.html',
-            controller: function PerspectivaObjetivosTableController($scope){                
-                // $scope.simpleList = [{"id":1,"name":"Nissim","age":41,"money":454},{"id":2,"name":"Mariko","age":10,"money":-100},{"id":3,"name":"Mark","age":39,"money":291},{"id":4,"name":"Allen","age":85,"money":871},{"id":5,"name":"Dustin","age":10,"money":378},{"id":6,"name":"Macon","age":9,"money":128}];
+            controller: function ObjetivosPageController($scope, $window){                
                 
-                $scope.onSelect = onSelect;
+                // Funciones del controller
+                $scope.onSelectObjetivo = onSelectObjetivo;
                 $scope.createObjetivo = createObjetivo;
                 $scope.updateObjetivo = updateObjetivo;
                 $scope.deleteObjetivo = deleteObjetivo;
 
-                function onSelect(value){
-                    console.log("objetivos-page -- onSelect");
-                    $scope.objetivoSelected = value;
+                // Variables del controller
+                var controllerName = "OBJETIVOS-PAGE-CONTROLLER -> ";
+                $scope.selectedObjetivo = null;
+
+
+                function onSelectObjetivo(value){
+                    $window.$window.console.log(controllerName + "onSelectObjetivo(value)");
+                    $scope.selectedObjetivo = value;
                 }
 
                 function createObjetivo(){
-                    alert("CREAR OBJETIVO");
+                    $window.$window.console.log(controllerName + "createObjetivo()");
+                    $window.alert("CREAR OBJETIVO");
                 }
 
                 function updateObjetivo(){
-                    alert("UPDATE OBJETVIO " + $scope.objetivoSelected.name);
+                    $window.$window.console.log(controllerName + "updateObjetivo()");
+                    $window.alert("UPDATE OBJETVIO " + $scope.selectedObjetivo.name);
                 }
 
                 function deleteObjetivo(){
-                    alert("ELIMINAR OBJETIVO: " + $scope.objetivoSelected.name);
+                    $window.$window.console.log(controllerName + "deleteObjetivo()");
+                    $window.alert("ELIMINAR OBJETIVO: " + $scope.selectedObjetivo.name);
                 }
             }
         });

@@ -1,29 +1,17 @@
 'use strict';
 
 angular.
-    module('objetivosAfectadosTable').
-        component('objetivosAfectadosTable', {
-            templateUrl: '../angular/objetivos-page/objetivos-afectados-table/objetivos-afectados-table.html',
-            bindings: {
-              id: '<'
+    module('perspectivasTable').
+        component('perspectivasTable', {
+            templateUrl: '../angular/estrategias-page/perspectivas-table/perspectivas-table.html',
+            bindings:{
+              onSelect: '&',
+              idEstrategia: "<"
             },
-            controller: function ObjetivosAfectadosTableController($scope, $window, NgTableParams){
-              var simpleList = [{"id":1,"name":"Nissim","peso":12.5},
-                                {"id":2,"name":"Marico","peso":12.5},
-                                {"id":3,"name":"Mark","peso":25},
-                                {"id":4,"name":"Allen","peso":25}];
-
-              var simpleList2 =[{"id":1,"name":"Macon","peso":5},
-                                {"id":2,"name":"Griselda","peso":15},
-                                {"id":3,"name":"Marcelo","peso":30},
-                                {"id":4,"name":"John","peso":50},
-                                {"id":5,"name":"Kel","peso":12.5}];
-                                
+            controller: function PerspectivasTableController($scope, $window, NgTableParams){
+              var simpleList = [{"id":1,"name":"Nissim","age":41,"money":454},{"id":2,"name":"Mariko","age":10,"money":-100},{"id":3,"name":"Mark","age":39,"money":291},{"id":4,"name":"Allen","age":85,"money":871},{"id":5,"name":"Dustin","age":10,"money":378},{"id":6,"name":"Macon","age":9,"money":128}];
+              var simpleList2 = [{"id":3,"name":"Mark","age":39,"money":291},{"id":4,"name":"Allen","age":85,"money":871},{"id":5,"name":"Dustin","age":10,"money":378},{"id":6,"name":"Macon","age":9,"money":128}];
               var originalData = angular.copy(simpleList);
-
-              // this.$onInit = function() {
-              //   var originalData = $scope.data;
-              // };
 
               $scope.tableParams = new NgTableParams({
                 page: 1, // show first page
@@ -32,42 +20,29 @@ angular.
                 counts: [],
                 dataset: angular.copy(simpleList)
               });
-
-              // Funciones del controller
+          
+              // Funciones de controller
               $scope.add = add;
               $scope.del = del;
               $scope.hasChanges = hasChanges;
               $scope.cancelChanges = cancelChanges;
               $scope.saveChanges = saveChanges;
-              
 
-              $scope.onSelectObjetivo = onSelectObjetivo;
-              $scope.onSelectPeso = onSelectPeso;
+              $scope.onSelectPerspectiva = onSelectPerspectiva;
+              $scope.onSelectItem = onSelectItem;
               $scope.changeDataset = changeDataset;
 
-              // Variables del controller
-              var controllerName = "OBJETIVOS-AFECTADOS-TABLE-CONTROLLER -> ";
-              $scope.selectedObjetivo = null;
-              $scope.selectedPeso = null;
+              // Variblaes de controller
+              var controllerName = "PERSPECTIVAS-TABLE-CONTROLLER -> ";
               $scope.deleteCount = 0;
-              
-              //Carga el OBJETIVO seleccionado en el search-box.
-              function onSelectObjetivo(value){
-                $window.console.log(controllerName + "onSelectObjetivo(value)");
-                $scope.selectedObjetivo = value;
-              }
+              $scope.selectedPerspectiva = null;
+              $scope.selectedItem = null;
 
-              //Carga el PESO seleccionado en el search-box.
-              function onSelectPeso(value){
-                $window.console.log(controllerName + "onSelectPeso(value)");
-                $scope.selectedPeso = value;
-              }
 
-              //Funcion de prueba para switchear de datset.
-              $scope.change = true;
-              function changeDataset(idObjetivo){
-                $window.console.log(controllerName + "changeDataset(idObjetivo)")
-                if ($scope.change)
+              //Esta funcion es la que va a cargar le nuevo dataset una vez seleccionado una perspectiva.
+              function changeDataset(idEstrategia){
+                $window.console.log(controllerName + "changeDataset(idEstrategia)")
+                if ((idEstrategia % 2) === 0)
                   $scope.tableParams.settings({
                     dataset: angular.copy(originalData)
                   });
@@ -75,14 +50,26 @@ angular.
                   $scope.tableParams.settings({
                     dataset: angular.copy(simpleList2)
                   });
-                $scope.change = ! $scope.change;
                 $scope.tableParams.reload();
               }
 
               this.$onChanges = function(changes){
                 $window.console.log(controllerName + "onChanges(changes)");
-                if (changes.id)
-                  $scope.changeDataset(changes.id.currentValue);
+                if (changes.idEstrategia)
+                  $scope.changeDataset(changes.idEstrategia.currentValue);
+              }
+
+
+              //Carga la PERSPECTIVA seleccionado en el search-box.
+              function onSelectPerspectiva(value){
+                $window.console.log(controllerName + "onSelectPerspectiva(value)");
+                $scope.selectedPerspectiva = value;
+              }
+
+              //Carga el ITEM clikeado en la tabla de perspectivas.
+              function onSelectItem(value){
+                $window.console.log(controllerName + "onSelectItem(value)");
+                $scope.selectedItem = value;
               }
 
               var id = '100';
@@ -92,8 +79,7 @@ angular.
                 $scope.isRowAdded = true;
                 $scope.tableParams.settings().dataset.unshift({
                   id: id++, 
-                  name: $scope.selectedObjetivo.name,
-                  peso: $scope.selectedPeso.name
+                  name: $scope.selectedPerspectiva.name
                 });
                 // we need to ensure the user sees the new row we've just added.
                 // it seems a poor but reliable choice to remove sorting and move them to the first page
@@ -146,4 +132,4 @@ angular.
               }
           
           }
-      });
+        });
