@@ -4,7 +4,7 @@ angular.
     module('estrategiasPage').
         component('estrategiasPage', {
             templateUrl: '../angular/estrategias-page/estrategias-page.html',
-            controller: function PerspectivasPageController($scope, $window){
+            controller: function PerspectivasPageController($scope, $window, $uibModal, $log){
         
                 // FuncIones de controler
 
@@ -26,12 +26,27 @@ angular.
                     $scope.selectedEstrategia = value;
                 }
 
-
+/*AGREGADO*/
                 function createEstrategia(){
                     $window.console.log(controllerName + "createEstrategia()");
-                    $window.alert("Agregar plan estrategico");
-                }
+                    var modalInstance = $uibModal.open({
+                      animation: true,
+                      component: 'modalComponent'
+                      /*resolve: {
+                        items: function () {
+                          return $ctrl.items;
+                        }
+                      }*/
+                    });
 
+                    modalInstance.result.then(function (userForm) {
+                      $log.info('ok');
+                      $log.info(userForm);
+                    }, function () {
+                      $log.info('modal-component dismissed at: ' + new Date());
+                    });
+                }
+/*FIN AGREGADO*/
                 function updateEstrategia(){
                     $window.console.log(controllerName + "updateEstrategia()");
                     $window.alert("Modificar plan estrategico");
@@ -43,3 +58,36 @@ angular.
                 }
             }
         });
+
+angular.module('estrategiasPage').component('modalComponent', {
+  templateUrl: '../angular/shared-components/modal-form/modal-form.modal.html',
+  bindings: {
+  /*  resolve: '<',*/
+    close: '&',
+    dismiss: '&'
+  },
+  controller: function () {
+    var $ctrl = this;
+
+    $ctrl.$onInit = function () {
+ /*     $ctrl.items = $ctrl.resolve.items;
+      $ctrl.selected = {
+        item: $ctrl.items[0]
+      };*/
+    };
+
+    $ctrl.userForm = {
+        nombre: "",
+        descripcion: ""
+    };
+
+    $ctrl.ok = function () {
+      console.log("userForm  -> " + $ctrl.userForm.nombre);
+      $ctrl.close({$value: $ctrl.userForm});
+    };
+
+    $ctrl.cancel = function () {
+      $ctrl.dismiss({$value: 'cancel'});
+    };
+  }
+});
