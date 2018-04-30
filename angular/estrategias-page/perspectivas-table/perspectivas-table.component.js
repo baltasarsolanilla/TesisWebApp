@@ -8,7 +8,7 @@ angular.
               onSelect: '&',
               idEstrategia: "<"
             },
-            controller: function PerspectivasTableController($scope, $window, NgTableParams){
+            controller: function PerspectivasTableController($scope, $window, $uibModal, $log, NgTableParams){
               var simpleList = [{"id":1,"name":"Nissim","age":41,"money":454},{"id":2,"name":"Mariko","age":10,"money":-100},{"id":3,"name":"Mark","age":39,"money":291},{"id":4,"name":"Allen","age":85,"money":871},{"id":5,"name":"Dustin","age":10,"money":378},{"id":6,"name":"Macon","age":9,"money":128}];
               var simpleList2 = [{"id":3,"name":"Mark","age":39,"money":291},{"id":4,"name":"Allen","age":85,"money":871},{"id":5,"name":"Dustin","age":10,"money":378},{"id":6,"name":"Macon","age":9,"money":128}];
               var originalData = angular.copy(simpleList);
@@ -22,7 +22,7 @@ angular.
               });
           
               // Funciones de controller
-              $scope.add = add;
+              $scope.createPerspectiva = createPerspectiva;
               $scope.del = del;
               $scope.hasChanges = hasChanges;
               $scope.cancelChanges = cancelChanges;
@@ -73,8 +73,8 @@ angular.
               }
 
               var id = '100';
-              function add() {
-                $window.console.log(controllerName + "add()");
+              function createPerspectiva() {
+                $window.console.log(controllerName + "createPerspectiva()");
                 $scope.isEditing = true;
                 $scope.isRowAdded = true;
                 $scope.tableParams.settings().dataset.unshift({
@@ -87,8 +87,26 @@ angular.
                 $scope.tableParams.sorting({});
                 $scope.tableParams.page(1);
                 $scope.tableParams.reload();
+
+/*agregado*/
+                var modalInstance = $uibModal.open({
+                      animation: true,
+                      component: 'modalComponentPerspectiva'
+                      /*resolve: {
+                        items: function () {
+                          return $ctrl.items;
+                        }
+                      }*/
+                    });
+
+                    modalInstance.result.then(function (userForm) {
+                      $log.info('ok');
+                      $log.info(userForm);
+                    }, function () {
+                      $log.info('modal-component dismissed at: ' + new Date());
+                    });
               }
-          
+/*fin agregado*/          
               function del(row) {
                 $window.console.log(controllerName + "del(row)");
                 _.remove($scope.tableParams.settings().dataset, function(item) {
@@ -133,3 +151,40 @@ angular.
           
           }
         });
+
+
+
+/*agregado*/
+angular.module('perspectivasTable').component('modalComponentPerspectiva', {
+  templateUrl: '../angular/shared-components/modal-form/modal-form.modal.html',
+  bindings: {
+  /*  resolve: '<',*/
+    close: '&',
+    dismiss: '&'
+  },
+  controller: function () {
+    var $ctrl = this;
+
+    $ctrl.$onInit = function () {
+ /*     $ctrl.items = $ctrl.resolve.items;
+      $ctrl.selected = {
+        item: $ctrl.items[0]
+      };*/
+    };
+
+    $ctrl.userForm = {
+        nombre: "",
+        descripcion: ""
+    };
+
+    $ctrl.ok = function () {
+      console.log("userForm  desde perspectiva-> " + $ctrl.userForm.nombre);
+      $ctrl.close({$value: $ctrl.userForm});
+    };
+
+    $ctrl.cancel = function () {
+      $ctrl.dismiss({$value: 'cancel'});
+    };
+  }
+});
+/*fin agregado*/

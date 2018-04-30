@@ -6,7 +6,7 @@
         </button>
         <div class="">
             <div class="btn-group pull-left" style="margin-bottom:6px;">
-                <button class="btn btn-success" ng-if="isEditing" ng-disabled="!selectedPerspectiva" ng-click="add()">
+                <button class="btn btn-success" ng-if="isEditing" ng-disabled="!selectedPerspectiva" ng-click="createPerspectiva()">
                     <span class="glyphicon glyphicon-plus"></span>
                 </button>
                 <button class="btn btn-primary" ng-if="isEditing" ng-disabled="!hasChanges()" ng-click="saveChanges()">
@@ -15,9 +15,6 @@
                 <button class="btn btn-warning" ng-if="isEditing" ng-click="cancelChanges()">
                     <span class="glyphicon glyphicon-remove"></span>
                 </button>
-            </div>
-            <div class="col-lg-6">
-                <search-box ng-show="isEditing" on-select="onSelectPerspectiva(value)" message="'Seleccionar perspectiva...'"></search-box>
             </div>
         </div>
         <table ng-table="tableParams" class="table table-bordered table-hover table-condensed table-striped table-estrategias-page" show-filter="false">
