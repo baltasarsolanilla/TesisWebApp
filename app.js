@@ -1,10 +1,7 @@
 angular.module('balancedScorecard', [
-    'strategySearchBox',
-    'strategyTabset',
-    'strategyTree',
-    'objetivosActualTable',
-    'objetivosHistoricTable',
-    'objetivosAffectTable',
     'menuRouting',
-    'perspectivasTable',
+    'strategyPage',
+    'estrategiasPage',
+    'objetivosPage',
+    'searchBox'
 ]);

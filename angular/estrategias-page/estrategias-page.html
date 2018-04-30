@@ -1,0 +1,38 @@
+<div class="">
+    <h1>Plan Estratégico</h1>
+    <div class="row" style="margin-bottom:10px;">
+        <div class="col-lg-6">
+            <div class="btn-group">
+                <button class="btn btn-success btn-lg" ng-click="createEstrategia()">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </button> 
+                <button class="btn btn-primary btn-lg" ng-click="updateEstrategia()" ng-disabled="!selectedEstrategia">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </button>
+                <button class="btn btn-danger btn-lg" ng-click="removeEstrategia()" ng-disabled="!selectedEstrategia">
+                    <span class="glyphicon glyphicon-trash"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4">
+            <search-box on-select="onSelectEstrategia(value)" message="'Seleccionar plan estratégico...'"></search-box>
+        </div>
+        <!-- <h4>Estrategia id: {{selectedEstrategia.id}}</h4> -->
+    </div>
+    <br></br>
+    <div class="row">
+        <div class="col-lg-6">
+            <h4>Misión</h4>
+            <p>{{mision}}</p>
+        </div>
+        <div class="col-lg-6">
+            <h4>Vision</h4>
+            <p>{{vision}}</p>
+        </div>
+    </div>
+    <div class="">
+        <perspectivas-table id-estrategia="selectedEstrategia.id"></perspectivas-table>
+    </div>
+</div>

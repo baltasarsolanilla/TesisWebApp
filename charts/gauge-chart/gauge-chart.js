@@ -24,10 +24,10 @@ var setColorTextField = function(minValue, maxValue, staticZones, value, opts){
 }
 
   var minValue = 0;
-  var maxValue = 2100;
-  var thresholdRedYellow = 700;  //umbral de rojo a amarillo
-  var thresholdYellowGreen = 1400;  //umbral de amarillo a verde
-  var value = 1630;
+  var maxValue = 10;
+  var thresholdRedYellow = 3.33;  //umbral de rojo a amarillo
+  var thresholdYellowGreen = 6.66;  //umbral de amarillo a verde
+  var value = Math.random()*10;
   if (value > maxValue)
     maxValue = value;
   if (value < minValue)
@@ -45,7 +45,7 @@ var setColorTextField = function(minValue, maxValue, staticZones, value, opts){
     staticLabels: {
       font: "14px sans-serif",
       labels: [thresholdRedYellow, thresholdYellowGreen],
-      fractionDigits: 0
+      fractionDigits: 2
     },
     staticZones: [
        {strokeStyle: "#F03E3E", min: minValue, max: thresholdRedYellow},

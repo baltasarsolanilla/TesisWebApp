@@ -24,10 +24,14 @@
     <!-- <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
 
     <!-- ************************** MAIN-MENU ************************** -->
-    <!-- strategy-search-box -> ui-select style -->
-    <link rel="stylesheet" href="../angular/main-menu/strategy-search-box/ui-select/ui-select.style.css">
+
+    <!-- ************************** SHARED-COMPONENTS ************************** -->
+    <link rel="stylesheet" href="../angular/shared-components/search-box/ui-select/ui-select.style.css">
+
 
     <!-- ************************** STRATEGY-PAGE ************************** -->
+
+    <link rel="stylesheet" href="../angular/strategy-page/strategy-page.css">
 
     <!-- strategyTree -> abn-tree style -->
     <link rel="stylesheet" href="../angular/strategy-page/strategy-tree/abn-tree/abn-tree.css">
@@ -55,8 +59,19 @@
     <!-- objetivos-affect-table -->
     <link rel="stylesheet" href="../angular/strategy-page/objetivos-affect-table/objetivos-affect-table.css">
 
-    <!-- ************************** PERSPECTIVE-PAGE ************************** -->
-    <link rel="stylesheet" href="../angular/perspective-page/perspectivas-table/perspectivas-table.css">
+
+    <!-- ************************** estrategias-page ************************** -->
+    <link rel="stylesheet" href="../angular/estrategias-page/estrategias-page.css">
+
+
+    <!-- ************************** OBJETIVOS-PAGE ************************** -->
+
+    <link rel="stylesheet" href="../angular/objetivos-page/objetivos-page.css">
+
+
+
+
+
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -86,7 +101,7 @@
            
             <ul class="nav navbar-top-links navbar-right">
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="">
                         <i class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-messages">
@@ -137,7 +152,7 @@
                 </li>
                 <!-- /.dropdown -->
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="">
                         <i class="fa fa-tasks fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-tasks">
@@ -216,7 +231,7 @@
                 </li>
                 <!-- /.dropdown -->
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="">
                         <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-alerts">
@@ -232,7 +247,7 @@
                         <li>
                             <a href="#">
                                 <div>
-                                    <i class="fa fa-twitter fa-fw"></i> 3 New Followers
+                                    <i class="fas fa-user-plus fa-fw"></i> 3 New Followers
                                     <span class="pull-right text-muted small">12 minutes ago</span>
                                 </div>
                             </a>
@@ -276,16 +291,16 @@
                 </li>
                 <!-- /.dropdown -->
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="">
                         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
                         <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
                         </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        <li><a href="#"><i class="fas fa-cog fa-fw"></i> Settings</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="login.html"><i class="fas fa-sign-out-alt fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -298,27 +313,27 @@
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <li class="sidebar-search">
-                            <strategy-search-box></strategy-search-box>
+                            <search-box message="'Search...'"></search-box>
                             <!-- /input-group -->
                         </li>
                         <li>
                             <!-- <a href="index.html"><i class="fa fa-cogs fa-fw"></i> Estrategia </a> -->
-                            <a href="#/"><i class="fa fa-location-arrow fa-fw"></i> Estrategia </a>
+                            <a href="#!/estrategia"><i class="fa fa-location-arrow fa-fw"></i>Tablero</a>
                         </li>
                         <li>
-                            <a href="#/mapa-estrategico"><i class="fa fa-map fa-fw"></i>Mapa Estratégico</a>
+                            <a href="#!/mapa-estrategico"><i class="fa fa-map fa-fw"></i>Mapa Estratégico</a>
                         </li>
                         <li>
-                            <a href="#/perspectivas"><i class="fas fa-bicycle fa-fw"></i>Perspectivas</a>
+                            <a href="#!/perspectivas"><i class="fas fa-bicycle fa-fw"></i>Estratégias</a>
                         </li>
                         <li>
-                            <a href="#/objetivos"><i class="fa fa-crosshairs fa-fw"></i>Objetivos</a>
+                            <a href="#!/objetivos"><i class="fa fa-crosshairs fa-fw"></i>Objetivos</a>
                         </li>
                         <li>
-                            <a href="#/indicadores"><i class="fa fa-tachometer-alt fa-fw"></i>Indicadores</a>
+                            <a href="#!/indicadores"><i class="fa fa-tachometer-alt fa-fw"></i>Indicadores</a>
                         </li>
                         <li>
-                            <a href="#/ayuda"><i class="fa fa-info fa-fw"></i>Ayuda</a>
+                            <a href="#!/ayuda"><i class="fa fa-info fa-fw"></i>Ayuda</a>
                         </li>
                         
                     </ul>
@@ -358,15 +373,20 @@
 
     <!-- ************************** MAIN-MENU ****************************** -->
 
-    <!-- strategy-search-box -->
-    <script src="../angular/main-menu/strategy-search-box/strategy-search-box.module.js"></script>
-    <script src="../angular/main-menu/strategy-search-box/strategy-search-box.component.js"></script>
-    <script src="../angular/main-menu/strategy-search-box/ui-select/ui-select.module.js"></script>
 
     <!-- menu routing -->
     <script src="../angular/main-menu/menu-routing/menu-routing.module.js"></script>
 
+    <!-- ************************** SHARED-COMPONENTS ****************************** -->
+    
+    <script src="../angular/shared-components/search-box/ui-select/ui-select.module.js"></script>
+    <script src="../angular/shared-components/search-box/search-box.module.js"></script>
+    <script src="../angular/shared-components/search-box/search-box.component.js"></script>
+
     <!-- ************************** STRATEGY-PAGE ************************** -->
+    <!-- strategy-page -->
+    <script src="../angular/strategy-page/strategy-page.module.js"></script>
+    <script src="../angular/strategy-page/strategy-page.component.js"></script>
 
     <!-- strategy-tabset -->
     <script src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.5.0.js"></script>
@@ -399,20 +419,32 @@
     <script  src="../angular/strategy-page/objetivos-affect-table/objetivos-affect-table.module.js"></script>
     <script  src="../angular/strategy-page/objetivos-affect-table/objetivos-affect-table.component.js"></script>
 
-    <!-- ************************** PERSPECTIVE-PAGE ************************** -->
+    <!-- ************************** estrategias-page ************************** -->
 
-    <!-- objetivos-search-box -->
-    <script src="../angular/perspective-page/objetivos-search-box/objetivos-search-box.module.js"></script>
-    <script src="../angular/perspective-page/objetivos-search-box/objetivos-search-box.component.js"></script>
+    <!-- estrategias-page -->
+    <script src="../angular/estrategias-page/estrategias-page.module.js"></script>
+    <script src="../angular/estrategias-page/estrategias-page.component.js"></script>
+
 
     <!-- objetivos-table -->
-    <script src="../angular/perspective-page/objetivos-table/objetivos-table.module.js"></script>
-    <script src="../angular/perspective-page/objetivos-table/objetivos-table.component.js"></script>
+    <script src="../angular/estrategias-page/objetivos-table/objetivos-table.module.js"></script>
+    <script src="../angular/estrategias-page/objetivos-table/objetivos-table.component.js"></script>
 
     <!-- perspectivas-table -->
-    <script src="../angular/perspective-page/perspectivas-table/perspectivas-table.module.js"></script>
-    <script src="../angular/perspective-page/perspectivas-table/perspectivas-table.component.js"></script>
-   
+    <script src="../angular/estrategias-page/perspectivas-table/perspectivas-table.module.js"></script>
+    <script src="../angular/estrategias-page/perspectivas-table/perspectivas-table.component.js"></script>
+
+    <!-- ************************** OBJETIVOS-PAGE ************************** -->
+
+    <script src="../angular/objetivos-page/objetivos-page.module.js"></script>
+    <script src="../angular/objetivos-page/objetivos-page.component.js"></script>
+
+    <script src="../angular/objetivos-page/objetivos-afectados-table/objetivos-afectados-table.module.js"></script>
+    <script src="../angular/objetivos-page/objetivos-afectados-table/objetivos-afectados-table.component.js"></script>
+
+    <script src="../angular/objetivos-page/kpis-table/kpis-table.module.js"></script>
+    <script src="../angular/objetivos-page/kpis-table/kpis-table.component.js"></script>
+
 </body>
 
 </html>
