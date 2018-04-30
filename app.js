@@ -1,5 +1,5 @@
 angular.module('balancedScorecard', [
-    'menuRouting',
+    'ngRoute',
     'strategyPage',
     'estrategiasPage',
     'objetivosPage',
