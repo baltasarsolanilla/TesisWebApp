@@ -66,7 +66,7 @@ angular.module('estrategiasPage').component('modalComponent', {
     close: '&',
     dismiss: '&'
   },
-  controller: function () {
+  controller: function ModalController($scope, $log) {
     var $ctrl = this;
 
     $ctrl.$onInit = function () {
@@ -82,7 +82,7 @@ angular.module('estrategiasPage').component('modalComponent', {
     };
 
     $ctrl.ok = function () {
-      console.log("userForm  -> " + $ctrl.userForm.nombre);
+      $log.log("userForm  -> " + $ctrl.userForm.nombre);
       $ctrl.close({$value: $ctrl.userForm});
     };
 
