@@ -82,7 +82,7 @@ angular.module('estrategiasPage').component('modalComponent', {
     };
 
     $ctrl.ok = function () {
-      console.log("userForm  -> " + $ctrl.userForm.nombre);
+      console.log("userForm  desde estrategia-> " + $ctrl.userForm.nombre);
       $ctrl.close({$value: $ctrl.userForm});
     };
 
