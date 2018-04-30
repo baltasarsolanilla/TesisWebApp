@@ -24,6 +24,7 @@ angular.
 
                 function createObjetivo(){
                     $window.console.log(controllerName + "createObjetivo()");
+/*<<<<<<< HEAD*/
                     var modalInstance = $uibModal.open({
                       animation: true,
                       component: 'modalComponentObjetivo'
@@ -40,6 +41,9 @@ angular.
                     }, function () {
                       $log.info('modal-component dismissed at: ' + new Date());
                     });
+/*=======*/
+                    /*$window.alert("CREAR OBJETIVO");*/
+/*>>>>>>> 86d0c90ce0c8c5aea865aaca5ef3bc312ff0719f*/
                 }
 
                 function updateObjetivo(){
