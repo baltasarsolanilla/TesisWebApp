@@ -32,7 +32,7 @@ module.exports = function generateRawFilesJs(grunt, jsFilename, files, banner, c
   var filesJsObject = {
     banner: banner,
     cssBanner: cssBanner,
-    files: getFiles(files),
+    files: getFiles(files)
   };
 
   var filesJsContent = JSON.stringify(filesJsObject);

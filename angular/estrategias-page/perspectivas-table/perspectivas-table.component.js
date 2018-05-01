@@ -1,4 +1,4 @@
-'use strict';
+'use strict',
 
 angular.
     module('perspectivasTable').
@@ -88,15 +88,15 @@ angular.
                 $scope.tableParams.page(1);
                 $scope.tableParams.reload();
 
-/*agregado*/
+
                 var modalInstance = $uibModal.open({
                       animation: true,
                       component: 'modalComponentPerspectiva'
-                      /*resolve: {
-                        items: function () {
-                          return $ctrl.items;
-                        }
-                      }*/
+                      // resolve: {
+                      //   items: function () {
+                      //     return $ctrl.items;
+                      //   }
+                      // }
                     });
 
                     modalInstance.result.then(function (userForm) {
@@ -106,7 +106,7 @@ angular.
                       $log.info('modal-component dismissed at: ' + new Date());
                     });
               }
-/*fin agregado*/          
+
               function del(row) {
                 $window.console.log(controllerName + "del(row)");
                 _.remove($scope.tableParams.settings().dataset, function(item) {
@@ -152,39 +152,38 @@ angular.
           }
         });
 
+angular
+    .module('perspectivasTable')
+        .component('modalComponentPerspectiva', {
+          templateUrl: '../angular/shared-components/modal-form/modal-form.modal.html',
+          bindings: {
+            // resolve: '<',
+            close: '&',
+            dismiss: '&'
+          },
+          controller: function ($window) {
+            var $ctrl = this;
+            var controllerName = "PERSPECTIVAS-TABLE-MODAL -> ";
+            $ctrl.$onInit = function () {
+              $window.console.log(controllerName + "onInit()");
+              // $ctrl.items = $ctrl.resolve.items;
+              // $ctrl.selected = {
+              //   item: $ctrl.items[0]
+              // };
+            };
 
+            $ctrl.userForm = {
+                nombre: "",
+                descripcion: ""
+            };
 
-/*agregado*/
-angular.module('perspectivasTable').component('modalComponentPerspectiva', {
-  templateUrl: '../angular/shared-components/modal-form/modal-form.modal.html',
-  bindings: {
-  /*  resolve: '<',*/
-    close: '&',
-    dismiss: '&'
-  },
-  controller: function () {
-    var $ctrl = this;
+            $ctrl.ok = function () {
+              $window.console.log(controllerName + "ok()");
+              $ctrl.close({$value: $ctrl.userForm});
+            };
 
-    $ctrl.$onInit = function () {
- /*     $ctrl.items = $ctrl.resolve.items;
-      $ctrl.selected = {
-        item: $ctrl.items[0]
-      };*/
-    };
-
-    $ctrl.userForm = {
-        nombre: "",
-        descripcion: ""
-    };
-
-    $ctrl.ok = function () {
-      console.log("userForm  desde perspectiva-> " + $ctrl.userForm.nombre);
-      $ctrl.close({$value: $ctrl.userForm});
-    };
-
-    $ctrl.cancel = function () {
-      $ctrl.dismiss({$value: 'cancel'});
-    };
-  }
-});
-/*fin agregado*/
+            $ctrl.cancel = function () {
+              $ctrl.dismiss({$value: 'cancel'});
+            };
+        }
+      });

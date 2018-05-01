@@ -7,12 +7,12 @@ angular.module('balancedScorecard')
             .when('/tablero', {
                 template: '<strategy-page></strategy-page>'
             })
-            .when('tablero/:objetivoId', {
-                template: '<>'
-            })
-            .when('tablero/:kpiId', {
-                template: '<>'
-            })
+            // .when('tablero/:objetivoId', {
+            //     template: '<>'
+            // })
+            // .when('tablero/:kpiId', {
+            //     template: '<>'
+            // })
             .when('/mapa-estrategico', {
                 template: '<div id="page-wrapper2"><h1>Mapa Estrategico</h1></div>'
             })
