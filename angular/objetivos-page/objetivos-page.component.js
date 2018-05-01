@@ -35,10 +35,10 @@ angular.
                     });
 
                     modalInstance.result.then(function (userForm) {
-                      $log.info('ok');
-                      $log.info(userForm);
+                      $window.console.log('ok');
+                      $window.console.log(userForm);
                     }, function () {
-                      $log.info('modal-component dismissed at: ' + new Date());
+                      $window.console.log('modal-component dismissed at: ' + new Date());
                     });
                 }
 
@@ -65,12 +65,12 @@ angular
               close: '&',
               dismiss: '&'
             },
-            controller: function () {
+            controller: function ($window) {
               var $ctrl = this;
               var controllerName = "OBJETIVO-PAGE-MODAL -> ";
 
               $ctrl.$onInit = function () {
-                console.log(controllerName + "onInit()");
+                $window.console.log(controllerName + "onInit()");
                 // $ctrl.items = $ctrl.resolve.items;
                 // $ctrl.selected = {
                 //   item: $ctrl.items[0]
@@ -83,7 +83,7 @@ angular
               };
 
               $ctrl.ok = function () {
-                console.log(controllerName + "ok()");
+                $window.console.log(controllerName + "ok()");
                 $ctrl.close({$value: $ctrl.userForm});
               };
 

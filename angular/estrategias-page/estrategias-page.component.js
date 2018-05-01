@@ -39,10 +39,10 @@ angular.
                     });
 
                     modalInstance.result.then(function (userForm) {
-                      $log.info('ok');
-                      $log.info(userForm);
+                      $window.console.log('ok');
+                      $window.console.log(userForm);
                     }, function () {
-                      $log.info('modal-component dismissed at: ' + new Date());
+                      $window.console.log('modal-component dismissed at: ' + new Date());
                     });
                 }
 
