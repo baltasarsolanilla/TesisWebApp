@@ -152,9 +152,9 @@ angular.
           }
         });
 
-angular
-    .module('perspectivasTable')
-        .component('modalComponentPerspectiva', {
+angular.
+    module('perspectivasTable').
+        component('modalComponentPerspectiva', {
           templateUrl: '../angular/shared-components/modal-form/modal-form.modal.html',
           bindings: {
             // resolve: '<',

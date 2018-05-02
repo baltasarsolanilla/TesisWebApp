@@ -4,7 +4,7 @@ angular.
     module('objetivosPage').
         component('objetivosPage', {
             templateUrl: '../angular/objetivos-page/objetivos-page.html',
-            controller: function ObjetivosPageController($scope, $window, $uibModal, $log){                
+            controller: function ObjetivosPageController($scope, $window, $uibModal){                
                 
                 // Funciones del controller
                 $scope.onSelectObjetivo = onSelectObjetivo;
@@ -21,7 +21,7 @@ angular.
                     $window.console.log(controllerName + "onSelectObjetivo(value)");
                     $scope.selectedObjetivo = value;
                 }
-
+                
                 function createObjetivo(){
                     $window.console.log(controllerName + "createObjetivo()");
                     var modalInstance = $uibModal.open({
@@ -56,9 +56,9 @@ angular.
 
 
 
-angular
-    .module('objetivosPage')
-        .component('modalComponentObjetivo', {
+angular.
+    module('objetivosPage').
+        component('modalComponentObjetivo', {
             templateUrl: '../angular/shared-components/modal-form/modal-form.modal.html',
             bindings: {
               // resolve: '<',

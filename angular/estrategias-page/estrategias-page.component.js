@@ -4,7 +4,7 @@ angular.
     module('estrategiasPage').
         component('estrategiasPage', {
             templateUrl: '../angular/estrategias-page/estrategias-page.html',
-            controller: function PerspectivasPageController($scope, $window, $uibModal, $log){
+            controller: function PerspectivasPageController($scope, $window, $uibModal){
         
                 // FuncIones de controler
 
@@ -58,9 +58,9 @@ angular.
             }
         });
 
-angular
-    .module('estrategiasPage')
-        .component('modalComponent', {
+angular.
+    module('estrategiasPage').
+        component('modalComponent', {
             templateUrl: '../angular/shared-components/modal-form/modal-form.modal.html',
             bindings: {
               // resolve: '<',
