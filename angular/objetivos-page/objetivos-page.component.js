@@ -1,10 +1,10 @@
-'use strict';
+'use strict',
 
 angular.
     module('objetivosPage').
         component('objetivosPage', {
             templateUrl: '../angular/objetivos-page/objetivos-page.html',
-            controller: function ObjetivosPageController($scope, $window, $uibModal, $log){                
+            controller: function ObjetivosPageController($scope, $window, $uibModal){                
                 
                 // Funciones del controller
                 $scope.onSelectObjetivo = onSelectObjetivo;
@@ -21,29 +21,25 @@ angular.
                     $window.console.log(controllerName + "onSelectObjetivo(value)");
                     $scope.selectedObjetivo = value;
                 }
-
+                
                 function createObjetivo(){
                     $window.console.log(controllerName + "createObjetivo()");
-/*<<<<<<< HEAD*/
                     var modalInstance = $uibModal.open({
                       animation: true,
                       component: 'modalComponentObjetivo'
-                      /*resolve: {
-                        items: function () {
-                          return $ctrl.items;
-                        }
-                      }*/
+                      // resolve: {
+                      //   items: function () {
+                      //     return $ctrl.items;
+                      //   }
+                      // }
                     });
 
                     modalInstance.result.then(function (userForm) {
-                      $log.info('ok');
-                      $log.info(userForm);
+                      $window.console.log('ok');
+                      $window.console.log(userForm);
                     }, function () {
-                      $log.info('modal-component dismissed at: ' + new Date());
+                      $window.console.log('modal-component dismissed at: ' + new Date());
                     });
-/*=======*/
-                    /*$window.alert("CREAR OBJETIVO");*/
-/*>>>>>>> 86d0c90ce0c8c5aea865aaca5ef3bc312ff0719f*/
                 }
 
                 function updateObjetivo(){
@@ -60,35 +56,39 @@ angular.
 
 
 
-angular.module('objetivosPage').component('modalComponentObjetivo', {
-  templateUrl: '../angular/shared-components/modal-form/modal-form.modal.html',
-  bindings: {
-  /*  resolve: '<',*/
-    close: '&',
-    dismiss: '&'
-  },
-  controller: function () {
-    var $ctrl = this;
+angular.
+    module('objetivosPage').
+        component('modalComponentObjetivo', {
+            templateUrl: '../angular/shared-components/modal-form/modal-form.modal.html',
+            bindings: {
+              // resolve: '<',
+              close: '&',
+              dismiss: '&'
+            },
+            controller: function ($window) {
+              var $ctrl = this;
+              var controllerName = "OBJETIVO-PAGE-MODAL -> ";
 
-    $ctrl.$onInit = function () {
- /*     $ctrl.items = $ctrl.resolve.items;
-      $ctrl.selected = {
-        item: $ctrl.items[0]
-      };*/
-    };
+              $ctrl.$onInit = function () {
+                $window.console.log(controllerName + "onInit()");
+                // $ctrl.items = $ctrl.resolve.items;
+                // $ctrl.selected = {
+                //   item: $ctrl.items[0]
+                // };
+              };
 
-    $ctrl.userForm = {
-        nombre: "",
-        descripcion: ""
-    };
+              $ctrl.userForm = {
+                  nombre: "",
+                  descripcion: ""
+              };
 
-    $ctrl.ok = function () {
-      console.log("userForm  desde objetivo-> " + $ctrl.userForm.nombre);
-      $ctrl.close({$value: $ctrl.userForm});
-    };
+              $ctrl.ok = function () {
+                $window.console.log(controllerName + "ok()");
+                $ctrl.close({$value: $ctrl.userForm});
+              };
 
-    $ctrl.cancel = function () {
-      $ctrl.dismiss({$value: 'cancel'});
-    };
-  }
-});
+              $ctrl.cancel = function () {
+                $ctrl.dismiss({$value: 'cancel'});
+              };
+            }
+    });

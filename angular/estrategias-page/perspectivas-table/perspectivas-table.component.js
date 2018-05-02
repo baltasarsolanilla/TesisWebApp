@@ -1,4 +1,4 @@
-'use strict';
+'use strict',
 
 angular.
     module('perspectivasTable').
@@ -8,7 +8,7 @@ angular.
               onSelect: '&',
               idEstrategia: "<"
             },
-            controller: function PerspectivasTableController($scope, $window, $uibModal, $log, NgTableParams){
+            controller: function PerspectivasTableController($scope, $window, $uibModal, NgTableParams){
               var simpleList = [{"id":1,"name":"Nissim","age":41,"money":454},{"id":2,"name":"Mariko","age":10,"money":-100},{"id":3,"name":"Mark","age":39,"money":291},{"id":4,"name":"Allen","age":85,"money":871},{"id":5,"name":"Dustin","age":10,"money":378},{"id":6,"name":"Macon","age":9,"money":128}];
               var simpleList2 = [{"id":3,"name":"Mark","age":39,"money":291},{"id":4,"name":"Allen","age":85,"money":871},{"id":5,"name":"Dustin","age":10,"money":378},{"id":6,"name":"Macon","age":9,"money":128}];
               var originalData = angular.copy(simpleList);
@@ -77,10 +77,10 @@ angular.
                 $window.console.log(controllerName + "createPerspectiva()");
                 $scope.isEditing = true;
                 $scope.isRowAdded = true;
-                $scope.tableParams.settings().dataset.unshift({
-                  id: id++, 
-                  name: $scope.selectedPerspectiva.name
-                });
+                // $scope.tableParams.settings().dataset.unshift({
+                //   id: id++, 
+                //   name: 'pepito'
+                // });
                 // we need to ensure the user sees the new row we've just added.
                 // it seems a poor but reliable choice to remove sorting and move them to the first page
                 // where we know that our new item was added to
@@ -88,25 +88,25 @@ angular.
                 $scope.tableParams.page(1);
                 $scope.tableParams.reload();
 
-/*agregado*/
+
                 var modalInstance = $uibModal.open({
                       animation: true,
                       component: 'modalComponentPerspectiva'
-                      /*resolve: {
-                        items: function () {
-                          return $ctrl.items;
-                        }
-                      }*/
+                      // resolve: {
+                      //   items: function () {
+                      //     return $ctrl.items;
+                      //   }
+                      // }
                     });
 
                     modalInstance.result.then(function (userForm) {
-                      $log.info('ok');
-                      $log.info(userForm);
+                      $window.console.log('ok');
+                      $window.console.log(userForm);
                     }, function () {
-                      $log.info('modal-component dismissed at: ' + new Date());
+                      $window.console.log('modal-component dismissed at: ' + new Date());
                     });
               }
-/*fin agregado*/          
+
               function del(row) {
                 $window.console.log(controllerName + "del(row)");
                 _.remove($scope.tableParams.settings().dataset, function(item) {
@@ -152,39 +152,38 @@ angular.
           }
         });
 
+angular.
+    module('perspectivasTable').
+        component('modalComponentPerspectiva', {
+          templateUrl: '../angular/shared-components/modal-form/modal-form.modal.html',
+          bindings: {
+            // resolve: '<',
+            close: '&',
+            dismiss: '&'
+          },
+          controller: function ($window) {
+            var $ctrl = this;
+            var controllerName = "PERSPECTIVAS-TABLE-MODAL -> ";
+            $ctrl.$onInit = function () {
+              $window.console.log(controllerName + "onInit()");
+              // $ctrl.items = $ctrl.resolve.items;
+              // $ctrl.selected = {
+              //   item: $ctrl.items[0]
+              // };
+            };
 
+            $ctrl.userForm = {
+                nombre: "",
+                descripcion: ""
+            };
 
-/*agregado*/
-angular.module('perspectivasTable').component('modalComponentPerspectiva', {
-  templateUrl: '../angular/shared-components/modal-form/modal-form.modal.html',
-  bindings: {
-  /*  resolve: '<',*/
-    close: '&',
-    dismiss: '&'
-  },
-  controller: function () {
-    var $ctrl = this;
+            $ctrl.ok = function () {
+              $window.console.log(controllerName + "ok()");
+              $ctrl.close({$value: $ctrl.userForm});
+            };
 
-    $ctrl.$onInit = function () {
- /*     $ctrl.items = $ctrl.resolve.items;
-      $ctrl.selected = {
-        item: $ctrl.items[0]
-      };*/
-    };
-
-    $ctrl.userForm = {
-        nombre: "",
-        descripcion: ""
-    };
-
-    $ctrl.ok = function () {
-      console.log("userForm  desde perspectiva-> " + $ctrl.userForm.nombre);
-      $ctrl.close({$value: $ctrl.userForm});
-    };
-
-    $ctrl.cancel = function () {
-      $ctrl.dismiss({$value: 'cancel'});
-    };
-  }
-});
-/*fin agregado*/
+            $ctrl.cancel = function () {
+              $ctrl.dismiss({$value: 'cancel'});
+            };
+        }
+      });

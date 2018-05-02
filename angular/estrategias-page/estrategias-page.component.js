@@ -1,10 +1,10 @@
-'use strict';
+'use strict',
 
 angular.
     module('estrategiasPage').
         component('estrategiasPage', {
             templateUrl: '../angular/estrategias-page/estrategias-page.html',
-            controller: function PerspectivasPageController($scope, $window, $uibModal, $log){
+            controller: function PerspectivasPageController($scope, $window, $uibModal){
         
                 // FuncIones de controler
 
@@ -26,27 +26,26 @@ angular.
                     $scope.selectedEstrategia = value;
                 }
 
-/*AGREGADO*/
                 function createEstrategia(){
                     $window.console.log(controllerName + "createEstrategia()");
                     var modalInstance = $uibModal.open({
                       animation: true,
                       component: 'modalComponent'
-                      /*resolve: {
-                        items: function () {
-                          return $ctrl.items;
-                        }
-                      }*/
+                      // resolve: {
+                      //   items: function () {
+                      //     return $ctrl.items;
+                      //   }
+                      // }
                     });
 
                     modalInstance.result.then(function (userForm) {
-                      $log.info('ok');
-                      $log.info(userForm);
+                      $window.console.log('ok');
+                      $window.console.log(userForm);
                     }, function () {
-                      $log.info('modal-component dismissed at: ' + new Date());
+                      $window.console.log('modal-component dismissed at: ' + new Date());
                     });
                 }
-/*FIN AGREGADO*/
+
                 function updateEstrategia(){
                     $window.console.log(controllerName + "updateEstrategia()");
                     $window.alert("Modificar plan estrategico");
@@ -59,35 +58,38 @@ angular.
             }
         });
 
-angular.module('estrategiasPage').component('modalComponent', {
-  templateUrl: '../angular/shared-components/modal-form/modal-form.modal.html',
-  bindings: {
-  /*  resolve: '<',*/
-    close: '&',
-    dismiss: '&'
-  },
-  controller: function ModalController($scope, $log) {
-    var $ctrl = this;
+angular.
+    module('estrategiasPage').
+        component('modalComponent', {
+            templateUrl: '../angular/shared-components/modal-form/modal-form.modal.html',
+            bindings: {
+              // resolve: '<',
+              close: '&',
+              dismiss: '&'
+            },
+            controller: function ModalController($scope, $window) {
+              var $ctrl = this;
+              var controllerName = "ESTRATEGIAS-PAGE-MODAL -> ";
+              $ctrl.$onInit = function () {
+                $window.console.log(controllerName + "onInit()");
+                // $ctrl.items = $ctrl.resolve.items;
+                // $ctrl.selected = {
+                //   item: $ctrl.items[0]
+                // };
+              };
 
-    $ctrl.$onInit = function () {
- /*     $ctrl.items = $ctrl.resolve.items;
-      $ctrl.selected = {
-        item: $ctrl.items[0]
-      };*/
-    };
+              $ctrl.userForm = {
+                  nombre: "",
+                  descripcion: ""
+              };
 
-    $ctrl.userForm = {
-        nombre: "",
-        descripcion: ""
-    };
+              $ctrl.ok = function () {
+                $window.console.log(controllerName + "ok()");
+                $ctrl.close({$value: $ctrl.userForm});
+              };
 
-    $ctrl.ok = function () {
-      $log.log("userForm  -> " + $ctrl.userForm.nombre);
-      $ctrl.close({$value: $ctrl.userForm});
-    };
-
-    $ctrl.cancel = function () {
-      $ctrl.dismiss({$value: 'cancel'});
-    };
-  }
+              $ctrl.cancel = function () {
+                $ctrl.dismiss({$value: 'cancel'});
+              };
+            }
 });
