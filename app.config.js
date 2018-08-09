@@ -14,7 +14,7 @@ angular.module('balancedScorecard')
             //     template: '<>'
             // })
             .when('/mapa-estrategico', {
-                template: '<div id="page-wrapper2"><h1>Mapa Estrategico</h1></div>'
+                template: '<mapa-estrategico-page></mapa-estrategico-page>'
             })
             .when('/estrategias', {
                 template: '<estrategias-page></estrategias-page>'

@@ -3,5 +3,6 @@ angular.module('balancedScorecard', [
     'strategyPage',
     'estrategiasPage',
     'objetivosPage',
-    'searchBox'
+    'searchBox',
+    'mapaEstrategicoPage'
 ]);
