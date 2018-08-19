@@ -57,22 +57,22 @@ angular.
             {key: "objetivo 12", valor: 5, group: "Organizational Capacity", tendencia: 0.5}];
           let num = 5;
           let inputLinks = [
-            {from: "objetivo 1", to: "objetivo 2", valor: num.toString()},
-            {from: "objetivo 3", to: "objetivo 2", valor: num.toString()},
-            {from: "objetivo 4", to: "objetivo 1", valor: num.toString()},
-            {from: "objetivo 5", to: "objetivo 2", valor: num.toString()},
-            {from: "objetivo 5", to: "objetivo 3", valor: num.toString()},
-            {from: "objetivo 6", to: "objetivo 3", valor: num.toString()},
-            {from: "objetivo 7", to: "objetivo 4", valor: num.toString()},
-            {from: "objetivo 8", to: "objetivo 4", valor: num.toString()},
-            {from: "objetivo 8", to: "objetivo 5", valor: num.toString()},
-            {from: "objetivo 9", to: "objetivo 5", valor: num.toString()},
-            {from: "objetivo 9", to: "objetivo 6", valor: num.toString()},
-            {from: "objetivo 10", to: "objetivo 7", valor: num.toString()},
-            {from: "objetivo 11", to: "objetivo 7", valor: num.toString()},
-            {from: "objetivo 11", to: "objetivo 8", valor: num.toString()},
-            {from: "objetivo 11", to: "objetivo 9", valor: num.toString()},
-            {from: "objetivo 12", to: "objetivo 9", valor: num.toString()}
+            {from: "objetivo 1", to: "objetivo 2", valor: num.toString(), color1: "#555555", color2: "#777777"},
+            {from: "objetivo 3", to: "objetivo 2", valor: num.toString(), color1: "#555555", color2: "#777777"},
+            {from: "objetivo 4", to: "objetivo 1", valor: num.toString(), color1: "#555555", color2: "#777777"},
+            {from: "objetivo 5", to: "objetivo 2", valor: num.toString(), color1: "#555555", color2: "#777777"},
+            {from: "objetivo 5", to: "objetivo 3", valor: num.toString(), color1: "#555555", color2: "#777777"},
+            {from: "objetivo 6", to: "objetivo 3", valor: num.toString(), color1: "#555555", color2: "#777777"},
+            {from: "objetivo 7", to: "objetivo 4", valor: num.toString(), color1: "#555555", color2: "#777777"},
+            {from: "objetivo 8", to: "objetivo 4", valor: num.toString(), color1: "#555555", color2: "#777777"},
+            {from: "objetivo 8", to: "objetivo 5", valor: num.toString(), color1: "#555555", color2: "#777777"},
+            {from: "objetivo 9", to: "objetivo 5", valor: num.toString(), color1: "#555555", color2: "#777777"},
+            {from: "objetivo 9", to: "objetivo 6", valor: num.toString(), color1: "#555555", color2: "#777777"},
+            {from: "objetivo 10", to: "objetivo 7", valor: num.toString(), color1: "#555555", color2: "#777777"},
+            {from: "objetivo 11", to: "objetivo 7", valor: num.toString(), color1: "#555555", color2: "#777777"},
+            {from: "objetivo 11", to: "objetivo 8", valor: num.toString(), color1: "#555555", color2: "#777777"},
+            {from: "objetivo 11", to: "objetivo 9", valor: num.toString(), color1: "#555555", color2: "#777777"},
+            {from: "objetivo 12", to: "objetivo 9", valor: num.toString(), color1: "#555555", color2: "#777777"},
             ];
 
           cantidadPerspectivas = inputPers.length;
@@ -93,8 +93,8 @@ angular.
               if (inputObjs[j].group === inputPers[i].key)
                 cantObjs++;
             objetivosPerspectivas[i] = cantObjs;
-            if (objetivosPerspectivas[i]*150 + 30+70 > widthTotal)
-                widthTotal = objetivosPerspectivas[i]*150 + 30+70;
+            if (objetivosPerspectivas[i]*150 + 30+70+35 > widthTotal)
+                widthTotal = objetivosPerspectivas[i]*150 + 30+70+35;
           }
           if (90 > myheight)
             myheight = 90;
@@ -131,11 +131,11 @@ angular.
                        deletable: false },
                   $(go.Shape,
                       {strokeWidth: 2},
-                      new go.Binding("stroke", "#1C1C1C")
+                      new go.Binding("stroke", "color1")
                       ),
                   $(go.Shape, { toArrow: "Triangle", strokeWidth: 2}, 
-                      new go.Binding("fill", "color"),
-                      new go.Binding("stroke", "color")),
+                      new go.Binding("fill", "color2"),
+                      new go.Binding("stroke", "color2")),
                   $(go.TextBlock, 
                       new go.Binding("text", "valor"), {segmentOffset: new go.Point(0,10)})
               );
@@ -163,6 +163,7 @@ angular.
                   $(go.TextBlock, 
                       { alignment: go.Spot.TopLeft,
                       desiredSize: new go.Size(122, 90),
+                      alignment: new go.Spot(0.01,0.12),
                       font: "Bold 14pt Arial, Serif" },
                       new go.Binding("text", "key"))
               ));
@@ -174,7 +175,7 @@ angular.
             perspectivas.push({key: inputPers[i].key, color: "#f8f8f8", isGroup: true, size: mySize, loc: posOrigen, highlight: "#e7e7e7"})
             diagram.model.addNodeData(perspectivas[i]);
             let objYOrigen = yOrigen + myheight/2 -45;
-            let objXOrigen = 30+70;
+            let objXOrigen = 30+70+35;
             let posObjetivo;
             for (let j = 0; j < objetivosPerspectivas[i]; j++) {
               objetivos.push({key: inputObjs[cantidad].key, group: inputObjs[cantidad].group, valor: inputObjs[cantidad].valor, color: 0, tendencia: inputObjs[cantidad].tendencia, imagen: 0, highlight: 0});
@@ -194,12 +195,12 @@ angular.
               }
               
               if(inputObjs[cantidad].tendencia < 0.4)
-                objetivos[cantidad].imagen = "../angular/mapa-estrategico-page/images/flecha-roja-3.png";
+                objetivos[cantidad].imagen = "../angular/mapa-estrategico-page/images/flecha-roja-t2.png";
               else
                 if(inputObjs[cantidad].tendencia < 0.6)
-                  objetivos[cantidad].imagen = "../angular/mapa-estrategico-page/images/flecha-amarilla-3.png";
+                  objetivos[cantidad].imagen = "../angular/mapa-estrategico-page/images/flecha-amarilla-t2.png";
                 else
-                  objetivos[cantidad].imagen = "../angular/mapa-estrategico-page/images/flecha-verde-3.png";
+                  objetivos[cantidad].imagen = "../angular/mapa-estrategico-page/images/flecha-verde-t2.png";
               
               posObjetivo = objXOrigen + " " + objYOrigen;
               objetivos[cantidad].loc = posObjetivo;
@@ -226,8 +227,8 @@ angular.
                 posOrigen = 0 + " " + yOrigen;
 
                 for (let i = 0; i < cantidadPerspectivas; i++) 
-                  if (objetivosPerspectivas[i]*150 + 30+70 > widthTotal)
-                    widthTotal = objetivosPerspectivas[i]*150 + 30+70;
+                  if (objetivosPerspectivas[i]*150 + 30+70+35 > widthTotal)
+                    widthTotal = objetivosPerspectivas[i]*150 + 30+70+35;
                 
                 let nuevoSize = widthTotal +" " + myheight;
                 diagram.startTransaction("shift node");
@@ -237,7 +238,7 @@ angular.
                   diagram.model.setDataProperty(per.data, "size", nuevoSize);
                   diagram.model.setDataProperty(per.data, "loc", posOrigen);
                   let objYOrigen = yOrigen + myheight/2 -45;
-                  let objXOrigen = 30+70;
+                  let objXOrigen = 30+70+35;
                   let posObjetivo;
                   for (let j = 0; j < objetivosPerspectivas[i]; j++) {
                     let obj = diagram.findNodeForKey(objetivos[cantidad].key);
