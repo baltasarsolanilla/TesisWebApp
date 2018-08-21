@@ -8,7 +8,6 @@ angular.
         /*
         https://www.youtube.com/watch?v=7cfHF7yAoJE&ab_channel=GoJSJavaScriptDiagrammingLibrary
         */
-        document.querySelector("#graficar").addEventListener("click", graficar);
         let cantidadPerspectivas = 0;
         let objetivosPerspectivas = [];
         let objetivo = {
@@ -25,6 +24,7 @@ angular.
               "valor": ""
             }
 
+        graficar();
         function graficar(){
           let $ = go.GraphObject.make;
           let diagram = $(go.Diagram,"myDiagramDiv");
@@ -114,7 +114,7 @@ angular.
                       strokeWidth: 2,
                       desiredSize: new go.Size(120, 60)},
                       new go.Binding("fill", "color"),
-                      new go.Binding("stroke", "highlight"),
+                      new go.Binding("stroke", "highlight")
                       ),
                   $(go.TextBlock,
                       {margin: 3, font: "12pt Arial, Serif"},
@@ -158,7 +158,7 @@ angular.
                       figure: "RoundedRectangle"},
                       new go.Binding("fill", "color"),
                       new go.Binding("stroke", "highlight"),
-                      new go.Binding("desiredSize", "size", go.Size.parse).makeTwoWay(go.Size.stringify),
+                      new go.Binding("desiredSize", "size", go.Size.parse).makeTwoWay(go.Size.stringify)
                   ),
                   $(go.TextBlock, 
                       { alignment: go.Spot.TopLeft,
