@@ -59,7 +59,7 @@ angular.
 angular.
     module('objetivosPage').
         component('modalComponentObjetivo', {
-            templateUrl: '../angular/shared-components/modal-form/modal-form.modal.html',
+            templateUrl: '../angular/shared-components/modal-form/modal-form-objetivo.modal.html',
             bindings: {
               // resolve: '<',
               close: '&',

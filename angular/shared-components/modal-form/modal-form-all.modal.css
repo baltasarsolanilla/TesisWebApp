@@ -1,0 +1,7 @@
+.margin-textarea {
+    margin-top: 8px;
+}
+
+textarea {
+    resize: vertical;
+}

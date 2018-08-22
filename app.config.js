@@ -23,7 +23,8 @@ angular.module('balancedScorecard')
                 template: '<objetivos-page></objetivos-page>'
             })
             .when('/indicadores', {
-                template: '<div id="page-wrapper2"><h1>Indicadores</h1></div>'
+                // template: '<div id="page-wrapper2"><h1>Indicadores</h1></div>'
+                template: '<indicadores-page></indicadores-page>'
             })
             .when('/ayuda', {
                 template: '<div id="page-wrapper2"><h1>Ayuda</h1></div>'

@@ -1,0 +1,14 @@
+/* Este CSS no se tiene encuenta ya que las mismas clases se cargar en otro css: el de objetivos-table-actual */
+
+.table.table-actual tr td {
+    border: none; 
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+#primer-columna {
+    text-align: left;
+    width: 30%;
+    /* border: 1px solid #ddd; */
+}
