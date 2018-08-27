@@ -8,6 +8,26 @@ angular.
                 var controllerName = "INDICADOR-PAGE-CONTROLLER -> ";
 
                 $scope.createIndicador = createIndicador;
+                $scope.updateIndicador = updateIndicador;
+                $scope.deleteIndicador = deleteIndicador;
+                $scope.updateSelectedIndicador = updateSelectedIndicador;
+                $scope.selectedIndicador = null;
+
+                function updateSelectedIndicador(idIndicador){
+                    $window.console.log(controllerName + "updateSelectedIndicador()");
+                    $scope.selectedIndicador = idIndicador;
+
+                }
+
+                function updateIndicador(){
+                    $window.console.log(controllerName + "updateIndicador()");
+                    $window.alert("Modificar indicador con id: " + $scope.selectedIndicador);
+                }
+
+                function deleteIndicador(){
+                    $window.console.log(controllerName + "deleteIndicador()");
+                    $window.alert("Eliminar indicador con id: " + $scope.selectedIndicador);
+                }
 
                 function createIndicador(){
                     $window.console.log(controllerName + "createIndicador()");

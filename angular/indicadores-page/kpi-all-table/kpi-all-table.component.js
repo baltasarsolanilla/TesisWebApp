@@ -4,7 +4,16 @@ angular.
     module('kpiAllTable').
     component('kpiAllTable', {
         templateUrl: '../angular/indicadores-page/kpi-all-table/kpi-all-table.html',
-        controller: function ResumenTableObjetivosController($scope, NgTableParams, BuilderTable){
+        bindings: {
+          onUpdate: '&'
+        },
+        controller: function ResumenTableObjetivosController($scope, NgTableParams, BuilderTable, $window){
+
+            $scope.onSelectItem = onSelectItem;
+            
+            //Varibles de controller
+            var controllerName = "KPI-ALL-TABLE-CONTROLLER -> ";
+            $scope.selectedItem = null;
 
             var kpi_data = [{
               id: 1,
@@ -33,7 +42,18 @@ angular.
             }
 
             fillData(kpi_data);
+
             
+            var ctrl = this;
+            //Filas clikeables
+            function onSelectItem(value){
+              $window.console.log(controllerName + "onSelectItem(value)");
+              $scope.selectedItem = value;
+              ctrl.onUpdate({idIndicador: $scope.selectedItem.id});
+              $window.console.log(controllerName + " id: " + $scope.selectedItem.id);
+            }
+
+
             $scope.setColorValor = function(valor){
               return BuilderTable.setColorValor(valor);
             }

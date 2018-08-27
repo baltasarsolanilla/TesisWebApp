@@ -6,12 +6,18 @@
                 <button class="btn btn-success btn-lg" ng-click="createIndicador()">
                     <span class="glyphicon glyphicon-plus"></span>
                 </button>
+                <button class="btn btn-primary btn-lg" ng-click="updateIndicador()" ng-disabled="!selectedIndicador">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </button>
+                <button class="btn btn-danger btn-lg" ng-click="deleteIndicador()" ng-disabled="!selectedIndicador">
+                    <span class="glyphicon glyphicon-trash"></span>
+                </button>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-lg-6">
-            <kpi-all-table></kpi-all-table>
+            <kpi-all-table on-update="updateSelectedIndicador(idIndicador)"></kpi-all-table>
         </div>
     </div>
 </div>
