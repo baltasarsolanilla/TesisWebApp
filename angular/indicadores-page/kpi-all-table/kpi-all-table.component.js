@@ -7,13 +7,28 @@ angular.
         bindings: {
           onUpdate: '&'
         },
-        controller: function ResumenTableObjetivosController($scope, NgTableParams, BuilderTable, $window){
+        controller: function ResumenTableObjetivosController($scope, NgTableParams, BuilderTable, $window, $http){
 
             $scope.onSelectItem = onSelectItem;
             
             //Varibles de controller
             var controllerName = "KPI-ALL-TABLE-CONTROLLER -> ";
             $scope.selectedItem = null;
+            
+            var kpi_data2;
+            this.$onInit = function() {
+              $window.console.log(controllerName + "onInit()");
+              $http.get("http://localhost:8080/indicadores")
+                .then(function(response) {
+                    console.log(response);
+                    kpi_data2 = response.data;
+                    kpi_data2.forEach(element => {
+                      element.tendencia = BuilderTable.getRandomTendencia();
+                    });
+                    console.log(kpi_data2);
+
+              });
+            };
 
             var kpi_data = [{
               id: 1,
