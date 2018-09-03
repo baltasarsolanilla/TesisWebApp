@@ -59,7 +59,7 @@ angular.
 angular.
     module('objetivosPage').
         component('modalComponentObjetivo', {
-            templateUrl: '../angular/shared-components/modal-form/modal-form.modal.html',
+            templateUrl: '../angular/shared-components/modal-form/modal-form-objetivo.modal.html',
             bindings: {
               // resolve: '<',
               close: '&',
@@ -77,14 +77,14 @@ angular.
                 // };
               };
 
-              $ctrl.userForm = {
+              $ctrl.objetivoForm = {
                   nombre: "",
                   descripcion: ""
               };
 
               $ctrl.ok = function () {
                 $window.console.log(controllerName + "ok()");
-                $ctrl.close({$value: $ctrl.userForm});
+                $ctrl.close({$value: $ctrl.objetivoForm});
               };
 
               $ctrl.cancel = function () {

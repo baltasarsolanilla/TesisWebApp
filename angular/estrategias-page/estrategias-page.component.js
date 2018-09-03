@@ -30,7 +30,7 @@ angular.
                     $window.console.log(controllerName + "createEstrategia()");
                     var modalInstance = $uibModal.open({
                       animation: true,
-                      component: 'modalComponent'
+                      component: 'modalComponentEstrategia'
                       // resolve: {
                       //   items: function () {
                       //     return $ctrl.items;
@@ -60,8 +60,8 @@ angular.
 
 angular.
     module('estrategiasPage').
-        component('modalComponent', {
-            templateUrl: '../angular/shared-components/modal-form/modal-form.modal.html',
+        component('modalComponentEstrategia', {
+            templateUrl: '../angular/shared-components/modal-form/modal-form-estrategia.modal.html',
             bindings: {
               // resolve: '<',
               close: '&',
@@ -78,14 +78,16 @@ angular.
                 // };
               };
 
-              $ctrl.userForm = {
+              $ctrl.estrategiaForm = {
                   nombre: "",
-                  descripcion: ""
+                  descripcion: "",
+                  mision: "",
+                  vision: ""
               };
 
               $ctrl.ok = function () {
                 $window.console.log(controllerName + "ok()");
-                $ctrl.close({$value: $ctrl.userForm});
+                $ctrl.close({$value: $ctrl.estrategiaForm});
               };
 
               $ctrl.cancel = function () {

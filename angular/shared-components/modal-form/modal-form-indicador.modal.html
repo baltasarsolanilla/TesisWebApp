@@ -1,0 +1,22 @@
+<div>
+    <div class="modal-header">
+        <h3>Nuevo Indicador</h3>
+    </div>
+     <form name="form.indicadores" ng-submit="submitForm()" class="form-horizontal" role="form" novalidate>
+        <div class="modal-body form-group" >
+            <div class="col-sm-6">
+                <label for="nombre" >Nombre</label>
+                <input type="text" id="nombre" name="nombre" class="form-control" ng-model="$ctrl.indicadorForm.nombre" ng-maxlength="12"  placeholder="Nombre del indicador" required />
+            </div>
+
+            <div class="col-sm-3">
+                <label for="valor">Valor</label>
+                <input type="number" name="valor" class="form-control" ng-model="$ctrl.indicadorForm.valor" required />
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-disabled="form.indicadores.$invalid" ng-click="$ctrl.ok()">OK</button>
+            <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+        </div>
+    </form>
+</div>

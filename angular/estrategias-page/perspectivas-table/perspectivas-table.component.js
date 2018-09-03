@@ -155,7 +155,7 @@ angular.
 angular.
     module('perspectivasTable').
         component('modalComponentPerspectiva', {
-          templateUrl: '../angular/shared-components/modal-form/modal-form.modal.html',
+          templateUrl: '../angular/shared-components/modal-form/modal-form-perspectiva.modal.html',
           bindings: {
             // resolve: '<',
             close: '&',
@@ -172,14 +172,14 @@ angular.
               // };
             };
 
-            $ctrl.userForm = {
+            $ctrl.perspectivaForm = {
                 nombre: "",
                 descripcion: ""
             };
 
             $ctrl.ok = function () {
               $window.console.log(controllerName + "ok()");
-              $ctrl.close({$value: $ctrl.userForm});
+              $ctrl.close({$value: $ctrl.perspectivaForm});
             };
 
             $ctrl.cancel = function () {
