@@ -78,7 +78,7 @@ angular.
                 // };
               };
 
-              $ctrl.userForm = {
+              $ctrl.estrategiaForm = {
                   nombre: "",
                   descripcion: "",
                   mision: "",
@@ -87,7 +87,7 @@ angular.
 
               $ctrl.ok = function () {
                 $window.console.log(controllerName + "ok()");
-                $ctrl.close({$value: $ctrl.userForm});
+                $ctrl.close({$value: $ctrl.estrategiaForm});
               };
 
               $ctrl.cancel = function () {

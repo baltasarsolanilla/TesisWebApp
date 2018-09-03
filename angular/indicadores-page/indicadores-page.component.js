@@ -71,14 +71,14 @@ angular.
                 // };
                 };
 
-                $ctrl.userForm = {
+                $ctrl.indicadorForm = {
                     nombre: "",
                     valor: ""
                 };
 
                 $ctrl.ok = function () {
                 $window.console.log(controllerName + "ok()");
-                $ctrl.close({$value: $ctrl.userForm});
+                $ctrl.close({$value: $ctrl.indicadorForm});
                 };
 
                 $ctrl.cancel = function () {

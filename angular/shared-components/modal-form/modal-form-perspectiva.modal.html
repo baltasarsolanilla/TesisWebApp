@@ -1,0 +1,22 @@
+<div>
+    <div class="modal-header">
+        <h3>Nueva Perspectiva</h3>
+    </div>
+     <form name="form.perspectiva" ng-submit="submitForm()" class="form-horizontal" role="form" novalidate>
+        <div class="modal-body form-group" >
+            <div class="col-sm-6">
+                <label for="nombre" >Nombre</label>
+                <input type="text" id="nombre" name="nombre" class="form-control" ng-model="$ctrl.perspectivaForm.nombre" ng-maxlength="12"  placeholder="Nombre de la perspectiva" required> </input>
+            </div>
+
+            <div class="col-sm-9 margin-textarea">
+                <label for="mision">Descripción</label>
+                <textarea type="text" name="descripcion" class="form-control" ng-model="$ctrl.perspectivaForm.descripcion" placeholder="Descripcion de la perspectiva" required> </textarea> 
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-disabled="form.perspectiva.$invalid" ng-click="$ctrl.ok()">OK</button>
+            <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+        </div>
+    </form>
+</div>
