@@ -5,5 +5,6 @@ angular.module('balancedScorecard', [
     'objetivosPage',
     'indicadoresPage',
     'searchBox',
-    'mapaEstrategicoPage'
+    'mapaEstrategicoPage',
+    'core'
 ]);
