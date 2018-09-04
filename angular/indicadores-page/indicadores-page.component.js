@@ -4,7 +4,7 @@ angular.
     module('indicadoresPage').
         component('indicadoresPage', {
             templateUrl: '../angular/indicadores-page/indicadores-page.html',
-            controller: function ObjetivosPageController($scope, $window, $uibModal){
+            controller: function ObjetivosPageController($scope, $window, $uibModal, Indicador){
                 var controllerName = "INDICADOR-PAGE-CONTROLLER -> ";
 
                 $scope.createIndicador = createIndicador;
@@ -12,6 +12,8 @@ angular.
                 $scope.deleteIndicador = deleteIndicador;
                 $scope.updateSelectedIndicador = updateSelectedIndicador;
                 $scope.selectedIndicador = null;
+                console.log("Indicadores: ");
+                Indicador.get();
 
                 function updateSelectedIndicador(idIndicador){
                     $window.console.log(controllerName + "updateSelectedIndicador()");

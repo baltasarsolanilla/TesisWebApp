@@ -1,3 +1,4 @@
 angular.module('indicadoresPage', [
-    'kpiAllTable'
+    'kpiAllTable',
+    'core.indicador'
 ]);

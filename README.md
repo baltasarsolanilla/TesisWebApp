@@ -34,3 +34,10 @@ Start Bootstrap is based on the [Bootstrap](http://getbootstrap.com/) framework 
 ## Copyright and License
 
 Copyright 2013-2018 Blackrock Digital LLC. Code released under the [MIT](https://github.com/BlackrockDigital/startbootstrap-sb-admin-2/blob/gh-pages/LICENSE) license.
+
+
+-------------------------------
+tesis:
+levantar en server: "http-server -o"
+ver indicadores-page.component.js si anda bien el get del recurso "Indicador", posible error de asincrónico.
+en indicadores-page/kpi-all-table.component.js esta andando los pedidos https.
