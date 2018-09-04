@@ -41,3 +41,4 @@ tesis:
 levantar en server: "http-server -o"
 ver indicadores-page.component.js si anda bien el get del recurso "Indicador", posible error de asincrónico.
 en indicadores-page/kpi-all-table.component.js esta andando los pedidos https.
+Verificar que el cross-origin (backend - frontend) tenga la misma URI. No es lo mismo localhost que 127.0.0.1!
