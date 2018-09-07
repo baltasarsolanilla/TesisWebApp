@@ -4,7 +4,17 @@ angular.
     module('objetivosPage').
         component('objetivosPage', {
             templateUrl: '../angular/objetivos-page/objetivos-page.html',
-            controller: function ObjetivosPageController($scope, $window, $uibModal){                
+            controller: function ObjetivosPageController($scope, $window, $uibModal, Objetivo){                
+                
+                //HTTP REST REQUEST-RESPONSE
+                console.log("Objetivos: GET ");
+                $scope.objetivos = Objetivo.query(function(objetivos){
+                    objetivos.forEach(element => {
+                        console.log(element.nombre);    
+                    });
+                    console.log($scope.objetivos);                  
+                });
+                
                 
                 // Funciones del controller
                 $scope.onSelectObjetivo = onSelectObjetivo;

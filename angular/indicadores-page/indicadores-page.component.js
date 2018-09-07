@@ -6,38 +6,21 @@ angular.
             templateUrl: '../angular/indicadores-page/indicadores-page.html',
             controller: function ObjetivosPageController($scope, $window, $uibModal, Indicador){
                 var controllerName = "INDICADOR-PAGE-CONTROLLER -> ";
-
+                
+                //HTTP REST REQUEST-RESPONSE
+                $window.console.log("Indicadores: GET ");
+                $scope.indicadores3 = Indicador.query(function(indicadores){
+                    indicadores.forEach(element => {
+                        $window.console.log(element.nombre);    
+                    });
+                    $window.console.log($scope.indicadores3);                  
+                });             
+               
                 $scope.createIndicador = createIndicador;
                 $scope.updateIndicador = updateIndicador;
                 $scope.deleteIndicador = deleteIndicador;
                 $scope.updateSelectedIndicador = updateSelectedIndicador;
                 $scope.selectedIndicador = null;
-
-                //HTTP REST REQUEST-RESPONSE
-                // console.log("Indicadores_1: QUERY ");
-                // $scope.indicadores = Indicador.query(function(indicadores){
-                //     indicadores.forEach(element => {
-                //         console.log(element.nombre);    
-                //     });
-                //     console.log($scope.indicadores);                  
-                // });
-
-                // console.log("Indicadores_2: QUERY-PROMISE ");
-                // var indicadorCore = Indicador;
-                // indicadorCore.get(function(indicadores){
-                //     indicadores.forEach(element => {
-                //         console.log(element.nombre);    
-                //     });                  
-                // });
-
-                console.log("Indicadores: GET ");
-                $scope.indicadores3 = Indicador.query(function(indicadores){
-                    indicadores.forEach(element => {
-                        console.log(element.nombre);    
-                    });
-                    console.log($scope.indicadores3);                  
-                });
-                
 
                 function updateSelectedIndicador(idIndicador){
                     $window.console.log(controllerName + "updateSelectedIndicador()");
