@@ -13,8 +13,7 @@ angular.
                         console.log(element.nombre);    
                     });
                     console.log($scope.objetivos);                  
-                });
-                
+                });                
                 
                 // Funciones del controller
                 $scope.onSelectObjetivo = onSelectObjetivo;

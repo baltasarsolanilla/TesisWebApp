@@ -7,7 +7,8 @@ angular.
         bindings: {
           onSelect: '&',
           url: '<',
-          message: '<'
+          message: '<',
+          data: '<'
         },
         controller: function SearchBoxController($scope, $window){
           var vm = this;
@@ -16,6 +17,8 @@ angular.
           vm.people = simpleList;
 
           this.$onInit = function() {
+            console.log("onInit-------------------------" + vm.message);
+            console.log("onInit-------------------------" + vm.data);
             if (vm.message === 'Peso')
               vm.people = [{"id":1,"name":"1"},
                            {"id":2,"name":"2"},
