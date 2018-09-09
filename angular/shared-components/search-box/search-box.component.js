@@ -17,9 +17,7 @@ angular.
           vm.people = simpleList;
 
           this.$onInit = function() {
-            console.log("onInit-------------------------" + vm.message);
-            console.log("onInit-------------------------" + vm.data);
-            if (vm.message === 'Peso')
+            if (typeof vm.data === "undefined")
               vm.people = [{"id":1,"name":"1"},
                            {"id":2,"name":"2"},
                            {"id":3,"name":"3"},
@@ -28,7 +26,7 @@ angular.
           };
 
           vm.onSelectValue = function(value){
-            $window.console.log(componentName + "onSelectValue()");
+            $window.console.log(componentName + "onSelectValue()" + value.id);
             vm.onSelect({value: value});
           };
         }
