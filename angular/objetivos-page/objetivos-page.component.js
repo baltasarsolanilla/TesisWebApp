@@ -44,9 +44,11 @@ angular.
                       // }
                     });
 
-                    modalInstance.result.then(function (userForm) {
-                      $window.console.log('ok');
-                      $window.console.log(userForm);
+                    modalInstance.result.then(function (new_objetivo) {
+                      $window.console.log(new_objetivo);
+                      Objetivo.save(new_objetivo, function(response){
+                          console.log("Response de SAVE NEW OBJETIVO --> " + response);
+                      })
                     }, function () {
                       $window.console.log('modal-component dismissed at: ' + new Date());
                     });
@@ -54,12 +56,22 @@ angular.
 
                 function updateObjetivo(){
                     $window.console.log(controllerName + "updateObjetivo()");
-                    $window.alert("UPDATE OBJETVIO " + $scope.selectedObjetivo.name);
+                    $window.alert("UPDATE OBJETVIO " + $scope.selectedObjetivo.id);
+                    var obj = Objetivo.get({idObjetivo: $scope.selectedObjetivo.id});
+                    obj.$promise.then(function(){
+                        obj.nombre = "HELLO, WORLD";
+                        Objetivo.update(obj, function(response){
+                            console.log("Response de UPDATE OBJETIVO --> " + response);
+                        });
+                    });
                 }
 
                 function deleteObjetivo(){
                     $window.console.log(controllerName + "deleteObjetivo()");
-                    $window.alert("ELIMINAR OBJETIVO: " + $scope.selectedObjetivo.name);
+                    $window.alert("ELIMINAR OBJETIVO: " + $scope.selectedObjetivo.id);
+                    Objetivo.delete({idObjetivo: $scope.selectedObjetivo.id}, function(response) {
+                        console.log("Response de DELETE OBJETIVO --> " + response);
+                    });
                 }
             }
         });
