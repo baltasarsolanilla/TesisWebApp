@@ -6,8 +6,8 @@ angular.
         templateUrl: '../angular/shared-components/search-box/search-box.html',
         bindings: {
           onSelect: '&',
-          url: '<',
-          message: '<'
+          message: '<',
+          listaElementos: '<'
         },
         controller: function SearchBoxController($scope, $window){
           var vm = this;
@@ -16,12 +16,6 @@ angular.
           vm.people = simpleList;
 
           this.$onInit = function() {
-            if (vm.message === 'Peso')
-              vm.people = [{"id":1,"name":"1"},
-                           {"id":2,"name":"2"},
-                           {"id":3,"name":"3"},
-                           {"id":4,"name":"4"},
-                           {"id":5,"name":"5"},];
           };
 
           vm.onSelectValue = function(value){

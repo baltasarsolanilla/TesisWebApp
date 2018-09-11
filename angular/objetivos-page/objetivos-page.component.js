@@ -61,7 +61,8 @@ angular.
                     obj.$promise.then(function(){
                         obj.nombre = "HELLO, WORLD";
                         Objetivo.update(obj, function(response){
-                            console.log("Response de UPDATE OBJETIVO --> " + response);
+                            console.log("Response de UPDATE OBJETIVO --> ");
+                            console.log(response)
                         });
                     });
                 }
@@ -70,7 +71,8 @@ angular.
                     $window.console.log(controllerName + "deleteObjetivo()");
                     $window.alert("ELIMINAR OBJETIVO: " + $scope.selectedObjetivo.id);
                     Objetivo.delete({idObjetivo: $scope.selectedObjetivo.id}, function(response) {
-                        console.log("Response de DELETE OBJETIVO --> " + response);
+                        console.log("Response de DELETE OBJETIVO --> ");
+                        console.log(response);
                     });
                 }
             }
