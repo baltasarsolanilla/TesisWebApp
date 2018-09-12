@@ -37,11 +37,6 @@ angular.
                     var modalInstance = $uibModal.open({
                       animation: true,
                       component: 'modalComponentObjetivo'
-                      // resolve: {
-                      //   items: function () {
-                      //     return $ctrl.items;
-                      //   }
-                      // }
                     });
 
                     modalInstance.result.then(function (new_objetivo) {
@@ -125,8 +120,6 @@ angular.
                 //   item: $ctrl.items[0]
                 // };
               };
-              
-
 
               $ctrl.objetivoForm = {
                   nombre: "",
