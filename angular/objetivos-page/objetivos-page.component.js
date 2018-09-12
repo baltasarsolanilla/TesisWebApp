@@ -8,14 +8,13 @@ angular.
                 
                 //HTTP REST REQUEST-RESPONSE
                 console.log("Objetivos: GET ");
-                $scope.objetivos = Objetivo.query(function(objetivos){
-                    objetivos.forEach(element => {
-                        console.log(element.nombre);    
-                    });
+                Objetivo.query(function(objetivos){
+                    delete objetivos.$promise;
+                    delete objetivos.$resolved;
+                    $scope.objetivos = objetivos;
                     console.log($scope.objetivos);                  
                 });
-                
-                
+            
                 // Funciones del controller
                 $scope.onSelectObjetivo = onSelectObjetivo;
                 $scope.createObjetivo = createObjetivo;
@@ -24,7 +23,10 @@ angular.
 
                 // Variables del controller
                 var controllerName = "OBJETIVOS-PAGE-CONTROLLER -> ";
-                $scope.selectedObjetivo = null;
+                $scope.selectedObjetivo = {
+                    "nombre" : "",
+                    "descripcion" : "Descripción de objetivo seleccionado..."
+                };
 
 
                 function onSelectObjetivo(value){
@@ -41,8 +43,9 @@ angular.
 
                     modalInstance.result.then(function (new_objetivo) {
                       $window.console.log(new_objetivo);
-                      Objetivo.save(new_objetivo, function(response){
-                          console.log("Response de SAVE NEW OBJETIVO --> " + response);
+                      Objetivo.save(new_objetivo, function(objetivo_creado){
+                          console.log("Response de SAVE NEW OBJETIVO --> ");
+                          $scope.objetivos.push(objetivo_creado);
                       })
                     }, function () {
                       $window.console.log('modal-component dismissed at: ' + new Date());
