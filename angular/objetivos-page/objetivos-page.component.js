@@ -65,6 +65,31 @@ angular.
                             console.log(response)
                         });
                     });
+
+                    var modalInstance = $uibModal.open({
+                        animation: true,
+                        component: 'modalComponentObjetivo',
+                        // resolve: {
+                        //   items: function () {
+                        //     return $ctrl.items;
+                        //   }
+                        // }
+                      });
+  
+                    modalInstance.result.then(function (objetivo_modificado) {
+                        $window.console.log(objetivo_modificado);
+                        var obj = Objetivo.get({idObjetivo: $scope.selectedObjetivo.id});
+                        obj.$promise.then(function(){
+                            obj.nombre = objetivo_modificado.nombre;
+                            obj.descripcion = objetivo_modificado.descripcion;
+                            Objetivo.update(obj, function(response){
+                                console.log("Response de UPDATE OBJETIVO --> ");
+                                console.log(response)
+                            });
+                        });
+                    }, function () {
+                        $window.console.log('modal-component dismissed at: ' + new Date());
+                    });
                 }
 
                 function deleteObjetivo(){
@@ -100,6 +125,8 @@ angular.
                 //   item: $ctrl.items[0]
                 // };
               };
+              
+
 
               $ctrl.objetivoForm = {
                   nombre: "",
