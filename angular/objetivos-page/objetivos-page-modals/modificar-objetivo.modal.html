@@ -1,0 +1,28 @@
+<div>
+    <div class="modal-header">
+        <h3>Modificar Objetivo</h3>
+    </div>
+     <form name="form.userForm" ng-submit="submitForm()"   class="form-horizontal" role="form" novalidate>
+            <!-- NAME -->
+        <div class="modal-body form-group" >
+    <!-- <div class="form-group" ng-class="{'has-error':  form.userForm.nombre.$error.required ,  'has-success': form.userForm.nombre.$valid }"> -->
+            <div class="col-sm-6" ng-class="{'has-error': form.userForm.nombre.$invalid ,  'has-success': form.userForm.nombre.$valid || form.userForm.nombre.$untouched}" >
+                <label for="nombre" >Nombre</label>
+                <input type="text" id="nombre" name="nombre" class="form-control" ng-model="$ctrl.objetivoForm.nombre" ng-maxlength="12"  placeholder="Nombre del objetivo" required> </input> 
+                <p ng-show="form.userForm.nombre.$error.maxlength">Username is too long. {{$task.status}}</p>
+                <p> {{$task.status}}</p>
+                <p> {{userForm.nombre}}</p>
+            </div>
+
+            <div class="col-sm-9">
+                <label for="descripcion">Descripción</label>
+                <textarea type="text" name="descripcion" class="form-control" ng-model="$ctrl.objetivoForm.descripcion"  required> </textarea> 
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-disabled="form.userForm.$invalid" ng-click="$ctrl.ok()">OK</button>
+            <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+        </div>
+    </form>
+</div>

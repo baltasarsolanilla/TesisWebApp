@@ -1,4 +1,4 @@
- <div class="ng-cloak">
+<div class="ng-cloak">
     <ui-select ng-model="$ctrl.item.selected" theme="bootstrap" ng-change="$ctrl.onSelectValue($ctrl.item.selected)">
         <ui-select-match placeholder='{{$ctrl.message}}'>{{$select.selected.nombre}}</ui-select-match>
         <ui-select-choices repeat="item in $ctrl.data | filter: $select.search">
