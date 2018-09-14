@@ -8,6 +8,8 @@ angular.
               data: '<'
             },
             controller: function KPIsTableController($scope, $window, NgTableParams){
+              var controllerName = "KPI-TABLE-CONTROLLER -> ";
+
               var simpleList = [{"id":1,"nombre":"Nombre 1","peso":0.0},
                                 {"id":2,"nombre":"Nombre 2","peso":0.0},
                                 {"id":3,"nombre":"Nombre 3","peso":0.0}];
@@ -23,10 +25,9 @@ angular.
                 $scope.cancelChanges = cancelChanges;
                 $scope.saveChanges = saveChanges;
                 
-
                 $scope.onSelectKpi = onSelectKpi;
                 $scope.onSelectPeso = onSelectPeso;
-                $scope.changeDataset = changeDataset;
+                $scope.changeDataTable = changeDataTable;
 
                 // Variables del controller
 
@@ -55,29 +56,28 @@ angular.
                 }
 
                 //Esta funcion es la que va a cargar le nuevo dataset una vez seleccionado una perspectiva.
-                $scope.change = true;
-                function changeDataset(dataset){
-                  if ($scope.change)
-                    $scope.tableParams.settings({
-                      dataset: angular.copy(simpleList)
-                    });
-                  else
-                    $scope.tableParams.settings({
-                      dataset: angular.copy(simpleList2)
-                    });
-                  $scope.change = !$scope.change;
+                function changeDataTable(data){
+                  var data_formateada = [];
+                  angular.forEach(data, function(e) {
+                    console.log(e.indicador.id);
+                    this.push({
+                      "id" : e.indicador.id,
+                      "nombre" : e.indicador.nombre,
+                      "peso" : e.peso
+                    })
+                  }, data_formateada);
+
+                  $scope.tableParams.settings({
+                    dataset: angular.copy(data_formateada)
+                  });
                   $scope.tableParams.reload();
-                  
-                  console.log("dataset en changeDataset -------------------")
-                  console.log(dataset)
-                  console.log("dataset viejo -------------------")
-                  console.log(simpleList);
                 }
 
                 this.$onChanges = function(changes){
-                  if (changes.data)
-                    console.log("data has changedddddddddddddddddddddddddddd")
-                    $scope.changeDataset(changes.data.currentValue);
+                  if (changes.data.currentValue){
+                    console.log(changes.data);
+                    $scope.changeDataTable(changes.data.currentValue);
+                  }
                 }
 
                 var id = '100';
