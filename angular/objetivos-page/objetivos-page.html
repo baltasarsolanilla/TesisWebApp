@@ -6,10 +6,10 @@
                 <button class="btn btn-success btn-lg" ng-click="createObjetivo()">
                     <span class="glyphicon glyphicon-plus"></span>
                 </button>
-                <button class="btn btn-primary btn-lg" ng-click="updateObjetivo()" ng-disabled="!selectedObjetivo">
+                <button class="btn btn-primary btn-lg" ng-click="updateObjetivo()" ng-disabled="!selectedObjetivo.id">
                     <span class="glyphicon glyphicon-pencil"></span>
                 </button>
-                <button class="btn btn-danger btn-lg" ng-click="deleteObjetivo()" ng-disabled="!selectedObjetivo">
+                <button class="btn btn-danger btn-lg" ng-click="deleteObjetivo()" ng-disabled="!selectedObjetivo.id">
                     <span class="glyphicon glyphicon-trash"></span>
                 </button>
             </div>
@@ -27,7 +27,7 @@
     </div>
     <div class="row">
         <div class="col-lg-6">
-            <kpis-table id="selectedObjetivo.id"></kpis-table>
+            <kpis-table data="selectedObjetivo.indicadoresAfectantes"></kpis-table>
         </div>
         <div class="col-lg-6">
             <objetivos-afectados-table id="selectedObjetivo.id"></objetivos-afectados-table>

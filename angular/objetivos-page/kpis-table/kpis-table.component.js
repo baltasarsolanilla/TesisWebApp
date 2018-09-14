@@ -5,21 +5,17 @@ angular.
         component('kpisTable', {
             templateUrl: '../angular/objetivos-page/kpis-table/kpis-table.html',
             bindings: {
-              id: '<'
+              data: '<'
             },
             controller: function KPIsTableController($scope, $window, NgTableParams){
-                var simpleList = [{"id":1,"name":"KPI -- A","peso":12.5},
-                                  {"id":2,"name":"KPI -- B","peso":12.5},
-                                  {"id":3,"name":"KPI -- C","peso":25}];
+              var simpleList = [{"id":1,"nombre":"Nombre 1","peso":0.0},
+                                {"id":2,"nombre":"Nombre 2","peso":0.0},
+                                {"id":3,"nombre":"Nombre 3","peso":0.0}];
+              var simpleList2 = [{"id":1,"nombre":"Nombre 4","peso":0.0},
+                                {"id":2,"nombre":"Nombre 5","peso":0.0},
+                                {"id":3,"nombre":"Nombre 6","peso":0.0}];
+
                 
-                var simpleList2 =[{"id":1,"name":"KPI -- Z","peso":5},
-                                  {"id":2,"name":"KPI -- Q","peso":15},
-                                  {"id":3,"name":"KPI -- R","peso":30},
-                                  {"id":4,"name":"KPI -- S","peso":50},
-                                  {"id":5,"name":"KPI -- T","peso":12.5}];
-
-                var originalData = angular.copy(simpleList);
-
                 // Funciones del controller
                 $scope.add = add;
                 $scope.del = del;
@@ -33,7 +29,7 @@ angular.
                 $scope.changeDataset = changeDataset;
 
                 // Variables del controller
-                var controllerName = "KPIS-TABLE-CONTROLLER -> ";
+
                 $scope.selectedKPI = null;
                 $scope.selectedPeso = null;
                 $scope.deleteCount = 0;
@@ -60,8 +56,7 @@ angular.
 
                 //Esta funcion es la que va a cargar le nuevo dataset una vez seleccionado una perspectiva.
                 $scope.change = true;
-                function changeDataset(idObjetivo){
-                  $window.console.log(controllerName + "changeDataset(idObjetivo)")
+                function changeDataset(dataset){
                   if ($scope.change)
                     $scope.tableParams.settings({
                       dataset: angular.copy(simpleList)
@@ -72,12 +67,17 @@ angular.
                     });
                   $scope.change = !$scope.change;
                   $scope.tableParams.reload();
+                  
+                  console.log("dataset en changeDataset -------------------")
+                  console.log(dataset)
+                  console.log("dataset viejo -------------------")
+                  console.log(simpleList);
                 }
 
                 this.$onChanges = function(changes){
-                  $window.console.log(controllerName + "onChanges(changes)");
-                  if (changes.id)
-                    $scope.changeDataset(changes.id.currentValue);
+                  if (changes.data)
+                    console.log("data has changedddddddddddddddddddddddddddd")
+                    $scope.changeDataset(changes.data.currentValue);
                 }
 
                 var id = '100';

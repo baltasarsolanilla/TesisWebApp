@@ -5,97 +5,95 @@ angular.
         component('objetivosPage', {
             templateUrl: '../angular/objetivos-page/objetivos-page.html',
             controller: function ObjetivosPageController($scope, $window, $uibModal, Objetivo){                
-                
+                var controllerName = "OBJETIVOS-PAGE-CONTROLLER -> ";
+
                 //HTTP REST REQUEST-RESPONSE
                 console.log("Objetivos: GET ");
-                Objetivo.query(function(objetivos){
-                    delete objetivos.$promise;
-                    delete objetivos.$resolved;
-                    $scope.objetivos = objetivos;
-                    console.log($scope.objetivos);                  
-                });
+               
             
-                // Funciones del controller
-                $scope.onSelectObjetivo = onSelectObjetivo;
+                //CRUD
                 $scope.createObjetivo = createObjetivo;
                 $scope.updateObjetivo = updateObjetivo;
                 $scope.deleteObjetivo = deleteObjetivo;
+                
+                //AJAX
+                $scope.cargarObjetivos = cargarObjetivos;
+
+                //Otras
+                $scope.onSelectObjetivo = onSelectObjetivo;
+
+                
+                cargarObjetivos();
 
                 // Variables del controller
-                var controllerName = "OBJETIVOS-PAGE-CONTROLLER -> ";
-                $scope.selectedObjetivo = {
-                    "nombre" : "",
-                    "descripcion" : "Descripción de objetivo seleccionado..."
+                
+                this.$onInit = function() {
+                    cargarObjetivos();
+                    $scope.objetivoSeleccionado = {
+                        "descripcion" : "Descripción del objetivo seleccionado..."
+                    };
                 };
 
-
                 function onSelectObjetivo(value){
-                    $window.console.log(controllerName + "onSelectObjetivo(value)");
-                    $scope.selectedObjetivo = value;
+                    $scope.objetivoSeleccionado = value;
                 }
                 
+                //CREATE OBJETIVO
                 function createObjetivo(){
-                    $window.console.log(controllerName + "createObjetivo()");
                     var modalInstance = $uibModal.open({
                       animation: true,
-                      component: 'modalComponentObjetivo'
+                      component: 'modalCrearObjetivo'
                     });
 
-                    modalInstance.result.then(function (new_objetivo) {
-                      $window.console.log(new_objetivo);
-                      Objetivo.save(new_objetivo, function(objetivo_creado){
-                          console.log("Response de SAVE NEW OBJETIVO --> ");
+                    modalInstance.result.then(function (obj) {
+                      Objetivo.save(obj, function(objetivo_creado){
                           $scope.objetivos.push(objetivo_creado);
+                          alert("Objetivo creado exitosamente");
                       })
                     }, function () {
                       $window.console.log('modal-component dismissed at: ' + new Date());
                     });
                 }
 
+                //UPDATE OBJETIVO
                 function updateObjetivo(){
-                    $window.console.log(controllerName + "updateObjetivo()");
-                    $window.alert("UPDATE OBJETVIO " + $scope.selectedObjetivo.id);
-                    var obj = Objetivo.get({idObjetivo: $scope.selectedObjetivo.id});
-                    obj.$promise.then(function(){
-                        obj.nombre = "HELLO, WORLD";
-                        Objetivo.update(obj, function(response){
-                            console.log("Response de UPDATE OBJETIVO --> ");
-                            console.log(response)
-                        });
-                    });
-
                     var modalInstance = $uibModal.open({
                         animation: true,
-                        component: 'modalComponentObjetivo',
-                        // resolve: {
-                        //   items: function () {
-                        //     return $ctrl.items;
-                        //   }
-                        // }
-                      });
+                        component: 'modalModificarObjetivo',
+                        resolve: {
+                          obj: function () {
+                            return $scope.objetivoSeleccionado;
+                          }
+                        }
+                    });
   
-                    modalInstance.result.then(function (objetivo_modificado) {
-                        $window.console.log(objetivo_modificado);
-                        var obj = Objetivo.get({idObjetivo: $scope.selectedObjetivo.id});
-                        obj.$promise.then(function(){
-                            obj.nombre = objetivo_modificado.nombre;
-                            obj.descripcion = objetivo_modificado.descripcion;
-                            Objetivo.update(obj, function(response){
-                                console.log("Response de UPDATE OBJETIVO --> ");
-                                console.log(response)
-                            });
+                    modalInstance.result.then(function (obj) {
+                        Objetivo.update(obj, function(objetivo_modificado){
+                            alert("Objetivo modificado exitosamente");
+                            var indexOfObj = $scope.objetivos.findIndex(i => i.id === objetivo_modificado.id);
+                            $scope.objetivos.splice(indexOfObj, 1, objetivo_modificado);
                         });
                     }, function () {
                         $window.console.log('modal-component dismissed at: ' + new Date());
                     });
                 }
-
+                
+                //DELETE OBJETIVO
                 function deleteObjetivo(){
-                    $window.console.log(controllerName + "deleteObjetivo()");
-                    $window.alert("ELIMINAR OBJETIVO: " + $scope.selectedObjetivo.id);
-                    Objetivo.delete({idObjetivo: $scope.selectedObjetivo.id}, function(response) {
-                        console.log("Response de DELETE OBJETIVO --> ");
-                        console.log(response);
+                    Objetivo.delete({idObjetivo: $scope.objetivoSeleccionado.id}, function(response) {
+                        alert("Objetivo eliminado exitosamente");
+                        var indexOfObj = $scope.objetivos.findIndex(i => i.id === $scope.objetivoSeleccionado.id);
+                        $scope.objetivos.splice(indexOfObj, 1);
+                    });
+                }
+
+                //AJAX
+                function cargarObjetivos(){
+                    Objetivo.query(function(objetivos){
+                        delete objetivos.$promise;
+                        delete objetivos.$resolved;
+                        $scope.objetivos = objetivos;
+                        console.log($scope.objetivos);
                     });
                 }
             }
@@ -105,23 +103,44 @@ angular.
 
 angular.
     module('objetivosPage').
-        component('modalComponentObjetivo', {
-            templateUrl: '../angular/shared-components/modal-form/modal-form-objetivo.modal.html',
+        component('modalCrearObjetivo', {
+            templateUrl: '../angular/objetivos-page/objetivos-page-modals/crear-objetivo.modal.html',
             bindings: {
-              // resolve: '<',
               close: '&',
               dismiss: '&'
             },
             controller: function ($window) {
               var $ctrl = this;
-              var controllerName = "OBJETIVO-PAGE-MODAL -> ";
+
+              $ctrl.objetivoForm = {
+                  nombre: "",
+                  descripcion: ""
+              };
+
+              $ctrl.ok = function () {
+                $ctrl.close({$value: $ctrl.objetivoForm});
+              };
+
+              $ctrl.cancel = function () {
+                $ctrl.dismiss({$value: 'cancel'});
+              };
+            }
+    });
+
+angular.
+    module('objetivosPage').
+        component('modalModificarObjetivo', {
+            templateUrl: '../angular/objetivos-page/objetivos-page-modals/modificar-objetivo.modal.html',
+            bindings: {
+              resolve: '<',
+              close: '&',
+              dismiss: '&'
+            },
+            controller: function ($window) {
+              var $ctrl = this;
 
               $ctrl.$onInit = function () {
-                $window.console.log(controllerName + "onInit()");
-                // $ctrl.items = $ctrl.resolve.items;
-                // $ctrl.selected = {
-                //   item: $ctrl.items[0]
-                // };
+                $ctrl.objetivoForm = $ctrl.resolve.obj;
               };
 
               $ctrl.objetivoForm = {
@@ -130,7 +149,6 @@ angular.
               };
 
               $ctrl.ok = function () {
-                $window.console.log(controllerName + "ok()");
                 $ctrl.close({$value: $ctrl.objetivoForm});
               };
 

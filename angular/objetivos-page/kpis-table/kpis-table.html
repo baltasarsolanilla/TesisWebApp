@@ -28,16 +28,15 @@
             <col width="30%"/>
         </colgroup>
         <tr ng-repeat="row in $data track by row.id">
-            <td title="'KPI'" sortable="'name'">
-                <span class="">{{row.name}}</span>
+            <td title="'KPI'" sortable="'nombre'">
+                <span class="">{{row.nombre}}</span>
             </td>
-            <td title="'PESO'" sortable="'name'" style="text-align:center !important;">
+            <td title="'PESO'" sortable="'nombre'" style="text-align:center !important;">
                 <span class="">{{row.peso}}%
                     <button class="btn btn-danger btn-sm pull-right"  ng-click="del(row)" ng-hide="!isEditing"><span class="glyphicon glyphicon-trash"></span></button>
                 </span>
             </td>
         </tr>
     </table>
-    <!-- <h4>Objetivo id: {{$ctrl.id}}</h4>
-    <h4>KPI seleccionado id: {{KpiSelected.id}}</h4> -->
+    <p>{{$ctrl.data}}</p>
 </div>

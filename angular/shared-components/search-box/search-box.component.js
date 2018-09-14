@@ -9,13 +9,15 @@ angular.
           message: '<',
           data: '<'
         },
-        controller: function SearchBoxController($scope, $window){
+        controller: function SearchBoxController($window){
           var vm = this;
           var componentName = "SEARCH-BOX -> ";
 
           this.$onInit = function() {
           };
-          //Cuando se carga "data" por primera vez, debo ejecutar onSelect con data[0]
+
+          this.$onChanges = function(){
+          }
 
           vm.onSelectValue = function(value){
             $window.console.log(componentName + "onSelectValue()");
