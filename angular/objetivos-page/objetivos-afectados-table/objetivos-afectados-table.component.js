@@ -8,16 +8,18 @@ angular.
               id: '<'
             },
             controller: function ObjetivosAfectadosTableController($scope, $window, NgTableParams){
-              var simpleList = [{"id":1,"name":"Nissim","peso":12.5},
-                                {"id":2,"name":"Marico","peso":12.5},
-                                {"id":3,"name":"Mark","peso":25},
-                                {"id":4,"name":"Allen","peso":25}];
+              var controllerName = "OBJETIVOS-AFECTADOS-TABLE-CONTROLLER -> ";
 
-              var simpleList2 =[{"id":1,"name":"Macon","peso":5},
-                                {"id":2,"name":"Griselda","peso":15},
-                                {"id":3,"name":"Marcelo","peso":30},
-                                {"id":4,"name":"John","peso":50},
-                                {"id":5,"name":"Kel","peso":12.5}];
+              var simpleList = [{"id":1,"nombre":"Nissim","peso":12.5},
+                                {"id":2,"nombre":"Marico","peso":12.5},
+                                {"id":3,"nombre":"Mark","peso":25},
+                                {"id":4,"nombre":"Allen","peso":25}];
+
+              var simpleList2 =[{"id":1,"nombre":"Macon","peso":5},
+                                {"id":2,"nombre":"Griselda","peso":15},
+                                {"id":3,"nombre":"Marcelo","peso":30},
+                                {"id":4,"nombre":"John","peso":50},
+                                {"id":5,"nombre":"Kel","peso":12.5}];
                                 
               var originalData = angular.copy(simpleList);
 
@@ -46,15 +48,14 @@ angular.
               $scope.changeDataset = changeDataset;
 
               // Variables del controller
-              var controllerName = "OBJETIVOS-AFECTADOS-TABLE-CONTROLLER -> ";
-              $scope.selectedObjetivo = null;
+              $scope.objetivoSeleccionado = null;
               $scope.selectedPeso = null;
               $scope.deleteCount = 0;
               
               //Carga el OBJETIVO seleccionado en el search-box.
               function onSelectObjetivo(value){
                 $window.console.log(controllerName + "onSelectObjetivo(value)");
-                $scope.selectedObjetivo = value;
+                $scope.objetivoSeleccionado = value;
               }
 
               //Carga el PESO seleccionado en el search-box.
@@ -92,8 +93,8 @@ angular.
                 $scope.isRowAdded = true;
                 $scope.tableParams.settings().dataset.unshift({
                   id: id++, 
-                  name: $scope.selectedObjetivo.name,
-                  peso: $scope.selectedPeso.name
+                  nombre: $scope.objetivoSeleccionado.nombre,
+                  peso: $scope.selectedPeso.nombre
                 });
                 // we need to ensure the user sees the new row we've just added.
                 // it seems a poor but reliable choice to remove sorting and move them to the first page
@@ -144,6 +145,5 @@ angular.
                 var currentPage = $scope.tableParams.page();
                 originalData = angular.copy($scope.tableParams.settings().dataset);
               }
-          
           }
       });
