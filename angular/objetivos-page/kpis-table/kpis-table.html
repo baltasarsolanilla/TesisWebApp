@@ -1,6 +1,6 @@
 <div class="">
     <h3 style="display:inline-block;">KPIs del objetivo</h3>
-    <button class="btn btn-primary btn-sm" ng-show="!isEditing" ng-click="isEditing = true" style="margin-left:12px;">
+    <button class="btn btn-primary btn-sm" ng-show="!isEditing"  ng-disabled="!data" ng-click="isEditing = true" style="margin-left:12px;">
             <span class="glyphicon glyphicon-pencil"></span>
     </button>
     <div class="">
@@ -17,7 +17,7 @@
         </div>
     </div>
     <div class="col-lg-4">
-        <search-box ng-show="isEditing" on-select="onSelectKpi(value)" message="'Seleccionar indicador...'"></search-box>
+        <search-box ng-show="isEditing" on-select="onSelectKpi(value)" data="indicadores" message="'Seleccionar indicador...'"></search-box>
     </div>
     <div class="col-lg-2">
         <search-box ng-show="isEditing" on-select="onSelectPeso(value)" message="'Peso'"></search-box>
@@ -38,4 +38,5 @@
             </td>
         </tr>
     </table>
+    <h1>PISTITA 3</h1>
 </div>

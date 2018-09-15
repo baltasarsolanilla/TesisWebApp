@@ -1,4 +1,5 @@
 angular.module('kpisTable', [
     'ngTable',
-    'searchBox'
+    'searchBox',
+    "core.indicador"
 ]);

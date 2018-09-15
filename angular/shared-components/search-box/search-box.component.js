@@ -16,7 +16,9 @@ angular.
           this.$onInit = function() {
           };
 
-          this.$onChanges = function(){
+          this.$onChanges = function(changes){
+            console.log("MENSAJEEEE: " + vm.message);
+            console.log(changes);
           }
 
           vm.onSelectValue = function(value){

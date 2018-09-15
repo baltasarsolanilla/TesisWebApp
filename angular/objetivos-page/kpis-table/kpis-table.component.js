@@ -7,15 +7,12 @@ angular.
             bindings: {
               data: '<'
             },
-            controller: function KPIsTableController($scope, $window, NgTableParams){
+            controller: function KPIsTableController($scope, $window, NgTableParams, Indicador){
               var controllerName = "KPI-TABLE-CONTROLLER -> ";
 
               var simpleList = [{"id":1,"nombre":"Nombre 1","peso":0.0},
                                 {"id":2,"nombre":"Nombre 2","peso":0.0},
                                 {"id":3,"nombre":"Nombre 3","peso":0.0}];
-              var simpleList2 = [{"id":1,"nombre":"Nombre 4","peso":0.0},
-                                {"id":2,"nombre":"Nombre 5","peso":0.0},
-                                {"id":3,"nombre":"Nombre 6","peso":0.0}];
 
                 
                 // Funciones del controller
@@ -28,6 +25,9 @@ angular.
                 $scope.onSelectKpi = onSelectKpi;
                 $scope.onSelectPeso = onSelectPeso;
                 $scope.changeDataTable = changeDataTable;
+
+                //AJAX
+                $scope.cargarIndicadores = cargarIndicadores;
 
                 // Variables del controller
 
@@ -71,6 +71,22 @@ angular.
                     dataset: angular.copy(data_formateada)
                   });
                   $scope.tableParams.reload();
+                }
+
+                $scope.indicadores = [{"id":1,"nombre":"Nombre 1","peso":0.0},
+                                      {"id":2,"nombre":"Nombre 2","peso":0.0},
+                                      {"id":3,"nombre":"Nombre 3","peso":0.0}];
+                this.$onInit = function() {
+                  cargarIndicadores();
+                };
+
+                function cargarIndicadores(){
+                  Indicador.query(function(indicadores){
+                    delete indicadores.$promise;
+                    delete indicadores.$resolved;
+                    $scope.indicadores = indicadores;
+                    console.log($scope.indicadores);
+                  });
                 }
 
                 this.$onChanges = function(changes){
