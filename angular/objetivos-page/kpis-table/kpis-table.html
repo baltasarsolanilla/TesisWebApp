@@ -5,7 +5,7 @@
     </button>
     <div class="">
         <div class="btn-group pull-left" style="margin-bottom:6px;">
-            <button class="btn btn-success" ng-if="isEditing" ng-disabled="!indicadorSeleccionado || !pesoSeleccionado" ng-click="add()">
+            <button class="btn btn-success" ng-if="isEditing" ng-disabled="!indicadorSeleccionado || !pesoSeleccionado || deleteCount > 0" ng-click="add()">
                 <span class="glyphicon glyphicon-plus"></span>
             </button>
             <button class="btn btn-primary" ng-if="isEditing" ng-disabled="!hasChanges()" ng-click="saveChanges()">
@@ -27,13 +27,13 @@
             <col width="70%"/>
             <col width="30%"/>
         </colgroup>
-        <tr ng-repeat="row in $data track by row.id">
+        <tr ng-repeat="row in $data track by row.indicador.id">
             <td title="'KPI'" sortable="'nombre'">
-                <span class="">{{row.nombre}}</span>
+                <span class="">{{row.indicador.nombre}}</span>
             </td>
             <td title="'PESO'" sortable="'nombre'" style="text-align:center !important;">
                 <span class="">{{row.peso}}%
-                    <button class="btn btn-danger btn-sm pull-right"  ng-click="del(row)" ng-hide="!isEditing"><span class="glyphicon glyphicon-trash"></span></button>
+                    <button class="btn btn-danger btn-sm pull-right"  ng-click="del(row)" ng-hide="!isEditing" ng-disabled="isRowAdded"><span class="glyphicon glyphicon-trash"></span></button>
                 </span>
             </td>
         </tr>
