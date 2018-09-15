@@ -1,6 +1,6 @@
 <div class="">
     <h3 style="display:inline-block;">Objetivos que me afectan</h3>
-    <button class="btn btn-primary btn-sm" ng-show="!isEditing" ng-click="isEditing = true" style="margin-left:12px;">
+    <button class="btn btn-primary btn-sm" ng-show="!isEditing" ng-disabled="!changeDataset" ng-click="isEditing = true" style="margin-left:12px;">
             <span class="glyphicon glyphicon-pencil"></span>
     </button>
     <div class="">
@@ -37,6 +37,5 @@
             </td>
         </tr>
     </table>
-    <!-- <h4>Objetivo id: {{$ctrl.id}}</h4>
-    <h4>Objetivo que me afecta seleccionado id: {{valueSelected.id}}</h4> -->
+    <!-- <h1>anda {{changeDataset}}</h1> -->
 </div>

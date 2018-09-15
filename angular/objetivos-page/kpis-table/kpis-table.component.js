@@ -27,7 +27,7 @@ angular.
                 
                 $scope.onSelectKpi = onSelectKpi;
                 $scope.onSelectPeso = onSelectPeso;
-                $scope.changeDataTable = changeDataTable;
+                $scope.changeDataTable = 0;
 
                 // Variables del controller
 
@@ -59,7 +59,6 @@ angular.
                 function changeDataTable(data){
                   var data_formateada = [];
                   angular.forEach(data, function(e) {
-                    console.log(e.indicador.id);
                     this.push({
                       "id" : e.indicador.id,
                       "nombre" : e.indicador.nombre,
@@ -70,13 +69,15 @@ angular.
                   $scope.tableParams.settings({
                     dataset: angular.copy(data_formateada)
                   });
+                  /**/$scope.change = !$scope.change;
                   $scope.tableParams.reload();
                 }
 
                 this.$onChanges = function(changes){
+                  $window.console.log(controllerName + "onChanges(changes)");
                   if (changes.data.currentValue){
-                    console.log(changes.data);
-                    $scope.changeDataTable(changes.data.currentValue);
+                    $scope.changeDataTable = changes.data.currentValue[0].indicador.id;
+                    changeDataTable(changes.data.currentValue);
                   }
                 }
 

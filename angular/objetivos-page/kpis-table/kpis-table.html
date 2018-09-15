@@ -1,6 +1,6 @@
 <div class="">
     <h3 style="display:inline-block;">KPIs del objetivo</h3>
-    <button class="btn btn-primary btn-sm" ng-show="!isEditing" ng-click="isEditing = true" style="margin-left:12px;">
+    <button class="btn btn-primary btn-sm" ng-show="!isEditing" ng-disabled="!changeDataTable" ng-click="isEditing = true" style="margin-left:12px;">
             <span class="glyphicon glyphicon-pencil"></span>
     </button>
     <div class="">
@@ -38,4 +38,5 @@
             </td>
         </tr>
     </table>
+    <!-- <h1>anda  {{changeDataTable}}</h1> -->
 </div>

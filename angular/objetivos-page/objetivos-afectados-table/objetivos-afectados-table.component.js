@@ -41,11 +41,10 @@ angular.
               $scope.hasChanges = hasChanges;
               $scope.cancelChanges = cancelChanges;
               $scope.saveChanges = saveChanges;
-              
 
               $scope.onSelectObjetivo = onSelectObjetivo;
               $scope.onSelectPeso = onSelectPeso;
-              $scope.changeDataset = changeDataset;
+              $scope.changeDataset = 0;
 
               // Variables del controller
               $scope.objetivoSeleccionado = null;
@@ -82,8 +81,10 @@ angular.
 
               this.$onChanges = function(changes){
                 $window.console.log(controllerName + "onChanges(changes)");
-                if (changes.id)
-                  $scope.changeDataset(changes.id.currentValue);
+                if (changes.id){
+                  $scope.changeDataset = changes.id.currentValue;
+                  changeDataset(changes.id.currentValue);
+                }
               }
 
               var id = '100';

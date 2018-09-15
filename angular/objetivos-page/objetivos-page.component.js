@@ -36,6 +36,7 @@ angular.
 
                 function onSelectObjetivo(value){
                     $scope.objetivoSeleccionado = value;
+/*                    console.log("laaaaa cambiooo : " + $scope.objetivoSeleccionado);*/
                 }
                 
                 //CREATE OBJETIVO
