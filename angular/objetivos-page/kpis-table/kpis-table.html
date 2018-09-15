@@ -1,11 +1,11 @@
 <div class="">
     <h3 style="display:inline-block;">KPIs del objetivo</h3>
-    <button class="btn btn-primary btn-sm" ng-show="!isEditing"  ng-disabled="!data" ng-click="isEditing = true" style="margin-left:12px;">
+    <button class="btn btn-primary btn-sm" ng-show="!isEditing" ng-disabled="!$ctrl.data" ng-click="isEditing = true" style="margin-left:12px;">
             <span class="glyphicon glyphicon-pencil"></span>
     </button>
     <div class="">
         <div class="btn-group pull-left" style="margin-bottom:6px;">
-            <button class="btn btn-success" ng-if="isEditing" ng-disabled="!selectedKPI" ng-click="add()">
+            <button class="btn btn-success" ng-if="isEditing" ng-disabled="!indicadorSeleccionado || !pesoSeleccionado" ng-click="add()">
                 <span class="glyphicon glyphicon-plus"></span>
             </button>
             <button class="btn btn-primary" ng-if="isEditing" ng-disabled="!hasChanges()" ng-click="saveChanges()">
@@ -20,7 +20,7 @@
         <search-box ng-show="isEditing" on-select="onSelectKpi(value)" data="indicadores" message="'Seleccionar indicador...'"></search-box>
     </div>
     <div class="col-lg-2">
-        <search-box ng-show="isEditing" on-select="onSelectPeso(value)" message="'Peso'"></search-box>
+        <search-box ng-show="isEditing" on-select="onSelectPeso(value)" data="pesos" message="'Peso'"></search-box>
     </div>
     <table ng-table="tableParams" class="table table-bordered table-hover table-condensed table-striped table-objetivos-page"  show-filter="false" >
         <colgroup>
@@ -38,5 +38,5 @@
             </td>
         </tr>
     </table>
-    <h1>PISTITA 3</h1>
+    <h1>PISTITA 2</h1>
 </div>

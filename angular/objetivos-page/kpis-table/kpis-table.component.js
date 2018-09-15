@@ -5,14 +5,18 @@ angular.
         component('kpisTable', {
             templateUrl: '../angular/objetivos-page/kpis-table/kpis-table.html',
             bindings: {
-              data: '<'
+              addIndicadores: '&',
+              data: '<'              
             },
             controller: function KPIsTableController($scope, $window, NgTableParams, Indicador){
               var controllerName = "KPI-TABLE-CONTROLLER -> ";
 
-              var simpleList = [{"id":1,"nombre":"Nombre 1","peso":0.0},
-                                {"id":2,"nombre":"Nombre 2","peso":0.0},
-                                {"id":3,"nombre":"Nombre 3","peso":0.0}];
+              $scope.indicadores = [{"id":1,"nombre":"Nombre 1","peso":0.0},
+                                    {"id":2,"nombre":"Nombre 2","peso":0.0},
+                                    {"id":3,"nombre":"Nombre 3","peso":0.0}];
+              $scope.pesos = [{"id":1,"nombre":"1"},
+                                 {"id":2,"nombre":"2"},
+                                 {"id":3,"nombre":"3"}];
 
                 
                 // Funciones del controller
@@ -24,15 +28,15 @@ angular.
                 
                 $scope.onSelectKpi = onSelectKpi;
                 $scope.onSelectPeso = onSelectPeso;
-                $scope.changeDataTable = 0;
+                $scope.changeDataset = 0;
 
                 //AJAX
                 $scope.cargarIndicadores = cargarIndicadores;
 
                 // Variables del controller
 
-                $scope.selectedKPI = null;
-                $scope.selectedPeso = null;
+                $scope.indicadorSeleccionado = null;
+                $scope.pesoSeleccionado = null;
                 $scope.deleteCount = 0;
 
                 $scope.tableParams = new NgTableParams({
@@ -40,19 +44,19 @@ angular.
                   count: 10 // count per page
                   }, {
                   counts: [],
-                  dataset: angular.copy(simpleList)
+                  dataset: angular.copy($scope.indicadores)
                 });
                 
                 //Carga el KPI seleccionado en el search-box.
                 function onSelectKpi(value){
                 $window.console.log(controllerName + "onSelect(vale)");
-                  $scope.selectedKPI = value;
+                  $scope.indicadorSeleccionado = value;
                 }
 
                 //Carga el PESO seleccionado en el search-box.
                 function onSelectPeso(value){
                   $window.console.log(controllerName + "onSelectPeso(value)");
-                  $scope.selectedPeso = value;
+                  $scope.pesoSeleccionado = value;
                 }
 
                 //Esta funcion es la que va a cargar le nuevo dataset una vez seleccionado una perspectiva.
@@ -73,9 +77,6 @@ angular.
                   $scope.tableParams.reload();
                 }
 
-                $scope.indicadores = [{"id":1,"nombre":"Nombre 1","peso":0.0},
-                                      {"id":2,"nombre":"Nombre 2","peso":0.0},
-                                      {"id":3,"nombre":"Nombre 3","peso":0.0}];
                 this.$onInit = function() {
                   cargarIndicadores();
                 };
@@ -92,20 +93,28 @@ angular.
                 this.$onChanges = function(changes){
                   $window.console.log(controllerName + "onChanges(changes)");
                   if (changes.data.currentValue){
-                    $scope.changeDataTable = changes.data.currentValue[0].indicador.id;
+                    $scope.changeDataset = changes.data.currentValue[0].indicador.id;
                     changeDataTable(changes.data.currentValue);
+                    console.log(this);
+                    
                   }
                 }
 
                 var id = '100';
+                var listaIndicadoresAgregados = [];
                 function add() {
-                  $window.console.log(controllerName + "add()");
+                  console.log("addddddddddddddddddddddddddddddddddddddddddddd");
+                  // $scope.$ctrl.addIndicadores({indicadores: i});
                   $scope.isEditing = true;
                   $scope.isRowAdded = true;
+                  listaIndicadoresAgregados.push({
+                    indicador: $scope.indicadorSeleccionado,
+                    peso: $scope.pesoSeleccionado.nombre
+                  });
                   $scope.tableParams.settings().dataset.unshift({
                     id: id++, 
-                    name: $scope.selectedKPI.name,
-                    peso: $scope.selectedPeso.name
+                    nombre: $scope.indicadorSeleccionado.nombre,
+                    peso: $scope.pesoSeleccionado.nombre
                   });
                   // we need to ensure the user sees the new row we've just added.
                   // it seems a poor but reliable choice to remove sorting and move them to the first page
@@ -153,9 +162,10 @@ angular.
                 function saveChanges() {
                   $window.console.log(controllerName + "saveChanges()");
                   resetTableStatus();
+                  $scope.$ctrl.addIndicadores({indicadores: listaIndicadoresAgregados});
+                  listaIndicadoresAgregados = [];
                   var currentPage = $scope.tableParams.page();
                   originalData = angular.copy($scope.tableParams.settings().dataset);
                 }
-            
             }
         });

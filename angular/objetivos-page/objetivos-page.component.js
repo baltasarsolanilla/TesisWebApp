@@ -15,6 +15,7 @@ angular.
                 $scope.createObjetivo = createObjetivo;
                 $scope.updateObjetivo = updateObjetivo;
                 $scope.deleteObjetivo = deleteObjetivo;
+                $scope.addIndicadoresAfectantes = addIndicadoresAfectantes;
                 
                 //AJAX
                 $scope.cargarObjetivos = cargarObjetivos;
@@ -86,6 +87,13 @@ angular.
                         var indexOfObj = $scope.objetivos.findIndex(i => i.id === $scope.objetivoSeleccionado.id);
                         $scope.objetivos.splice(indexOfObj, 1);
                     });
+                }
+
+                //ADD INDICADOR AFECTANTE
+                function addIndicadoresAfectantes(indicadores){
+                    angular.forEach(indicadores, function(i) {
+                        console.log(i);
+                      });
                 }
 
                 //AJAX
