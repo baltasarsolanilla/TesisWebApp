@@ -6,5 +6,6 @@ angular.module('balancedScorecard', [
     'indicadoresPage',
     'searchBox',
     'mapaEstrategicoPage',
-    'core'
+    'core',
+    'blockUI'
 ]);
