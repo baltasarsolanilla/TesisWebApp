@@ -58,7 +58,7 @@ angular.
 
                 this.$onInit = function() {
                   cargarIndicadores();
-
+                  
                   originalData = $scope.indicadores;
                   $scope.tableParams = new NgTableParams({
                     page: 1, // show first page

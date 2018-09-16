@@ -7,7 +7,8 @@ angular.
         bindings: {
           onSelect: '&',
           message: '<',
-          data: '<'
+          data: '<',
+          firstDefault: '<'
         },
         controller: function SearchBoxController($window){
           var vm = this;
@@ -15,11 +16,14 @@ angular.
 
           this.$onInit = function() {
           };
-
+          
+          vm.item = {};
           this.$onChanges = function(changes){
-            console.log("MENSAJEEEE: " + vm.message);
-            console.log(changes);
-          }
+            if (changes.data.currentValue && vm.firstDefault){
+              vm.item.selected = changes.data.currentValue[0];
+              vm.onSelectValue(vm.item.selected);
+            }
+          };
 
           vm.onSelectValue = function(value){
             $window.console.log(componentName + "onSelectValue()" + value.id);
