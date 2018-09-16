@@ -12,6 +12,7 @@ angular.
             controller: function KPIsTableController($scope, $window, NgTableParams, Indicador){
               var controllerName = "KPI-TABLE-CONTROLLER -> ";
 
+              //Lista de indicadoresAfectantes en caso de que no se seleccione un objetivo por default.
               $scope.indicadores = [
                 {
                   indicador: {"id":1,"nombre":"Nombre 1","peso":0.0},
@@ -26,9 +27,6 @@ angular.
                   peso: 0.0
                 }
               ];
-
-                                    
-                                    
 
               $scope.pesos = [{"id":1,"nombre":"1"},
                               {"id":2,"nombre":"2"},
@@ -58,7 +56,7 @@ angular.
 
                 this.$onInit = function() {
                   cargarIndicadores();
-                  
+
                   originalData = $scope.indicadores;
                   $scope.tableParams = new NgTableParams({
                     page: 1, // show first page
