@@ -31,4 +31,32 @@ angular.module('balancedScorecard')
             })
             // .otherwise({redirectTo: $routeProvider});
             .otherwise('/tablero');
-    }]);
+    }])
+    .config(function(blockUIConfig){
+        // Change the default overlay message
+        blockUIConfig.requestFilter = function(config) {
+
+            var message;
+          
+            switch(config.method) {
+              case 'GET':
+                message = 'Cargando...';
+                break;
+                
+              case 'POST':
+                message = 'Guardando...';
+                break;
+          
+              case 'DELETE':
+                message = 'Eliminando...';
+                break;
+          
+              case 'PUT':
+                message = 'Actualizando...';
+                break;
+            }
+            
+            return message;
+            
+          };
+    });
