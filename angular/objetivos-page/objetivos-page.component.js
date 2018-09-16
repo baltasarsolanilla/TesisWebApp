@@ -38,7 +38,6 @@ angular.
 
                 function onSelectObjetivo(value){
                     $scope.objetivoSeleccionado = value;
-/*                    console.log("laaaaa cambiooo : " + $scope.objetivoSeleccionado);*/
                 }
                 
                 //CREATE OBJETIVO
@@ -52,7 +51,7 @@ angular.
                       Objetivo.save(obj, function(objetivo_creado){
                           $scope.objetivos.push(objetivo_creado);
                           alert("Objetivo creado exitosamente");
-                      })
+                      });
                     }, function () {
                       $window.console.log('modal-component dismissed at: ' + new Date());
                     });
@@ -93,14 +92,38 @@ angular.
                 //ADD INDICADOR AFECTANTE
                 function addIndicadoresAfectantes(indicadores){
                     angular.forEach(indicadores, function(i) {
-                        console.log(i);
+                        addSingleIndicadorAfectante(i);
                       });
+                }
+
+                function addSingleIndicadorAfectante(indicadorPeso){
+                    var ixp = {
+                        idIndicador: indicadorPeso.indicador.id,
+                        peso: indicadorPeso.peso
+                    };
+                    Objetivo.addIndicadorAfectante({idObjetivo: $scope.objetivoSeleccionado.id}, ixp, function(response){
+                        alert("Indicador afectante relacionado exitosamente");
+                        console.log(response);
+                    });
                 }
 
                 function deleteIndicadoresAfectantes(indicadores){
                     angular.forEach(indicadores, function(i) {
-                        console.log(i);
+                        deleteSingleIndicadorAfectante(i);
                       });
+                }
+
+                function deleteSingleIndicadorAfectante(indicadorPeso){
+                    var i = {
+                        id: indicadorPeso.indicador.id,
+                        nombre: indicadorPeso.indicador.nombre,
+                        valor: indicadorPeso.indicador.valor
+                    };
+                    console.log(i);
+                    Objetivo.deleteIndicadorAfectante({idObjetivo: $scope.objetivoSeleccionado.id}, i, function(response){
+                        alert("Indicador afectante eliminado exitosamente");
+                        console.log(response);
+                    });
                 }
 
                 //AJAX
