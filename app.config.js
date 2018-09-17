@@ -5,7 +5,7 @@ angular.module('balancedScorecard')
 
         $routeProvider
             .when('/tablero', {
-                template: '<strategy-page></strategy-page>'
+                template: '<tablero-page></tablero-page>'
             })
             // .when('tablero/:objetivoId', {
             //     template: '<>'

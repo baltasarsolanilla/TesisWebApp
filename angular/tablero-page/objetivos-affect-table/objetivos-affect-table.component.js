@@ -3,7 +3,7 @@
 angular.
     module('objetivosAffectTable').
     component('objetivosAffectTable', {
-        templateUrl: '../angular/strategy-page/objetivos-affect-table/objetivos-affect-table.html',
+        templateUrl: '../angular/tablero-page/objetivos-affect-table/objetivos-affect-table.html',
         controller: function objetivosAffectTableController($scope, NgTableParams, BuilderTable){
 
             var kpi_data = [{

@@ -1,4 +1,4 @@
-angular.module('strategyTree', [ 
+angular.module('estrategiaTree', [ 
     'angularBootstrapNavTree',
     'ngAnimate'
 ]);

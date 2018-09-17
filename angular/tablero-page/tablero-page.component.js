@@ -1,9 +1,9 @@
 'use strict',
 
 angular.
-    module('strategyPage').
-    component('strategyPage', {
-        templateUrl: '../angular/strategy-page/strategy-page.html',
+    module('tableroPage').
+    component('tableroPage', {
+        templateUrl: '../angular/tablero-page/tablero-page.html',
         controller: function ResumenTableObjetivosController($scope){
 
             $scope.onSelectTreeItem = $scope.onSelectTreeItem;

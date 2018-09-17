@@ -1,6 +1,6 @@
 angular.module('balancedScorecard', [
     'ngRoute',
-    'strategyPage',
+    'tableroPage',
     'estrategiasPage',
     'objetivosPage',
     'indicadoresPage',

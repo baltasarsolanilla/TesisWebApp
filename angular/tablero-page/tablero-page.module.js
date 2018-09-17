@@ -1,6 +1,6 @@
-angular.module("strategyPage", [
+angular.module("tableroPage", [
     'strategyTabset',
-    'strategyTree',
+    'estrategiaTree',
     'objetivosActualTable',
     'objetivosHistoricTable',
     'objetivosAffectTable',

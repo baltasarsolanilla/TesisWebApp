@@ -8,7 +8,7 @@
     '$timeout', function($timeout) {
       return {
         restrict: 'E',
-        templateUrl: '../angular/strategy-page/estrategia-tree/abn-tree/abn-tree.html',
+        templateUrl: '../angular/tablero-page/estrategia-tree/abn-tree/abn-tree.html',
         replace: true,
         scope: {
           treeData: '=',

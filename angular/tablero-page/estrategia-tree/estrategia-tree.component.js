@@ -1,9 +1,9 @@
 'use strict',
 
 angular.
-    module('strategyTree').
-        component('strategyTree', {
-            templateUrl: '../angular/strategy-page/estrategia-tree/estrategia-tree.html',
+    module('estrategiaTree').
+        component('estrategiaTree', {
+            templateUrl: '../angular/tablero-page/estrategia-tree/estrategia-tree.html',
             controller: function TableroTreeController($scope, $window){
                 $scope.my_data = [
                     {

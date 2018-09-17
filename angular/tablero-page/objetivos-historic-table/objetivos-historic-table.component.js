@@ -3,7 +3,7 @@
 angular.
     module('objetivosHistoricTable').
     component('objetivosHistoricTable', {
-        templateUrl: '../angular/strategy-page/objetivos-historic-table/objetivos-historic-table.html',
+        templateUrl: '../angular/tablero-page/objetivos-historic-table/objetivos-historic-table.html',
         controller: function objetivosHistoricTableController($scope, NgTableParams, BuilderTable){
             // tip: to debug, open chrome dev tools and uncomment the following line 
             //debugger;

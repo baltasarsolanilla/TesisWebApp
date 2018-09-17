@@ -3,7 +3,7 @@
 angular.
     module('objetivosActualTable').
     component('objetivosActualTable', {
-        templateUrl: '../angular/strategy-page/objetivos-actual-table/objetivos-actual-table.html',
+        templateUrl: '../angular/tablero-page/objetivos-actual-table/objetivos-actual-table.html',
         controller: function ResumenTableObjetivosController($scope, NgTableParams, BuilderTable){
 
             var kpi_data = [{
