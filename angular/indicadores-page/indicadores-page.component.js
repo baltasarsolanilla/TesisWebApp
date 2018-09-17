@@ -10,24 +10,24 @@ angular.
                 $scope.createIndicador = createIndicador;
                 $scope.updateIndicador = updateIndicador;
                 $scope.deleteIndicador = deleteIndicador;
-                $scope.updateSelectedIndicador = updateSelectedIndicador;
+                $scope.onSelectIndicador = onSelectIndicador;
                 $scope.selectedIndicador = null;
 
                 this.$onInit = function(){
                     cargarIndicadores();
                 }
 
-                function updateSelectedIndicador(idIndicador){
-                    $scope.selectedIndicador = idIndicador;
+                function onSelectIndicador(indicador){
+                    $scope.selectedIndicador = indicador;
 
                 }
 
                 function updateIndicador(){
-                    $window.alert("Modificar indicador con id: " + $scope.selectedIndicador);
+                    $window.alert("Modificar indicador con id: " + $scope.selectedIndicador.nombre);
                 }
 
                 function deleteIndicador(){
-                    $window.alert("Eliminar indicador con id: " + $scope.selectedIndicador);
+                    $window.alert("Eliminar indicador con id: " + $scope.selectedIndicador.nombre);
                 }
 
                 function createIndicador(){

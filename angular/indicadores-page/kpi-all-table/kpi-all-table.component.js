@@ -5,11 +5,12 @@ angular.
     component('kpiAllTable', {
         templateUrl: '../angular/indicadores-page/kpi-all-table/kpi-all-table.html',
         bindings: {
-          data: '<'
+          data: '<',
+          onSelect: '&'
         },
         controller: function ResumenTableObjetivosController($scope, NgTableParams, BuilderTable){
             var controllerName = "KPI-ALL-TABLE-CONTROLLER -> ";
-            
+          
             var kpi_data = [{
               id: 1,
               nombre: 'Ganarle a Juanca',
@@ -61,6 +62,14 @@ angular.
             // class="fas fa-arrow-circle-up"
             $scope.setArrowTendencia = function(tendencia){
               return BuilderTable.setArrowTendencia(tendencia);
-            }  
+            }
+            
+            $scope.onSelectIndicador = onSelectIndicador;
+            $scope.selectedIndicador = null;
+
+            function onSelectIndicador(value){
+              $scope.selectedIndicador = value;
+              $scope.$ctrl.onSelect({indicador: $scope.selectedIndicador});
+            }
         }
     });
