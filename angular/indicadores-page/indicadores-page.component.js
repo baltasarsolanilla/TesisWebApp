@@ -5,22 +5,17 @@ angular.
         component('indicadoresPage', {
             templateUrl: '../angular/indicadores-page/indicadores-page.html',
             controller: function ObjetivosPageController($scope, $window, $uibModal, Indicador){
-                var controllerName = "INDICADOR-PAGE-CONTROLLER -> ";
-                
-                //HTTP REST REQUEST-RESPONSE
-                $window.console.log("Indicadores: GET ");
-                $scope.indicadores3 = Indicador.query(function(indicadores){
-                    indicadores.forEach(element => {
-                        $window.console.log(element.nombre);    
-                    });
-                    $window.console.log($scope.indicadores3);                  
-                });             
+                var controllerName = "INDICADOR-PAGE-CONTROLLER -> ";  
                
                 $scope.createIndicador = createIndicador;
                 $scope.updateIndicador = updateIndicador;
                 $scope.deleteIndicador = deleteIndicador;
                 $scope.updateSelectedIndicador = updateSelectedIndicador;
                 $scope.selectedIndicador = null;
+
+                this.$onInit = function(){
+                    cargarIndicadores();
+                }
 
                 function updateSelectedIndicador(idIndicador){
                     $window.console.log(controllerName + "updateSelectedIndicador()");
@@ -43,28 +38,33 @@ angular.
                     var modalInstance = $uibModal.open({
                       animation: true,
                       component: 'modalComponentIndicador'
-                      // resolve: {
-                      //   items: function () {
-                      //     return $ctrl.items;
-                      //   }
-                      // }
                     });
 
-                    modalInstance.result.then(function (userForm) {
-                      $window.console.log('ok');
-                      $window.console.log(userForm);
+                    modalInstance.result.then(function (indicador) {
+                      Indicador.save(indicador, function(){
+                          
+                      })
                     }, function () {
                       $window.console.log('modal-component dismissed at: ' + new Date());
                     });
                 }
+
+                //AJAX
+                function cargarIndicadores(){
+                    Indicador.query(function(indicadores){
+                      delete indicadores.$promise;
+                      delete indicadores.$resolved;
+                      $scope.indicadores = indicadores;
+                      console.log($scope.indicadores);
+                    });
+                  }
             }
         });
 angular.
     module('indicadoresPage').
         component('modalComponentIndicador', {
-            templateUrl: '../angular/shared-components/modal-form/modal-form-indicador.modal.html',
+            templateUrl: '../angular/indicadores-page/indicadores-page-modals/crear-indicador.modal.html',
             bindings: {
-                // resolve: '<',
                 close: '&',
                 dismiss: '&'
             },
@@ -73,11 +73,7 @@ angular.
                 var controllerName = "INDICADOR-PAGE-MODAL -> ";
 
                 $ctrl.$onInit = function () {
-                $window.console.log(controllerName + "onInit()");
-                // $ctrl.items = $ctrl.resolve.items;
-                // $ctrl.selected = {
-                //   item: $ctrl.items[0]
-                // };
+
                 };
 
                 $ctrl.indicadorForm = {
