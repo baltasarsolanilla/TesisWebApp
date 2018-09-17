@@ -1,13 +1,6 @@
 <div>
     <!-- Nav-tree -->
-    <div ng-controller="strategyTreeController">
-        <td>
-            <div class="strategy-tree-box">
-                <span ng-if="doing_async">...loading...</span>
-                <abn-tree tree-data="my_data" expand-level="3" ></abn-tree>
-            </div>
-        </td>
-    </div>
+    <strategy-tree></strategy-tree>
     <!-- tabs -->
     <div id="page-wrapper" >
         <div class="row page-margin">
