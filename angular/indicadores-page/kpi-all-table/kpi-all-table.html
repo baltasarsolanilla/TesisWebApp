@@ -1,7 +1,7 @@
 <div class="">
     <h3 style="display:inline-block;">Lista de Indicadores creados</h3>
     <table ng-table="tableParams" show-filter="false" class="table table-bordered table-striped table-actual">
-        <tr ng-repeat="row in $data track by row.id" ng-click="onSelectItem(row)" ng-class="{selected: row.id === selectedItem.id}">
+        <tr ng-repeat="row in $data track by row.id" ng-click="onSelected(row)" ng-class="{selected: row.id === selectedItem.id}">
           <td title="'KPI'" sortable="'nombre'" id="primer-columna">{{row.nombre}}</td>
           <td title="'VALOR'" sortable="'valor'" ng-style="setColorValor(row.valor)">{{row.valor | number:2}}</td>
           <td title="'TENDENCIA'" sortable="'tendencia'">
