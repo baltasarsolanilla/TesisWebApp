@@ -1,9 +1,9 @@
 'use strict',
 
 angular.
-    module('kpisTable').
-        component('kpisTable', {
-            templateUrl: '../angular/objetivos-page/kpis-table/kpis-table.html',
+    module('kpisAfectantesTable').
+        component('kpisAfectantesTable', {
+            templateUrl: '../angular/objetivos-page/kpis-afectantes-table/kpis-afectantes-table.html',
             bindings: {
               addIndicadores: '&',
               deleteIndicadores: '&',
