@@ -122,7 +122,6 @@ angular.
                         nombre: indicadorPeso.indicador.nombre,
                         valor: indicadorPeso.indicador.valor
                     };
-                    console.log(i);
                     Objetivo.deleteIndicadorAfectante({idObjetivo: $scope.objetivoSeleccionado.id}, i, function(response){
                         alert("Indicador afectante eliminado exitosamente");
                         console.log(response);
@@ -131,19 +130,39 @@ angular.
 
                 function addObjetivosAfectantes(objetivos){
                     angular.forEach(objetivos, function(i) {
-                        console.log(i);
+                        addSingleObjetivoAfectante(i);
                       });
+                }
+
+                function addSingleObjetivoAfectante(objetivo){
+                    console.log(objetivo);
+                    console.log(objetivo.id);
+                    var o = {
+                        id: objetivo.id,
+                    };
+                    Objetivo.addObjetivoAfectante({idObjetivo: $scope.objetivoSeleccionado.id}, o, function(response){
+                        alert("Objetivo afectante relacionado exitosamente");
+                        console.log(response);
+                    });
                 }
 
                 function deleteObjetivosAfectantes(objetivos){
                     angular.forEach(objetivos, function(i) {
-                        console.log(i);
+                        deleteSingleObjetivoAfectante(i);
                       });
                 }
 
                 
+                function deleteSingleObjetivoAfectante(objetivo){
+                    var o = {
+                        id: objetivo.id,
+                    };
+                    Objetivo.deleteObjetivoAfectante({idObjetivo: $scope.objetivoSeleccionado.id}, o, function(response){
+                        alert("Objetivo afectante eliminado exitosamente");
+                        console.log(response);
+                    });
+                }
 
-                //AJAX
                 function cargarObjetivos(){
                     Objetivo.query(function(objetivos){
                         delete objetivos.$promise;
