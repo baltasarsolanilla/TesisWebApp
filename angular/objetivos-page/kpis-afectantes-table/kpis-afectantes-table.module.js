@@ -1,4 +1,4 @@
-angular.module('kpisTable', [
+angular.module('kpisAfectantesTable', [
     'ngTable',
     'searchBox',
     "core.indicador"

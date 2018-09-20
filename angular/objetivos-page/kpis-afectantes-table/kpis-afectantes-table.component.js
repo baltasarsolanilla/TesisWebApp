@@ -1,15 +1,15 @@
 'use strict',
 
 angular.
-    module('kpisTable').
-        component('kpisTable', {
-            templateUrl: '../angular/objetivos-page/kpis-table/kpis-table.html',
+    module('kpisAfectantesTable').
+        component('kpisAfectantesTable', {
+            templateUrl: '../angular/objetivos-page/kpis-afectantes-table/kpis-afectantes-table.html',
             bindings: {
               addIndicadores: '&',
               deleteIndicadores: '&',
               data: '<'              
             },
-            controller: function KPIsTableController($scope, $window, NgTableParams, Indicador){
+            controller: function KPIsTableController($scope, NgTableParams, Indicador){
               var controllerName = "KPI-TABLE-CONTROLLER -> ";
 
               //Lista de indicadoresAfectantes en caso de que no se seleccione un objetivo por default.
@@ -74,20 +74,8 @@ angular.
                     
                   }
                 };
-               
-                //Carga el KPI seleccionado en el search-box.
-                function onSelectKpi(value){
-                $window.console.log(controllerName + "onSelect(vale)");
-                  $scope.indicadorSeleccionado = value;
-                }
 
-                //Carga el PESO seleccionado en el search-box.
-                function onSelectPeso(value){
-                  $window.console.log(controllerName + "onSelectPeso(value)");
-                  $scope.pesoSeleccionado = value;
-                }
-
-                //Esta funcion el dataset con los indicadoresAfecantes del objetivo seleccionado
+                //Esta funcion recarga el dataset con los indicadoresAfecantes del objetivo seleccionado
                 function changeDataTable(data){
                   originalData = data;
                   $scope.tableParams.settings({
@@ -95,7 +83,17 @@ angular.
                   });
                   $scope.tableParams.reload();
                 }
-                
+               
+                //Carga el KPI seleccionado en el search-box.
+                function onSelectKpi(value){
+                  $scope.indicadorSeleccionado = value;
+                }
+
+                //Carga el PESO seleccionado en el search-box.
+                function onSelectPeso(value){
+                  $scope.pesoSeleccionado = value;
+                }
+
                 function add() {
                   if ($scope.tableParams.settings().dataset.findIndex(i => i.indicador.id === $scope.indicadorSeleccionado.id) > -1){
                     alert("Indicador afectante duplicado");

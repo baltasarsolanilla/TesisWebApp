@@ -17,6 +17,9 @@ angular.
                 $scope.deleteObjetivo = deleteObjetivo;
                 $scope.addIndicadoresAfectantes = addIndicadoresAfectantes;
                 $scope.deleteIndicadoresAfectantes = deleteIndicadoresAfectantes;
+                $scope.addObjetivosAfectantes = addObjetivosAfectantes;
+                $scope.deleteObjetivosAfectantes = deleteObjetivosAfectantes;
+
                 
                 //AJAX
                 $scope.cargarObjetivos = cargarObjetivos;
@@ -83,9 +86,10 @@ angular.
                 //DELETE OBJETIVO
                 function deleteObjetivo(){
                     Objetivo.delete({idObjetivo: $scope.objetivoSeleccionado.id}, function(response) {
-                        alert("Objetivo eliminado exitosamente");
                         var indexOfObj = $scope.objetivos.findIndex(i => i.id === $scope.objetivoSeleccionado.id);
                         $scope.objetivos.splice(indexOfObj, 1);
+                        $window.location.reload();
+                        alert("Objetivo eliminado exitosamente");
                     });
                 }
 
@@ -116,17 +120,46 @@ angular.
                 function deleteSingleIndicadorAfectante(indicadorPeso){
                     var i = {
                         id: indicadorPeso.indicador.id,
-                        nombre: indicadorPeso.indicador.nombre,
-                        valor: indicadorPeso.indicador.valor
                     };
-                    console.log(i);
                     Objetivo.deleteIndicadorAfectante({idObjetivo: $scope.objetivoSeleccionado.id}, i, function(response){
                         alert("Indicador afectante eliminado exitosamente");
                         console.log(response);
                     });
                 }
 
-                //AJAX
+                function addObjetivosAfectantes(objetivos){
+                    angular.forEach(objetivos, function(i) {
+                        addSingleObjetivoAfectante(i);
+                      });
+                }
+
+                function addSingleObjetivoAfectante(objetivo){
+                    var o = {
+                        id: objetivo.objetivoAfectante.id,
+                    };
+                    Objetivo.addObjetivoAfectante({idObjetivo: $scope.objetivoSeleccionado.id}, o, function(response){
+                        alert("Objetivo afectante relacionado exitosamente");
+                        console.log(response);
+                    });
+                }
+
+                function deleteObjetivosAfectantes(objetivos){
+                    angular.forEach(objetivos, function(i) {
+                        deleteSingleObjetivoAfectante(i);
+                      });
+                }
+
+                
+                function deleteSingleObjetivoAfectante(objetivo){
+                    var o = {
+                        id: objetivo.objetivoAfectante.id,
+                    };
+                    Objetivo.deleteObjetivoAfectante({idObjetivo: $scope.objetivoSeleccionado.id}, o, function(response){
+                        alert("Objetivo afectante eliminado exitosamente");
+                        console.log(response);
+                    });
+                }
+
                 function cargarObjetivos(){
                     Objetivo.query(function(objetivos){
                         delete objetivos.$promise;

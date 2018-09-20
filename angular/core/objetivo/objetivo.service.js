@@ -11,6 +11,14 @@ angular.
           deleteIndicadorAfectante: {
             method: 'PUT',
             url: 'http://localhost:8080/objetivos/:idObjetivo/indicadoresAfectantes',
+          },
+          addObjetivoAfectante: {
+            method: 'POST',
+            url: 'http://localhost:8080/objetivos/:idObjetivo/objetivosAfectantes'
+          },
+          deleteObjetivoAfectante: {
+            method: 'PUT',
+            url: 'http://localhost:8080/objetivos/:idObjetivo/objetivosAfectantes',
           }
       });
     }
