@@ -1,23 +1,8 @@
 <div id="page-wrapper2">
     <h1>Indicadores</h1>
-    <div class="row" style="margin-bottom:10px;">
-        <div class="col-lg-3">
-            <div class="btn-group">
-                <button class="btn btn-success btn-lg" ng-click="createIndicador()">
-                    <span class="glyphicon glyphicon-plus"></span>
-                </button>
-                <button class="btn btn-primary btn-lg" ng-click="updateIndicador()" ng-disabled="!selectedIndicador">
-                    <span class="glyphicon glyphicon-pencil"></span>
-                </button>
-                <button class="btn btn-danger btn-lg" ng-click="deleteIndicador()" ng-disabled="!selectedIndicador">
-                    <span class="glyphicon glyphicon-trash"></span>
-                </button>
-            </div>
-        </div>
-    </div>
     <div class="row">
         <div class="col-lg-6">
-            <kpi-all-table data="indicadores" on-select="onSelectIndicador(indicador)"></kpi-all-table>
+            <kpi-all-table data="indicadores"></kpi-all-table>
         </div>
     </div>
 </div>
