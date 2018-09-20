@@ -1,6 +1,6 @@
 angular.module('objetivosPage', [
     'kpisTable',
-    'objetivosAfectadosTable',
+    'objetivosAfectantesTable',
     'searchBox',
     'core.objetivo'
 ]);

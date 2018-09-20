@@ -1,4 +1,4 @@
-angular.module('objetivosAfectadosTable', [
+angular.module('objetivosAfectantesTable', [
     'ngTable',
     'searchBox',
     'core.objetivo'

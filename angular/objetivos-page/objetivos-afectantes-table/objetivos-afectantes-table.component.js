@@ -1,16 +1,16 @@
 'use strict',
 
 angular.
-    module('objetivosAfectadosTable').
-        component('objetivosAfectadosTable', {
-            templateUrl: '../angular/objetivos-page/objetivos-afectados-table/objetivos-afectados-table.html',
+    module('objetivosAfectantesTable').
+        component('objetivosAfectantesTable', {
+            templateUrl: '../angular/objetivos-page/objetivos-afectantes-table/objetivos-afectantes-table.html',
             bindings: {
               addObjetivos: '&',
               deleteObjetivos: '&',
               data: '<'             
             },
-            controller: function ObjetivosAfectadosTableController($scope, NgTableParams, Objetivo){
-              var controllerName = "OBJETIVOS-AFECTADOS-TABLE-CONTROLLER -> ";
+            controller: function ObjetivosAfectantesTableController($scope, NgTableParams, Objetivo){
+              var controllerName = "OBJETIVOS-AFECTANTES-TABLE-CONTROLLER -> ";
 
               //Lista de ObjetivosAfectantes en caso de que no se seleccione un objetivo por default.
               $scope.objetivosAfectantes = [
