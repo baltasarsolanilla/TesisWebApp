@@ -106,7 +106,7 @@ angular.
                   return row === item;
                 });
                 $scope.deleteCount++;
-              
+                
                 //Refresco la tabla de objetivos afectantes
                 $scope.tableParams.reload().then(function(data) {
                   if (data.length === 0 && $scope.tableParams.total() > 0) {

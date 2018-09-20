@@ -86,9 +86,10 @@ angular.
                 //DELETE OBJETIVO
                 function deleteObjetivo(){
                     Objetivo.delete({idObjetivo: $scope.objetivoSeleccionado.id}, function(response) {
-                        alert("Objetivo eliminado exitosamente");
                         var indexOfObj = $scope.objetivos.findIndex(i => i.id === $scope.objetivoSeleccionado.id);
                         $scope.objetivos.splice(indexOfObj, 1);
+                        $window.location.reload();
+                        alert("Objetivo eliminado exitosamente");
                     });
                 }
 
@@ -119,8 +120,6 @@ angular.
                 function deleteSingleIndicadorAfectante(indicadorPeso){
                     var i = {
                         id: indicadorPeso.indicador.id,
-                        nombre: indicadorPeso.indicador.nombre,
-                        valor: indicadorPeso.indicador.valor
                     };
                     Objetivo.deleteIndicadorAfectante({idObjetivo: $scope.objetivoSeleccionado.id}, i, function(response){
                         alert("Indicador afectante eliminado exitosamente");
@@ -135,10 +134,8 @@ angular.
                 }
 
                 function addSingleObjetivoAfectante(objetivo){
-                    console.log(objetivo);
-                    console.log(objetivo.id);
                     var o = {
-                        id: objetivo.id,
+                        id: objetivo.objetivoAfectante.id,
                     };
                     Objetivo.addObjetivoAfectante({idObjetivo: $scope.objetivoSeleccionado.id}, o, function(response){
                         alert("Objetivo afectante relacionado exitosamente");
@@ -155,7 +152,7 @@ angular.
                 
                 function deleteSingleObjetivoAfectante(objetivo){
                     var o = {
-                        id: objetivo.id,
+                        id: objetivo.objetivoAfectante.id,
                     };
                     Objetivo.deleteObjetivoAfectante({idObjetivo: $scope.objetivoSeleccionado.id}, o, function(response){
                         alert("Objetivo afectante eliminado exitosamente");
