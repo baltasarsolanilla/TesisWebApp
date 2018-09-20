@@ -1,4 +1,5 @@
 angular.module('objetivosAfectadosTable', [
     'ngTable',
-    'searchBox'
+    'searchBox',
+    'core.objetivo'
 ]);

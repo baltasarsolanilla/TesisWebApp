@@ -17,6 +17,9 @@ angular.
                 $scope.deleteObjetivo = deleteObjetivo;
                 $scope.addIndicadoresAfectantes = addIndicadoresAfectantes;
                 $scope.deleteIndicadoresAfectantes = deleteIndicadoresAfectantes;
+                $scope.addObjetivosAfectantes = addObjetivosAfectantes;
+                $scope.deleteObjetivosAfectantes = deleteObjetivosAfectantes;
+
                 
                 //AJAX
                 $scope.cargarObjetivos = cargarObjetivos;
@@ -125,6 +128,20 @@ angular.
                         console.log(response);
                     });
                 }
+
+                function addObjetivosAfectantes(objetivos){
+                    angular.forEach(objetivos, function(i) {
+                        console.log(i);
+                      });
+                }
+
+                function deleteObjetivosAfectantes(objetivos){
+                    angular.forEach(objetivos, function(i) {
+                        console.log(i);
+                      });
+                }
+
+                
 
                 //AJAX
                 function cargarObjetivos(){
