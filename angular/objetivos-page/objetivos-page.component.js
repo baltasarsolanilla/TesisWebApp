@@ -88,8 +88,8 @@ angular.
                     Objetivo.delete({idObjetivo: $scope.objetivoSeleccionado.id}, function(response) {
                         var indexOfObj = $scope.objetivos.findIndex(i => i.id === $scope.objetivoSeleccionado.id);
                         $scope.objetivos.splice(indexOfObj, 1);
-                        $window.location.reload();
                         alert("Objetivo eliminado exitosamente");
+                        $window.location.reload();
                     });
                 }
 
