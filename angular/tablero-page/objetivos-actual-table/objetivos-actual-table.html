@@ -1,11 +1,9 @@
 <div class="">
     <table ng-table="tableParams" show-filter="false" class="table table-bordered table-striped table-actual">
         <tr ng-repeat="row in $data track by row.id">
-          <td title="'KPI'" sortable="'nombre'" id="primer-columna">
+          <td title="'INDICADOR'" sortable="'nombre'" id="primer-columna">
             <a href="#"> {{row.nombre}}</a></td>
-          <td title="'VALOR'" sortable="'valor'" ng-style="setColorValor(row.valor)">{{row.valor | number:2}}</td>
-          <td title="'TENDENCIA'" sortable="'tendencia'">
-              <i ng-class="setArrowTendencia(row.tendencia)" ng-style="setColorTendencia(row.tendencia)"></i></td>            
+          <td title="'VALOR'" sortable="'valor'" ng-style="setColorValor(row.valor)">{{row.valor | number:2}}</td>          
           <td title="'PESO'" sortable="'peso'">{{row.peso}}%</td>
         </tr>
     </table>
