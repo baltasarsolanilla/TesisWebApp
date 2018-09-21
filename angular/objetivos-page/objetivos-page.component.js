@@ -5,11 +5,7 @@ angular.
         component('objetivosPage', {
             templateUrl: '../angular/objetivos-page/objetivos-page.html',
             controller: function ObjetivosPageController($scope, $window, $uibModal, Objetivo){                
-                var controllerName = "OBJETIVOS-PAGE-CONTROLLER -> ";
-
-                //HTTP REST REQUEST-RESPONSE
-                console.log("Objetivos: GET ");
-               
+                var controllerName = "OBJETIVOS-PAGE-CONTROLLER -> ";            
             
                 //CRUD
                 $scope.createObjetivo = createObjetivo;

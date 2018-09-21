@@ -7,12 +7,6 @@ angular.module('balancedScorecard')
             .when('/tablero', {
                 template: '<tablero-page></tablero-page>'
             })
-            // .when('tablero/:objetivoId', {
-            //     template: '<>'
-            // })
-            // .when('tablero/:kpiId', {
-            //     template: '<>'
-            // })
             .when('/mapa-estrategico', {
                 template: '<mapa-estrategico-page></mapa-estrategico-page>'
             })
@@ -23,7 +17,6 @@ angular.module('balancedScorecard')
                 template: '<objetivos-page></objetivos-page>'
             })
             .when('/indicadores', {
-                // template: '<div id="page-wrapper2"><h1>Indicadores</h1></div>'
                 template: '<indicadores-page></indicadores-page>'
             })
             .when('/ayuda', {

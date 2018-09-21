@@ -28,13 +28,13 @@ angular.
 
             this.$onInit = function() {
               originalData = $scope.objetivosAfectantes;
-              $scope.tableParams = new NgTableParams({
-                page: 1, // show first page
-                count: 10 // count per page
-                }, {
-                counts: [],
-                dataset: angular.copy(originalData)
-              });
+              // $scope.tableParams = new NgTableParams({
+              //   page: 1, // show first page
+              //   count: 10 // count per page
+              //   }, {
+              //   counts: [],
+              //   dataset: angular.copy(originalData)
+              // });
             };
 
             this.$onChanges = function(changes){
@@ -46,9 +46,17 @@ angular.
             //Esta funcion recarga el dataset con los objetivosAfecantes del objetivo seleccionado
             function changeDataTable(data){
               originalData = data;
-              $scope.tableParams.settings({
+              // $scope.tableParams.settings({
+              //   dataset: angular.copy(originalData)
+              // });
+              $scope.tableParams = new NgTableParams({
+                page: 1, // show first page
+                count: 10 // count per page
+                }, {
+                counts: [],
                 dataset: angular.copy(originalData)
               });
+
               $scope.tableParams.reload();
             }
  
