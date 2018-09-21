@@ -3,38 +3,55 @@
 angular.
     module('objetivosAffectTable').
     component('objetivosAffectTable', {
+        bindings: {
+          data: '<'             
+        },
         templateUrl: '../angular/tablero-page/objetivos-affect-table/objetivos-affect-table.html',
         controller: function objetivosAffectTableController($scope, NgTableParams, BuilderTable){
+            var controllerName = "OBJETIVOS-AFFECT-TABLE-CONTROLLER -> ";
 
-            var kpi_data = [{
-              id: 1,
-              nombre: 'Jugar al tennis',
-              //valor:
-              //tendencia: 
-            },
-            {
-              id: 2,
-              nombre: 'Aprender AngularJS',
-            },
-            {
-              id: 3,
-              nombre: 'Funcional',
-            },
-            {
-              id: 4,
-              nombre: 'Leer Harry Potter III',
-            }];
+            //Lista de ObjetivosAfectantes en caso de que no se seleccione un objetivo por default.
+            $scope.objetivosAfectantes = [
+              {
+                objetivoAfectante: {"id":1,"nombre":"Nombre 1","valor": 2.5,"tendencia":"ALTA"},
+              },
+              {
+                objetivoAfectante: {"id":2,"nombre":"Nombre 2","valor": 5.5,"tendencia":"BAJA"},
+              },
+              {
+                objetivoAfectante: {"id":3,"nombre":"Nombre 3","valor": 7.5,"tendencia":"MEDIA"},
+              }
+            ];
 
 
-            function fillData(array){
-              array.forEach(element => {
-                element.valor = BuilderTable.getRandomValor();
-                element.tendencia = BuilderTable.getRandomTendencia();
+            var originalData = [];
+
+            this.$onInit = function() {
+              originalData = $scope.objetivosAfectantes;
+              $scope.tableParams = new NgTableParams({
+                page: 1, // show first page
+                count: 10 // count per page
+                }, {
+                counts: [],
+                dataset: angular.copy(originalData)
               });
-            }
+            };
 
-            fillData(kpi_data);
-            
+            this.$onChanges = function(changes){
+              if (changes.data.currentValue){
+                changeDataTable(changes.data.currentValue);
+              }
+            };
+
+            //Esta funcion recarga el dataset con los objetivosAfecantes del objetivo seleccionado
+            function changeDataTable(data){
+              originalData = data;
+              $scope.tableParams.settings({
+                dataset: angular.copy(originalData)
+              });
+              $scope.tableParams.reload();
+            }
+ 
             $scope.setColorValor = function(valor){
               return BuilderTable.setColorValor(valor);
             }
@@ -48,13 +65,5 @@ angular.
             $scope.setArrowTendencia = function(tendencia){
               return BuilderTable.setArrowTendencia(tendencia);
             }
-    
-            $scope.tableParams = new NgTableParams({
-                page: 1, // show first page
-                count: kpi_data.length // count per page
-                }, {
-                counts: [],
-                dataset: kpi_data
-              });
         }
     });

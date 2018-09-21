@@ -15,15 +15,15 @@ angular.
               //Lista de indicadoresAfectantes en caso de que no se seleccione un objetivo por default.
               $scope.indicadores = [
                 {
-                  indicador: {"id":1,"nombre":"Nombre 1","peso":0.0},
+                  indicador: {"id":1,"nombre":"Nombre 1"},
                   peso: 0.0
                 },
                 {
-                  indicador: {"id":2,"nombre":"Nombre 2","peso":0.0},
+                  indicador: {"id":2,"nombre":"Nombre 2"},
                   peso: 0.0
                 },
                 {
-                  indicador: {"id":3,"nombre":"Nombre 3","peso":0.0},
+                  indicador: {"id":3,"nombre":"Nombre 3"},
                   peso: 0.0
                 }
               ];

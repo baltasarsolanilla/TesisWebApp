@@ -1,12 +1,12 @@
 <div class="">
     <p>{{hello}}</p>
     <table ng-table="tableParams" show-filter="false" class="table table-bordered table-striped table-affect">
-        <tr ng-repeat="row in $data track by row.id">
+        <tr ng-repeat="row in $data track by row.objetivoAfectante.id">
           <td title="'OBJETIVO'" sortable="'nombre'" style="text-align:left !important">
-            <a href="#"> {{row.nombre}}</a></td>
-          <td title="'VALOR'" sortable="'valor'" ng-style="setColorValor(row.valor)">{{row.valor | number:2}}</td>
+            <a href="#"> {{row.objetivoAfectante.nombre}}</a></td>
+          <td title="'VALOR'" sortable="'valor'" ng-style="setColorValor(row.valor)">{{row.objetivoAfectante.valor | number:2}}</td>
           <td title="'TENDENCIA'" sortable="'tendencia'">
-              <i ng-class="setArrowTendencia(row.tendencia)" ng-style="setColorTendencia(row.tendencia)"></i></td>
+              <i ng-class="setArrowTendencia(row.objetivoAfectante.tendencia)" ng-style="setColorTendencia(row.objetivoAfectante.tendencia)"></i></td>
         </tr>
     </table>
 </div>
