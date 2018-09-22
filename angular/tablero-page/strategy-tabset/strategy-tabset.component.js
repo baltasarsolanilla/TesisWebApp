@@ -7,14 +7,26 @@ angular.
           data: '<'
         },
         templateUrl: '../angular/tablero-page/strategy-tabset/strategy-tabset.html',
-        controller: function StrategyTabsetController($scope){
+        controller: function StrategyTabsetController($scope, Objetivo){
           $scope.tabs = [
             { title:'Resumen', content:'../angular/tablero-page/strategy-tabset/tabs/resumen-tab.html'},
             { title:'Detalle', content:'../angular/tablero-page/strategy-tabset/tabs/detalle-tab.html'}
           ];
 
-          $scope.objetivoSeleccionado = {}
-          $scope.objetivoSeleccionado.nombre = "Objetivo A";
+          $scope.objetivo = null;
+          $scope.historico = [{
+              valor: 2.28488, 
+              fecha: "2018-09-2"
+            },
+            {
+              valor: 3.568488, 
+              fecha: "2018-09-2"
+            },
+            {
+              valor: 6.528, 
+              fecha: "2018-09-2"
+            }
+          ];
 
           $scope.indicadoresAfectantes = [
             {
@@ -45,12 +57,32 @@ angular.
 
           this.$onInit = function(){
 
-          }
+          };
 
           this.$onChanges = function(changes){
+            console.log("onChanges ---------------------------------");
             if (changes.data.currentValue){
-              console.log(changes);
+              var objetivo = changes.data.currentValue;
+              $scope.objetivo = objetivo;
+              $scope.indicadoresAfectantes = objetivo.indicadoresAfectantes;
+              $scope.objetivosAfectantes = objetivo.objetivosAfectantes;
+              cargarDataHistorica(objetivo.id)
             }
+          };
+
+          $scope.cargarDataHistorica = cargarDataHistorica;
+          function cargarDataHistorica(idObjetivo){
+            console.log("Valores historicos del objetivo: " +  $scope.objetivo.nombre);
+            var fechaHasta = 23092018;
+            var fechaDesde = 25082018;
+            Objetivo.getHistorico({
+              idObjetivo: idObjetivo,
+              fromDate: fechaDesde,
+              toDate: fechaHasta
+            }, function(valoresHistoricos){
+              console.log(valoresHistoricos);
+              $scope.historico = valoresHistoricos;
+            });
           }
         }
     });

@@ -1,5 +1,6 @@
 angular.module('strategyTabset', [
     'ngAnimate', 
     'ngSanitize', 
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'core.objetivo'
 ])

@@ -34,6 +34,15 @@ angular.module('builderTableService').
                   return 'fas fa-arrow-circle-left'
                 else
                   return 'fas fa-arrow-circle-down'
+            },
+            getTendencia: function(newValue, oldValue){
+                var desviacion = 1;
+                if (newValue - oldValue >= desviacion)
+                    return 'ALTA';
+                else if (newValue - oldValue <= -desviacion)
+                    return 'BAJA';
+                else
+                    return 'MEDIA';
             }
         };
     });

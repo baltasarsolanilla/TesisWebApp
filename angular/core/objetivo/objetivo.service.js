@@ -19,6 +19,11 @@ angular.
           deleteObjetivoAfectante: {
             method: 'PUT',
             url: 'http://localhost:8080/objetivos/:idObjetivo/objetivosAfectantes',
+          },
+          getHistorico: {
+            method: 'GET',
+            url: 'http://localhost:8080/objetivos/:idObjetivo/valoresHistoricos',
+            isArray: true
           }
       });
     }
