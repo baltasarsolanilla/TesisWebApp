@@ -43,6 +43,13 @@ angular.module('builderTableService').
                     return 'BAJA';
                 else
                     return 'MEDIA';
+            },
+            getPesoTotal: function(data){
+                var peso = 0.0;
+                angular.forEach(data, function(i) {
+                   peso += i.peso;
+                });
+                return peso;
             }
         };
     });

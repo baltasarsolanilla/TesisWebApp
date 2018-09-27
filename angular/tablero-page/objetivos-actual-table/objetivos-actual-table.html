@@ -4,7 +4,7 @@
           <td title="'INDICADOR'" sortable="'nombre'" id="primer-columna">
             <a href="#">{{row.indicador.nombre}}</a></td>
           <td title="'VALOR'" sortable="'valor'" ng-style="setColorValor(row.indicador.valor)">{{row.indicador.valor | number:2}}</td>          
-          <td title="'PESO'" sortable="'peso'">{{row.peso | number:2}}%</td>
+          <td title="'PESO'" sortable="'peso'">{{getPorcentaje(row.peso) | number:2}}%</td>
         </tr>
     </table>
 </div>

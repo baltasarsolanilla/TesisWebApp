@@ -26,6 +26,7 @@ angular.
             ];
 
             var originalData = [];
+            var pesoTotal = 0.0;
 
             this.$onInit = function() {
               originalData = $scope.indicadoresAfectantes;
@@ -38,7 +39,7 @@ angular.
               // });
               
             };
-
+            var pesoTotal = 0.0;
             this.$onChanges = function(changes){
               if (changes.data.currentValue){
                 changeDataTable(changes.data.currentValue);
@@ -48,6 +49,7 @@ angular.
             //Esta funcion recarga el dataset con los indicadoresAfecantes del objetivo seleccionado
             function changeDataTable(data){
               originalData = data;
+              pesoTotal = BuilderTable.getPesoTotal(data);
               // $scope.tableParams.settings({
               //   dataset: angular.copy(originalData)
               // });
@@ -63,6 +65,10 @@ angular.
             
             $scope.setColorValor = function(valor){
               return BuilderTable.setColorValor(valor);
+            }
+
+            $scope.getPorcentaje = function(valor){
+              return (valor / pesoTotal) * 100;
             }
         }
     });

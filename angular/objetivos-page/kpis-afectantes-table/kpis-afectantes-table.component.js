@@ -9,7 +9,7 @@ angular.
               deleteIndicadores: '&',
               data: '<'              
             },
-            controller: function KPIsTableController($scope, NgTableParams, Indicador){
+            controller: function KPIsTableController($scope, NgTableParams, Indicador, BuilderTable){
               var controllerName = "KPI-TABLE-CONTROLLER -> ";
 
               //Lista de indicadoresAfectantes en caso de que no se seleccione un objetivo por default.
@@ -28,9 +28,11 @@ angular.
                 }
               ];
 
-              $scope.pesos = [{"id":1,"nombre":"1"},
-                              {"id":2,"nombre":"2"},
-                              {"id":3,"nombre":"3"}];
+              $scope.pesos = [{"id":1,"nombre":1.0},
+                              {"id":2,"nombre":2.0},
+                              {"id":3,"nombre":3.0},
+                              {"id":3,"nombre":4.0},
+                              {"id":3,"nombre":5.0}];
 
               
                 // Funciones del controller
@@ -78,10 +80,15 @@ angular.
                 //Esta funcion recarga el dataset con los indicadoresAfecantes del objetivo seleccionado
                 function changeDataTable(data){
                   originalData = data;
+                  pesoTotal = BuilderTable.getPesoTotal(data);
                   $scope.tableParams.settings({
                     dataset: angular.copy(originalData)
                   });
                   $scope.tableParams.reload();
+                }
+
+                $scope.getPorcentaje = function(valor){
+                  return (valor / pesoTotal) * 100;
                 }
                
                 //Carga el KPI seleccionado en el search-box.
@@ -108,6 +115,7 @@ angular.
                   };
                   listaIndicadoresAgregados.push(indicadorAgregado);
 
+                  pesoTotal += indicadorAgregado.peso;
                   $scope.tableParams.settings().dataset.unshift(indicadorAgregado);
                   // we need to ensure the user sees the new row we've just added.
                   // it seems a poor but reliable choice to remove sorting and move them to the first page
@@ -123,6 +131,7 @@ angular.
                     return row === item;
                   });
                   $scope.deleteCount++;
+                  pesoTotal -= row.peso;
                 
                   //Refresco la tabla de indicadores afectantes
                   $scope.tableParams.reload().then(function(data) {
@@ -147,7 +156,7 @@ angular.
             
                 function cancelChanges() {
                   resetTableStatus();
-                  var currentPage = $scope.tableParams.page();
+                  pesoTotal = BuilderTable.getPesoTotal(originalData);
                   $scope.tableParams.settings({
                     dataset: angular.copy(originalData)
                   });
