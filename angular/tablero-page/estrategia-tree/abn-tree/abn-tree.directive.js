@@ -13,7 +13,7 @@
         scope: {
           treeData: '=',
           onSelect: '&',
-          initialSelection: '@',
+          initialSelection: '<',
           treeControl: '='
         },
         link: function(scope, element, attrs) {

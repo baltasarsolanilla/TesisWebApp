@@ -66,7 +66,7 @@ angular.
               $scope.objetivo = objetivo;
               $scope.indicadoresAfectantes = objetivo.indicadoresAfectantes;
               $scope.objetivosAfectantes = objetivo.objetivosAfectantes;
-              cargarDataHistorica(objetivo.id)
+              cargarDataHistorica(objetivo.id);
             }
           };
 
@@ -74,7 +74,7 @@ angular.
           function cargarDataHistorica(idObjetivo){
             console.log("Valores historicos del objetivo: " +  $scope.objetivo.nombre);
             var fechaHasta = 23092018;
-            var fechaDesde = 25082018;
+            var fechaDesde = 01012000;
             Objetivo.getHistorico({
               idObjetivo: idObjetivo,
               fromDate: fechaDesde,
