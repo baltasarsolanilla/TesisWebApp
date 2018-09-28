@@ -216,7 +216,8 @@ angular.
             diagram.model.addLinkData(inputLinks[i]);
 
         
-          setInterval(function () {
+          let timer = setInterval(function() {
+            if (document.querySelector("#myDiagramDiv") !== null){
               if ((document.querySelector("#myDiagramDiv").clientWidth - 20) !== widthTotal || (document.querySelector("#myDiagramDiv").clientHeight - 20) !== heightTotal) {
                 widthTotal = (document.querySelector("#myDiagramDiv").clientWidth - 20);
                 heightTotal = (document.querySelector("#myDiagramDiv").clientHeight - 20);
@@ -252,6 +253,12 @@ angular.
                 }
                 diagram.commitTransaction("shift node");            
             }
+            }
+              else{
+                setTimeout(function() {
+                clearInterval(timer);
+                }, 0);
+              }
           }, 50); 
         }
 			}

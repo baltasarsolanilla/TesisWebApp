@@ -5,14 +5,8 @@ angular.module('balancedScorecard')
 
         $routeProvider
             .when('/tablero', {
-                template: '<strategy-page></strategy-page>'
+                template: '<tablero-page></tablero-page>'
             })
-            // .when('tablero/:objetivoId', {
-            //     template: '<>'
-            // })
-            // .when('tablero/:kpiId', {
-            //     template: '<>'
-            // })
             .when('/mapa-estrategico', {
                 template: '<mapa-estrategico-page></mapa-estrategico-page>'
             })
@@ -23,7 +17,6 @@ angular.module('balancedScorecard')
                 template: '<objetivos-page></objetivos-page>'
             })
             .when('/indicadores', {
-                // template: '<div id="page-wrapper2"><h1>Indicadores</h1></div>'
                 template: '<indicadores-page></indicadores-page>'
             })
             .when('/ayuda', {
@@ -31,4 +24,32 @@ angular.module('balancedScorecard')
             })
             // .otherwise({redirectTo: $routeProvider});
             .otherwise('/tablero');
-    }]);
+    }])
+    .config(function(blockUIConfig){
+        // Change the default overlay message
+        blockUIConfig.requestFilter = function(config) {
+
+            var message;
+          
+            switch(config.method) {
+              case 'GET':
+                message = 'Cargando...';
+                break;
+                
+              case 'POST':
+                message = 'Guardando...';
+                break;
+          
+              case 'DELETE':
+                message = 'Eliminando...';
+                break;
+          
+              case 'PUT':
+                message = 'Actualizando...';
+                break;
+            }
+            
+            return message;
+            
+          };
+    });

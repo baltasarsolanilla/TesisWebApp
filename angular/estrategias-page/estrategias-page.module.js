@@ -1,3 +1,4 @@
 angular.module('estrategiasPage', [
-    'perspectivasTable'
+    'perspectivasTable',
+    'core.estrategia'
 ]);

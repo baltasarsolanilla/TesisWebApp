@@ -4,10 +4,21 @@ angular.
     module('estrategiasPage').
         component('estrategiasPage', {
             templateUrl: '../angular/estrategias-page/estrategias-page.html',
-            controller: function PerspectivasPageController($scope, $window, $uibModal){
+            controller: function PerspectivasPageController($scope, $window, $uibModal, Estrategia){
         
+                //HTTP REST REQUEST-RESPONSE
+                console.log("Estrategia: GET ");
+                $scope.estrategias = Estrategia.query(function(estrategias){
+                    estrategias.forEach(element => {
+                        $window.console.log(element.nombre);
+                        $window.console.log("Mision: " + element.mision);    
+                        $window.console.log("Vision: " + element.vision);
+                    });
+                    $window.console.log($scope.estrategias);                  
+                });
+                
+                
                 // FuncIones de controler
-
                 $scope.createEstrategia = createEstrategia;
                 $scope.updateEstrategia = updateEstrategia;
                 $scope.deleteEstrategia = deleteEstrategia;

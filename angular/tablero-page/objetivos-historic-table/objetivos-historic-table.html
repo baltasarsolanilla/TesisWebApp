@@ -1,0 +1,22 @@
+<div class="">
+    <div class="row">
+        <div class="col-lg-4">
+            <h4 style="float:left; margin-right:10px;">Histórico</h4>
+            <input type="text" class="form-control" style="float:left; width:auto;" placeholder="Filtrar por fecha" name="filter historico" ng-model="filter.fecha"></input>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <table ng-table="tableParams" show-filter="false" class="table table-bordered table-striped table-detalle">
+                <tr ng-repeat="row in $data track by row.id">
+                  <td title="'FECHA'" sortable="'fecha'" id="primer-columna">
+                    <a href="#">{{row.fecha}}</a></td>
+                  <td title="'VALOR'" sortable="'valor'" ng-style="setColorValor(row.valor)">{{row.valor | number:2}}</td>          
+                  <td title="'TENDENCIA'" sortable="'tendencia'">
+                    <i ng-class="setArrowTendencia(row.tendencia)" ng-style="setColorTendencia(row.tendencia)"></i></td>
+                </tr>
+            </table>
+
+        </div>
+    </div>
+</div>
