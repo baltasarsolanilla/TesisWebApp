@@ -11,7 +11,7 @@ angular.
             var controllerName = "OBJETIVOS-AFFECT-TABLE-CONTROLLER -> ";
 
             //Lista de ObjetivosAfectantes en caso de que no se seleccione un objetivo por default.
-            $scope.objetivosAfectantes = [
+            var objetivosAfectantesFAKE = [
               {
                 objetivoAfectante: {"id":1,"nombre":"Nombre 1","valor": 2.5,"tendencia":"ALTA"},
               },
@@ -27,14 +27,16 @@ angular.
             var originalData = [];
 
             this.$onInit = function() {
-              originalData = $scope.objetivosAfectantes;
-              // $scope.tableParams = new NgTableParams({
-              //   page: 1, // show first page
-              //   count: 10 // count per page
-              //   }, {
-              //   counts: [],
-              //   dataset: angular.copy(originalData)
-              // });
+              originalData = objetivosAfectantesFAKE;
+              if ($scope.$ctrl.data != undefined)
+                originalData = $scope.$ctrl.data;
+              $scope.tableParams = new NgTableParams({
+                page: 1, // show first page
+                count: 10 // count per page
+                }, {
+                counts: [],
+                dataset: angular.copy(originalData)
+              });
             };
 
             this.$onChanges = function(changes){
@@ -46,17 +48,9 @@ angular.
             //Esta funcion recarga el dataset con los objetivosAfecantes del objetivo seleccionado
             function changeDataTable(data){
               originalData = data;
-              // $scope.tableParams.settings({
-              //   dataset: angular.copy(originalData)
-              // });
-              $scope.tableParams = new NgTableParams({
-                page: 1, // show first page
-                count: 10 // count per page
-                }, {
-                counts: [],
+              $scope.tableParams.settings({
                 dataset: angular.copy(originalData)
               });
-
               $scope.tableParams.reload();
             }
  
