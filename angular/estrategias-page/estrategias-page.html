@@ -9,7 +9,7 @@
                 <button class="btn btn-primary btn-lg" ng-click="updateEstrategia()" ng-disabled="!selectedEstrategia">
                     <span class="glyphicon glyphicon-pencil"></span>
                 </button>
-                <button class="btn btn-danger btn-lg" ng-click="removeEstrategia()" ng-disabled="!selectedEstrategia">
+                <button class="btn btn-danger btn-lg" ng-click="deleteEstrategia()" ng-disabled="!selectedEstrategia">
                     <span class="glyphicon glyphicon-trash"></span>
                 </button>
             </div>
@@ -17,7 +17,7 @@
     </div>
     <div class="row">
         <div class="col-lg-4">
-            <search-box on-select="onSelectEstrategia(value)" message="'Seleccionar plan estratégico...'"></search-box>
+            <search-box on-select="onSelectEstrategia(value)" data="estrategias" first-default="true" message="'Seleccionar plan estratégico...'"></search-box>
         </div>
         <!-- <h4>Estrategia id: {{selectedEstrategia.id}}</h4> -->
     </div>
@@ -25,14 +25,14 @@
     <div class="row">
         <div class="col-lg-6">
             <h4>Misión</h4>
-            <p>{{mision}}</p>
+            <p>{{selectedEstrategia.mision}}</p>
         </div>
         <div class="col-lg-6">
             <h4>Vision</h4>
-            <p>{{vision}}</p>
+            <p>{{selectedEstrategia.vision}}</p>
         </div>
     </div>
     <div class="">
-        <perspectivas-table id-estrategia="selectedEstrategia.id"></perspectivas-table>
+        <perspectivas-table data="selectedEstrategia.perspectivasAfectantes" id-estrategia="selectedEstrategia.id"></perspectivas-table>
     </div>
 </div>

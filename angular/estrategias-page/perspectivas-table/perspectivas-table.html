@@ -21,9 +21,9 @@
             <colgroup>
                 <col width="80%" />
             </colgroup>
-            <tr ng-repeat="row in $data track by row.id" ng-click="onSelectItem(row)" ng-class="{selected: row.id === selectedItem.id}">
-                <td title="'PERSPECTIVAS'" sortable="'name'">
-                    <span class="">{{row.name}}
+            <tr ng-repeat="row in {{$perspectivas}} track by row.id" ng-click="onSelectItem(row)" ng-class="{selected: row.id === selectedItem.id}">
+                <td title="'PERSPECTIVAS'" sortable="'nombre'">
+                    <span class="">{{row.nombre}}
                         <button class="btn btn-danger btn-sm pull-right"  ng-click="del(row)" ng-hide="!isEditing"><span class="glyphicon glyphicon-trash"></span></button>
                     </span>
                 </td>
