@@ -1,23 +1,23 @@
 'use strict',
+'use strict',
 
 angular.
     module('objetivosTable').
         component('objetivosTable', {
             templateUrl: '../angular/estrategias-page/objetivos-table/objetivos-table.html',
             bindings: {
-              idPerspectiva: '<'
+              data: '<',
+              first: '<'
             },
             controller: function ObjetivosTableController($scope, $window, NgTableParams){
-              var simpleList = [{"id":1,"name":"Nissim","age":41,"money":454},{"id":2,"name":"Mariko","age":10,"money":-100},{"id":3,"name":"Mark","age":39,"money":291},{"id":4,"name":"Allen","age":85,"money":871},{"id":5,"name":"Dustin","age":10,"money":378},{"id":6,"name":"Macon","age":9,"money":128}];
-              var simpleList2 = [{"id":3,"name":"Mark","age":39,"money":291},{"id":4,"name":"Allen","age":85,"money":871},{"id":5,"name":"Dustin","age":10,"money":378},{"id":6,"name":"Macon","age":9,"money":128}];
-              var originalData = angular.copy(simpleList);
+             var originalData = [];
 
               $scope.tableParams = new NgTableParams({
                 page: 1, // show first page
                 count: 10 // count per page
                 }, {
                 counts: [],
-                dataset: angular.copy(simpleList)
+                dataset: angular.copy(originalData)
               });
               
               // Funciones de controller
@@ -35,31 +35,62 @@ angular.
               $scope.deleteCount = 0;
               $scope.selectedObjetivo = null;
               
+
+              this.$onInit = function() {
+                cargarObjetivos();
+                /*changeDataTable(first);*/
+                originalData = $scope.objetivos;
+                $scope.tableParams = new NgTableParams({
+                  page: 1, // show first page
+                  count: 10 // count per page
+                  }, {
+                  counts: [],
+                  dataset: angular.copy(originalData)
+                });
+              };
+
+              this.$onChanges = function(changes){
+                $window.console.log(controllerName + "onChanges(changes)");
+                if (changes.data.currentValue){
+                  changeDataTable(changes.data.currentValue);
+                  console.log(this);
+                  
+                }
+              };
+
+              //Esta funcion recarga el dataset con los indicadoresAfecantes del objetivo seleccionado
+              function changeDataTable(data){
+                $window.console.log(controllerName + "changeDataTable(data)")
+                originalData = data;
+                /*pesoTotal = BuilderTable.getPesoTotal(data);*/
+                $scope.tableParams.settings({
+                  dataset: angular.copy(originalData)
+                });
+                $scope.tableParams.reload();
+              }
+
+              //AJAX
+              function cargarObjetivos(){
+                $scope.objetivos = $scope.data;
+                $scope.selectedItem = $scope.first;
+              }
+
+              //Esta funcion es la que va a cargar le nuevo dataset una vez seleccionado una perspectiva.
+              function changeDataset(idPerspectiva){
+                $window.console.log(controllerName + "changeDataset(idPerspectiva)")
+                  $scope.tableParams.settings({
+                    dataset: angular.copy(originalData)
+                  });
+                $scope.tableParams.reload();
+              }
+
+
               //Carga el OBJETIVO seleccionado en el search-box.
               function onSelectObjetivo(value){
                 $window.console.log(controllerName + "onSelectObjetivo(value)");
                 $scope.selectedObjetivo = value;
               }
 
-              //Esta funcion es la que va a cargar le nuevo dataset una vez seleccionado una perspectiva.
-              function changeDataset(idPerspectiva){
-                $window.console.log(controllerName + "changeDataset(idPerspectiva)");
-                if ((idPerspectiva % 2) === 0)
-                  $scope.tableParams.settings({
-                    dataset: angular.copy(originalData)
-                  });
-                else
-                  $scope.tableParams.settings({
-                    dataset: angular.copy(simpleList2)
-                  });
-                $scope.tableParams.reload();
-              }
-
-              this.$onChanges = function(changes){
-                $window.console.log(controllerName + "onChanges(changes)");
-                if (changes.idPerspectiva)
-                  $scope.changeDataset(changes.idPerspectiva.currentValue);
-              }
 
               var id = '100';
               function add() {

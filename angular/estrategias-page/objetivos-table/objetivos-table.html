@@ -23,14 +23,14 @@
         <colgroup>
             <col width="80%" />
         </colgroup>
-        <tr ng-repeat="row in $data track by row.id">
-            <td title="'OBJETIVOS'" sortable="'name'">
-                <span class="">{{row.name}}
+        <tr ng-repeat="row in $ctrl.data track by row.id">
+            <td title="'OBJETIVOS'" sortable="'nombre'">
+                <span class="">{{row.nombre}}
                     <button class="btn btn-danger btn-sm pull-right"  ng-click="del(row)" ng-hide="!isEditing"><span class="glyphicon glyphicon-trash"></span></button>
                 </span>
             </td>
         </tr>
     </table>
-    <!-- <h4>perspectiva id en objetivos-table: {{$ctrl.idPerspectiva}}</h4> -->
+    <h4>perspectiva id en objetivos-table: {{$ctrl.first}}</h4>
  
 </div>

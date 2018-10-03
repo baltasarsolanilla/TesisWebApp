@@ -25,6 +25,8 @@ angular.
 
                 $scope.onSelectEstrategia = onSelectEstrategia;
 
+                $scope.addPerspectivasAfectantes = addPerspectivasAfectantes;
+
                 // Variables de controller
                 var controllerName = "ESTRATEGIAS-PAGE-CONTROLLER ->";
              /*   $scope.mision = "Elit reprehenderit aliquip magna culpa. Duis irure sit ex officia sunt adipisicing magna. Ex incididunt sunt sint ut duis exercitation enim anim. Pariatur magna id deserunt commodo laborum ad laborum. Irure incididunt qui officia ut ea amet et eu pariatur est adipisicing occaecat. Voluptate deserunt sint eu mollit laboris dolor id fugiat pariatur ut non commodo. Eiusmod consectetur dolore sunt sunt enim nulla sunt ad aute nostrud laborum tempor ad officia."
@@ -103,6 +105,46 @@ angular.
                         /*onSelectEstrategia($scope.estrategias[0]);*/
                     });
                 }
+
+
+                  //ADD INDICADOR AFECTANTE
+                function addPerspectivasAfectantes(perspectivas){
+                    angular.forEach(perspectivas, function(i) {
+                      console.log(i);
+                        addSinglePerspectivaAfectante(i);
+                      });
+                }
+
+                function addSinglePerspectivaAfectante(perspectiva){
+                    var pers = {
+                        nombre: perspectiva.nombre,
+                        descripcion: perspectiva.descripcion
+                    };
+                    Estrategia.addPerspectivaAfectante({idEstrategia: $scope.selectedEstrategia.id}, pers, function(response){
+                        alert("Perspectiva afectante relacionado exitosamente");
+                        console.log(response);
+                    });
+                }
+
+                function deletePerspectivasAfectantes(perspectivas){
+                    angular.forEach(perspectivas, function(i) {
+                        deleteSinglePerspectivaAfectante(i);
+                      });
+                }
+
+                function deleteSinglePerspectivaAfectante(perspectiva){
+                    var i = {
+                        nombre: perspectiva.nombre
+                    };
+                    Estrategia.deletePerspectivaAfectante(i, function(response){
+                        alert("Perspectiva afectante eliminado exitosamente");
+                        console.log(response);
+                    });
+                }
+
+
+
+
             }
         });
 

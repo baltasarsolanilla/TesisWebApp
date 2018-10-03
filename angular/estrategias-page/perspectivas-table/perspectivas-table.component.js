@@ -6,19 +6,21 @@ angular.
             templateUrl: '../angular/estrategias-page/perspectivas-table/perspectivas-table.html',
             bindings:{
               onSelect: '&',
+              addPerspectivas: '&',
+              deletePerspectivas: '&',
               data: "<"
             },
-            controller: function PerspectivasTableController($scope, $window, $uibModal, NgTableParams){
-              var simpleList = [{"id":1,"name":"Nissim","age":41,"money":454},{"id":2,"name":"Mariko","age":10,"money":-100},{"id":3,"name":"Mark","age":39,"money":291},{"id":4,"name":"Allen","age":85,"money":871},{"id":5,"name":"Dustin","age":10,"money":378},{"id":6,"name":"Macon","age":9,"money":128}];
+            controller: function PerspectivasTableController($scope, $window, $uibModal, NgTableParams, Perspectiva){
+              /*var simpleList = [{"id":1,"name":"Nissim","age":41,"money":454},{"id":2,"name":"Mariko","age":10,"money":-100},{"id":3,"name":"Mark","age":39,"money":291},{"id":4,"name":"Allen","age":85,"money":871},{"id":5,"name":"Dustin","age":10,"money":378},{"id":6,"name":"Macon","age":9,"money":128}];
               var simpleList2 = [{"id":3,"name":"Mark","age":39,"money":291},{"id":4,"name":"Allen","age":85,"money":871},{"id":5,"name":"Dustin","age":10,"money":378},{"id":6,"name":"Macon","age":9,"money":128}];
-              var originalData = angular.copy(simpleList);
+              */var originalData = [];/*angular.copy(simpleList);*/
 
               $scope.tableParams = new NgTableParams({
                 page: 1, // show first page
                 count: 10 // count per page
                 }, {
                 counts: [],
-                dataset: angular.copy(simpleList)
+                dataset: $scope.data
               });
           
               // Funciones de controller
@@ -38,25 +40,62 @@ angular.
               $scope.selectedPerspectiva = null;
               $scope.selectedItem = null;
 
+              $scope.perspectivas = [];
+              var listaPerspectivasEliminadas = [];
+              var listaPerspectivasAgregadas = [];
+
+              this.$onInit = function() {
+                cargarPerspectivas();
+                $scope.selectedItem = $ctrl.data[0];
+                originalData = $scope.perspectivas;
+                $scope.tableParams = new NgTableParams({
+                  page: 1, // show first page
+                  count: 10 // count per page
+                  }, {
+                  counts: [],
+                  dataset: angular.copy(originalData)
+                });
+              };
+
+              this.$onChanges = function(changes){
+                if (changes.data.currentValue){
+                  changeDataTable(changes.data.currentValue);
+                  console.log(this);
+                  
+                }
+              };
+
+              //Esta funcion recarga el dataset con los indicadoresAfecantes del objetivo seleccionado
+              function changeDataTable(data){
+                originalData = data;
+                /*pesoTotal = BuilderTable.getPesoTotal(data);*/
+                $scope.tableParams.settings({
+                  dataset: angular.copy(originalData)
+                });
+                $scope.tableParams.reload();
+              }
+
+              //AJAX
+              function cargarPerspectivas(){
+                $scope.perspectivas = $scope.data;
+                $scope.selectedItem = $scope.perspectivas[0];
+              }
 
               //Esta funcion es la que va a cargar le nuevo dataset una vez seleccionado una perspectiva.
               function changeDataset(idEstrategia){
                 $window.console.log(controllerName + "changeDataset(idEstrategia)")
-                if ((idEstrategia % 2) === 0)
+                /*if ((idEstrategia % 2) === 0)
                   $scope.tableParams.settings({
                     dataset: angular.copy(originalData)
                   });
                 else
                   $scope.tableParams.settings({
                     dataset: angular.copy(simpleList2)
+                  });*/
+                  $scope.tableParams.settings({
+                    dataset: angular.copy(originalData)
                   });
                 $scope.tableParams.reload();
-              }
-
-              this.$onChanges = function(changes){
-                $window.console.log(controllerName + "onChanges(changes)");
-                if (changes.idEstrategia)
-                  $scope.changeDataset(changes.idEstrategia.currentValue);
               }
 
 
@@ -69,26 +108,17 @@ angular.
               //Carga el ITEM clikeado en la tabla de perspectivas.
               function onSelectItem(value){
                 $window.console.log(controllerName + "onSelectItem(value)");
+                console.log(value);
                 $scope.selectedItem = value;
               }
 
               var id = '100';
               function createPerspectiva() {
                 $window.console.log(controllerName + "createPerspectiva()");
+
                 $scope.isEditing = true;
                 $scope.isRowAdded = true;
-                // $scope.tableParams.settings().dataset.unshift({
-                //   id: id++, 
-                //   name: 'pepito'
-                // });
-                // we need to ensure the user sees the new row we've just added.
-                // it seems a poor but reliable choice to remove sorting and move them to the first page
-                // where we know that our new item was added to
-                $scope.tableParams.sorting({});
-                $scope.tableParams.page(1);
-                $scope.tableParams.reload();
-
-
+                
                 var modalInstance = $uibModal.open({
                       animation: true,
                       component: 'modalComponentPerspectiva'
@@ -99,9 +129,16 @@ angular.
                       // }
                     });
 
-                    modalInstance.result.then(function (userForm) {
-                      $window.console.log('ok');
-                      $window.console.log(userForm);
+                    modalInstance.result.then(function (pers) {
+                      
+                      pers.id = id;
+                      id++;
+                      listaPerspectivasAgregadas.push(pers);
+                      $scope.tableParams.settings().dataset.unshift(pers);
+                      $scope.tableParams.sorting({});
+                      $scope.tableParams.page(1);
+                      $scope.tableParams.reload();
+                      console.log(pers.nombre); 
                     }, function () {
                       $window.console.log('modal-component dismissed at: ' + new Date());
                     });
@@ -144,9 +181,18 @@ angular.
           
               function saveChanges() {
                 $window.console.log(controllerName + "saveChanges()");
+                if ($scope.deleteCount > 0)
+                    $scope.$ctrl.deletePerspectivas({perspectivas: listaPerspectivasEliminadas});
+                if ($scope.isRowAdded){
+                  $scope.$ctrl.addPerspectivas({perspectivas: listaPerspectivasAgregadas});
+                }
+
                 resetTableStatus();
                 var currentPage = $scope.tableParams.page();
                 originalData = angular.copy($scope.tableParams.settings().dataset);
+                listaPerspectivasAgregadas = [];
+                listaPerspectivasEliminadas = [];
+                $scope.tableParams.reload();
               }
           
           }

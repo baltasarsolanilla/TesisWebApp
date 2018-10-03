@@ -21,7 +21,7 @@
             <colgroup>
                 <col width="80%" />
             </colgroup>
-            <tr ng-repeat="row in {{$perspectivas}} track by row.id" ng-click="onSelectItem(row)" ng-class="{selected: row.id === selectedItem.id}">
+            <tr ng-repeat="row in $data track by row.id" ng-click="onSelectItem(row)" ng-class="{selected: row.id === selectedItem.id}">
                 <td title="'PERSPECTIVAS'" sortable="'nombre'">
                     <span class="">{{row.nombre}}
                         <button class="btn btn-danger btn-sm pull-right"  ng-click="del(row)" ng-hide="!isEditing"><span class="glyphicon glyphicon-trash"></span></button>
@@ -29,9 +29,9 @@
                 </td>
             </tr>
         </table>
-        <!-- <h4>estrategia id en perspectivas-table: {{$ctrl.idEstrategia}}</h4> -->
+        <!-- <h4>estrategia id en perspectivas-table: {{$ctrl.data[0].objetivosAfectantes}}</h4> -->
     </div>
     <div class="col-lg-6">
-        <objetivos-table id-perspectiva="selectedItem.id"></objetivos-table>
+        <objetivos-table data="selectedItem.objetivosAfectantes" first="$ctrl.data[0].objetivosAfectantes"></objetivos-table>
     </div>
 </div>
