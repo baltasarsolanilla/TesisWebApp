@@ -63,7 +63,6 @@ angular.
                 inputLinks.push({
                   from: objetivo.objetivosAfectantes[k].objetivoAfectante.nombre,
                   to: objetivo.nombre,
-                  valor: objetivo.objetivosAfectantes[k].objetivoAfectante.valor.toString(), //el valor es el del objetivo, no el peso relativo de objetivoxobjetivo, ya no existe
                   color1: "#555555",
                   color2: "#777777"
                 });

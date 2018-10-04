@@ -26,6 +26,7 @@ angular.
                 $scope.onSelectEstrategia = onSelectEstrategia;
 
                 $scope.addPerspectivasAfectantes = addPerspectivasAfectantes;
+                $scope.deletePerspectivasAfectantes = deletePerspectivasAfectantes;
 
                 // Variables de controller
                 var controllerName = "ESTRATEGIAS-PAGE-CONTROLLER ->";
@@ -107,7 +108,7 @@ angular.
                 }
 
 
-                  //ADD INDICADOR AFECTANTE
+                //ADD PERSPECTIVA AFECTANTE
                 function addPerspectivasAfectantes(perspectivas){
                     angular.forEach(perspectivas, function(i) {
                       console.log(i);
@@ -127,16 +128,17 @@ angular.
                 }
 
                 function deletePerspectivasAfectantes(perspectivas){
-                    angular.forEach(perspectivas, function(i) {
-                        deleteSinglePerspectivaAfectante(i);
+                    angular.forEach(perspectivas, function(p) {
+                        deleteSinglePerspectivaAfectante(p);
                       });
                 }
 
                 function deleteSinglePerspectivaAfectante(perspectiva){
-                    var i = {
+                    var p = {
+                        id: perspectiva.id,
                         nombre: perspectiva.nombre
                     };
-                    Estrategia.deletePerspectivaAfectante(i, function(response){
+                    Estrategia.deletePerspectivaAfectante({idEstrategia: $scope.selectedEstrategia.id}, p, function(response){
                         alert("Perspectiva afectante eliminado exitosamente");
                         console.log(response);
                     });

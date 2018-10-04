@@ -8,21 +8,24 @@ angular.
               onSelect: '&',
               addPerspectivas: '&',
               deletePerspectivas: '&',
-              data: "<"
+              data: '<'
             },
             controller: function PerspectivasTableController($scope, $window, $uibModal, NgTableParams, Perspectiva){
-              /*var simpleList = [{"id":1,"name":"Nissim","age":41,"money":454},{"id":2,"name":"Mariko","age":10,"money":-100},{"id":3,"name":"Mark","age":39,"money":291},{"id":4,"name":"Allen","age":85,"money":871},{"id":5,"name":"Dustin","age":10,"money":378},{"id":6,"name":"Macon","age":9,"money":128}];
-              var simpleList2 = [{"id":3,"name":"Mark","age":39,"money":291},{"id":4,"name":"Allen","age":85,"money":871},{"id":5,"name":"Dustin","age":10,"money":378},{"id":6,"name":"Macon","age":9,"money":128}];
-              */var originalData = [];/*angular.copy(simpleList);*/
 
-              $scope.tableParams = new NgTableParams({
-                page: 1, // show first page
-                count: 10 // count per page
-                }, {
-                counts: [],
-                dataset: $scope.data
-              });
-          
+              var perspectivasFAKE = [
+                {
+                  id:"1",
+                  nombre:"p1",
+                  descripcion:"d1"
+                },
+                {
+                  id:"2",
+                  nombre:"p2",
+                  descripcion:"d2"
+                }
+              ];
+
+
               // Funciones de controller
               $scope.createPerspectiva = createPerspectiva;
               $scope.del = del;
@@ -31,23 +34,23 @@ angular.
               $scope.saveChanges = saveChanges;
 
               $scope.onSelectPerspectiva = onSelectPerspectiva;
-              $scope.onSelectItem = onSelectItem;
-              $scope.changeDataset = changeDataset;
+
+              $scope.addObjetivosAfectantes = addObjetivosAfectantes;
+              $scope.deleteObjetivosAfectantes = deleteObjetivosAfectantes;
 
               // Variblaes de controller
               var controllerName = "PERSPECTIVAS-TABLE-CONTROLLER -> ";
               $scope.deleteCount = 0;
               $scope.selectedPerspectiva = null;
-              $scope.selectedItem = null;
 
               $scope.perspectivas = [];
               var listaPerspectivasEliminadas = [];
               var listaPerspectivasAgregadas = [];
 
               this.$onInit = function() {
-                cargarPerspectivas();
-                $scope.selectedItem = $ctrl.data[0];
-                originalData = $scope.perspectivas;
+                if ($scope.$ctrl.data == undefined)
+                  originalData = perspectivasFAKE;
+                
                 $scope.tableParams = new NgTableParams({
                   page: 1, // show first page
                   count: 10 // count per page
@@ -68,36 +71,12 @@ angular.
               //Esta funcion recarga el dataset con los indicadoresAfecantes del objetivo seleccionado
               function changeDataTable(data){
                 originalData = data;
-                /*pesoTotal = BuilderTable.getPesoTotal(data);*/
                 $scope.tableParams.settings({
                   dataset: angular.copy(originalData)
                 });
                 $scope.tableParams.reload();
+                onSelectPerspectiva(data[0]);
               }
-
-              //AJAX
-              function cargarPerspectivas(){
-                $scope.perspectivas = $scope.data;
-                $scope.selectedItem = $scope.perspectivas[0];
-              }
-
-              //Esta funcion es la que va a cargar le nuevo dataset una vez seleccionado una perspectiva.
-              function changeDataset(idEstrategia){
-                $window.console.log(controllerName + "changeDataset(idEstrategia)")
-                /*if ((idEstrategia % 2) === 0)
-                  $scope.tableParams.settings({
-                    dataset: angular.copy(originalData)
-                  });
-                else
-                  $scope.tableParams.settings({
-                    dataset: angular.copy(simpleList2)
-                  });*/
-                  $scope.tableParams.settings({
-                    dataset: angular.copy(originalData)
-                  });
-                $scope.tableParams.reload();
-              }
-
 
               //Carga la PERSPECTIVA seleccionado en el search-box.
               function onSelectPerspectiva(value){
@@ -105,28 +84,14 @@ angular.
                 $scope.selectedPerspectiva = value;
               }
 
-              //Carga el ITEM clikeado en la tabla de perspectivas.
-              function onSelectItem(value){
-                $window.console.log(controllerName + "onSelectItem(value)");
-                console.log(value);
-                $scope.selectedItem = value;
-              }
-
-              var id = '100';
+              var id = '9999';
               function createPerspectiva() {
-                $window.console.log(controllerName + "createPerspectiva()");
-
                 $scope.isEditing = true;
                 $scope.isRowAdded = true;
                 
                 var modalInstance = $uibModal.open({
                       animation: true,
                       component: 'modalComponentPerspectiva'
-                      // resolve: {
-                      //   items: function () {
-                      //     return $ctrl.items;
-                      //   }
-                      // }
                     });
 
                     modalInstance.result.then(function (pers) {
@@ -138,18 +103,19 @@ angular.
                       $scope.tableParams.sorting({});
                       $scope.tableParams.page(1);
                       $scope.tableParams.reload();
-                      console.log(pers.nombre); 
                     }, function () {
                       $window.console.log('modal-component dismissed at: ' + new Date());
                     });
               }
 
               function del(row) {
-                $window.console.log(controllerName + "del(row)");
+                $scope.isRowDeleted = true;
                 _.remove($scope.tableParams.settings().dataset, function(item) {
                   return row === item;
                 });
-                $scope.deleteCount++;
+
+                listaPerspectivasEliminadas.push(row);
+
                 $scope.tableParams.reload().then(function(data) {
                   if (data.length === 0 && $scope.tableParams.total() > 0) {
                     $scope.tableParams.page($scope.tableParams.page() - 1);
@@ -160,39 +126,77 @@ angular.
           
               function hasChanges() {
                 $window.console.log(controllerName + "hasChanges()");
-                return $scope.deleteCount > 0 || $scope.isRowAdded;
+                return $scope.isRowDeleted || $scope.isRowAdded;
               }
           
               function resetTableStatus() {
-                $window.console.log(controllerName + "resetTableStatus()");
                 $scope.isEditing = false;
                 $scope.isRowAdded = false;
-                $scope.deleteCount = 0;
+                $scope.isRowDeleted = false;
+                listaPerspectivasAgregadas = [];
+                listaPerspectivasEliminadas = [];
               }
           
               function cancelChanges() {
-                $window.console.log(controllerName + "cancelChanges()");
                 resetTableStatus();
-                var currentPage = $scope.tableParams.page();
                 $scope.tableParams.settings({
                   dataset: angular.copy(originalData)
                 });
+
               }
           
               function saveChanges() {
-                $window.console.log(controllerName + "saveChanges()");
-                if ($scope.deleteCount > 0)
-                    $scope.$ctrl.deletePerspectivas({perspectivas: listaPerspectivasEliminadas});
                 if ($scope.isRowAdded){
                   $scope.$ctrl.addPerspectivas({perspectivas: listaPerspectivasAgregadas});
                 }
 
+                if ($scope.isRowDeleted)
+                $scope.$ctrl.deletePerspectivas({perspectivas: listaPerspectivasEliminadas});
+
+
                 resetTableStatus();
-                var currentPage = $scope.tableParams.page();
                 originalData = angular.copy($scope.tableParams.settings().dataset);
-                listaPerspectivasAgregadas = [];
-                listaPerspectivasEliminadas = [];
+                onSelectPerspectiva(originalData[0]);
                 $scope.tableParams.reload();
+              }
+
+              // PERSPECTIVAS SERVICE AJAX
+              //ADD PERSPECTIVA AFECTANTE
+              function addObjetivosAfectantes(objetivos){
+                  angular.forEach(objetivos, function(o) {
+                      console.log(o);
+                      addSingleObjetivoAfectante(o);
+                    });
+              }
+
+              function addSingleObjetivoAfectante(objetivo){
+                  var obj = {
+                      nombre: objetivo.nombre,
+                      descripcion: objetivo.descripcion
+                  };
+                  Perspectiva.addObjetivoAfectante({idPerspectiva: $scope.selectedPerspectiva.id}, obj, function(response){
+                      alert("Objetivo afectante relacionado exitosamente");
+                      console.log(response);
+                  });
+              }
+
+              function deleteObjetivosAfectantes(objetivos){
+                  angular.forEach(objetivos, function(o) {
+                      deleteSingleObjetivoAfectante(o);
+                      console.log(o);
+                    });
+              }
+
+              function deleteSingleObjetivoAfectante(objetivo){
+                  var obj = {
+                      id: objetivo.id,
+                      nombre: objetivo.nombre
+                  };
+                  console.log("------------------------------------------------",$scope.selectedPerspectiva);
+                  Perspectiva.deleteObjetivoAfectante({idPerspectiva: $scope.selectedPerspectiva.id}, obj, function(response){
+                      alert("Objetivo afectante eliminado exitosamente");
+                      console.log(response);
+                  });
               }
           
           }
