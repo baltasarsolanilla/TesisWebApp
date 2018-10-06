@@ -10,7 +10,7 @@ angular.
               addObjetivos: '&',
               deleteObjetivos: '&'
             },
-            controller: function ObjetivosTableController($scope, $window, NgTableParams){
+            controller: function ObjetivosTableController($scope, $window, $uibModal, NgTableParams){
               
               var objetivosFAKE = [
                 {
@@ -25,7 +25,7 @@ angular.
 
                
               // Funciones de controller
-              $scope.add = add;
+              $scope.createObjetivo = createObjetivo;
               $scope.del = del;
               $scope.hasChanges = hasChanges;
               $scope.cancelChanges = cancelChanges;
@@ -60,29 +60,45 @@ angular.
               //Esta funcion recarga el dataset con los indicadoresAfecantes del objetivo seleccionado
               function changeDataTable(data){
                 originalData = data;
-                $scope.tableParams.settings({
+                if ($scope.tableParams == undefined) {
+                  console.log("tableParams undefined!!!");
+                  $scope.tableParams = new NgTableParams({
+                  page: 1, // show first page
+                  count: 10 // count per page
+                  }, {
+                  counts: [],
                   dataset: angular.copy(originalData)
                 });
-                $scope.tableParams.reload();
-              }
+                }
+                else{
+                    $scope.tableParams.settings({
+                      dataset: angular.copy(originalData)
+                    });
+                    $scope.tableParams.reload();
+                  }
+            }
 
               var id = '9999';
-              function add() {
+              function createObjetivo() {
                 $scope.isEditing = true;
                 $scope.isRowAdded = true;
-                $scope.tableParams.settings().dataset.unshift({
-                  id: id++, 
-                  name: $scope.selectedObjetivo.name
-                });
+                var modalInstance = $uibModal.open({
+                      animation: true,
+                      component: 'modalComponentObjetivo'
+                    });
 
-
-                listaObjetivosAgregados.push(nuevo_objetivo);
-                // we need to ensure the user sees the new row we've just added.
-                // it seems a poor but reliable choice to remove sorting and move them to the first page
-                // where we know that our new item was added to
-                $scope.tableParams.sorting({});
-                $scope.tableParams.page(1);
-                $scope.tableParams.reload();
+                    modalInstance.result.then(function (obj) {
+                      
+                      obj.id = id;
+                      id++;
+                      listaObjetivosAgregados.push(obj);
+                      $scope.tableParams.settings().dataset.unshift(obj);
+                      $scope.tableParams.sorting({});
+                      $scope.tableParams.page(1);
+                      $scope.tableParams.reload();
+                    }, function () {
+                      $window.console.log('modal-component dismissed at: ' + new Date());
+                    });
               }
           
               function del(row) {
@@ -139,4 +155,41 @@ angular.
               
           
           }
+      });
+
+
+angular.
+    module('objetivosTable').
+        component('modalComponentObjetivo', {
+          templateUrl: '../angular/shared-components/modal-form/modal-form-objetivo.modal.html',
+          bindings: {
+            // resolve: '<',
+            close: '&',
+            dismiss: '&'
+          },
+          controller: function ($window) {
+            var $ctrl = this;
+            var controllerName = "OBJETIVOS-TABLE-MODAL -> ";
+            $ctrl.$onInit = function () {
+              $window.console.log(controllerName + "onInit()");
+              // $ctrl.items = $ctrl.resolve.items;
+              // $ctrl.selected = {
+              //   item: $ctrl.items[0]
+              // };
+            };
+
+            $ctrl.objetivoForm = {
+                nombre: "",
+                descripcion: ""
+            };
+
+            $ctrl.ok = function () {
+              $window.console.log(controllerName + "ok()");
+              $ctrl.close({$value: $ctrl.objetivoForm});
+            };
+
+            $ctrl.cancel = function () {
+              $ctrl.dismiss({$value: 'cancel'});
+            };
+        }
       });

@@ -5,7 +5,7 @@
      <form name="form.userForm" ng-submit="submitForm()"   class="form-horizontal" role="form" novalidate>
             <!-- NAME -->
         <div class="modal-body form-group" >
-            <div class="col-sm-6" ng-class="{'has-error': form.userForm.nombre.$invalid ,  'has-success': form.userForm.nombre.$valid || form.userForm.nombre.$untouched}" >
+            <div class="col-sm-6" ><!-- ng-class="{'has-error': form.userForm.nombre.$invalid ,  'has-success': form.userForm.nombre.$valid || form.userForm.nombre.$untouched}" > -->
                 <label for="nombre" >Nombre</label>
                 <input type="text" id="nombre" name="nombre" class="form-control" ng-model="$ctrl.estrategiaForm.nombre" ng-maxlength="12"  placeholder="Nombre de la estrategia" required> </input> 
                 <p ng-show="form.userForm.nombre.$error.maxlength">Username is too long. {{$task.status}}</p>
