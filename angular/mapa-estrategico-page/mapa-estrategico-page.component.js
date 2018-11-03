@@ -174,7 +174,9 @@ angular.
             let objXOrigen = 30+70+35;
             let posObjetivo;
             for (let j = 0; j < objetivosPerspectivas[i]; j++) {
-              objetivos.push({key: inputObjs[cantidad].key, group: inputObjs[cantidad].group, valor: inputObjs[cantidad].valor, color: 0, tendencia: inputObjs[cantidad].tendencia, imagen: 0, highlight: 0});
+              let tend = Math.random();
+              console.log(tend);
+              objetivos.push({key: inputObjs[cantidad].key, group: inputObjs[cantidad].group, valor: inputObjs[cantidad].valor, color: 0, tendencia: tend, imagen: 0, highlight: 0});
               if (inputObjs[cantidad].valor < 3.34){
                 objetivos[cantidad].highlight = "#c24128";
                 objetivos[cantidad].color = "#eb4b25";
@@ -190,10 +192,10 @@ angular.
                 }
               }
               
-              if(inputObjs[cantidad].tendencia < 0.4)
+              if(tend < 0.4)
                 objetivos[cantidad].imagen = "../angular/mapa-estrategico-page/images/flecha-roja-t2.png";
               else
-                if(inputObjs[cantidad].tendencia < 0.6)
+                if(tend < 0.6)
                   objetivos[cantidad].imagen = "../angular/mapa-estrategico-page/images/flecha-amarilla-t2.png";
                 else
                   objetivos[cantidad].imagen = "../angular/mapa-estrategico-page/images/flecha-verde-t2.png";
