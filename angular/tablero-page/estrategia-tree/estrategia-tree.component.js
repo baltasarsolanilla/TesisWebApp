@@ -45,6 +45,7 @@ angular.
                       ]
                     }, 
                 ];
+                
 
                 this.$onInit = function(){
                 };
@@ -52,6 +53,7 @@ angular.
                 this.$onChanges = function(changes){
                   if (changes.data.currentValue){
                     $scope.perspectivas = addLabels(changes.data.currentValue);
+                    
                   }
                 };
 

@@ -1,6 +1,6 @@
 <div>
     <div class="modal-header">
-        <h3>Nuevo Objetivo</h3>
+        <h3>Modificar Estrategia</h3>
     </div>
      <form name="form.userForm" ng-submit="submitForm()"   class="form-horizontal" role="form" novalidate>
             <!-- NAME -->
@@ -8,15 +8,19 @@
     <!-- <div class="form-group" ng-class="{'has-error':  form.userForm.nombre.$error.required ,  'has-success': form.userForm.nombre.$valid }"> -->
             <div class="col-sm-6" ><!-- ng-class="{'has-error': form.userForm.nombre.$invalid ,  'has-success': form.userForm.nombre.$valid || form.userForm.nombre.$untouched}" > -->
                 <label for="nombre" >Nombre</label>
-                <input type="text" id="nombre" name="nombre" class="form-control" ng-model="$ctrl.objetivoForm.nombre" ng-maxlength="12"  placeholder="Nombre del objetivo" required> </input> 
+                <input type="text" id="nombre" name="nombre" class="form-control" ng-model="$ctrl.estrategiaForm.nombre" ng-maxlength="12"  placeholder="{{selectedEstrategia.nombre}}" required> </input> 
                 <p ng-show="form.userForm.nombre.$error.maxlength">Username is too long. {{$task.status}}</p>
                 <p> {{$task.status}}</p>
                 <p> {{userForm.nombre}}</p>
             </div>
 
-            <div class="col-sm-9">
-                <label for="descripcion">Descripción</label>
-                <textarea type="text" name="descripcion" class="form-control" ng-model="$ctrl.objetivoForm.descripcion" placeholder="Descripción del objetivo" required> </textarea> 
+            <div class="col-sm-9 margin-textarea">
+                <label for="mision">Misión</label>
+                <textarea type="text" name="mision" class="form-control" ng-model="$ctrl.estrategiaForm.mision" placeholder="selectedEstrategia.mision" required> </textarea> 
+            </div>
+            <div class="col-sm-9 margin-textarea">
+                <label for="vision">Visión</label>
+                <textarea type="textarea" name="vision" class="form-control" ng-model="$ctrl.estrategiaForm.vision" placeholder="selectedEstrategia.vision" required> </textarea> 
             </div>
         </div>
 

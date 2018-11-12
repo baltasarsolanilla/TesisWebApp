@@ -3,10 +3,14 @@ angular.
   factory('Perspectiva', ['$resource',
     function($resource) {
       return $resource('http://localhost:8080/perspectivas/:idPerspectiva', {}, {
-        // query: {
-        //   method: 'GET',
-        //   isArray: true
-        // }
+        addObjetivoAfectante: {
+          method: 'POST',
+          url: 'http://localhost:8080/perspectivas/:idPerspectiva/objetivosAfectantes'
+        },
+        deleteObjetivoAfectante: {
+          method: 'PUT',
+          url: 'http://localhost:8080/perspectivas/:idPerspectiva/objetivosAfectantes',
+        },
       });
     }
   ]);
