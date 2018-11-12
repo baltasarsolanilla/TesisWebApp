@@ -13,13 +13,13 @@ angular.
             //Lista de ObjetivosAfectantes en caso de que no se seleccione un objetivo por default.
             var objetivosAfectantesFAKE = [
               {
-                objetivoAfectante: {"id":1,"nombre":"Nombre 1","valor": 2.5,"tendencia":"ALTA"},
+                objetivoAfectante: {"id":1,"nombre":"Utilidades","valor": 2.5,"tendencia":"ALTA"},
               },
               {
-                objetivoAfectante: {"id":2,"nombre":"Nombre 2","valor": 5.5,"tendencia":"BAJA"},
+                objetivoAfectante: {"id":2,"nombre":"Capitalizacion","valor": 5.5,"tendencia":"BAJA"},
               },
               {
-                objetivoAfectante: {"id":3,"nombre":"Nombre 3","valor": 7.5,"tendencia":"MEDIA"},
+                objetivoAfectante: {"id":3,"nombre":"Incrementar no. clientes","valor": 7.5,"tendencia":"MEDIA"},
               }
             ];
 

@@ -48,9 +48,9 @@ var setColorTextField = function(minValue, maxValue, staticZones, value, opts){
       fractionDigits: 2
     },
     staticZones: [
-       {strokeStyle: "#F03E3E", min: minValue, max: thresholdRedYellow},
-       {strokeStyle: "#FFDD00", min: thresholdRedYellow, max: thresholdYellowGreen},
-       {strokeStyle: "#30B32D", min: thresholdYellowGreen, max: maxValue}
+       {strokeStyle: "#eb4b25", min: minValue, max: thresholdRedYellow},
+       {strokeStyle: "#f6d900", min: thresholdRedYellow, max: thresholdYellowGreen},
+       {strokeStyle: "#91d202", min: thresholdYellowGreen, max: maxValue}
     ],
     limitMax: false,
     limitMin: false,

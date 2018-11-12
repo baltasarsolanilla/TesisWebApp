@@ -13,19 +13,19 @@ angular.module('builderTableService').
             },
             setColorValor: function(valor){
                 if (valor > 6.66)
-                    return {color:'green'}
+                    return {color:'#91d202'}
                 else if (valor > 3.33)
-                    return {color:'#FFDD00'}
+                    return {color:'#f6d900'}
                 else
-                    return {color:'rgba(243, 4, 4, 0.918)'}
+                    return {color:'#eb4b25'}
             },
             setColorTendencia: function(tendencia){
                 if (tendencia === 'ALTA')
-                    return {color:'green'}
+                    return {color:'#91d202'}
                 else if (tendencia === 'MEDIA')
-                    return {color:'#FFDD00'}
+                    return {color:'#f6d900'}
                 else
-                    return {color:'rgba(243, 4, 4, 0.918)'}
+                    return {color:'#eb4b25'}
             },
             setArrowTendencia: function(tendencia){
                 if (tendencia === 'ALTA')
