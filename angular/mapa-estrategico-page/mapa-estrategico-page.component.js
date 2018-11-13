@@ -177,12 +177,12 @@ angular.
               let tend = Math.random();
               console.log(tend);
               objetivos.push({key: inputObjs[cantidad].key, group: inputObjs[cantidad].group, valor: inputObjs[cantidad].valor, color: 0, tendencia: tend, imagen: 0, highlight: 0});
-              if (inputObjs[cantidad].valor < 3.34){
+              if (inputObjs[cantidad].valor < 3.33){
                 objetivos[cantidad].highlight = "#c24128";
                 objetivos[cantidad].color = "#eb4b25";
               }
               else{
-                if (inputObjs[cantidad].valor < 6.67){
+                if (inputObjs[cantidad].valor < 6.66){
                   objetivos[cantidad].highlight = "#c9a330";
                   objetivos[cantidad].color = "#f6d900";
                 }
@@ -192,10 +192,10 @@ angular.
                 }
               }
               
-              if(tend < 0.4)
+              if(tend < 0.33)
                 objetivos[cantidad].imagen = "../angular/mapa-estrategico-page/images/flecha-roja-t2.png";
               else
-                if(tend < 0.6)
+                if(tend < 0.66)
                   objetivos[cantidad].imagen = "../angular/mapa-estrategico-page/images/flecha-amarilla-t2.png";
                 else
                   objetivos[cantidad].imagen = "../angular/mapa-estrategico-page/images/flecha-verde-t2.png";

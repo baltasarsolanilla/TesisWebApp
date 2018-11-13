@@ -14,6 +14,9 @@ angular.
           ];
 
           $scope.objetivo = null;
+          $scope.objetivo = {
+            nombre: "Nombre del objetivo"
+          };
           $scope.historico = [{
               valor: 2.28488, 
               fecha: "2018-09-2"
@@ -56,11 +59,9 @@ angular.
           ];
 
           this.$onInit = function(){
-
           };
 
           this.$onChanges = function(changes){
-            console.log("onChanges ---------------------------------");
             if (changes.data.currentValue){
               var objetivo = changes.data.currentValue;
               $scope.objetivo = objetivo;
@@ -73,15 +74,21 @@ angular.
           $scope.cargarDataHistorica = cargarDataHistorica;
           function cargarDataHistorica(idObjetivo){
             console.log("Valores historicos del objetivo: " +  $scope.objetivo.nombre);
-            var fechaHasta = 23092018;
-            var fechaDesde = 01012000;
+            //La fecheHasta tiene que ser hasta 1 día POSTERIOR a cuando está el dato ya que la HORA va a ser todo 0.
+            //dia-mes-año
+            //Entonces si el dato es del 13/11/2018, para recuperarlo: fechaHasta=14112018.   
+            //El request tiene la forma final:
+            //http://localhost:8080/objetivos/valoresHistoricos?fromDate=18082018&toDate=14112018
+            var fechaDesde = 18082018;
+            var fechaHasta = 14112018;
             Objetivo.getHistorico({
               idObjetivo: idObjetivo,
               fromDate: fechaDesde,
               toDate: fechaHasta
             }, function(valoresHistoricos){
-              console.log(valoresHistoricos);
-              $scope.historico = valoresHistoricos;
+                $scope.historico = valoresHistoricos;
+            }, function (err) {
+                console.log("ERROR recuperando valores historicos");
             });
           }
         }

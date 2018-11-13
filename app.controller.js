@@ -29,7 +29,7 @@ angular.
                 delete estrategias.$promise;
                 delete estrategias.$resolved;                
                 $scope.estrategias = estrategias;
-                console.log($scope.estrategias);
+                // console.log($scope.estrategias);
             });
         }
 

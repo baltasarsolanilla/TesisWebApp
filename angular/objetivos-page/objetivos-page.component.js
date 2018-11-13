@@ -161,7 +161,7 @@ angular.
                         delete objetivos.$promise;
                         delete objetivos.$resolved;
                         $scope.objetivos = objetivos;
-                        console.log($scope.objetivos);
+                        // console.log($scope.objetivos);
                     });
                 }
             }
