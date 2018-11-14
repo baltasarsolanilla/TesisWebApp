@@ -73,14 +73,14 @@ angular.
 
           $scope.cargarDataHistorica = cargarDataHistorica;
           function cargarDataHistorica(idObjetivo){
-            console.log("Valores historicos del objetivo: " +  $scope.objetivo.nombre);
+            // console.log("Valores historicos del objetivo: " +  $scope.objetivo.nombre);
             //La fecheHasta tiene que ser hasta 1 día POSTERIOR a cuando está el dato ya que la HORA va a ser todo 0.
             //dia-mes-año
             //Entonces si el dato es del 13/11/2018, para recuperarlo: fechaHasta=14112018.   
             //El request tiene la forma final:
             //http://localhost:8080/objetivos/valoresHistoricos?fromDate=18082018&toDate=14112018
-            var fechaDesde = 18082018;
-            var fechaHasta = 14112018;
+            var fechaDesde = '01012018';
+            var fechaHasta = '01012020';
             Objetivo.getHistorico({
               idObjetivo: idObjetivo,
               fromDate: fechaDesde,
