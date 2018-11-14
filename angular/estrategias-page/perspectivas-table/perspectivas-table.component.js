@@ -63,13 +63,22 @@ angular.
               this.$onChanges = function(changes){
                 if (changes.data.currentValue){
                   changeDataTable(changes.data.currentValue);
-                  console.log(this);
+                  // console.log(this);
                   
                 }
               };
 
               //Esta funcion recarga el dataset con los indicadoresAfecantes del objetivo seleccionado
               function changeDataTable(data){
+                if ($scope.tableParams == undefined){
+                  $scope.tableParams = new NgTableParams({
+                    page: 1, // show first page
+                    count: 10 // count per page
+                    }, {
+                    counts: [],
+                    dataset: angular.copy(originalData)
+                  });
+                }
                 originalData = data;
                 $scope.tableParams.settings({
                   dataset: angular.copy(originalData)
@@ -80,7 +89,7 @@ angular.
 
               //Carga la PERSPECTIVA seleccionado en el search-box.
               function onSelectPerspectiva(value){
-                $window.console.log(controllerName + "onSelectPerspectiva(value)");
+                // $window.console.log(controllerName + "onSelectPerspectiva(value)");
                 $scope.selectedPerspectiva = value;
               }
 
@@ -125,7 +134,7 @@ angular.
               }
           
               function hasChanges() {
-                $window.console.log(controllerName + "hasChanges()");
+                // $window.console.log(controllerName + "hasChanges()");
                 return $scope.isRowDeleted || $scope.isRowAdded;
               }
           
@@ -192,7 +201,7 @@ angular.
                       id: objetivo.id,
                       nombre: objetivo.nombre
                   };
-                  console.log("------------------------------------------------",$scope.selectedPerspectiva);
+                  
                   Perspectiva.deleteObjetivoAfectante({idPerspectiva: $scope.selectedPerspectiva.id}, obj, function(response){
                       alert("Objetivo afectante eliminado exitosamente");
                       console.log(response);
@@ -215,7 +224,7 @@ angular.
             var $ctrl = this;
             var controllerName = "PERSPECTIVAS-TABLE-MODAL -> ";
             $ctrl.$onInit = function () {
-              $window.console.log(controllerName + "onInit()");
+              // $window.console.log(controllerName + "onInit()");
               // $ctrl.items = $ctrl.resolve.items;
               // $ctrl.selected = {
               //   item: $ctrl.items[0]
@@ -228,7 +237,7 @@ angular.
             };
 
             $ctrl.ok = function () {
-              $window.console.log(controllerName + "ok()");
+              // $window.console.log(controllerName + "ok()");
               $ctrl.close({$value: $ctrl.perspectivaForm});
             };
 

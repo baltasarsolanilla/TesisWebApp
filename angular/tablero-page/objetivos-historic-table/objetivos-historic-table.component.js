@@ -10,7 +10,7 @@ angular.
         controller: function objetivosHistoricTableController($scope, NgTableParams, BuilderTable){
             // tip: to debug, open chrome dev tools and uncomment the following line 
             //debugger;
-
+            // LA TENDENCIA NO SE MUESTRA MÁS -- LIMPIAR CUANDO SE QUIERA
             var data = [{
                     // id: 0
                     fecha: 'Enero 2016',
@@ -54,10 +54,22 @@ angular.
   
             //Esta funcion recarga el dataset con los indicadoresAfecantes del objetivo seleccionado
             function changeDataTable(data){
+                if ($scope.tableParams == undefined){
+                    $scope.tableParams = new NgTableParams({
+                        page: 1, // show first page
+                        count: 10, // count per page
+                        filter: $scope.filter
+                        }, {
+                        filterDelay: 0,
+                        counts: [],
+                        dataset: angular.copy(originalData)
+                    });    
+                }
+                
                 originalData = formatearData(data);
                 $scope.tableParams.settings({
-                dataset: angular.copy(originalData)
-                });
+                    dataset: angular.copy(originalData)
+                    });
                 $scope.tableParams.reload();
             }
             
@@ -67,7 +79,7 @@ angular.
                     i.id = id++;
                 });
                 valoresHistoricos = addTendencias(valoresHistoricos);
-                console.log(valoresHistoricos);
+                // console.log(valoresHistoricos);
                 return valoresHistoricos;
             }
 

@@ -1,6 +1,6 @@
 <div class="">
     <h3 class="objetivo-title">{{objetivo.nombre}}</h3>
-    <h2 class="objetivo-title">{{objetivo.valor | number:2}}</h2>
+    <!-- <h2 class="objetivo-title">{{objetivo.valor | number:2}}</h2> -->
     <uib-tabset active="active" template-url="../angular/tablero-page/strategy-tabset/tabset.html">
         <uib-tab index="$index + 1" ng-repeat="tab in tabs" heading="{{tab.title}}">
           <div ng-include="tab.content"></div>

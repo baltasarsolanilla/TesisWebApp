@@ -47,6 +47,16 @@ angular.
 
             //Esta funcion recarga el dataset con los objetivosAfecantes del objetivo seleccionado
             function changeDataTable(data){
+              if ($scope.tableParams == undefined){
+                $scope.tableParams = new NgTableParams({
+                  page: 1, // show first page
+                  count: 10 // count per page
+                  }, {
+                  counts: [],
+                  dataset: angular.copy(originalData)
+                });
+              }
+             
               originalData = data;
               $scope.tableParams.settings({
                 dataset: angular.copy(originalData)

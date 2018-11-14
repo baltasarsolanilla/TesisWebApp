@@ -33,6 +33,15 @@ angular.
             };
 
             function changeDataTable(data){
+              if ($scope.tableParams == undefined){
+                $scope.tableParams = new NgTableParams({
+                  page: 1, // show first page
+                  count: 10 // count per page
+                  }, {
+                  counts: [],
+                  dataset: kpi_data
+                });
+              }
               $scope.tableParams.settings({
                 dataset: angular.copy(data)
               });

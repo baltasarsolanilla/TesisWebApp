@@ -47,12 +47,12 @@ angular.
                         delete estrategias.$promise;
                         delete estrategias.$resolved;
                         $scope.estrategias = estrategias;
-                        console.log($scope.estrategias);
+                        // console.log($scope.estrategias);
                     });
                 }
 
                 function onSelectEstrategia(value){
-                    $window.console.log(controllerName + "onSelectEstrategia(value");
+                    // $window.console.log(controllerName + "onSelectEstrategia(value");
                     $scope.selectedEstrategia = value;
                 }
 
@@ -163,7 +163,7 @@ angular.
               var $ctrl = this;
               var controllerName = "ESTRATEGIAS-PAGE-MODAL -> ";
               $ctrl.$onInit = function () {
-                $window.console.log(controllerName + "onInit()");
+                // $window.console.log(controllerName + "onInit()");
                 // $ctrl.items = $ctrl.resolve.items;
                 // $ctrl.selected = {
                 //   item: $ctrl.items[0]
@@ -178,7 +178,7 @@ angular.
               };
 
               $ctrl.ok = function () {
-                $window.console.log(controllerName + "ok()");
+                // $window.console.log(controllerName + "ok()");
                 $ctrl.close({$value: $ctrl.estrategiaForm});
               };
 

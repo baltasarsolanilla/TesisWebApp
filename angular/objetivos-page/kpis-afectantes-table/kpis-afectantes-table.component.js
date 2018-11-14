@@ -44,6 +44,7 @@ angular.
                 
                 $scope.onSelectKpi = onSelectKpi;
                 $scope.onSelectPeso = onSelectPeso;
+                pesoTotal = 0.0;
 
                 //AJAX
                 $scope.cargarIndicadores = cargarIndicadores;
@@ -72,13 +73,22 @@ angular.
                 this.$onChanges = function(changes){
                   if (changes.data.currentValue){
                     changeDataTable(changes.data.currentValue);
-                    console.log(this);
+                    // console.log(this);
                     
                   }
                 };
 
                 //Esta funcion recarga el dataset con los indicadoresAfecantes del objetivo seleccionado
                 function changeDataTable(data){
+                  if ($scope.tableParams == undefined){
+                    $scope.tableParams = new NgTableParams({
+                      page: 1, // show first page
+                      count: 10 // count per page
+                      }, {
+                      counts: [],
+                      dataset: angular.copy(originalData)
+                    });
+                  }
                   originalData = data;
                   pesoTotal = BuilderTable.getPesoTotal(data);
                   $scope.tableParams.settings({
@@ -179,7 +189,7 @@ angular.
                     delete indicadores.$promise;
                     delete indicadores.$resolved;
                     $scope.indicadores = indicadores;
-                    console.log($scope.indicadores);
+                    // console.log($scope.indicadores);
                   });
                 }
                 

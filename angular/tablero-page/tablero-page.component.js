@@ -11,7 +11,7 @@ angular.
 
             $scope.onSelectTreeItem = onSelectTreeItem;
             function onSelectTreeItem(item){
-                console.log(item);
+                // console.log(item);
                 $scope.treeItemSelected = item;
             }
 
@@ -22,8 +22,9 @@ angular.
             this.$onChanges = function(changes){
             };
 
-            $scope.$watch(function() { return GlobalStorageFactory.getEstrategia(); }, function(estrategiaSeleccionada) { 
-                $scope.perspectivasAfectantes = estrategiaSeleccionada.perspectivasAfectantes;
+            $scope.$watch(function() { return GlobalStorageFactory.getEstrategia(); }, function(estrategiaSeleccionada) {
+                if (estrategiaSeleccionada != undefined) 
+                    $scope.perspectivasAfectantes = estrategiaSeleccionada.perspectivasAfectantes;
             }, true);
         }
     });
