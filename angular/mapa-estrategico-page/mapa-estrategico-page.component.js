@@ -7,6 +7,7 @@ angular.
       controller: function mapaEstrategicoPageController($scope, GlobalStorageFactory) {
         /*
         https://www.youtube.com/watch?v=7cfHF7yAoJE&ab_channel=GoJSJavaScriptDiagrammingLibrary
+        Para commit
         */
         let $ = go.GraphObject.make;
         let diagram = $(go.Diagram,"myDiagramDiv");
