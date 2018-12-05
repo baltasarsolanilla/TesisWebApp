@@ -205,12 +205,11 @@ angular.
               
               if(inputObjs[cantidad].tendencia == "BAJA")
                 objetivos[cantidad].imagen = "../angular/mapa-estrategico-page/images/flecha-roja-t2.png";
-              else
-                if(inputObjs[cantidad].tendencia == "MEDIA")
+              else if(inputObjs[cantidad].tendencia == "MEDIA")
                   objetivos[cantidad].imagen = "../angular/mapa-estrategico-page/images/flecha-amarilla-t2.png";
-                else
+              else if(inputObjs[cantidad].tendencia == "ALTA")
                   objetivos[cantidad].imagen = "../angular/mapa-estrategico-page/images/flecha-verde-t2.png";
-              
+
               posObjetivo = objXOrigen + " " + objYOrigen;
               objetivos[cantidad].loc = posObjetivo;
               diagram.model.addNodeData(objetivos[cantidad]);
