@@ -19,20 +19,38 @@ var data = {
 	],
     datasets: [{
         // backgroundColor: utils.transparentize(presets.red),
+        backgroundColor: 'rgba(255, 255, 255, 1)',
+        borderColor: 'rgba(255, 255, 255, 1)',
+        borderWidth: 0.01,
+        data: [0, 0, 0, 0, 0, 0],
+        hidden: true,
+        fill: 'origin',
+        label: '',
+        radius: 0
+    }, {
+        // backgroundColor: utils.transparentize(presets.red),
         backgroundColor: 'rgba(235, 75, 37, 0.3)',
         borderColor: 'rgba(235, 75, 37, 0.35)',
         borderWidth: 0.01,
-        data: [6, 6.5, 7.5, 5, 3, 3],
+        data: [2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
         hidden: false,
         fill: 'origin',
         label: 'Malo',
         radius: 0
     }, {
+        backgroundColor: 'rgba(252, 140, 40, 0.3)', //utils.transparentize(presets.yellow),
+        borderColor: 'rgba(252, 140, 40, 0.35)', //presets.yellow,
+        borderWidth: 0.01,
+        data: [5.0, 5.0, 5.0, 5.0, 5.0, 5.0],
+        label: 'Regular',
+        fill: '-1',
+        radius: 0
+    }, {
         backgroundColor: 'rgba(246, 217, 0, 0.3)', //utils.transparentize(presets.yellow),
         borderColor: 'rgba(246, 217, 0, 0.35)', //presets.yellow,
         borderWidth: 0.01,
-        data: [8, 9, 9, 7, 5, 4],
-        label: 'Aceptable',
+        data: [7.5, 7.5, 7.5, 7.5, 7.5, 7.5],
+        label: 'Bueno',
         fill: '-1',
         radius: 0
     }, {

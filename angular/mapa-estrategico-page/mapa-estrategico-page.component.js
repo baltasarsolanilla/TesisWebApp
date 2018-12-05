@@ -57,7 +57,7 @@ angular.
                 key: objetivo.nombre, 
                 valor: objetivo.valor, 
                 group: $scope.perspectivas[i].nombre, 
-                tendencia: 0
+                tendencia: objetivo.tendencia
               });
               for (let k = 0; k < objetivo.objetivosAfectantes.length; k++) {
                 inputLinks.push({
@@ -174,28 +174,39 @@ angular.
             let objXOrigen = 30+70+35;
             let posObjetivo;
             for (let j = 0; j < objetivosPerspectivas[i]; j++) {
-              let tend = Math.random();
-              console.log(tend);
-              objetivos.push({key: inputObjs[cantidad].key, group: inputObjs[cantidad].group, valor: inputObjs[cantidad].valor, color: 0, tendencia: tend, imagen: 0, highlight: 0});
-              if (inputObjs[cantidad].valor < 3.33){
-                objetivos[cantidad].highlight = "#c24128";
-                objetivos[cantidad].color = "#eb4b25";
+              objetivos.push({key: inputObjs[cantidad].key, group: inputObjs[cantidad].group, valor: inputObjs[cantidad].valor, color: 0, tendencia: inputObjs[cantidad].tendencia, imagen: 0, highlight: 0});
+              //console.log(inputObjs[cantidad].key + " --> " + inputObjs[cantidad].valor);
+              if (!inputObjs[cantidad].valor){
+                objetivos[cantidad].highlight = "#555555";
+                objetivos[cantidad].color = "#dddddd";
               }
               else{
-                if (inputObjs[cantidad].valor < 6.66){
-                  objetivos[cantidad].highlight = "#c9a330";
-                  objetivos[cantidad].color = "#f6d900";
+                if (inputObjs[cantidad].valor < 2.5){
+                  objetivos[cantidad].highlight = "#c24128";
+                  objetivos[cantidad].color = "#eb4b25";
                 }
                 else{
-                  objetivos[cantidad].highlight = "#78a400";
-                  objetivos[cantidad].color = "#91d202";
+                    if (inputObjs[cantidad].valor < 5.0){
+                      objetivos[cantidad].highlight = "#ff7514";
+                      objetivos[cantidad].color = "#fc8c28";
+                    }
+                    else{
+                    if (inputObjs[cantidad].valor < 7.5){
+                      objetivos[cantidad].highlight = "#c9a330";
+                      objetivos[cantidad].color = "#f6d900";
+                    }
+                    else{
+                      objetivos[cantidad].highlight = "#78a400";
+                      objetivos[cantidad].color = "#91d202";
+                    }
+                  }
                 }
               }
               
-              if(tend < 0.33)
+              if(inputObjs[cantidad].tendencia == "BAJA")
                 objetivos[cantidad].imagen = "../angular/mapa-estrategico-page/images/flecha-roja-t2.png";
               else
-                if(tend < 0.66)
+                if(inputObjs[cantidad].tendencia == "MEDIA")
                   objetivos[cantidad].imagen = "../angular/mapa-estrategico-page/images/flecha-amarilla-t2.png";
                 else
                   objetivos[cantidad].imagen = "../angular/mapa-estrategico-page/images/flecha-verde-t2.png";
