@@ -38,6 +38,10 @@
     "angular-block-ui": "^0.2.2"
   },
   "resolutions": {
-    "font-awesome": "~4.6.3"
+    "font-awesome": "~4.6.3",
+    "angular": "^1.7.4"
+  },
+  "devDependencies": {
+    "angularjs-gauge": "^2.2.0"
   }
 }

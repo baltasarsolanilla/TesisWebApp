@@ -1,4 +1,5 @@
 angular.module('objetivosHistoricTable', [
     'ngTable',
-    'builderTableService'
+    'builderTableService',
+    'gaugeChart'
 ]);
