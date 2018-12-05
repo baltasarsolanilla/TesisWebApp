@@ -172,9 +172,7 @@ angular.
 
               $ctrl.estrategiaForm = {
                   nombre: "",
-                  descripcion: "",
-                  mision: "",
-                  vision: ""
+                  descripcion: ""
               };
 
               $ctrl.ok = function () {
@@ -206,9 +204,7 @@ angular.
 
               $ctrl.estrategiaForm = {
                   nombre: "",
-                  descripcion: "",
-                  mision: "",
-                  vision: ""
+                  descripcion: ""
               };
 
               $ctrl.ok = function () {

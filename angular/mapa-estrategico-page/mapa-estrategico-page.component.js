@@ -7,7 +7,6 @@ angular.
       controller: function mapaEstrategicoPageController($scope, GlobalStorageFactory) {
         /*
         https://www.youtube.com/watch?v=7cfHF7yAoJE&ab_channel=GoJSJavaScriptDiagrammingLibrary
-        Para commit
         */
         let $ = go.GraphObject.make;
         let diagram = $(go.Diagram,"myDiagramDiv");
@@ -58,7 +57,7 @@ angular.
                 key: objetivo.nombre, 
                 valor: objetivo.valor, 
                 group: $scope.perspectivas[i].nombre, 
-                tendencia: 0
+                tendencia: objetivo.tendencia
               });
               for (let k = 0; k < objetivo.objetivosAfectantes.length; k++) {
                 inputLinks.push({
@@ -175,9 +174,8 @@ angular.
             let objXOrigen = 30+70+35;
             let posObjetivo;
             for (let j = 0; j < objetivosPerspectivas[i]; j++) {
-              let tend = Math.random();
-              objetivos.push({key: inputObjs[cantidad].key, group: inputObjs[cantidad].group, valor: inputObjs[cantidad].valor, color: 0, tendencia: tend, imagen: 0, highlight: 0});
-              console.log(inputObjs[cantidad].key + " --> " + inputObjs[cantidad].valor);
+              objetivos.push({key: inputObjs[cantidad].key, group: inputObjs[cantidad].group, valor: inputObjs[cantidad].valor, color: 0, tendencia: inputObjs[cantidad].tendencia, imagen: 0, highlight: 0});
+              //console.log(inputObjs[cantidad].key + " --> " + inputObjs[cantidad].valor);
               if (!inputObjs[cantidad].valor){
                 objetivos[cantidad].highlight = "#555555";
                 objetivos[cantidad].color = "#dddddd";
@@ -205,10 +203,10 @@ angular.
                 }
               }
               
-              if(tend < 0.33)
+              if(inputObjs[cantidad].tendencia == "BAJA")
                 objetivos[cantidad].imagen = "../angular/mapa-estrategico-page/images/flecha-roja-t2.png";
               else
-                if(tend < 0.66)
+                if(inputObjs[cantidad].tendencia == "MEDIA")
                   objetivos[cantidad].imagen = "../angular/mapa-estrategico-page/images/flecha-amarilla-t2.png";
                 else
                   objetivos[cantidad].imagen = "../angular/mapa-estrategico-page/images/flecha-verde-t2.png";
