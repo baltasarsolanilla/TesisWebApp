@@ -1,0 +1,9 @@
+<div class="">
+    <table ng-table="tableParams" show-filter="false" class="table table-bordered table-striped table-affect">
+        <tr ng-repeat="row in $data track by row.umbral.id">
+          <td title="'ESTADO'" sortable="'nombre'" style="text-align:left !important">
+            {{row.umbral.estado}}</td>
+          <td title="'RANGO'" sortable="'valor'" ng-style="setColorValor(row.umbral.estado)">{{row.umbral.valor}}</td>
+        </tr>
+    </table>
+</div>

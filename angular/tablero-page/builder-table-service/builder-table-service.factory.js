@@ -19,11 +19,11 @@ angular.module('builderTableService').
                 else return ALTA;
             },
             setColorValor: function(valor){
-                if (valor > 7.50)
+                if (valor >= 7.50)
                     return {color: VERDE}
-                else if (valor > 5.00)
+                else if (valor >= 5.00)
                     return {color: AMARILLO}
-                else if (valor > 2.50)
+                else if (valor >= 2.50)
                     return {color: NARANJA}
                 else
                     return {color: ROJO}
