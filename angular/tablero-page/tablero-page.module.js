@@ -4,5 +4,7 @@ angular.module("tableroPage", [
     'objetivosActualTable',
     'objetivosHistoricTable',
     'objetivosAffectTable',
-    'objetivosUmbralesTable'
+    'objetivosUmbralesTable',
+    'gaugeChart',
+    'diagramaHistorico'
 ])
