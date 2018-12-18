@@ -1,3 +1,4 @@
 angular.module('diagramaHistorico', [
-    "chart.js"
+    "chart.js",
+    "core.objetivo"
 ])

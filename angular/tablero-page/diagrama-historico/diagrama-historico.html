@@ -1,39 +1,5 @@
+<!-- Diagrama historico -->
 <div>
-	<!-- <div class="panel-heading clearfix"> -->
-		<!-- <div> 
-			<div ng-hide="editaPeriodo" class="pull-left">
-				Cantidad de períodos ({{indicador.periodo}}) graficados: {{indicador.cantidadPeriodos}} 
-			</div>
-			<form class="form-inline" ng-show="editaPeriodo">
-			  <div class="form-group">
-				<label for="edita">Cantidad de períodos a graficar:</label>
-				<input type="number" class="form-control input-sm" id="edita" ng-model="cantidadPeriodos">
-			  </div>
-			  <button ng-show="editaPeriodo" class="btn btn-primary btn-xs pull-right"
-							ng-click="confirmarPeriodos()">
-					<i class="fa fa-edit"></i> Aceptar
-			  </button>
-			</form>						
-			<button ng-hide="editaPeriodo" class="btn btn-primary btn-xs pull-right"
-							ng-click="editarPeriodos()">
-				<i class="fa fa-edit"></i> Editar
-			</button>
-		</div> -->
-	<!-- </div> -->
-	<!-- <div class="panel-body">
-		<div class="col-sm-12">
-			<canvas id="line" 
-					class="chart chart-line chart-xl"
-					data="line.data" 
-					labels="line.labels | date:'dd-MM-yyyy'" 
-					legend="true" 
-					colours="line.colors"
-					click="line.onClick" 
-					series="line.series">
-			</canvas>
-		</div>
-	</div> -->
-
 	<canvas id="line" 
 			class="chart chart-line" 
 			chart-data="data"
@@ -45,40 +11,34 @@
 			>
 	</canvas>
 
-
-	<!-- Aca arranco los componentes para seleccionar la fecha y actualizar el gráfico -->
-	<!-- <div class="panel-footer clearfix"> -->
-			<div style="margin-top:30px;">
-			<div class="row">
-				<div class="col-sm-12">
-					<div class="col-sm-6">
-						<div class='input-group date' id='fechaDesde'>
-						  <input type='text' class="form-control" id='fechaDesdeInput'/>
-						  <span class="input-group-addon">
-							  <span class="glyphicon glyphicon-calendar"></span>
-						  </span>
-						</div>
-						<!-- <small style="float: left;">Fecha desde</small> -->
-					</div>
-					<div class="col-sm-6">
-						<div class='input-group date' id='fechaHasta'>
-						  <input type='text' class="form-control" id='fechaHastaInput'/>
-						  <span class="input-group-addon">
-							  <span class="glyphicon glyphicon-calendar"></span>
-						  </span>
-						</div>
-						<!-- <small style="float: right;">Fecha hasta</small> -->
-					</div>
+	<!-- Selectores de fecha y boton "Consular periodo" -->
+	<div style="margin-top:15px;"></div>
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="col-sm-4">
+				<span class='input-group date' id='fechaDesde'>
+					<input type='text' class="form-control" id='fechaDesdeInput' placeholder="DESDE"/>
+					<span class="input-group-addon">
+						<span class="glyphicon glyphicon-calendar"></span>
+					</span>
+				</span>
+			</div>
+			<div class="col-sm-4">
+				<div class='input-group date' id='fechaHasta'>
+					<input type='text' class="form-control" id='fechaHastaInput' placeholder="HASTA"/>
+					<span class="input-group-addon">
+						<span class="glyphicon glyphicon-calendar"></span>
+					</span>
 				</div>
 			</div>
-			<div style="margin-top:20px;">
-				<button class="btn btn-primary btn-xs center-block"
-								ng-click="graficarFechaDesdeHasta()">
-					<i class="fa fa-bar-chart-o"></i>Actualizar Gráfico
+			<div class="col-sm-4">
+				<button class="btn btn-primary btn-md center-block" ng-click="graficar()">
+					<i class="fas fa-search" style="padding-right:3px;"></i>
+					Consultar período
 				</button>
-			</div>	
+			</div>
 		</div>
-<!-- </div> -->
+	</div>
 </div>
 
 <script type="text/javascript">

@@ -16,11 +16,11 @@ angular.module('balancedScorecard')
             .when('/objetivos', {
                 template: '<objetivos-page></objetivos-page>'
             })
-            .when('/indicadores', {
-                template: '<indicadores-page></indicadores-page>'
-            })
+            // .when('/indicadores', {
+            //     template: '<indicadores-page></indicadores-page>'
+            // })
             .when('/ayuda', {
-                template: '<div id="page-wrapper2"><h1>Ayuda</h1></div>'
+                templateUrl: '../informacion.html'
             })
             // .otherwise({redirectTo: $routeProvider});
             .otherwise('/tablero');
