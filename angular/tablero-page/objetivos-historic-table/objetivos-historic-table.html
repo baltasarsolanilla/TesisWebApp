@@ -9,8 +9,7 @@
         <div class="col-lg-12">
             <table ng-table="tableParams" show-filter="false" class="table table-bordered table-striped table-detalle">
                 <tr ng-repeat="row in $data track by row.id">
-                  <td title="'FECHA'" sortable="'fecha'" id="primer-columna">
-                    <a href="#">{{row.fecha}}</a></td>
+                  <td title="'FECHA'" sortable="'fecha'">{{row.fecha}}</td>
                   <td title="'VALOR'" sortable="'valor'" ng-style="setColorValor(row.valor)">{{row.valor | number:2}}</td>          
                   <!-- <td title="'TENDENCIA'" sortable="'tendencia'">
                     <i ng-class="setArrowTendencia(row.tendencia)" ng-style="setColorTendencia(row.tendencia)"></i></td> -->
