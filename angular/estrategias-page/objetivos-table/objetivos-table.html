@@ -20,7 +20,7 @@
         <colgroup>
             <col width="80%" />
         </colgroup>
-        <tr ng-repeat="row in $data track by row.id">
+        <tr ng-repeat="row in $data track by row.id" ng-click="onSelectObjetivo(row)" ng-class="{selected: row.id === selectedObjetivo.id}">
             <td title="'OBJETIVOS'" sortable="'nombre'">
                 <span class="">{{row.nombre}}
                     <button class="btn btn-danger btn-sm pull-right" ng-disabled="isRowAdded" ng-click="del(row)" ng-hide="!isEditing"><span class="glyphicon glyphicon-trash"></span></button>
@@ -28,4 +28,8 @@
             </td>
         </tr>
     </table>
+    <div class="col-lg-12" ng-show="selectedObjetivo != null" style="padding-left:0px !important;">
+        <h4>Descripcion del objetivo:</h4>
+        <p>{{selectedObjetivo.descripcion}}</p>
+    </div>
 </div>

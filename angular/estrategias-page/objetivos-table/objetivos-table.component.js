@@ -74,6 +74,7 @@ angular.
                   dataset: angular.copy(originalData)
                 });
                 $scope.tableParams.reload();
+                onSelectObjetivo(data[0]);
             }
 
               var id = '9999';
@@ -150,6 +151,15 @@ angular.
                 originalData = angular.copy($scope.tableParams.settings().dataset);
                 $scope.tableParams.reload();
               }
+
+
+              //Carga el objetivo clickeado en la tabla.
+              $scope.onSelectObjetivo = onSelectObjetivo;
+              function onSelectObjetivo(value){
+                console.log(value);
+                $scope.selectedObjetivo = value;
+              };
+              
               
           
           }
