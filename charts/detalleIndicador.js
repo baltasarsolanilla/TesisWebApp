@@ -46,7 +46,7 @@ angular.module('sbAdminApp')
 							Notification.success({message: 'Indicador actualizado correctamente', positionX: 'center', closeOnClick: 'true'});
 				    	}
 			    	},function(httpResponse){
-			    		console.log(httpResponse.data);
+			    		// console.log(httpResponse.data);
 			    		Notification.error({title: 'Error al obtener los datos del indicador', message: 'click para cerrar', positionX: 'center', closeOnClick: 'true'});
 			    	});
 				}
@@ -64,7 +64,7 @@ angular.module('sbAdminApp')
 					getIndicadorAGraficar($scope.idIndicador);
 			      }, 
 			      function(httpResponse){
-					    console.log(httpResponse.data);
+					    // console.log(httpResponse.data);
 					    Notification.error({title: httpResponse.data, positionX: 'center'});
 			    });
 			}

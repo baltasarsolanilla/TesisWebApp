@@ -59,7 +59,7 @@ component('diagramaHistorico', {
             if ($scope.$ctrl.data != null){
                 idObjetivo = data;
             }
-            console.log("onInit - idObjetivo: ", idObjetivo);
+            // console.log("onInit - idObjetivo: ", idObjetivo);
         };
 
         this.$onChanges = function(changes){
@@ -71,7 +71,7 @@ component('diagramaHistorico', {
                 // var fechaHasta = '01012020';
                 graficarFechaDesdeHasta(fechaDesde, fechaHasta);
             }
-            console.log("onChanges - idObjetivo: ", idObjetivo);
+            // console.log("onChanges - idObjetivo: ", idObjetivo);
         };
 
         $scope.graficar = function(){
@@ -115,8 +115,8 @@ component('diagramaHistorico', {
         }
         
         function graficarFechaDesdeHasta(fechaDesde, fechaHasta){
-            console.log("Fecha desde:",fechaDesde);
-            console.log("Fecha hasta:",fechaHasta);
+            // console.log("Fecha desde:",fechaDesde);
+            // console.log("Fecha hasta:",fechaHasta);
             Objetivo.getHistorico({
                 idObjetivo: idObjetivo,
                 fromDate: fechaDesde,
@@ -130,7 +130,7 @@ component('diagramaHistorico', {
         }
 
         function prepararValores(valoresHistoricos){
-            console.log("Valores historicos recuperados: ", valoresHistoricos)
+            // console.log("Valores historicos recuperados: ", valoresHistoricos)
             var newLabels = [];
             var newData = [];
             var newUmbralesMalos = [];
