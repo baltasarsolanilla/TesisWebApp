@@ -30,6 +30,7 @@ angular.
               $scope.hasChanges = hasChanges;
               $scope.cancelChanges = cancelChanges;
               $scope.saveChanges = saveChanges;
+              $scope.selectedObjetivo = null;
 
               // Variables de controller
               var controllerName = "OBJETIVOS-TABLE-CONTROLLER -> ";
