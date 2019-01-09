@@ -23,8 +23,9 @@ angular.
             };
 
             $scope.$watch(function() { return GlobalStorageFactory.getEstrategia(); }, function(estrategiaSeleccionada) {
-                if (estrategiaSeleccionada != undefined) 
+                if (estrategiaSeleccionada != undefined){ 
                     $scope.perspectivasAfectantes = estrategiaSeleccionada.perspectivasAfectantes;
-            }, true);
+                }
+            });
         }
     });

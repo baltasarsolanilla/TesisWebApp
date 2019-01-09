@@ -91,7 +91,7 @@ angular.
                       obj.id = id;
                       id++;
                       listaObjetivosAgregados.push(obj);
-                      $scope.tableParams.settings().dataset.unshift(obj);
+                      $scope.tableParams.settings().dataset.push(obj);
                       $scope.tableParams.sorting({});
                       $scope.tableParams.page(1);
                       $scope.tableParams.reload();

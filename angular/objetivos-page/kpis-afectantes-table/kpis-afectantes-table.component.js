@@ -126,7 +126,7 @@ angular.
                   listaIndicadoresAgregados.push(indicadorAgregado);
 
                   pesoTotal += indicadorAgregado.peso;
-                  $scope.tableParams.settings().dataset.unshift(indicadorAgregado);
+                  $scope.tableParams.settings().dataset.push(indicadorAgregado);
                   // we need to ensure the user sees the new row we've just added.
                   // it seems a poor but reliable choice to remove sorting and move them to the first page
                   // where we know that our new item was added to

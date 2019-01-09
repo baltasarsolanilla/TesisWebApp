@@ -108,7 +108,7 @@ angular.
                       pers.id = id;
                       id++;
                       listaPerspectivasAgregadas.push(pers);
-                      $scope.tableParams.settings().dataset.unshift(pers);
+                      $scope.tableParams.settings().dataset.push(pers);
                       $scope.tableParams.sorting({});
                       $scope.tableParams.page(1);
                       $scope.tableParams.reload();

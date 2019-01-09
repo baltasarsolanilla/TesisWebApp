@@ -26,8 +26,6 @@ angular.
           };
 
           vm.onSelectValue = function(value){
-            // $window.console.log(componentName + "onSelectValue()");
-            // $window.console.log(value);
             vm.onSelect({value: value});
           };
         }
