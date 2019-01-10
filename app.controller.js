@@ -9,6 +9,8 @@ angular.
         //Funciones
         $scope.cargarEstrategias = cargarEstrategias;
         $scope.onSelectEstrategia = onSelectEstrategia;
+        $scope.firstDefault = true;
+        // $scope.lastDefault = false;
 
         //Atributos
         $scope.estrategias = [];
@@ -37,5 +39,14 @@ angular.
             $scope.estrategiaSeleccionada = value;
             GlobalStorageFactory.setEstrategia($scope.estrategiaSeleccionada);
         }
+
+        $scope.$watch(function(){return GlobalStorageFactory.getActualizarEstrategias();}, function(actualizar) {
+            if (actualizar == true){
+                cargarEstrategias();
+                $scope.firstDefault = false;
+                // $scope.lastDefault = true;
+                GlobalStorageFactory.setActualizarEstrategias(false);
+            }
+        });
 
       });

@@ -4,7 +4,7 @@ angular.
     module('estrategiasPage').
         component('estrategiasPage', {
             templateUrl: '../angular/estrategias-page/estrategias-page.html',
-            controller: function PerspectivasPageController($scope, $window, $uibModal, Estrategia){
+            controller: function PerspectivasPageController($scope, $window, $uibModal, Estrategia, GlobalStorageFactory){
         
                 //HTTP REST REQUEST-RESPONSE
              /*   console.log("Estrategia: GET ");
@@ -67,6 +67,7 @@ angular.
                       Estrategia.save(est, function(estrategia_creada){
                           $scope.estrategias.push(estrategia_creada);
                           //onSelectEstrategia(estrategia_creada);  quiero agregar que se vea esta al crearla
+                          GlobalStorageFactory.setActualizarEstrategias(true);
                           alert("Estrategia creada exitosamente");
                       });
                     }, function () {
