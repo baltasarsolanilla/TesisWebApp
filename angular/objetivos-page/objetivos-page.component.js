@@ -22,7 +22,6 @@ angular.
                 // Variables del controller
                 
                 this.$onInit = function() {
-                    cargarObjetivos();
                     $scope.objetivoSeleccionado = {
                         "descripcion" : "Descripción del objetivo seleccionado..."
                     };

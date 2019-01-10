@@ -52,14 +52,17 @@ angular.
                   dataset: angular.copy(originalData)
                 });
 
-                // $scope.objetivos = $scope.$ctrl.objetivos;
               };
 
               this.$onChanges = function(changes){
-                if (changes.data.currentValue){
-                  changeDataTable(changes.data.currentValue);
+                if (changes.data){
+                  if (changes.data.currentValue){
+                    changeDataTable(changes.data.currentValue);
+                  }
+                  else{
+                    changeDataTable([]);
+                  }
                 }
-                // $scope.objetivos = $scope.$ctrl.objetivos;
               };
 
               //Esta funcion recarga el dataset con los objetivosAfecantes del objetivo seleccionado

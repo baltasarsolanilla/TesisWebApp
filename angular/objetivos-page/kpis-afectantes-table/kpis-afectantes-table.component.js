@@ -71,10 +71,13 @@ angular.
                 };
 
                 this.$onChanges = function(changes){
-                  if (changes.data.currentValue){
-                    changeDataTable(changes.data.currentValue);
-                    // console.log(this);
-                    
+                  if (changes.data){
+                    if (changes.data.currentValue){
+                      changeDataTable(changes.data.currentValue);
+                    }
+                    else{
+                      changeDataTable([]);
+                    }
                   }
                 };
 
