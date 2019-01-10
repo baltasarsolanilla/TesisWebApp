@@ -37,6 +37,7 @@ angular.
                     modalInstance.result.then(function (est) {
                       Estrategia.save(est, function(estrategia_creada){
                           GlobalStorageFactory.setActualizarEstrategias(true);
+                          GlobalStorageFactory.setAccion("CREATE");
                           alert("Estrategia creada exitosamente");
                       });
                     }, function () {
@@ -59,8 +60,8 @@ angular.
                     modalInstance.result.then(function (est) {
                         Estrategia.update(est, function(estrategia_modificada){
                             alert("Estrategia modificada exitosamente");
-                            var indexOfEst = $scope.estrategias.findIndex(i => i.id === estrategia_modificada.id);
-                            $scope.estrategias.splice(indexOfEst, 1, estrategia_modificada);
+                            GlobalStorageFactory.setActualizarEstrategias(true);
+                            GlobalStorageFactory.setAccion("UPDATE");
                         });
                     }, function () {
                         $window.console.log('modal-component dismissed at: ' + new Date());
@@ -69,11 +70,10 @@ angular.
 
                 function deleteEstrategia(){
                   Estrategia.delete({idEstrategia: $scope.selectedEstrategia.id}, function(response) {
-                        var indexOfEst = $scope.estrategias.findIndex(i => i.id === $scope.selectedEstrategia.id);
-                        $scope.estrategias.splice(indexOfEst, 1);
                         alert("Estrategia eliminada exitosamente");
-                        $window.location.reload();
-                        /*onSelectEstrategia($scope.estrategias[0]);*/
+                        GlobalStorageFactory.setActualizarEstrategias(true);
+                        GlobalStorageFactory.setAccion("DELETE");
+                        // $window.location.reload();
                     });
                 }
 

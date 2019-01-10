@@ -8,8 +8,7 @@ angular.
           onSelect: '&',
           message: '<',
           data: '<',
-          firstDefault: '<',
-          lastDefault: '<'
+          selectDefault: '<'
         },
         controller: function SearchBoxController($window){
           var vm = this;
@@ -19,23 +18,23 @@ angular.
           };
           
           vm.item = {};
+
           this.$onChanges = function(changes){
-            var listaItems = changes.data.currentValue;
-            if (listaItems && (vm.firstDefault || vm.lastDefault)){
-              if (vm.firstDefault){
+            //Configuracion de seleccion por default.
+            if (changes.data && changes.data.currentValue && vm.selectDefault != null){
+              var listaItems = changes.data.currentValue;
+              if (vm.selectDefault == "FIRST"){
                 vm.item.selected = listaItems[0];
               }
-              // if (vm.lastDefault){
-              //   vm.item.selected = listaItems[listaItems.length-1];  
-              // }
+              if (vm.selectDefault == "LAST"){
+                vm.item.selected = listaItems[listaItems.length-1];  
+              }
+              if (vm.selectDefault == "NO_CHANGE"){
+                var indexOfEst = vm.data.findIndex(i => i.id === vm.item.selected.id);
+                vm.item.selected = vm.data[indexOfEst];  
+              }
               vm.onSelectValue(vm.item.selected);
             }
-            
-            // if (changes.lastDefault.currentValue){
-            //   console.log("last");
-            //   vm.item.selected = $ctrl.data[$ctrl.data.length-1];
-            //   vm.onSelectValue(vm.item.selected);
-            // }
           };
 
           vm.onSelectValue = function(value){
