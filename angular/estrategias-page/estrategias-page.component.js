@@ -5,6 +5,21 @@ angular.
         component('estrategiasPage', {
             templateUrl: '../angular/estrategias-page/estrategias-page.html',
             controller: function PerspectivasPageController($scope, $window, $uibModal, Estrategia, GlobalStorageFactory){
+<<<<<<< HEAD
+=======
+        
+                //HTTP REST REQUEST-RESPONSE
+             /*   console.log("Estrategia: GET ");
+                $scope.estrategias = Estrategia.query(function(estrategias){
+                    estrategias.forEach(element => {
+                        $window.console.log(element.nombre);
+                        $window.console.log("Mision: " + element.mision);    
+                        $window.console.log("Vision: " + element.vision);
+                    });
+                    $window.console.log($scope.estrategias);                  
+                });*/
+                
+>>>>>>> sincronizacion_menu_lateral
                 
                 // FuncIones de controler
                 $scope.createEstrategia = createEstrategia;
@@ -37,6 +52,11 @@ angular.
                     modalInstance.result.then(function (est) {
                       Estrategia.save(est, function(estrategia_creada){
                           $scope.estrategias.push(estrategia_creada);
+<<<<<<< HEAD
+=======
+                          //onSelectEstrategia(estrategia_creada);  quiero agregar que se vea esta al crearla
+                          GlobalStorageFactory.setActualizarEstrategias(true);
+>>>>>>> sincronizacion_menu_lateral
                           alert("Estrategia creada exitosamente");
                       });
                     }, function () {

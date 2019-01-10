@@ -8,7 +8,8 @@ angular.
           onSelect: '&',
           message: '<',
           data: '<',
-          firstDefault: '<'
+          firstDefault: '<',
+          lastDefault: '<'
         },
         controller: function SearchBoxController($window){
           var vm = this;
@@ -19,10 +20,22 @@ angular.
           
           vm.item = {};
           this.$onChanges = function(changes){
-            if (changes.data.currentValue && vm.firstDefault){
-              vm.item.selected = changes.data.currentValue[0];
+            var listaItems = changes.data.currentValue;
+            if (listaItems && (vm.firstDefault || vm.lastDefault)){
+              if (vm.firstDefault){
+                vm.item.selected = listaItems[0];
+              }
+              // if (vm.lastDefault){
+              //   vm.item.selected = listaItems[listaItems.length-1];  
+              // }
               vm.onSelectValue(vm.item.selected);
             }
+            
+            // if (changes.lastDefault.currentValue){
+            //   console.log("last");
+            //   vm.item.selected = $ctrl.data[$ctrl.data.length-1];
+            //   vm.onSelectValue(vm.item.selected);
+            // }
           };
 
           vm.onSelectValue = function(value){
