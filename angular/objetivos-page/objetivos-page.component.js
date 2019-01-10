@@ -4,7 +4,7 @@ angular.
     module('objetivosPage').
         component('objetivosPage', {
             templateUrl: '../angular/objetivos-page/objetivos-page.html',
-            controller: function ObjetivosPageController($scope, $window, $uibModal, Objetivo){                
+            controller: function ObjetivosPageController($scope, $window, $uibModal, Objetivo, GlobalStorageFactory){                
                 var controllerName = "OBJETIVOS-PAGE-CONTROLLER -> ";            
             
                 //CRUD
@@ -16,15 +16,8 @@ angular.
                 $scope.addObjetivosAfectantes = addObjetivosAfectantes;
                 $scope.deleteObjetivosAfectantes = deleteObjetivosAfectantes;
 
-                
-                //AJAX
-                $scope.cargarObjetivos = cargarObjetivos;
-
                 //Otras
                 $scope.onSelectObjetivo = onSelectObjetivo;
-
-                
-                cargarObjetivos();
 
                 // Variables del controller
                 
@@ -34,6 +27,14 @@ angular.
                         "descripcion" : "Descripción del objetivo seleccionado..."
                     };
                 };
+
+                //Watcher para sincronizar el objetivo a modificar con la estrategia seleccionada en el menu lateral.
+                $scope.$watch(function() { return GlobalStorageFactory.getEstrategia(); }, function(estrategiaSeleccionada) {
+                    if (estrategiaSeleccionada != undefined) {
+                        cargarObjetivos();
+                    }
+                });
+
 
                 function onSelectObjetivo(value){
                     $scope.objetivoSeleccionado = value;
@@ -157,12 +158,13 @@ angular.
                 }
 
                 function cargarObjetivos(){
-                    Objetivo.query(function(objetivos){
-                        delete objetivos.$promise;
-                        delete objetivos.$resolved;
-                        $scope.objetivos = objetivos;
-                        // console.log($scope.objetivos);
+                    var estrategia = GlobalStorageFactory.getEstrategia();
+                    var perspectivas = estrategia.perspectivasAfectantes;
+                    var objetivosAfectantes = [];
+                    angular.forEach(perspectivas, function(p) {
+                        objetivosAfectantes.push.apply(objetivosAfectantes, p.objetivosAfectantes)
                     });
+                    $scope.objetivos = objetivosAfectantes;
                 }
             }
         });

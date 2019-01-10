@@ -7,7 +7,8 @@ angular.
             bindings: {
               addObjetivos: '&',
               deleteObjetivos: '&',
-              data: '<'             
+              data: '<',
+              objetivos: '<'             
             },
             controller: function ObjetivosAfectantesTableController($scope, NgTableParams, Objetivo){
               var controllerName = "OBJETIVOS-AFECTANTES-TABLE-CONTROLLER -> ";
@@ -41,12 +42,7 @@ angular.
               var listaObjetivosEliminados = [];
               var listaObjetivosAgregados = [];
 
-
-              //AJAX
-              $scope.cargarObjetivos = cargarObjetivos;
-
               this.$onInit = function() {
-                cargarObjetivos();
                 originalData = $scope.objetivosAfectantes;
                 $scope.tableParams = new NgTableParams({
                   page: 1, // show first page
@@ -55,12 +51,15 @@ angular.
                   counts: [],
                   dataset: angular.copy(originalData)
                 });
+
+                // $scope.objetivos = $scope.$ctrl.objetivos;
               };
 
               this.$onChanges = function(changes){
                 if (changes.data.currentValue){
                   changeDataTable(changes.data.currentValue);
                 }
+                // $scope.objetivos = $scope.$ctrl.objetivos;
               };
 
               //Esta funcion recarga el dataset con los objetivosAfecantes del objetivo seleccionado
@@ -155,15 +154,6 @@ angular.
                 resetTableStatus();
                 var currentPage = $scope.tableParams.page();
                 originalData = angular.copy($scope.tableParams.settings().dataset);
-              }
-
-              //AJAX
-              function cargarObjetivos(){
-                Objetivo.query(function(objetivos){
-                  delete objetivos.$promise;
-                  delete objetivos.$resolved;
-                  $scope.objetivos = objetivos;
-                });
               }
           }
       });
