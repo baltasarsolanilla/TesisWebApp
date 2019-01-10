@@ -46,10 +46,13 @@ angular.
               $scope.perspectivas = [];
               var listaPerspectivasEliminadas = [];
               var listaPerspectivasAgregadas = [];
+              var originalData = [];
 
               this.$onInit = function() {
-                if ($scope.$ctrl.data == undefined)
-                  originalData = perspectivasFAKE;
+                originalData = perspectivasFAKE;
+                if ($scope.$ctrl.data != undefined){
+                  originalData = $scope.$ctrl.data;
+                }
                 
                 $scope.tableParams = new NgTableParams({
                   page: 1, // show first page
@@ -61,10 +64,13 @@ angular.
               };
 
               this.$onChanges = function(changes){
-                if (changes.data.currentValue){
-                  changeDataTable(changes.data.currentValue);
-                  // console.log(this);
-                  
+                if (changes.data){
+                  if (changes.data.currentValue){
+                    changeDataTable(changes.data.currentValue);
+                  }
+                  else{
+                    changeDataTable([]);
+                  }
                 }
               };
 

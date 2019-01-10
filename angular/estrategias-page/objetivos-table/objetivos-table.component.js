@@ -52,9 +52,13 @@ angular.
               };
 
               this.$onChanges = function(changes){
-                if (changes.data.currentValue){
-                  changeDataTable(changes.data.currentValue);
-                  // console.log(this);
+                if (changes.data){
+                  if (changes.data.currentValue){
+                    changeDataTable(changes.data.currentValue);
+                  }
+                  else{
+                    changeDataTable([]);
+                  }
                 }
               };
 
@@ -157,12 +161,8 @@ angular.
               //Carga el objetivo clickeado en la tabla.
               $scope.onSelectObjetivo = onSelectObjetivo;
               function onSelectObjetivo(value){
-                console.log(value);
                 $scope.selectedObjetivo = value;
               };
-              
-              
-          
           }
       });
 

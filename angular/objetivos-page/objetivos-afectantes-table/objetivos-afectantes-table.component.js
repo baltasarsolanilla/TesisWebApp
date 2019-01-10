@@ -10,7 +10,7 @@ angular.
               data: '<',
               objetivos: '<'             
             },
-            controller: function ObjetivosAfectantesTableController($scope, NgTableParams, Objetivo){
+            controller: function ObjetivosAfectantesTableController($scope, NgTableParams){
               var controllerName = "OBJETIVOS-AFECTANTES-TABLE-CONTROLLER -> ";
 
               //Lista de ObjetivosAfectantes en caso de que no se seleccione un objetivo por default.
