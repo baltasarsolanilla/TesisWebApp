@@ -36,8 +36,6 @@ angular.
 
                     modalInstance.result.then(function (est) {
                       Estrategia.save(est, function(estrategia_creada){
-                          $scope.estrategias.push(estrategia_creada);
-                          //onSelectEstrategia(estrategia_creada);  quiero agregar que se vea esta al crearla
                           GlobalStorageFactory.setActualizarEstrategias(true);
                           alert("Estrategia creada exitosamente");
                       });
