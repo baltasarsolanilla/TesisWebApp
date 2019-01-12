@@ -148,13 +148,12 @@ component('diagramaHistorico', {
                 $scope.labels = [];
             } else{
                 angular.forEach(valoresHistoricos, function(valor) {
-                    newLabels.unshift(valor.fecha);
-                    newData.unshift(valor.valor.toFixed(2));
+                    newLabels.push(valor.fecha);
+                    newData.push(valor.valor.toFixed(2));
                     newUmbralesMalos.push(umbralMalo);
                     newUmbralesRegulares.push(umbralRegular);
                     newUmbralesBuenos.push(umbralBueno); 
                     newUmbralesMuyBuenos.push(umbralMuyBueno);
-                      
                 });
                 
                 $scope.data = [newUmbralesMalos, newUmbralesRegulares, newUmbralesBuenos, newUmbralesMuyBuenos, newData];
