@@ -33,6 +33,10 @@ angular.
                 var indexOfEst = vm.data.findIndex(i => i.id === vm.item.selected.id);
                 vm.item.selected = vm.data[indexOfEst];  
               }
+              //Si no tengo posicion de seleccion por default elijo FIRST.
+              if (vm.item.selected == undefined){
+                vm.item.selected = listaItems[0];
+              }
               vm.onSelectValue(vm.item.selected);
             }
           };
