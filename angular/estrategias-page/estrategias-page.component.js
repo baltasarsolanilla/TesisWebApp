@@ -28,7 +28,7 @@ angular.
                 });
 
                 function createEstrategia(){
-                    $window.console.log(controllerName + "createEstrategia()");
+                    // $window.console.log(controllerName + "createEstrategia()");
                     var modalInstance = $uibModal.open({
                       animation: true,
                       component: 'modalCrearEstrategia'
@@ -41,7 +41,7 @@ angular.
                           alert("Estrategia creada exitosamente");
                       });
                     }, function () {
-                      $window.console.log('modal-component dismissed at: ' + new Date());
+                    //   $window.console.log('modal-component dismissed at: ' + new Date());
                     });
                 }
 
@@ -64,7 +64,7 @@ angular.
                             GlobalStorageFactory.setAccion("UPDATE");
                         });
                     }, function () {
-                        $window.console.log('modal-component dismissed at: ' + new Date());
+                        // $window.console.log('modal-component dismissed at: ' + new Date());
                     });
                 }
 
@@ -81,7 +81,7 @@ angular.
                 //ADD PERSPECTIVA AFECTANTE
                 function addPerspectivasAfectantes(perspectivas){
                     angular.forEach(perspectivas, function(i) {
-                        console.log(i);
+                        // console.log(i);
                         addSinglePerspectivaAfectante(i);
                     });
                     GlobalStorageFactory.setActualizarEstrategias(true);
@@ -96,7 +96,7 @@ angular.
                     };
                     Estrategia.addPerspectivaAfectante({idEstrategia: $scope.selectedEstrategia.id}, pers, function(response){
                         alert("Perspectiva afectante relacionado exitosamente");
-                        console.log(response);
+                        // console.log(response);
                     });
                 }
 
@@ -115,7 +115,7 @@ angular.
                     };
                     Estrategia.deletePerspectivaAfectante({idEstrategia: $scope.selectedEstrategia.id}, p, function(response){
                         alert("Perspectiva afectante eliminado exitosamente");
-                        console.log(response);
+                        // console.log(response);
                     });
                 }
             }

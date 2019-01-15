@@ -101,12 +101,12 @@ angular.
                       $scope.tableParams.page(1);
                       $scope.tableParams.reload();
                     }, function () {
-                      $window.console.log('modal-component dismissed at: ' + new Date());
+                      // $window.console.log('modal-component dismissed at: ' + new Date());
                     });
               }
           
               function del(row) {
-                $window.console.log(controllerName + "del(row)");
+                // $window.console.log(controllerName + "del(row)");
                 // console.log(row);
                 $scope.isRowDeleted = true;
                 _.remove($scope.tableParams.settings().dataset, function(item) {

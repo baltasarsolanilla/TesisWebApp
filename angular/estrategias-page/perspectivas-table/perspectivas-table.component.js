@@ -119,7 +119,7 @@ angular.
                       $scope.tableParams.page(1);
                       $scope.tableParams.reload();
                     }, function () {
-                      $window.console.log('modal-component dismissed at: ' + new Date());
+                      // $window.console.log('modal-component dismissed at: ' + new Date());
                     });
               }
 
@@ -179,7 +179,7 @@ angular.
               //ADD PERSPECTIVA AFECTANTE
               function addObjetivosAfectantes(objetivos){
                   angular.forEach(objetivos, function(o) {
-                      console.log(o);
+                      // console.log(o);
                       addSingleObjetivoAfectante(o);
                   });
                   GlobalStorageFactory.setActualizarEstrategias(true);
@@ -193,14 +193,14 @@ angular.
                   };
                   Perspectiva.addObjetivoAfectante({idPerspectiva: $scope.selectedPerspectiva.id}, obj, function(response){
                       alert("Objetivo afectante relacionado exitosamente");
-                      console.log(response);
+                      // console.log(response);
                   });
               }
 
               function deleteObjetivosAfectantes(objetivos){
                   angular.forEach(objetivos, function(o) {
                       deleteSingleObjetivoAfectante(o);
-                      console.log(o);
+                      // console.log(o);
                   });
                   GlobalStorageFactory.setActualizarEstrategias(true);
                   GlobalStorageFactory.setAccion("UPDATE");
@@ -214,7 +214,7 @@ angular.
                   
                   Perspectiva.deleteObjetivoAfectante({idPerspectiva: $scope.selectedPerspectiva.id}, obj, function(response){
                       alert("Objetivo afectante eliminado exitosamente");
-                      console.log(response);
+                      // console.log(response);
                   });
               }
           
