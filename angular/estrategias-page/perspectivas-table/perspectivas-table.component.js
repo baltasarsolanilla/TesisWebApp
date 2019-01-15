@@ -10,7 +10,7 @@ angular.
               deletePerspectivas: '&',
               data: '<'
             },
-            controller: function PerspectivasTableController($scope, $window, $uibModal, NgTableParams, Perspectiva){
+            controller: function PerspectivasTableController($scope, $window, $uibModal, NgTableParams, Perspectiva, GlobalStorageFactory){
 
               var perspectivasFAKE = [
                 {
@@ -181,7 +181,9 @@ angular.
                   angular.forEach(objetivos, function(o) {
                       console.log(o);
                       addSingleObjetivoAfectante(o);
-                    });
+                  });
+                  GlobalStorageFactory.setActualizarEstrategias(true);
+                  GlobalStorageFactory.setAccion("UPDATE");
               }
 
               function addSingleObjetivoAfectante(objetivo){
@@ -199,7 +201,9 @@ angular.
                   angular.forEach(objetivos, function(o) {
                       deleteSingleObjetivoAfectante(o);
                       console.log(o);
-                    });
+                  });
+                  GlobalStorageFactory.setActualizarEstrategias(true);
+                  GlobalStorageFactory.setAccion("UPDATE");
               }
 
               function deleteSingleObjetivoAfectante(objetivo){

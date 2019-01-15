@@ -8,13 +8,12 @@ angular.
                 var controllerName = "OBJETIVOS-PAGE-CONTROLLER -> ";            
             
                 //CRUD
-                $scope.createObjetivo = createObjetivo;
                 $scope.updateObjetivo = updateObjetivo;
-                $scope.deleteObjetivo = deleteObjetivo;
                 $scope.addIndicadoresAfectantes = addIndicadoresAfectantes;
                 $scope.deleteIndicadoresAfectantes = deleteIndicadoresAfectantes;
                 $scope.addObjetivosAfectantes = addObjetivosAfectantes;
                 $scope.deleteObjetivosAfectantes = deleteObjetivosAfectantes;
+                $scope.selectDefault = "FIRST";
 
                 //Otras
                 $scope.onSelectObjetivo = onSelectObjetivo;
@@ -37,23 +36,7 @@ angular.
 
                 function onSelectObjetivo(value){
                     $scope.objetivoSeleccionado = value;
-                }
-                
-                //CREATE OBJETIVO
-                function createObjetivo(){
-                    var modalInstance = $uibModal.open({
-                      animation: true,
-                      component: 'modalCrearObjetivo'
-                    });
-
-                    modalInstance.result.then(function (obj) {
-                      Objetivo.save(obj, function(objetivo_creado){
-                          $scope.objetivos.push(objetivo_creado);
-                          alert("Objetivo creado exitosamente");
-                      });
-                    }, function () {
-                      $window.console.log('modal-component dismissed at: ' + new Date());
-                    });
+                    $scope.selectDefault = "NO_CHANGE";
                 }
 
                 //UPDATE OBJETIVO
@@ -73,27 +56,22 @@ angular.
                             alert("Objetivo modificado exitosamente");
                             var indexOfObj = $scope.objetivos.findIndex(i => i.id === objetivo_modificado.id);
                             $scope.objetivos.splice(indexOfObj, 1, objetivo_modificado);
+                            GlobalStorageFactory.setActualizarEstrategias(true);
+                            GlobalStorageFactory.setAccion("UPDATE");
                         });
                     }, function () {
                         $window.console.log('modal-component dismissed at: ' + new Date());
                     });
                 }
                 
-                //DELETE OBJETIVO
-                function deleteObjetivo(){
-                    Objetivo.delete({idObjetivo: $scope.objetivoSeleccionado.id}, function(response) {
-                        var indexOfObj = $scope.objetivos.findIndex(i => i.id === $scope.objetivoSeleccionado.id);
-                        $scope.objetivos.splice(indexOfObj, 1);
-                        alert("Objetivo eliminado exitosamente");
-                        $window.location.reload();
-                    });
-                }
 
                 //ADD INDICADOR AFECTANTE
                 function addIndicadoresAfectantes(indicadores){
                     angular.forEach(indicadores, function(i) {
                         addSingleIndicadorAfectante(i);
-                      });
+                    });
+                    GlobalStorageFactory.setActualizarEstrategias(true);
+                    GlobalStorageFactory.setAccion("UPDATE");
                 }
 
                 function addSingleIndicadorAfectante(indicadorPeso){
@@ -110,7 +88,9 @@ angular.
                 function deleteIndicadoresAfectantes(indicadores){
                     angular.forEach(indicadores, function(i) {
                         deleteSingleIndicadorAfectante(i);
-                      });
+                    });
+                    GlobalStorageFactory.setActualizarEstrategias(true);
+                    GlobalStorageFactory.setAccion("UPDATE");
                 }
 
                 function deleteSingleIndicadorAfectante(indicadorPeso){
@@ -126,7 +106,9 @@ angular.
                 function addObjetivosAfectantes(objetivos){
                     angular.forEach(objetivos, function(i) {
                         addSingleObjetivoAfectante(i);
-                      });
+                    });
+                    GlobalStorageFactory.setActualizarEstrategias(true);
+                    GlobalStorageFactory.setAccion("UPDATE");
                 }
 
                 function addSingleObjetivoAfectante(objetivo){
@@ -142,7 +124,9 @@ angular.
                 function deleteObjetivosAfectantes(objetivos){
                     angular.forEach(objetivos, function(i) {
                         deleteSingleObjetivoAfectante(i);
-                      });
+                    });
+                    GlobalStorageFactory.setActualizarEstrategias(true);
+                    GlobalStorageFactory.setAccion("UPDATE");
                 }
 
                 
@@ -169,32 +153,6 @@ angular.
         });
 
 
-
-angular.
-    module('objetivosPage').
-        component('modalCrearObjetivo', {
-            templateUrl: '../angular/objetivos-page/objetivos-page-modals/crear-objetivo.modal.html',
-            bindings: {
-              close: '&',
-              dismiss: '&'
-            },
-            controller: function ($window) {
-              var $ctrl = this;
-
-              $ctrl.objetivoForm = {
-                  nombre: "",
-                  descripcion: ""
-              };
-
-              $ctrl.ok = function () {
-                $ctrl.close({$value: $ctrl.objetivoForm});
-              };
-
-              $ctrl.cancel = function () {
-                $ctrl.dismiss({$value: 'cancel'});
-              };
-            }
-    });
 
 angular.
     module('objetivosPage').

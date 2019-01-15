@@ -8,7 +8,8 @@ angular.
               addObjetivos: '&',
               deleteObjetivos: '&',
               data: '<',
-              objetivos: '<'             
+              objetivos: '<',
+              objetivoAfectadoId: '<'             
             },
             controller: function ObjetivosAfectantesTableController($scope, NgTableParams){
               var controllerName = "OBJETIVOS-AFECTANTES-TABLE-CONTROLLER -> ";
@@ -90,8 +91,13 @@ angular.
               }
 
               function add() {
-                if ($scope.tableParams.settings().dataset.findIndex(i => i.objetivoAfectante.id === $scope.objetivoSeleccionado.id) > -1){
+                if ($scope.tableParams.settings().dataset.findIndex(i => i.objetivoAfectante.id === $scope.objetivoSeleccionado.id) > -1 ){
                   alert("Objetivo afectante duplicado");
+                  return;
+                }
+
+                if ($scope.$ctrl.objetivoAfectadoId === $scope.objetivoSeleccionado.id){
+                  alert("Objetivo afectante igual a objetivo principal seleccionado");
                   return;
                 }
 
@@ -103,7 +109,7 @@ angular.
                 };
                 listaObjetivosAgregados.push(objetivoAgregado);
 
-                $scope.tableParams.settings().dataset.unshift(objetivoAgregado);
+                $scope.tableParams.settings().dataset.push(objetivoAgregado);
                 // we need to ensure the user sees the new row we've just added.
                 // it seems a poor but reliable choice to remove sorting and move them to the first page
                 // where we know that our new item was added to

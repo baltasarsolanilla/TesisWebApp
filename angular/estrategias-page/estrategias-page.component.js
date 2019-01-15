@@ -81,9 +81,12 @@ angular.
                 //ADD PERSPECTIVA AFECTANTE
                 function addPerspectivasAfectantes(perspectivas){
                     angular.forEach(perspectivas, function(i) {
-                      console.log(i);
+                        console.log(i);
                         addSinglePerspectivaAfectante(i);
-                      });
+                    });
+                    GlobalStorageFactory.setActualizarEstrategias(true);
+                    GlobalStorageFactory.setAccion("UPDATE");
+
                 }
 
                 function addSinglePerspectivaAfectante(perspectiva){
@@ -100,7 +103,9 @@ angular.
                 function deletePerspectivasAfectantes(perspectivas){
                     angular.forEach(perspectivas, function(p) {
                         deleteSinglePerspectivaAfectante(p);
-                      });
+                    });
+                    GlobalStorageFactory.setActualizarEstrategias(true);
+                    GlobalStorageFactory.setAccion("UPDATE");
                 }
 
                 function deleteSinglePerspectivaAfectante(perspectiva){
