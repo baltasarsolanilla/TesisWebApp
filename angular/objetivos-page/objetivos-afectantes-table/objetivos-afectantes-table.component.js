@@ -121,7 +121,7 @@ angular.
               function del(row) {
                 listaObjetivosEliminados.push(row);
                 _.remove($scope.tableParams.settings().dataset, function(item) {
-                  return row === item;
+                  return row.objetivoAfectante.id === item.objetivoAfectante.id;
                 });
                 $scope.deleteCount++;
                 

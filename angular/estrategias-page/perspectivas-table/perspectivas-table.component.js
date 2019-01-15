@@ -93,7 +93,7 @@ angular.
                 onSelectPerspectiva(data[0]);
               }
 
-              //Carga la PERSPECTIVA seleccionado en el search-box.
+              //Carga la PERSPECTIVA seleccionada.
               function onSelectPerspectiva(value){
                 // $window.console.log(controllerName + "onSelectPerspectiva(value)");
                 $scope.selectedPerspectiva = value;
@@ -126,11 +126,11 @@ angular.
               function del(row) {
                 $scope.isRowDeleted = true;
                 _.remove($scope.tableParams.settings().dataset, function(item) {
-                  return row === item;
+                  return row.id === item.id;
                 });
 
                 listaPerspectivasEliminadas.push(row);
-
+                onSelectPerspectiva($scope.tableParams.settings().dataset[0]); //Selecciono again la primera opcion.
                 $scope.tableParams.reload().then(function(data) {
                   if (data.length === 0 && $scope.tableParams.total() > 0) {
                     $scope.tableParams.page($scope.tableParams.page() - 1);

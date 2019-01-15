@@ -141,7 +141,7 @@ angular.
                 function del(row) {
                   listaIndicadoresEliminados.push(row);
                   _.remove($scope.tableParams.settings().dataset, function(item) {
-                    return row === item;
+                    return row.indicador.id === item.indicador.id;
                   });
                   $scope.deleteCount++;
                   pesoTotal -= row.peso;
