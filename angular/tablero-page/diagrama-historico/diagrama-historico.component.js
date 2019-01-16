@@ -103,6 +103,7 @@ component('diagramaHistorico', {
             var today = new Date();
             var dd = today.getDate(); //Incluyo HOY;
             var mm = today.getMonth()+1; //January is 0!
+            if (mm < 10){mm = '0'+mm;}
             var yyyy = today.getFullYear();
             var fechaHoy = dd + "" + mm + "" +yyyy;
             if (fechaFormateada == fechaHoy){
@@ -138,18 +139,29 @@ component('diagramaHistorico', {
             var newUmbralesBuenos = [];
             var newUmbralesMuyBuenos = [];
 
-            angular.forEach(valoresHistoricos, function(valor) {
-                newLabels.unshift(valor.fecha);
-                newData.unshift(valor.valor.toFixed(2));
+            if (valoresHistoricos.length == 0){
                 newUmbralesMalos.push(umbralMalo);
                 newUmbralesRegulares.push(umbralRegular);
                 newUmbralesBuenos.push(umbralBueno); 
                 newUmbralesMuyBuenos.push(umbralMuyBueno);
-                  
-            });
-            
-            $scope.data = [newUmbralesMalos, newUmbralesRegulares, newUmbralesBuenos, newUmbralesMuyBuenos, newData];
-            $scope.labels = newLabels;
+                $scope.data = [newUmbralesMalos, newUmbralesRegulares, newUmbralesBuenos, newUmbralesMuyBuenos];
+                $scope.labels = [];
+            } else{
+                angular.forEach(valoresHistoricos, function(valor) {
+                    newLabels.unshift(valor.fecha);
+                    newData.unshift(valor.valor.toFixed(2));
+                    newUmbralesMalos.push(umbralMalo);
+                    newUmbralesRegulares.push(umbralRegular);
+                    newUmbralesBuenos.push(umbralBueno); 
+                    newUmbralesMuyBuenos.push(umbralMuyBueno);
+                      
+                });
+                
+                $scope.data = [newUmbralesMalos, newUmbralesRegulares, newUmbralesBuenos, newUmbralesMuyBuenos, newData];
+                $scope.labels = newLabels;
+            }
+
+           
         }
 
         // VER SI HACE FALTA, capaz con el preparar datos ya se re-dibuja.
