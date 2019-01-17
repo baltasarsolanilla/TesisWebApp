@@ -41,12 +41,17 @@ angular.
 
                 //UPDATE OBJETIVO
                 function updateObjetivo(){
+                    var obj = {
+                        id: $scope.objetivoSeleccionado.id,
+                        nombre: $scope.objetivoSeleccionado.nombre,
+                        descripcion: $scope.objetivoSeleccionado.descripcion
+                    };
                     var modalInstance = $uibModal.open({
                         animation: true,
                         component: 'modalModificarObjetivo',
                         resolve: {
                           obj: function () {
-                            return $scope.objetivoSeleccionado;
+                            return obj;
                           }
                         }
                     });
