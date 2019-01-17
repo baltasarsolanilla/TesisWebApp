@@ -47,12 +47,17 @@ angular.
 
                 //UPDATE OBJETIVO
                 function updateEstrategia(){
+                    var est = {
+                        id: $scope.selectedEstrategia.id,
+                        nombre: $scope.selectedEstrategia.nombre,
+                        descripcion: $scope.selectedEstrategia.descripcion
+                    };
                     var modalInstance = $uibModal.open({
                         animation: true,
                         component: 'modalModificarEstrategia',
                         resolve: {
                           est: function () {
-                            return $scope.selectedEstrategia;
+                            return est;
                           }
                         }
                     });
