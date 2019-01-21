@@ -59,7 +59,6 @@ component('diagramaHistorico', {
             if ($scope.$ctrl.data != null){
                 idObjetivo = data;
             }
-            // console.log("onInit - idObjetivo: ", idObjetivo);
         };
 
         this.$onChanges = function(changes){
@@ -67,11 +66,8 @@ component('diagramaHistorico', {
                 idObjetivo = changes.data.currentValue;
                 var fechaDesde = getFechaHoyMenosSeisMeses();
                 var fechaHasta = getFechaMañana();
-                // var fechaDesde = '01012018';
-                // var fechaHasta = '01012020';
                 graficarFechaDesdeHasta(fechaDesde, fechaHasta);
             }
-             //console.log("onChanges - idObjetivo: ", idObjetivo);
         };
 
         $scope.graficar = function(){
@@ -129,8 +125,10 @@ component('diagramaHistorico', {
                     alert("Error al recuperar los valores históricos");
                 });
             }
-            else
+            else{
+                //Le paso un arreglo vacio en caso de que se haya seleccionado una perspectiva.
                 prepararValores([]);
+            }
         }
 
         function prepararValores(valoresHistoricos){
@@ -141,6 +139,8 @@ component('diagramaHistorico', {
             var newUmbralesRegulares = [];
             var newUmbralesBuenos = [];
             var newUmbralesMuyBuenos = [];
+
+            //Si el arreglo es vacio -> se selecciono una perspectiva.
             if (valoresHistoricos.length == 0){
                 newUmbralesMalos.push(umbralMalo);
                 newUmbralesRegulares.push(umbralRegular);
@@ -150,8 +150,8 @@ component('diagramaHistorico', {
                 $scope.labels = [];
             } else{
                 angular.forEach(valoresHistoricos, function(valor) {
-                    newLabels.push(valor.fecha);
-                    newData.push(valor.valor.toFixed(2));
+                    newLabels.unshift(valor.fecha);
+                    newData.unshift(valor.valor.toFixed(2));
                     newUmbralesMalos.push(umbralMalo);
                     newUmbralesRegulares.push(umbralRegular);
                     newUmbralesBuenos.push(umbralBueno); 
