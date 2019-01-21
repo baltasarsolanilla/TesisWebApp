@@ -31,6 +31,7 @@ angular.
               }
               if (vm.selectDefault == "NO_CHANGE"){
                 var indexOfEst = vm.data.findIndex(i => i.id === vm.item.selected.id);
+                vm.selectDefault = "FIRST";
                 vm.item.selected = vm.data[indexOfEst];  
               }
               vm.onSelectValue(vm.item.selected);

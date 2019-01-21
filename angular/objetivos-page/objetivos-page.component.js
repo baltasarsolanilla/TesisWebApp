@@ -31,6 +31,7 @@ angular.
                     if (estrategiaSeleccionada != undefined) {
                         cargarObjetivos();
                     }
+                    $scope.selectDefault = "FIRST";
                 });
 
 

@@ -12,7 +12,7 @@ angular.
             },
             controller: function ObjetivosTableController($scope, $window, $uibModal, NgTableParams){
               
-              var objetivosFAKE = [
+              /*var objetivosFAKE = [
                 {
                   id:"1",
                   nombre:"o1",
@@ -21,7 +21,7 @@ angular.
                   id:"2",
                   nombre:"o2",
                 }
-              ];
+              ];*/
 
                
               // Funciones de controller
@@ -41,7 +41,7 @@ angular.
 
               this.$onInit = function() {
                 if ($scope.$ctrl.data == undefined)
-                  originalData = objetivosFAKE;
+                  originalData = []; //mostraba los objetivosFAKE en los casos en que la perspectiva era vacía (porque los objetivos de la perspectiva son undefined)
                 $scope.tableParams = new NgTableParams({
                   page: 1, // show first page
                   count: 10 // count per page
