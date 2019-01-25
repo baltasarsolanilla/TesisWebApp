@@ -44,7 +44,9 @@ angular.
               var listaObjetivosAgregados = [];
 
               this.$onInit = function() {
-                originalData = $scope.objetivosAfectantes;
+                //originalData = $scope.objetivosAfectantes;
+                if ($scope.$ctrl.data == undefined)
+                  originalData = [];
                 $scope.tableParams = new NgTableParams({
                   page: 1, // show first page
                   count: 10 // count per page
@@ -120,6 +122,7 @@ angular.
 
               function del(row) {
                 listaObjetivosEliminados.push(row);
+                $scope.isRowDeleted = true;
                 _.remove($scope.tableParams.settings().dataset, function(item) {
                   return row.objetivoAfectante.id === item.objetivoAfectante.id;
                 });
@@ -161,8 +164,9 @@ angular.
                   $scope.$ctrl.addObjetivos({objetivos: listaObjetivosAgregados});
                 
                 resetTableStatus();
-                var currentPage = $scope.tableParams.page();
+                //var currentPage = $scope.tableParams.page();
                 originalData = angular.copy($scope.tableParams.settings().dataset);
+                $scope.tableParams.reload();
               }
           }
       });
