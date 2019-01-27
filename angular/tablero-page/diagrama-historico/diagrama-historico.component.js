@@ -71,7 +71,7 @@ component('diagramaHistorico', {
                 // var fechaHasta = '01012020';
                 graficarFechaDesdeHasta(fechaDesde, fechaHasta);
             }
-            // console.log("onChanges - idObjetivo: ", idObjetivo);
+             console.log("onChanges - idObjetivo: ", idObjetivo);
         };
 
         $scope.graficar = function(){
@@ -118,16 +118,20 @@ component('diagramaHistorico', {
         function graficarFechaDesdeHasta(fechaDesde, fechaHasta){
             // console.log("Fecha desde:",fechaDesde);
             // console.log("Fecha hasta:",fechaHasta);
-            Objetivo.getHistorico({
-                idObjetivo: idObjetivo,
-                fromDate: fechaDesde,
-                toDate: fechaHasta
-            }, function(valoresHistoricos){
-                prepararValores(valoresHistoricos);
-                // graficar();
-            }, function (err) {
-                alert("Error al recuperar los valores históricos");
-            });
+            if (idObjetivo != -2) {
+                Objetivo.getHistorico({
+                    idObjetivo: idObjetivo,
+                    fromDate: fechaDesde,
+                    toDate: fechaHasta
+                }, function(valoresHistoricos){
+                    prepararValores(valoresHistoricos);
+                    // graficar();
+                }, function (err) {
+                    alert("Error al recuperar los valores históricos");
+                });
+            }
+            else
+                prepararValores([]);
         }
 
         function prepararValores(valoresHistoricos){
@@ -138,7 +142,6 @@ component('diagramaHistorico', {
             var newUmbralesRegulares = [];
             var newUmbralesBuenos = [];
             var newUmbralesMuyBuenos = [];
-
             if (valoresHistoricos.length == 0){
                 newUmbralesMalos.push(umbralMalo);
                 newUmbralesRegulares.push(umbralRegular);
@@ -159,7 +162,6 @@ component('diagramaHistorico', {
                 $scope.data = [newUmbralesMalos, newUmbralesRegulares, newUmbralesBuenos, newUmbralesMuyBuenos, newData];
                 $scope.labels = newLabels;
             }
-
            
         }
 
