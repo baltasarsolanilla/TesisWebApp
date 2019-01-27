@@ -71,7 +71,7 @@ component('diagramaHistorico', {
                 // var fechaHasta = '01012020';
                 graficarFechaDesdeHasta(fechaDesde, fechaHasta);
             }
-             console.log("onChanges - idObjetivo: ", idObjetivo);
+             //console.log("onChanges - idObjetivo: ", idObjetivo);
         };
 
         $scope.graficar = function(){

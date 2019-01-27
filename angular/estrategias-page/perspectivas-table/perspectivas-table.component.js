@@ -189,8 +189,7 @@ angular.
               function addSingleObjetivoAfectante(objetivo){
                   var obj = {
                       nombre: objetivo.nombre,
-                      descripcion: objetivo.descripcion,
-                      //valor: 0.0;
+                      descripcion: objetivo.descripcion
                   };
                   Perspectiva.addObjetivoAfectante({idPerspectiva: $scope.selectedPerspectiva.id}, obj, function(response){
                       alert("Objetivo afectante relacionado exitosamente");
