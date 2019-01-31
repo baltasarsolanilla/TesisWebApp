@@ -60,7 +60,7 @@ angular.
                 //Capaz que aca debería poner que si el branch seleccionado es una perspectiva, se pase el objetivoAfectante en pos = 0.
                 $scope.onSelectItem = onSelectItem;
                 function onSelectItem(branch){
-                  console.log("arbol seleccionado: " + branch);
+                  //console.log("arbol seleccionado: " + branch);
                   $scope.$ctrl.onSelect({item: branch});
                 }
 

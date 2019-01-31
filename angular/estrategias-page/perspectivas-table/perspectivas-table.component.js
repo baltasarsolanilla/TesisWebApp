@@ -53,6 +53,9 @@ angular.
                 if ($scope.$ctrl.data != undefined){
                   originalData = $scope.$ctrl.data;
                 }
+                else{
+                  originalData = [];
+                }
                 
                 $scope.tableParams = new NgTableParams({
                   page: 1, // show first page
