@@ -60,7 +60,9 @@ angular.
                 this.$onInit = function() {
                   cargarIndicadores();
 
-                  originalData = $scope.indicadores;
+                  //originalData = $scope.indicadores;
+                  if ($scope.$ctrl.data == undefined)
+                    originalData = [];
                   $scope.tableParams = new NgTableParams({
                     page: 1, // show first page
                     count: 10 // count per page
@@ -140,6 +142,7 @@ angular.
                 
                 function del(row) {
                   listaIndicadoresEliminados.push(row);
+                  $scope.isRowDeleted = true;
                   _.remove($scope.tableParams.settings().dataset, function(item) {
                     return row.indicador.id === item.indicador.id;
                   });
@@ -182,8 +185,9 @@ angular.
                     $scope.$ctrl.addIndicadores({indicadores: listaIndicadoresAgregados});
                   
                   resetTableStatus();
-                  var currentPage = $scope.tableParams.page();
+                  //var currentPage = $scope.tableParams.page();
                   originalData = angular.copy($scope.tableParams.settings().dataset);
+                  $scope.tableParams.reload();
                 }
 
                 //AJAX
