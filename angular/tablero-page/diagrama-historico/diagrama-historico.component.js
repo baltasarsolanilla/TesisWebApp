@@ -66,7 +66,7 @@ component('diagramaHistorico', {
             if (changes.data.currentValue){
                 idObjetivo = changes.data.currentValue;
                 var fechaDesde = getFechaHoyMenosSeisMeses();
-                var fechaHasta = getFechaHoy();
+                var fechaHasta = getFechaMañana();
                 // var fechaDesde = '01012018';
                 // var fechaHasta = '01012020';
                 graficarFechaDesdeHasta(fechaDesde, fechaHasta);
@@ -100,15 +100,14 @@ component('diagramaHistorico', {
             });
             
             //Parchisimo, para cuando la fecha es igual a HOY:
-            var today = new Date();
-            var dd = today.getDate(); //Incluyo HOY;
-            var mm = today.getMonth()+1; //January is 0!
+            var date = new Date();
+            var dd = date.getDate(); //Incluyo HOY;
+            var mm = date.getMonth()+1; //January is 0!
             if (mm < 10){mm = '0'+mm;}
-            var yyyy = today.getFullYear();
+            var yyyy = date.getFullYear();
             var fechaHoy = dd + "" + mm + "" +yyyy;
             if (fechaFormateada == fechaHoy){
-                dd++;
-                fechaFormateada = dd + "" + mm + "" + yyyy;
+                fechaFormateada = getFechaMañana();
             }
             //Fin parchisimo.
             
@@ -163,22 +162,13 @@ component('diagramaHistorico', {
            
         }
 
-        // VER SI HACE FALTA, capaz con el preparar datos ya se re-dibuja.
-        function graficar(){
-            $scope.line = {
-                labels: $scope.labels,
-                series: $scope.series,
-                data: $scope.data,
-                colors : $scope.colors
-            };
-        }
-
         // VER EL FORMATO -- la funcion backend no espera las barras '/'
-        function getFechaHoy(){
-            var today = new Date();
-            var dd = today.getDate()+1; //Incluyo HOY;
-            var mm = today.getMonth()+1; //January is 0!
-            var yyyy = today.getFullYear();
+        function getFechaMañana(){
+            var tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            var dd = tomorrow.getDate(); //Incluyo HOY;
+            var mm = tomorrow.getMonth()+1; //January is 0!
+            var yyyy = tomorrow.getFullYear();
 
             if(dd<10) {
                 dd = '0'+dd;
@@ -196,8 +186,8 @@ component('diagramaHistorico', {
             var today = new Date();
             var  todayMenos6 = new Date(today);
             todayMenos6.setMonth(today.getMonth() - 6);
-
-            var ddv = todayMenos6.getDate()+1; //Incluyo HOY
+            todayMenos6.setDate(today.getDate() +1);
+            var ddv = todayMenos6.getDate(); //Incluyo HOY
             var mmv = todayMenos6.getMonth()+1; //January is 0!
             var yyyyv = todayMenos6.getFullYear();
 
