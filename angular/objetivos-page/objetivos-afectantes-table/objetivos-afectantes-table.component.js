@@ -103,6 +103,11 @@ angular.
                   return;
                 }
 
+                if ($scope.objetivoSeleccionado.objetivosAfectantes.findIndex(i => i.objetivoAfectante.id === $scope.$ctrl.objetivoAfectadoId) > -1 ){
+                  alert("Ya existe una relación de afección entre el objetivo " + $scope.objetivoSeleccionado.nombre + " y el objetivo principal seleccionado");
+                  return;
+                }
+
                 $scope.isEditing = true;
                 $scope.isRowAdded = true;
                 
