@@ -1,0 +1,33 @@
+----------------------
+Instalar back-end
+----------------------
+1) Bajar el JAR.
+2) Configurar la BD
+    *spring.datasource.url=jdbc:mysql://localhost:3306/bsc_db
+    *spring.datasource.username=tesis
+    *spring.datasource.password=tesis
+3) Correr el JAR (con modificacion de application.properties)
+    $ java -jar myproject.jar (--spring.config.location=classpath)
+
+(OPCIONAL) Si se requiere modificar el application.properties, corremos el JAR indicando la ruta del nuevo application.properties:
+Ref: https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-external-config.html
+$ java -jar myproject.jar --spring.config.location=classpath:/custom.properties
+
+
+----------------------
+Instalar front-end
+----------------------
+1) Bajar el repo.
+2) Instalar dependencias:
+    $ bower install
+3) Instalar node si hiciera falta.
+4) Levantarlo en un server node
+    $ http-server -c-1 -o
+
+
+-----------------
+Otros comandos:
+Generar JAR en backend:
+$ ./mvnw clean package
+Correr backend sin JAR:
+$ ./mvnw spring-boot:run
