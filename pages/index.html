@@ -49,7 +49,8 @@
     <link rel="stylesheet" href="../charts/gauge-chart/gauge-chart.css" >
 
     <!-- ngTable -->
-    <link rel='stylesheet prefetch' href='https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.css'>
+    <link rel='stylesheet prefetch' href='../bower_components/ng-table-bundle/ng-table.min.css'>
+
     
     <!-- objetivos-actual-table -->
     <link rel="stylesheet" href="../angular/tablero-page/objetivos-actual-table/objetivos-actual-table.css">
@@ -82,6 +83,10 @@
 
     <link rel="stylesheet" href="../bower_components/angular-block-ui/dist/angular-block-ui.min.css">
 
+    <!-- ************************** BLOCK-UI ************************** -->
+
+    <link rel="stylesheet" href="../bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
+
 
 
 
@@ -105,7 +110,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">Ábaco Informática {{greeting}}</a>
+                <a class="navbar-brand" href="index.html">Cuadro de mando integral</a>
             </div>
             <!-- /.navbar-header -->
            
@@ -135,27 +140,30 @@
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <li class="sidebar-search">
-                            <search-box message="'Estrategia...'" data="estrategias" on-select="onSelectEstrategia(value)" first-default="true"></search-box>
+                            <search-box message="'Estrategia...'" data="estrategias" 
+                                        on-select="onSelectEstrategia(value)" 
+                                        select-default="selectDefault">
+                            </search-box>
                             <!-- /input-group -->
                         </li>
                         <li>
                             <!-- <a href="index.html"><i class="fa fa-cogs fa-fw"></i> Estrategia </a> -->
-                            <a href="#!/tablero"><i class="fa fa-location-arrow fa-fw"></i>Tablero</a>
+                            <a href="#!/home"><i class="fa fa-location-arrow fa-fw" style="margin-right:1px;"></i>Home</a>
                         </li>
                         <li>
-                            <a href="#!/mapa-estrategico"><i class="fa fa-map fa-fw"></i>Mapa Estratégico</a>
+                            <a href="#!/mapa-estrategico"><i class="fa fa-map fa-fw" style="margin-right:1px;"></i>Mapa Estratégico</a>
                         </li>
                         <li>
-                            <a href="#!/estrategias"><i class="fas fa-bicycle fa-fw"></i>Estratégias</a>
+                            <a href="#!/estrategias"><i class="fas fa-chess-knight fa-fw" style="margin-right:1px;"></i>Estrategias</a>
                         </li>
                         <li>
-                            <a href="#!/objetivos"><i class="fa fa-crosshairs fa-fw"></i>Objetivos</a>
+                            <a href="#!/objetivos"><i class="fa fa-crosshairs fa-fw" style="margin-right:1px;"></i>Objetivos</a>
                         </li>
-                        <li>
+                        <!-- <li>
                             <a href="#!/indicadores"><i class="fa fa-tachometer-alt fa-fw"></i>Indicadores</a>
-                        </li>
+                        </li> -->
                         <li>
-                            <a href="#!/ayuda"><i class="fa fa-info fa-fw"></i>Ayuda</a>
+                            <a href="#!/informacion"><i class="fa fa-info fa-fw" style="margin-right:1px;"></i>Información</a>
                         </li>
                         
                     </ul>
@@ -178,17 +186,25 @@
     <!-- fontAwesome 5.0 -->
     <script src="../vendor/fontawesome5/fontawesome-all.js"></script>
 
+    <!-- datapicker -->
+    <script type="text/javascript" src="../bower_components/moment/min/moment.min.js"></script>
+    <script type="text/javascript" src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
   
     <!-- ****               **** -->
     <!-- ****  ANGULAR 1.X  **** -->
     <!-- ****               **** -->
 
-    <!-- AngularJS 1.x CDN -->
+    <!-- AngularJS 1.x  -->
     <script src="../bower_components/angular/angular.min.js"></script>
     <script src="../bower_components/angular-sanitize/angular-sanitize.min.js"></script>
     <script src="../bower_components/angular-animate/angular-animate.min.js"></script>
     <script src="../bower_components/angular-route/angular-route.min.js"></script>
     <script src="../bower_components/angular-resource/angular-resource.min.js"></script>
+
+     <!-- AngularChartJs -->
+     <script src="../bower_components/chart.js/dist/Chart.js"></script>
+     <script src="../bower_components/angular-chart.js/dist/angular-chart.min.js"></script>
     
 
      <!-- app main module --> 
@@ -200,6 +216,10 @@
     <!-- BLOCK-UI  -->
 
     <script src="../bower_components/angular-block-ui/dist/angular-block-ui.min.js"></script>
+
+    <!-- GAUGE -->
+    <script src="../bower_components/angularjs-gauge/src/angularjs-gauge.js"></script>
+
 
     <!-- ************************** MAIN-MENU ****************************** -->
 
@@ -215,7 +235,7 @@
     <script src="../angular/tablero-page/tablero-page.component.js"></script>
 
     <!-- strategy-tabset -->
-    <script src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.5.0.js"></script>
+    <script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script src="../angular/tablero-page/strategy-tabset/strategy-tabset.module.js"></script>
     <script src="../angular/tablero-page/strategy-tabset/strategy-tabset.component.js"></script>
 
@@ -226,8 +246,8 @@
 
     <!-- **** TABLES **** -->
     <!-- ngTable -->
-    <script src='https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.0/lodash.min.js'></script>
+    <script src="../bower_components/ng-table-bundle/ng-table.min.js"></script>
+    <script src="../bower_components/lodash/dist/lodash.min.js"></script>
 
     <!-- build-table-service -->
     <script src="../angular/tablero-page/builder-table-service/builder-table-service.module.js"></script>
@@ -244,6 +264,18 @@
     <!-- objetivos-affect-table -->
     <script  src="../angular/tablero-page/objetivos-affect-table/objetivos-affect-table.module.js"></script>
     <script  src="../angular/tablero-page/objetivos-affect-table/objetivos-affect-table.component.js"></script>
+
+    <!-- objetivos-umbrales-table -->
+    <script src="../angular/tablero-page/objetivos-umbrales-table/objetivos-umbrales-table.module.js"></script>
+    <script src="../angular/tablero-page/objetivos-umbrales-table/objetivos-umbrales-table.component.js"></script>
+
+    <!-- gauge-chart -->
+    <script src="../angular/tablero-page/gauge-chart/gauge-chart.module.js"></script>
+    <script src="../angular/tablero-page/gauge-chart/gauge-chart.component.js"></script>
+
+    <!-- diagrama-historico -->
+    <script src="../angular/tablero-page/diagrama-historico/diagrama-historico.module.js"></script>
+    <script src="../angular/tablero-page/diagrama-historico/diagrama-historico.component.js"></script>
 
     <!-- ************************** ESTRATEGIAS-PAGE ************************** -->
 

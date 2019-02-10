@@ -79,8 +79,8 @@ angular.
             //Entonces si el dato es del 13/11/2018, para recuperarlo: fechaHasta=14112018.   
             //El request tiene la forma final:
             //http://localhost:8080/objetivos/valoresHistoricos?fromDate=18082018&toDate=14112018
-            var fechaDesde = '01012018';
-            var fechaHasta = '01012020';
+            var fechaDesde = '01012000';
+            var fechaHasta = getFechaMañana();
             Objetivo.getHistorico({
               idObjetivo: idObjetivo,
               fromDate: fechaDesde,
@@ -91,5 +91,26 @@ angular.
                 console.log("ERROR recuperando valores historicos");
             });
           }
+
+            // VER EL FORMATO -- la funcion backend no espera las barras '/'
+          function getFechaMañana(){
+            var tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            var dd = tomorrow.getDate(); //Incluyo HOY;
+            var mm = tomorrow.getMonth()+1; //January is 0!
+            var yyyy = tomorrow.getFullYear();
+
+            if(dd<10) {
+                dd = '0'+dd;
+            } 
+
+            if(mm<10) {
+                mm = '0'+mm;
+            } 
+
+            return dd + "" + mm + "" +yyyy;
+          }
         }
+
+        
     });

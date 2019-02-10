@@ -12,7 +12,7 @@ angular.
             },
             controller: function ObjetivosTableController($scope, $window, $uibModal, NgTableParams){
               
-              var objetivosFAKE = [
+              /*var objetivosFAKE = [
                 {
                   id:"1",
                   nombre:"o1",
@@ -21,7 +21,7 @@ angular.
                   id:"2",
                   nombre:"o2",
                 }
-              ];
+              ];*/
 
                
               // Funciones de controller
@@ -30,6 +30,7 @@ angular.
               $scope.hasChanges = hasChanges;
               $scope.cancelChanges = cancelChanges;
               $scope.saveChanges = saveChanges;
+              $scope.selectedObjetivo = null;
 
               // Variables de controller
               var controllerName = "OBJETIVOS-TABLE-CONTROLLER -> ";
@@ -39,8 +40,12 @@ angular.
               
 
               this.$onInit = function() {
-                if ($scope.$ctrl.data == undefined)
-                  originalData = objetivosFAKE;
+                if ($scope.$ctrl.data != undefined){
+                  originalData = $scope.$ctrl.data;
+                }
+                else{
+                  originalData = [];
+                }
                 $scope.tableParams = new NgTableParams({
                   page: 1, // show first page
                   count: 10 // count per page
@@ -51,9 +56,13 @@ angular.
               };
 
               this.$onChanges = function(changes){
-                if (changes.data.currentValue){
-                  changeDataTable(changes.data.currentValue);
-                  // console.log(this);
+                if (changes.data){
+                  if (changes.data.currentValue){
+                    changeDataTable(changes.data.currentValue);
+                  }
+                  else{
+                    changeDataTable([]);
+                  }
                 }
               };
 
@@ -74,6 +83,7 @@ angular.
                   dataset: angular.copy(originalData)
                 });
                 $scope.tableParams.reload();
+                onSelectObjetivo(data[0]);
             }
 
               var id = '9999';
@@ -90,25 +100,25 @@ angular.
                       obj.id = id;
                       id++;
                       listaObjetivosAgregados.push(obj);
-                      $scope.tableParams.settings().dataset.unshift(obj);
+                      $scope.tableParams.settings().dataset.push(obj);
                       $scope.tableParams.sorting({});
                       $scope.tableParams.page(1);
                       $scope.tableParams.reload();
                     }, function () {
-                      $window.console.log('modal-component dismissed at: ' + new Date());
+                      // $window.console.log('modal-component dismissed at: ' + new Date());
                     });
               }
           
               function del(row) {
-                $window.console.log(controllerName + "del(row)");
+                // $window.console.log(controllerName + "del(row)");
                 // console.log(row);
                 $scope.isRowDeleted = true;
                 _.remove($scope.tableParams.settings().dataset, function(item) {
-                  return row === item;
+                  return row.id === item.id;
                 });
 
                 listaObjetivosEliminados.push(row);
-
+                onSelectObjetivo($scope.tableParams.settings().dataset[0]); //Selecciono again la primera opcion.
                 $scope.tableParams.reload().then(function(data) {
                   if (data.length === 0 && $scope.tableParams.total() > 0) {
                     $scope.tableParams.page($scope.tableParams.page() - 1);
@@ -150,8 +160,13 @@ angular.
                 originalData = angular.copy($scope.tableParams.settings().dataset);
                 $scope.tableParams.reload();
               }
-              
-          
+
+
+              //Carga el objetivo clickeado en la tabla.
+              $scope.onSelectObjetivo = onSelectObjetivo;
+              function onSelectObjetivo(value){
+                $scope.selectedObjetivo = value;
+              };
           }
       });
 

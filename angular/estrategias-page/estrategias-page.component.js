@@ -4,60 +4,31 @@ angular.
     module('estrategiasPage').
         component('estrategiasPage', {
             templateUrl: '../angular/estrategias-page/estrategias-page.html',
-            controller: function PerspectivasPageController($scope, $window, $uibModal, Estrategia){
-        
-                //HTTP REST REQUEST-RESPONSE
-             /*   console.log("Estrategia: GET ");
-                $scope.estrategias = Estrategia.query(function(estrategias){
-                    estrategias.forEach(element => {
-                        $window.console.log(element.nombre);
-                        $window.console.log("Mision: " + element.mision);    
-                        $window.console.log("Vision: " + element.vision);
-                    });
-                    $window.console.log($scope.estrategias);                  
-                });*/
-                
+            controller: function PerspectivasPageController($scope, $window, $uibModal, Estrategia, GlobalStorageFactory){
                 
                 // FuncIones de controler
                 $scope.createEstrategia = createEstrategia;
                 $scope.updateEstrategia = updateEstrategia;
                 $scope.deleteEstrategia = deleteEstrategia;
 
-                $scope.onSelectEstrategia = onSelectEstrategia;
-
                 $scope.addPerspectivasAfectantes = addPerspectivasAfectantes;
                 $scope.deletePerspectivasAfectantes = deletePerspectivasAfectantes;
 
                 // Variables de controller
                 var controllerName = "ESTRATEGIAS-PAGE-CONTROLLER ->";
-             /*   $scope.mision = "Elit reprehenderit aliquip magna culpa. Duis irure sit ex officia sunt adipisicing magna. Ex incididunt sunt sint ut duis exercitation enim anim. Pariatur magna id deserunt commodo laborum ad laborum. Irure incididunt qui officia ut ea amet et eu pariatur est adipisicing occaecat. Voluptate deserunt sint eu mollit laboris dolor id fugiat pariatur ut non commodo. Eiusmod consectetur dolore sunt sunt enim nulla sunt ad aute nostrud laborum tempor ad officia."
-                $scope.vision = "Commodo tempor nulla incididunt proident velit ea est proident aliqua fugiat magna irure nostrud pariatur. Duis do ad esse nisi culpa. Qui est incididunt aliquip magna ullamco ipsum Lorem. Magna minim aliquip cillum ea in ut labore ipsum laborum amet aute proident nulla eu. Nisi ex nostrud aliquip deserunt."
-                $scope.selectedEstrategia = null;
-               */ 
-
-               cargarEstrategias();
 
                 this.$onInit = function() {
-                    cargarEstrategias();
-                    /*$scope.estrategiaSeleccionada = $scope.estrategias[0];*/
                 };
 
-                function cargarEstrategias(){
-                    Estrategia.query(function(estrategias){
-                        delete estrategias.$promise;
-                        delete estrategias.$resolved;
-                        $scope.estrategias = estrategias;
-                        // console.log($scope.estrategias);
-                    });
-                }
-
-                function onSelectEstrategia(value){
-                    // $window.console.log(controllerName + "onSelectEstrategia(value");
-                    $scope.selectedEstrategia = value;
-                }
+                //Watcher para sincronizar la estrategia seleccionada con la estrategia seleccionada en el menu lateral.
+                $scope.$watch(function() { return GlobalStorageFactory.getEstrategia(); }, function(estrategiaSeleccionada) {
+                    if (estrategiaSeleccionada != undefined) {
+                        $scope.selectedEstrategia = estrategiaSeleccionada;
+                    }
+                });
 
                 function createEstrategia(){
-                    $window.console.log(controllerName + "createEstrategia()");
+                    // $window.console.log(controllerName + "createEstrategia()");
                     var modalInstance = $uibModal.open({
                       animation: true,
                       component: 'modalCrearEstrategia'
@@ -65,23 +36,28 @@ angular.
 
                     modalInstance.result.then(function (est) {
                       Estrategia.save(est, function(estrategia_creada){
-                          $scope.estrategias.push(estrategia_creada);
-                          //onSelectEstrategia(estrategia_creada);  quiero agregar que se vea esta al crearla
+                          GlobalStorageFactory.setActualizarEstrategias(true);
+                          GlobalStorageFactory.setAccion("CREATE");
                           alert("Estrategia creada exitosamente");
                       });
                     }, function () {
-                      $window.console.log('modal-component dismissed at: ' + new Date());
+                    //   $window.console.log('modal-component dismissed at: ' + new Date());
                     });
                 }
 
                 //UPDATE OBJETIVO
                 function updateEstrategia(){
+                    var est = {
+                        id: $scope.selectedEstrategia.id,
+                        nombre: $scope.selectedEstrategia.nombre,
+                        descripcion: $scope.selectedEstrategia.descripcion
+                    };
                     var modalInstance = $uibModal.open({
                         animation: true,
                         component: 'modalModificarEstrategia',
                         resolve: {
                           est: function () {
-                            return $scope.selectedEstrategia;
+                            return est;
                           }
                         }
                     });
@@ -89,21 +65,20 @@ angular.
                     modalInstance.result.then(function (est) {
                         Estrategia.update(est, function(estrategia_modificada){
                             alert("Estrategia modificada exitosamente");
-                            var indexOfEst = $scope.estrategias.findIndex(i => i.id === estrategia_modificada.id);
-                            $scope.estrategias.splice(indexOfEst, 1, estrategia_modificada);
+                            GlobalStorageFactory.setActualizarEstrategias(true);
+                            GlobalStorageFactory.setAccion("UPDATE");
                         });
                     }, function () {
-                        $window.console.log('modal-component dismissed at: ' + new Date());
+                        // $window.console.log('modal-component dismissed at: ' + new Date());
                     });
                 }
 
                 function deleteEstrategia(){
                   Estrategia.delete({idEstrategia: $scope.selectedEstrategia.id}, function(response) {
-                        var indexOfEst = $scope.estrategias.findIndex(i => i.id === $scope.selectedEstrategia.id);
-                        $scope.estrategias.splice(indexOfEst, 1);
                         alert("Estrategia eliminada exitosamente");
-                        $window.location.reload();
-                        /*onSelectEstrategia($scope.estrategias[0]);*/
+                        GlobalStorageFactory.setActualizarEstrategias(true);
+                        GlobalStorageFactory.setAccion("DELETE");
+                        // $window.location.reload();
                     });
                 }
 
@@ -111,9 +86,12 @@ angular.
                 //ADD PERSPECTIVA AFECTANTE
                 function addPerspectivasAfectantes(perspectivas){
                     angular.forEach(perspectivas, function(i) {
-                      console.log(i);
+                        // console.log(i);
                         addSinglePerspectivaAfectante(i);
-                      });
+                    });
+                    GlobalStorageFactory.setActualizarEstrategias(true);
+                    GlobalStorageFactory.setAccion("UPDATE");
+
                 }
 
                 function addSinglePerspectivaAfectante(perspectiva){
@@ -123,14 +101,16 @@ angular.
                     };
                     Estrategia.addPerspectivaAfectante({idEstrategia: $scope.selectedEstrategia.id}, pers, function(response){
                         alert("Perspectiva afectante relacionado exitosamente");
-                        console.log(response);
+                        // console.log(response);
                     });
                 }
 
                 function deletePerspectivasAfectantes(perspectivas){
                     angular.forEach(perspectivas, function(p) {
                         deleteSinglePerspectivaAfectante(p);
-                      });
+                    });
+                    GlobalStorageFactory.setActualizarEstrategias(true);
+                    GlobalStorageFactory.setAccion("UPDATE");
                 }
 
                 function deleteSinglePerspectivaAfectante(perspectiva){
@@ -140,13 +120,9 @@ angular.
                     };
                     Estrategia.deletePerspectivaAfectante({idEstrategia: $scope.selectedEstrategia.id}, p, function(response){
                         alert("Perspectiva afectante eliminado exitosamente");
-                        console.log(response);
+                        // console.log(response);
                     });
                 }
-
-
-
-
             }
         });
 
@@ -172,9 +148,7 @@ angular.
 
               $ctrl.estrategiaForm = {
                   nombre: "",
-                  descripcion: "",
-                  mision: "",
-                  vision: ""
+                  descripcion: ""
               };
 
               $ctrl.ok = function () {
@@ -206,9 +180,7 @@ angular.
 
               $ctrl.estrategiaForm = {
                   nombre: "",
-                  descripcion: "",
-                  mision: "",
-                  vision: ""
+                  descripcion: ""
               };
 
               $ctrl.ok = function () {

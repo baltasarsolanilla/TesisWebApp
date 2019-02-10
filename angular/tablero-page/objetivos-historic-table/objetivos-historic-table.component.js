@@ -96,7 +96,7 @@ angular.
                     else{ //Para el caso de ser el ultimo elemento.
                         oldValue = newValue;
                     }
-                    i.tendencia = BuilderTable.getTendencia(newValue, oldValue);
+                    // i.tendencia = BuilderTable.getTendencia(newValue, oldValue);
 
                 });
                 return valoresHistoricos;

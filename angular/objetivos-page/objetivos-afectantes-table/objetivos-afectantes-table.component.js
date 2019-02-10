@@ -7,9 +7,11 @@ angular.
             bindings: {
               addObjetivos: '&',
               deleteObjetivos: '&',
-              data: '<'             
+              data: '<',
+              objetivos: '<',
+              objetivoAfectadoId: '<'             
             },
-            controller: function ObjetivosAfectantesTableController($scope, NgTableParams, Objetivo){
+            controller: function ObjetivosAfectantesTableController($scope, NgTableParams){
               var controllerName = "OBJETIVOS-AFECTANTES-TABLE-CONTROLLER -> ";
 
               //Lista de ObjetivosAfectantes en caso de que no se seleccione un objetivo por default.
@@ -41,13 +43,10 @@ angular.
               var listaObjetivosEliminados = [];
               var listaObjetivosAgregados = [];
 
-
-              //AJAX
-              $scope.cargarObjetivos = cargarObjetivos;
-
               this.$onInit = function() {
-                cargarObjetivos();
-                originalData = $scope.objetivosAfectantes;
+                //originalData = $scope.objetivosAfectantes;
+                if ($scope.$ctrl.data == undefined)
+                  originalData = [];
                 $scope.tableParams = new NgTableParams({
                   page: 1, // show first page
                   count: 10 // count per page
@@ -55,11 +54,17 @@ angular.
                   counts: [],
                   dataset: angular.copy(originalData)
                 });
+
               };
 
               this.$onChanges = function(changes){
-                if (changes.data.currentValue){
-                  changeDataTable(changes.data.currentValue);
+                if (changes.data){
+                  if (changes.data.currentValue){
+                    changeDataTable(changes.data.currentValue);
+                  }
+                  else{
+                    changeDataTable([]);
+                  }
                 }
               };
 
@@ -88,8 +93,18 @@ angular.
               }
 
               function add() {
-                if ($scope.tableParams.settings().dataset.findIndex(i => i.objetivoAfectante.id === $scope.objetivoSeleccionado.id) > -1){
+                if ($scope.tableParams.settings().dataset.findIndex(i => i.objetivoAfectante.id === $scope.objetivoSeleccionado.id) > -1 ){
                   alert("Objetivo afectante duplicado");
+                  return;
+                }
+
+                if ($scope.$ctrl.objetivoAfectadoId === $scope.objetivoSeleccionado.id){
+                  alert("Objetivo afectante igual a objetivo principal seleccionado");
+                  return;
+                }
+
+                if ($scope.objetivoSeleccionado.objetivosAfectantes.findIndex(i => i.objetivoAfectante.id === $scope.$ctrl.objetivoAfectadoId) > -1 ){
+                  alert("Ya existe una relación de afección entre el objetivo " + $scope.objetivoSeleccionado.nombre + " y el objetivo principal seleccionado");
                   return;
                 }
 
@@ -101,7 +116,7 @@ angular.
                 };
                 listaObjetivosAgregados.push(objetivoAgregado);
 
-                $scope.tableParams.settings().dataset.unshift(objetivoAgregado);
+                $scope.tableParams.settings().dataset.push(objetivoAgregado);
                 // we need to ensure the user sees the new row we've just added.
                 // it seems a poor but reliable choice to remove sorting and move them to the first page
                 // where we know that our new item was added to
@@ -112,8 +127,9 @@ angular.
 
               function del(row) {
                 listaObjetivosEliminados.push(row);
+                $scope.isRowDeleted = true;
                 _.remove($scope.tableParams.settings().dataset, function(item) {
-                  return row === item;
+                  return row.objetivoAfectante.id === item.objetivoAfectante.id;
                 });
                 $scope.deleteCount++;
                 
@@ -153,17 +169,9 @@ angular.
                   $scope.$ctrl.addObjetivos({objetivos: listaObjetivosAgregados});
                 
                 resetTableStatus();
-                var currentPage = $scope.tableParams.page();
+                //var currentPage = $scope.tableParams.page();
                 originalData = angular.copy($scope.tableParams.settings().dataset);
-              }
-
-              //AJAX
-              function cargarObjetivos(){
-                Objetivo.query(function(objetivos){
-                  delete objetivos.$promise;
-                  delete objetivos.$resolved;
-                  $scope.objetivos = objetivos;
-                });
+                $scope.tableParams.reload();
               }
           }
       });

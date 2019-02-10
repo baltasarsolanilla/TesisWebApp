@@ -3,7 +3,9 @@ angular.
   factory('Objetivo', ['$resource',
     function($resource) {
       return $resource('http://localhost:8080/objetivos/:idObjetivo', {idObjetivo: '@id'}, {
-          update: {method: 'PUT'},
+          update: {
+            method: 'PUT'
+          },
           addIndicadorAfectante: {
             method: 'POST',
             url: 'http://localhost:8080/objetivos/:idObjetivo/indicadoresAfectantes'

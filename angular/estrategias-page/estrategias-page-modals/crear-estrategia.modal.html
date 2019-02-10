@@ -7,19 +7,15 @@
         <div class="modal-body form-group" >
             <div class="col-sm-6" ><!-- ng-class="{'has-error': form.userForm.nombre.$invalid ,  'has-success': form.userForm.nombre.$valid || form.userForm.nombre.$untouched}" > -->
                 <label for="nombre" >Nombre</label>
-                <input type="text" id="nombre" name="nombre" class="form-control" ng-model="$ctrl.estrategiaForm.nombre" ng-maxlength="12"  placeholder="Nombre de la estrategia" required> </input> 
+                <input type="text" id="nombre" name="nombre" class="form-control" ng-model="$ctrl.estrategiaForm.nombre" ng-maxlength="20"  placeholder="Nombre de la estrategia" required> </input> 
                 <p ng-show="form.userForm.nombre.$error.maxlength">Username is too long. {{$task.status}}</p>
                 <p> {{$task.status}}</p>
                 <p> {{userForm.nombre}}</p>
             </div>
 
             <div class="col-sm-9 margin-textarea">
-                <label for="mision">Misión</label>
-                <textarea type="text" name="mision" class="form-control" ng-model="$ctrl.estrategiaForm.mision" placeholder="Misión de la estrategia" required> </textarea> 
-            </div>
-            <div class="col-sm-9 margin-textarea">
-                <label for="vision">Visión</label>
-                <textarea type="textarea" name="vision" class="form-control" ng-model="$ctrl.estrategiaForm.vision" placeholder="Visión de la estrategia" required> </textarea> 
+                <label for="descripcion">Descripcion</label>
+                <textarea type="text" name="descripcion" class="form-control" ng-model="$ctrl.estrategiaForm.descripcion" placeholder="Descripcion de la estrategia" required> </textarea> 
             </div>
         </div>
         <div class="modal-footer">

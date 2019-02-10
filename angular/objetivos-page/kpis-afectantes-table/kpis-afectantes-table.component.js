@@ -60,7 +60,9 @@ angular.
                 this.$onInit = function() {
                   cargarIndicadores();
 
-                  originalData = $scope.indicadores;
+                  //originalData = $scope.indicadores;
+                  if ($scope.$ctrl.data == undefined)
+                    originalData = [];
                   $scope.tableParams = new NgTableParams({
                     page: 1, // show first page
                     count: 10 // count per page
@@ -71,10 +73,13 @@ angular.
                 };
 
                 this.$onChanges = function(changes){
-                  if (changes.data.currentValue){
-                    changeDataTable(changes.data.currentValue);
-                    // console.log(this);
-                    
+                  if (changes.data){
+                    if (changes.data.currentValue){
+                      changeDataTable(changes.data.currentValue);
+                    }
+                    else{
+                      changeDataTable([]);
+                    }
                   }
                 };
 
@@ -126,7 +131,7 @@ angular.
                   listaIndicadoresAgregados.push(indicadorAgregado);
 
                   pesoTotal += indicadorAgregado.peso;
-                  $scope.tableParams.settings().dataset.unshift(indicadorAgregado);
+                  $scope.tableParams.settings().dataset.push(indicadorAgregado);
                   // we need to ensure the user sees the new row we've just added.
                   // it seems a poor but reliable choice to remove sorting and move them to the first page
                   // where we know that our new item was added to
@@ -137,8 +142,9 @@ angular.
                 
                 function del(row) {
                   listaIndicadoresEliminados.push(row);
+                  $scope.isRowDeleted = true;
                   _.remove($scope.tableParams.settings().dataset, function(item) {
-                    return row === item;
+                    return row.indicador.id === item.indicador.id;
                   });
                   $scope.deleteCount++;
                   pesoTotal -= row.peso;
@@ -179,8 +185,9 @@ angular.
                     $scope.$ctrl.addIndicadores({indicadores: listaIndicadoresAgregados});
                   
                   resetTableStatus();
-                  var currentPage = $scope.tableParams.page();
+                  //var currentPage = $scope.tableParams.page();
                   originalData = angular.copy($scope.tableParams.settings().dataset);
+                  $scope.tableParams.reload();
                 }
 
                 //AJAX

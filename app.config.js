@@ -4,7 +4,7 @@ angular.module('balancedScorecard')
         $locationProvider.hashPrefix('!'); //defualt
 
         $routeProvider
-            .when('/tablero', {
+            .when('/home', {
                 template: '<tablero-page></tablero-page>'
             })
             .when('/mapa-estrategico', {
@@ -16,14 +16,14 @@ angular.module('balancedScorecard')
             .when('/objetivos', {
                 template: '<objetivos-page></objetivos-page>'
             })
-            .when('/indicadores', {
-                template: '<indicadores-page></indicadores-page>'
-            })
-            .when('/ayuda', {
-                template: '<div id="page-wrapper2"><h1>Ayuda</h1></div>'
+            // .when('/indicadores', {
+            //     template: '<indicadores-page></indicadores-page>'
+            // })
+            .when('/informacion', {
+                templateUrl: '../informacion.html'
             })
             // .otherwise({redirectTo: $routeProvider});
-            .otherwise('/tablero');
+            .otherwise('/home');
     }])
     .config(function(blockUIConfig){
         // Change the default overlay message

@@ -10,7 +10,7 @@ angular.
               deletePerspectivas: '&',
               data: '<'
             },
-            controller: function PerspectivasTableController($scope, $window, $uibModal, NgTableParams, Perspectiva){
+            controller: function PerspectivasTableController($scope, $window, $uibModal, NgTableParams, Perspectiva, GlobalStorageFactory){
 
               var perspectivasFAKE = [
                 {
@@ -46,10 +46,16 @@ angular.
               $scope.perspectivas = [];
               var listaPerspectivasEliminadas = [];
               var listaPerspectivasAgregadas = [];
+              var originalData = [];
 
               this.$onInit = function() {
-                if ($scope.$ctrl.data == undefined)
-                  originalData = perspectivasFAKE;
+                originalData = perspectivasFAKE;
+                if ($scope.$ctrl.data != undefined){
+                  originalData = $scope.$ctrl.data;
+                }
+                else{
+                  originalData = [];
+                }
                 
                 $scope.tableParams = new NgTableParams({
                   page: 1, // show first page
@@ -61,10 +67,13 @@ angular.
               };
 
               this.$onChanges = function(changes){
-                if (changes.data.currentValue){
-                  changeDataTable(changes.data.currentValue);
-                  // console.log(this);
-                  
+                if (changes.data){
+                  if (changes.data.currentValue){
+                    changeDataTable(changes.data.currentValue);
+                  }
+                  else{
+                    changeDataTable([]);
+                  }
                 }
               };
 
@@ -87,7 +96,7 @@ angular.
                 onSelectPerspectiva(data[0]);
               }
 
-              //Carga la PERSPECTIVA seleccionado en el search-box.
+              //Carga la PERSPECTIVA seleccionada.
               function onSelectPerspectiva(value){
                 // $window.console.log(controllerName + "onSelectPerspectiva(value)");
                 $scope.selectedPerspectiva = value;
@@ -108,23 +117,23 @@ angular.
                       pers.id = id;
                       id++;
                       listaPerspectivasAgregadas.push(pers);
-                      $scope.tableParams.settings().dataset.unshift(pers);
+                      $scope.tableParams.settings().dataset.push(pers);
                       $scope.tableParams.sorting({});
                       $scope.tableParams.page(1);
                       $scope.tableParams.reload();
                     }, function () {
-                      $window.console.log('modal-component dismissed at: ' + new Date());
+                      // $window.console.log('modal-component dismissed at: ' + new Date());
                     });
               }
 
               function del(row) {
                 $scope.isRowDeleted = true;
                 _.remove($scope.tableParams.settings().dataset, function(item) {
-                  return row === item;
+                  return row.id === item.id;
                 });
 
                 listaPerspectivasEliminadas.push(row);
-
+                onSelectPerspectiva($scope.tableParams.settings().dataset[0]); //Selecciono again la primera opcion.
                 $scope.tableParams.reload().then(function(data) {
                   if (data.length === 0 && $scope.tableParams.total() > 0) {
                     $scope.tableParams.page($scope.tableParams.page() - 1);
@@ -173,9 +182,11 @@ angular.
               //ADD PERSPECTIVA AFECTANTE
               function addObjetivosAfectantes(objetivos){
                   angular.forEach(objetivos, function(o) {
-                      console.log(o);
+                      // console.log(o);
                       addSingleObjetivoAfectante(o);
-                    });
+                  });
+                  GlobalStorageFactory.setActualizarEstrategias(true);
+                  GlobalStorageFactory.setAccion("UPDATE");
               }
 
               function addSingleObjetivoAfectante(objetivo){
@@ -185,15 +196,17 @@ angular.
                   };
                   Perspectiva.addObjetivoAfectante({idPerspectiva: $scope.selectedPerspectiva.id}, obj, function(response){
                       alert("Objetivo afectante relacionado exitosamente");
-                      console.log(response);
+                      // console.log(response);
                   });
               }
 
               function deleteObjetivosAfectantes(objetivos){
                   angular.forEach(objetivos, function(o) {
                       deleteSingleObjetivoAfectante(o);
-                      console.log(o);
-                    });
+                      // console.log(o);
+                  });
+                  GlobalStorageFactory.setActualizarEstrategias(true);
+                  GlobalStorageFactory.setAccion("UPDATE");
               }
 
               function deleteSingleObjetivoAfectante(objetivo){
@@ -204,7 +217,7 @@ angular.
                   
                   Perspectiva.deleteObjetivoAfectante({idPerspectiva: $scope.selectedPerspectiva.id}, obj, function(response){
                       alert("Objetivo afectante eliminado exitosamente");
-                      console.log(response);
+                      // console.log(response);
                   });
               }
           

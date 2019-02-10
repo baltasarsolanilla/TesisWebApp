@@ -1,37 +1,42 @@
 <div class="row">
     <div class="col-lg-6">
-        <h3 style="display:inline-block;">Perspectivas del plan estratégico</h3>
-        <button class="btn btn-primary btn-sm" ng-show="!isEditing" ng-click="isEditing = true" style="margin-left:12px;">
-                <span class="glyphicon glyphicon-pencil"></span>
-        </button>
-        <div class="">
-            <div class="btn-group pull-left" style="margin-bottom:6px;">
-                <button class="btn btn-success" ng-if="isEditing" ng-disabled="isRowDeleted" ng-click="createPerspectiva()">
-                    <span class="glyphicon glyphicon-plus"></span>
-                </button>
-                <button class="btn btn-primary" ng-if="isEditing" ng-disabled="!hasChanges()" ng-click="saveChanges()">
-                    <span class="glyphicon glyphicon-ok"></span>
-                </button>
-                <button class="btn btn-warning" ng-if="isEditing" ng-click="cancelChanges()">
-                    <span class="glyphicon glyphicon-remove"></span>
-                </button>
+        <div class="col-lg-12" style="padding-left:0px !important;">
+            <h3 style="display:inline-block;">Perspectivas del plan estratégico</h3>
+            <button class="btn btn-primary btn-sm" ng-show="!isEditing" ng-click="isEditing = true" style="margin-left:12px;">
+                    <span class="glyphicon glyphicon-pencil"></span>
+            </button>
+            <div class="">
+                <div class="btn-group pull-left" style="margin-bottom:6px;">
+                    <button class="btn btn-success" ng-if="isEditing" ng-disabled="isRowDeleted" ng-click="createPerspectiva()">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </button>
+                    <button class="btn btn-primary" ng-if="isEditing" ng-disabled="!hasChanges()" ng-click="saveChanges()">
+                        <span class="glyphicon glyphicon-ok"></span>
+                    </button>
+                    <button class="btn btn-warning" ng-if="isEditing" ng-click="cancelChanges()">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                </div>
             </div>
+            <table ng-table="tableParams" class="table table-bordered table-hover table-condensed table-striped table-estrategias-page" show-filter="false">
+                <colgroup>
+                    <col width="80%" />
+                </colgroup>
+                <tr ng-repeat="row in $data track by row.id" ng-click="onSelectPerspectiva(row)" ng-class="{selected: row.id === selectedPerspectiva.id}">
+                    <td title="'PERSPECTIVAS'" sortable="'nombre'">
+                        <span class="">{{row.nombre}}
+                            <button class="btn btn-danger btn-sm pull-right" ng-disabled="isRowAdded" ng-click="del(row)" ng-hide="!isEditing"><span class="glyphicon glyphicon-trash"></span></button>
+                        </span>
+                    </td>
+                </tr>
+            </table>
         </div>
-        <table ng-table="tableParams" class="table table-bordered table-hover table-condensed table-striped table-estrategias-page" show-filter="false">
-            <colgroup>
-                <col width="80%" />
-            </colgroup>
-            <tr ng-repeat="row in $data track by row.id" ng-click="onSelectPerspectiva(row)" ng-class="{selected: row.id === selectedPerspectiva.id}">
-                <td title="'PERSPECTIVAS'" sortable="'nombre'">
-                    <span class="">{{row.nombre}}
-                        <button class="btn btn-danger btn-sm pull-right" ng-disabled="isRowAdded" ng-click="del(row)" ng-hide="!isEditing"><span class="glyphicon glyphicon-trash"></span></button>
-                    </span>
-                </td>
-            </tr>
-        </table>
-        <!-- <h4>estrategia id en perspectivas-table: {{$ctrl.data[0].objetivosAfectantes}}</h4> -->
+        <div class="col-lg-12" ng-show="selectedPerspectiva != null" style="padding-left:0px !important;">
+            <h4>Descripcion de la perspectiva</h4>
+            <p>{{selectedPerspectiva.descripcion}}</p>
+        </div>
     </div>
-    <div class="col-lg-6">
+    <div class="col-lg-6" >
         <objetivos-table data="selectedPerspectiva.objetivosAfectantes" delete-objetivos="deleteObjetivosAfectantes(objetivos)" add-objetivos="addObjetivosAfectantes(objetivos)"></objetivos-table>
     </div>
 </div>

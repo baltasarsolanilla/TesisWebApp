@@ -60,6 +60,7 @@ angular.
                 //Capaz que aca debería poner que si el branch seleccionado es una perspectiva, se pase el objetivoAfectante en pos = 0.
                 $scope.onSelectItem = onSelectItem;
                 function onSelectItem(branch){
+                  //console.log("arbol seleccionado: " + branch);
                   $scope.$ctrl.onSelect({item: branch});
                 }
 
@@ -69,6 +70,7 @@ angular.
                 function addLabels(perspectivas){
                   angular.forEach(perspectivas, function(p){
                     p.label = p.nombre;
+                    p.id = -2;
                     angular.forEach(p.objetivosAfectantes, function(o){
                       o.label = o.nombre;
                     });

@@ -4,66 +4,54 @@ angular.
     module('objetivosPage').
         component('objetivosPage', {
             templateUrl: '../angular/objetivos-page/objetivos-page.html',
-            controller: function ObjetivosPageController($scope, $window, $uibModal, Objetivo){                
+            controller: function ObjetivosPageController($scope, $window, $uibModal, Objetivo, GlobalStorageFactory){                
                 var controllerName = "OBJETIVOS-PAGE-CONTROLLER -> ";            
             
                 //CRUD
-                $scope.createObjetivo = createObjetivo;
                 $scope.updateObjetivo = updateObjetivo;
-                $scope.deleteObjetivo = deleteObjetivo;
                 $scope.addIndicadoresAfectantes = addIndicadoresAfectantes;
                 $scope.deleteIndicadoresAfectantes = deleteIndicadoresAfectantes;
                 $scope.addObjetivosAfectantes = addObjetivosAfectantes;
                 $scope.deleteObjetivosAfectantes = deleteObjetivosAfectantes;
-
-                
-                //AJAX
-                $scope.cargarObjetivos = cargarObjetivos;
+                $scope.selectDefault = "FIRST";
 
                 //Otras
                 $scope.onSelectObjetivo = onSelectObjetivo;
 
-                
-                cargarObjetivos();
-
                 // Variables del controller
                 
                 this.$onInit = function() {
-                    cargarObjetivos();
                     $scope.objetivoSeleccionado = {
                         "descripcion" : "Descripción del objetivo seleccionado..."
                     };
                 };
 
+                //Watcher para sincronizar el objetivo a modificar con la estrategia seleccionada en el menu lateral.
+                $scope.$watch(function() { return GlobalStorageFactory.getEstrategia(); }, function(estrategiaSeleccionada) {
+                    if (estrategiaSeleccionada != undefined) {
+                        cargarObjetivos();
+                    }
+                });
+
+
                 function onSelectObjetivo(value){
                     $scope.objetivoSeleccionado = value;
-                }
-                
-                //CREATE OBJETIVO
-                function createObjetivo(){
-                    var modalInstance = $uibModal.open({
-                      animation: true,
-                      component: 'modalCrearObjetivo'
-                    });
-
-                    modalInstance.result.then(function (obj) {
-                      Objetivo.save(obj, function(objetivo_creado){
-                          $scope.objetivos.push(objetivo_creado);
-                          alert("Objetivo creado exitosamente");
-                      });
-                    }, function () {
-                      $window.console.log('modal-component dismissed at: ' + new Date());
-                    });
+                    $scope.selectDefault = "NO_CHANGE";
                 }
 
                 //UPDATE OBJETIVO
                 function updateObjetivo(){
+                    var obj = {
+                        id: $scope.objetivoSeleccionado.id,
+                        nombre: $scope.objetivoSeleccionado.nombre,
+                        descripcion: $scope.objetivoSeleccionado.descripcion
+                    };
                     var modalInstance = $uibModal.open({
                         animation: true,
                         component: 'modalModificarObjetivo',
                         resolve: {
                           obj: function () {
-                            return $scope.objetivoSeleccionado;
+                            return obj;
                           }
                         }
                     });
@@ -73,27 +61,22 @@ angular.
                             alert("Objetivo modificado exitosamente");
                             var indexOfObj = $scope.objetivos.findIndex(i => i.id === objetivo_modificado.id);
                             $scope.objetivos.splice(indexOfObj, 1, objetivo_modificado);
+                            GlobalStorageFactory.setActualizarEstrategias(true);
+                            GlobalStorageFactory.setAccion("UPDATE");
                         });
                     }, function () {
                         $window.console.log('modal-component dismissed at: ' + new Date());
                     });
                 }
                 
-                //DELETE OBJETIVO
-                function deleteObjetivo(){
-                    Objetivo.delete({idObjetivo: $scope.objetivoSeleccionado.id}, function(response) {
-                        var indexOfObj = $scope.objetivos.findIndex(i => i.id === $scope.objetivoSeleccionado.id);
-                        $scope.objetivos.splice(indexOfObj, 1);
-                        alert("Objetivo eliminado exitosamente");
-                        $window.location.reload();
-                    });
-                }
 
                 //ADD INDICADOR AFECTANTE
                 function addIndicadoresAfectantes(indicadores){
                     angular.forEach(indicadores, function(i) {
                         addSingleIndicadorAfectante(i);
-                      });
+                    });
+                    GlobalStorageFactory.setActualizarEstrategias(true);
+                    GlobalStorageFactory.setAccion("UPDATE");
                 }
 
                 function addSingleIndicadorAfectante(indicadorPeso){
@@ -110,7 +93,9 @@ angular.
                 function deleteIndicadoresAfectantes(indicadores){
                     angular.forEach(indicadores, function(i) {
                         deleteSingleIndicadorAfectante(i);
-                      });
+                    });
+                    GlobalStorageFactory.setActualizarEstrategias(true);
+                    GlobalStorageFactory.setAccion("UPDATE");
                 }
 
                 function deleteSingleIndicadorAfectante(indicadorPeso){
@@ -126,7 +111,9 @@ angular.
                 function addObjetivosAfectantes(objetivos){
                     angular.forEach(objetivos, function(i) {
                         addSingleObjetivoAfectante(i);
-                      });
+                    });
+                    GlobalStorageFactory.setActualizarEstrategias(true);
+                    GlobalStorageFactory.setAccion("UPDATE");
                 }
 
                 function addSingleObjetivoAfectante(objetivo){
@@ -142,7 +129,9 @@ angular.
                 function deleteObjetivosAfectantes(objetivos){
                     angular.forEach(objetivos, function(i) {
                         deleteSingleObjetivoAfectante(i);
-                      });
+                    });
+                    GlobalStorageFactory.setActualizarEstrategias(true);
+                    GlobalStorageFactory.setAccion("UPDATE");
                 }
 
                 
@@ -157,43 +146,18 @@ angular.
                 }
 
                 function cargarObjetivos(){
-                    Objetivo.query(function(objetivos){
-                        delete objetivos.$promise;
-                        delete objetivos.$resolved;
-                        $scope.objetivos = objetivos;
-                        // console.log($scope.objetivos);
+                    var estrategia = GlobalStorageFactory.getEstrategia();
+                    var perspectivas = estrategia.perspectivasAfectantes;
+                    var objetivosAfectantes = [];
+                    angular.forEach(perspectivas, function(p) {
+                        objetivosAfectantes.push.apply(objetivosAfectantes, p.objetivosAfectantes)
                     });
+                    $scope.objetivos = objetivosAfectantes;
                 }
             }
         });
 
 
-
-angular.
-    module('objetivosPage').
-        component('modalCrearObjetivo', {
-            templateUrl: '../angular/objetivos-page/objetivos-page-modals/crear-objetivo.modal.html',
-            bindings: {
-              close: '&',
-              dismiss: '&'
-            },
-            controller: function ($window) {
-              var $ctrl = this;
-
-              $ctrl.objetivoForm = {
-                  nombre: "",
-                  descripcion: ""
-              };
-
-              $ctrl.ok = function () {
-                $ctrl.close({$value: $ctrl.objetivoForm});
-              };
-
-              $ctrl.cancel = function () {
-                $ctrl.dismiss({$value: 'cancel'});
-              };
-            }
-    });
 
 angular.
     module('objetivosPage').

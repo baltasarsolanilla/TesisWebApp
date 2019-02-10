@@ -2,7 +2,7 @@
     <table ng-table="tableParams" show-filter="false" class="table table-bordered table-striped table-actual">
         <tr ng-repeat="row in $data track by row.indicador.id">
           <td title="'INDICADOR'" sortable="'nombre'" id="primer-columna">
-            <a href="#">{{row.indicador.nombre}}</a></td>
+            {{row.indicador.nombre}}</td>
           <td title="'VALOR'" sortable="'valor'" ng-style="setColorValor(row.indicador.valor)">{{row.indicador.valor | number:2}}</td>          
           <td title="'PESO'" sortable="'peso'">{{getPorcentaje(row.peso) | number:2}}%</td>
         </tr>

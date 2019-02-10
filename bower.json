@@ -23,9 +23,7 @@
   ],
   "main": [
     "dist/css/sb-admin-2.css",
-    "dist/css/sb-admin-2.min.css",
-    "dist/js/sb-admin-2.js",
-    "dist/js/sb-admin-2.min.js"
+    "dist/js/sb-admin-2.js"
   ],
   "dependencies": {
     "bootstrap": "~3.3.7",
@@ -35,9 +33,18 @@
     "angular-route": "^1.7.4",
     "angular-resource": "^1.7.4",
     "jquery": "^3.3.1",
-    "angular-block-ui": "^0.2.2"
+    "angular-block-ui": "^0.2.2",
+    "angular-chart.js": "^1.1.1",
+    "eonasdan-bootstrap-datetimepicker": "^4.17.47",
+    "ng-table-bundle": "^4.0.0",
+    "angular-bootstrap": "^2.5.0",
+    "lodash": "^4.17.11"
   },
   "resolutions": {
-    "font-awesome": "~4.6.3"
+    "font-awesome": "~4.6.3",
+    "angular": "^1.7.4"
+  },
+  "devDependencies": {
+    "angularjs-gauge": "^2.2.0"
   }
 }

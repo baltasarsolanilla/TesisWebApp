@@ -16,7 +16,7 @@
             </button>
         </div>
     </div>
-    <div class="col-lg-4">
+    <div class="col-lg-7">
         <search-box ng-show="isEditing" on-select="onSelectKpi(value)" data="indicadores" message="'Seleccionar indicador...'"></search-box>
     </div>
     <div class="col-lg-2">
@@ -24,7 +24,8 @@
     </div>
     <table ng-table="tableParams" class="table table-bordered table-hover table-condensed table-striped table-objetivos-page"  show-filter="false" >
         <colgroup>
-            <col width="70%"/>
+            <col width="50%"/>
+            <col width="20%"/>
             <col width="30%"/>
         </colgroup>
         <tr ng-repeat="row in $data track by row.indicador.id">
@@ -32,6 +33,9 @@
                 <span class="">{{row.indicador.nombre}}</span>
             </td>
             <td title="'PESO'" sortable="'nombre'" style="text-align:center !important;">
+                <span class="">{{row.peso}}</span>
+            </td>
+            <td title="'% PESO'" sortable="'nombre'" style="text-align:center !important;">
                 <span class="">{{getPorcentaje(row.peso) | number:2}}%
                     <button class="btn btn-danger btn-sm pull-right"  ng-click="del(row)" ng-hide="!isEditing" ng-disabled="isRowAdded"><span class="glyphicon glyphicon-trash"></span></button>
                 </span>
