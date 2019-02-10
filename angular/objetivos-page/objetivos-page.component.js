@@ -86,7 +86,7 @@ angular.
                     };
                     Objetivo.addIndicadorAfectante({idObjetivo: $scope.objetivoSeleccionado.id}, ixp, function(response){
                         alert("Indicador afectante relacionado exitosamente");
-                        console.log(response);
+                        // console.log(response);
                     });
                 }
 
@@ -104,7 +104,7 @@ angular.
                     };
                     Objetivo.deleteIndicadorAfectante({idObjetivo: $scope.objetivoSeleccionado.id}, i, function(response){
                         alert("Indicador afectante eliminado exitosamente");
-                        console.log(response);
+                        // console.log(response);
                     });
                 }
 
@@ -122,7 +122,7 @@ angular.
                     };
                     Objetivo.addObjetivoAfectante({idObjetivo: $scope.objetivoSeleccionado.id}, o, function(response){
                         alert("Objetivo afectante relacionado exitosamente");
-                        console.log(response);
+                        // console.log(response);
                     });
                 }
 
@@ -141,7 +141,7 @@ angular.
                     };
                     Objetivo.deleteObjetivoAfectante({idObjetivo: $scope.objetivoSeleccionado.id}, o, function(response){
                         alert("Objetivo afectante eliminado exitosamente");
-                        console.log(response);
+                        // console.log(response);
                     });
                 }
 

@@ -29,7 +29,7 @@ angular.
          $scope.$watch( 
             function(){return GlobalStorageFactory.getEstrategia()},
             function(newValue,oldValue) {
-              console.log(newValue);
+              // console.log(newValue);
                 $scope.perspectivas = newValue.perspectivasAfectantes;
                 graficar();
         });
