@@ -24,7 +24,7 @@
             <col width="80%" />
         </colgroup>
         <tr ng-repeat="row in $data track by row.objetivoAfectante.id">
-            <td title="'OBJETIVO'" sortable="'nombre'">
+            <td title="'OBJETIVO'" sortable="'objetivoAfectante.nombre'">
                 <span class="">{{row.objetivoAfectante.nombre}}
                     <button class="btn btn-danger btn-sm pull-right"  ng-click="del(row)" ng-hide="!isEditing" ng-disabled="isRowAdded"><span class="glyphicon glyphicon-trash"></span></button>
                 </span>
