@@ -15,7 +15,7 @@ angular.
                 $scope.treeItemSelected = item;
             }
 
-            $scope.estrategia = null;
+            $scope.estrategiaSeleccionada = null;
             this.$onInit = function(){
             };
 
@@ -24,7 +24,7 @@ angular.
 
             $scope.$watch(function() { return GlobalStorageFactory.getEstrategia(); }, function(estrategiaSeleccionada) {
                 if (estrategiaSeleccionada != undefined){ 
-                    $scope.perspectivasAfectantes = estrategiaSeleccionada.perspectivasAfectantes;
+                    $scope.estrategiaSeleccionada = estrategiaSeleccionada;
                 }
             });
         }
