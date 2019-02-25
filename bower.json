@@ -38,7 +38,8 @@
     "eonasdan-bootstrap-datetimepicker": "^4.17.47",
     "ng-table-bundle": "^4.0.0",
     "angular-bootstrap": "^2.5.0",
-    "lodash": "^4.17.11"
+    "lodash": "^4.17.11",
+    "font-awesome-5": "^5.7.2"
   },
   "resolutions": {
     "font-awesome": "~4.6.3",
