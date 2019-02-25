@@ -20,7 +20,7 @@ angular.module('balancedScorecard')
             //     template: '<indicadores-page></indicadores-page>'
             // })
             .when('/informacion', {
-                templateUrl: '../informacion.html'
+                templateUrl: '../pages/informacion.html'
             })
             // .otherwise({redirectTo: $routeProvider});
             .otherwise('/home');

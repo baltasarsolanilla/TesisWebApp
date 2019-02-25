@@ -29,13 +29,13 @@
             <col width="30%"/>
         </colgroup>
         <tr ng-repeat="row in $data track by row.indicador.id">
-            <td title="'KPI'" sortable="'nombre'">
+            <td title="'KPI'" sortable="'indicador.nombre'">
                 <span class="">{{row.indicador.nombre}}</span>
             </td>
-            <td title="'PESO'" sortable="'nombre'" style="text-align:center !important;">
+            <td title="'PESO'" sortable="'peso'" style="text-align:center !important;">
                 <span class="">{{row.peso}}</span>
             </td>
-            <td title="'% PESO'" sortable="'nombre'" style="text-align:center !important;">
+            <td title="'% PESO'" sortable="'peso'" style="text-align:center !important;">
                 <span class="">{{getPorcentaje(row.peso) | number:2}}%
                     <button class="btn btn-danger btn-sm pull-right"  ng-click="del(row)" ng-hide="!isEditing" ng-disabled="isRowAdded"><span class="glyphicon glyphicon-trash"></span></button>
                 </span>
